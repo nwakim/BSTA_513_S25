@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Categorical Data Analysis"
+  navbar:
+    background: primary
+    search: true
+    logo: "images/Bsta513.png"
+    foreground: "#fff"
+    collapse-below: sm
+    right:
+      - href: schedule.qmd
+        text: Schedule
+      - href: syllabus.qmd
+        text: Syllabus
+      - href: instructors.qmd
+        text: Instructors
+      - href: homeworks.qmd
+        text: Homework
+      - href: project.qmd
+        text: Projects
+          
+execute:
+  freeze: auto
+
+format:
+  html:
+    theme:
+      - sandstone_NW.scss
+    toc: true
+

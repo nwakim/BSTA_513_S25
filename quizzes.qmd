@@ -1,0 +1,42 @@
+---
+title: "Quizzes"
+date-modified: "today"
+categories: [""]
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+  pdf: default
+editor_options: 
+  chunk_output_type: console
+---
+
+| Quiz | Answer key                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1    | [[{{< iconify ph key-fill size=29px >}}](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/S2024_BSTA_513_613/Student_files/Quiz_solns/Quiz_01_Answer_key%202.pdf?csf=1&web=1&e=jmxcJq)]{style="color:#f8f5f0;"}                                                                                                                                                                                                                                                         |
+| 2    | [[{{< iconify ph key-fill size=29px >}}](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/S2024_BSTA_513_613/Student_files/Quiz_solns/Quiz_01_Answer_key%202.pdf?csf=1&web=1&e=jmxcJq)]{style="color:#f8f5f0;"}                                                                                                                                                                                                                                                         |
+| 3    | [[{{< iconify ph key-fill size=29px >}}](https://ohsuitg-my.sharepoint.com/personal/wakim_ohsu_edu/_layouts/15/onedrive.aspx?FolderCTID=0x012000313CF7F10467BC479DC8A23F258AB10C&id=%2Fpersonal%2Fwakim%5Fohsu%5Fedu%2FDocuments%2FTeaching%2FClasses%2FS2024%5FBSTA%5F513%5F613%2FStudent%5Ffiles%2FQuiz%5Fsolns%2FQuiz%5F03%5FAnswer%5Fkey%2Epdf&parent=%2Fpersonal%2Fwakim%5Fohsu%5Fedu%2FDocuments%2FTeaching%2FClasses%2FS2024%5FBSTA%5F513%5F613%2FStudent%5Ffiles%2FQuiz%5Fsolns)]{style="color:#f8f5f0;"} |
+
+### Quiz Instructions
+
+1.  I have written a "30 minute" quiz, but there is no time limit. You will have from Monday at 2pm to Wednesday at 1pm to finish the quiz. The quiz will be administered through Sakai under "Tests & Quizzes."
+
+2.  The quiz is open book and open notes. You may use books other than the class textbook, you may use anything on our course webpage, and you may use reference websites (like Wikipedia, Googling expected value of specific distribution, etc.).
+
+3.  No cheating will be tolerated. Cheating includes:
+
+    -   Using ChatGPT
+
+    -   Using question and answer threads typically seen on sites like StackExchange, WikiHow, Quora, Reddit, StackOverflow, Chegg, etc.
+
+    -   Asking other students in the room or looking at other students' quiz work.
+
+4.  Each multiple choice question is worth 3 points. The free response questions are labelled with their point value.
+
+5.  If taking the quiz in class, you may use headphones.
+
+### Quiz 1 Information
+
+-   Will cover the learning objectives in Lesson 1-4, with more emphasis on the new material presented in Lessons 3-4
+
+    -   From Lesson 2 there will be a question about the Normal approximation of the binomial distribution and a question about which test to use for a set of variables
