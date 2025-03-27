@@ -1,309 +1,214 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="author" content="Nicky Wakim">
-<meta name="dcterms.date" content="2024-05-06">
-
-<title>Lesson 10: Multiple Logistic Regression – Categorical Data Analysis</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-</style>
-
-
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<html lang="en"><head>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-62d5ecfa613c5c5644cabfb02a2f4c65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-65186549de95cd2ff331b98fa30c8ceb.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.42">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
+  <meta name="author" content="Nicky Wakim">
+  <meta name="dcterms.date" content="2024-05-06">
+  <title>Categorical Data Analysis – Lesson 10: Multiple Logistic Regression</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
     }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #575f66;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #575f66; } /* Normal */
+    code span.al { color: #f51818; background-color: #faefef; font-weight: bold; } /* Alert */
+    code span.an { color: #e6ba7e; } /* Annotation */
+    code span.at { color: #399ee6; } /* Attribute */
+    code span.bn { color: #ff9940; } /* BaseN */
+    code span.bu { color: #4cbf99; } /* BuiltIn */
+    code span.cf { color: #fa8d3e; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4cbf99; } /* Char */
+    code span.cn { color: #a37acc; } /* Constant */
+    code span.co { color: #607880; font-style: italic; } /* Comment */
+    code span.cv { color: #a37acc; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #fa8d3e; } /* DataType */
+    code span.dv { color: #ff9940; } /* DecVal */
+    code span.er { color: #f51818; text-decoration: underline; } /* Error */
+    code span.ex { color: #399ee6; font-weight: bold; } /* Extension */
+    code span.fl { color: #ff9940; } /* Float */
+    code span.fu { color: #f2ae49; } /* Function */
+    code span.im { color: #86b300; } /* Import */
+    code span.in { color: #ff9940; } /* Information */
+    code span.kw { color: #fa8d3e; font-weight: bold; } /* Keyword */
+    code span.op { color: #ed9366; } /* Operator */
+    code span.ot { color: #55b4d4; } /* Other */
+    code span.pp { color: #f07171; } /* Preprocessor */
+    code span.re { color: #399ee6; background-color: #ddecf3; } /* RegionMarker */
+    code span.sc { color: #4cbf99; } /* SpecialChar */
+    code span.ss { color: #4cbf99; } /* SpecialString */
+    code span.st { color: #86b300; } /* String */
+    code span.va { color: #55b4d4; } /* Variable */
+    code span.vs { color: #86b300; } /* VerbatimString */
+    code span.wa { color: #f07171; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-781d4605ef869f56bf6969dbc197fbaf.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
 </head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
 
-<body class="nav-fixed">
+<section id="title-slide" data-background-color="#C2352F" class="quarto-title-block center">
+  <h1 class="title">Lesson 10: Multiple Logistic Regression</h1>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/Bsta513.png" alt="" class="navbar-logo">
-    </a>
-    <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Categorical Data Analysis</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../schedule.html"> 
-<span class="menu-text">Schedule</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../syllabus.html"> 
-<span class="menu-text">Syllabus</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../instructors.html"> 
-<span class="menu-text">Instructors</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../homeworks.html"> 
-<span class="menu-text">Homework</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../project.html"> 
-<span class="menu-text">Projects</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Nicky Wakim 
 </div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a>
-  <ul class="collapse">
-  <li><a href="#last-class" id="toc-last-class" class="nav-link" data-scroll-target="#last-class">Last class</a></li>
-  <li><a href="#breast-cancer-example" id="toc-breast-cancer-example" class="nav-link" data-scroll-target="#breast-cancer-example">Breast Cancer example</a></li>
-  </ul></li>
-  <li><a href="#learning-objectives-1" id="toc-learning-objectives-1" class="nav-link" data-scroll-target="#learning-objectives-1">Learning Objectives</a>
-  <ul class="collapse">
-  <li><a href="#introduction-to-multiple-logistic-regression" id="toc-introduction-to-multiple-logistic-regression" class="nav-link" data-scroll-target="#introduction-to-multiple-logistic-regression">Introduction to Multiple Logistic Regression</a></li>
-  <li><a href="#multiple-logistic-regression-model" id="toc-multiple-logistic-regression-model" class="nav-link" data-scroll-target="#multiple-logistic-regression-model">Multiple Logistic Regression Model</a></li>
-  <li><a href="#fitting-the-multiple-logistic-regression-model" id="toc-fitting-the-multiple-logistic-regression-model" class="nav-link" data-scroll-target="#fitting-the-multiple-logistic-regression-model">Fitting the Multiple Logistic Regression Model</a></li>
-  <li><a href="#breast-cancer-example-population-model" id="toc-breast-cancer-example-population-model" class="nav-link" data-scroll-target="#breast-cancer-example-population-model">Breast Cancer Example: Population Model</a></li>
-  <li><a href="#fitting-multiple-logistic-regression-model" id="toc-fitting-multiple-logistic-regression-model" class="nav-link" data-scroll-target="#fitting-multiple-logistic-regression-model">Fitting Multiple Logistic Regression Model</a></li>
-  <li><a href="#breast-cancer-example-fitted-model" id="toc-breast-cancer-example-fitted-model" class="nav-link" data-scroll-target="#breast-cancer-example-fitted-model">Breast Cancer Example: Fitted Model</a></li>
-  </ul></li>
-  <li><a href="#learning-objectives-2" id="toc-learning-objectives-2" class="nav-link" data-scroll-target="#learning-objectives-2">Learning Objectives</a>
-  <ul class="collapse">
-  <li><a href="#testing-significance-of-the-coefficients" id="toc-testing-significance-of-the-coefficients" class="nav-link" data-scroll-target="#testing-significance-of-the-coefficients">Testing Significance of the Coefficients</a></li>
-  <li><a href="#a-note-on-wording" id="toc-a-note-on-wording" class="nav-link" data-scroll-target="#a-note-on-wording">A note on wording</a></li>
-  <li><a href="#all-three-tests-together" id="toc-all-three-tests-together" class="nav-link" data-scroll-target="#all-three-tests-together">All three tests together</a></li>
-  <li><a href="#from-lesson-6-wald-test" id="toc-from-lesson-6-wald-test" class="nav-link" data-scroll-target="#from-lesson-6-wald-test">From Lesson 6: Wald test</a></li>
-  <li><a href="#wald-test-procedure-with-confidence-intervals" id="toc-wald-test-procedure-with-confidence-intervals" class="nav-link" data-scroll-target="#wald-test-procedure-with-confidence-intervals">Wald test procedure with confidence intervals</a></li>
-  <li><a href="#wald-test-in-our-example" id="toc-wald-test-in-our-example" class="nav-link" data-scroll-target="#wald-test-in-our-example">Wald test in our example</a></li>
-  <li><a href="#example-1-single-continuous-variable-age" id="toc-example-1-single-continuous-variable-age" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age">Example 1: Single, continuous variable: Age</a></li>
-  <li><a href="#example-1-single-continuous-variable-age-1" id="toc-example-1-single-continuous-variable-age-1" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age-1">Example 1: Single, continuous variable: Age</a></li>
-  <li><a href="#example-1-single-continuous-variable-age-2" id="toc-example-1-single-continuous-variable-age-2" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age-2">Example 1: Single, continuous variable: Age</a></li>
-  <li><a href="#example-1-single-continuous-variable-age-3" id="toc-example-1-single-continuous-variable-age-3" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age-3">Example 1: Single, continuous variable: Age</a></li>
-  <li><a href="#example-1-single-continuous-variable-age-4" id="toc-example-1-single-continuous-variable-age-4" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age-4">Example 1: Single, continuous variable: Age</a></li>
-  </ul></li>
-  <li><a href="#break-here" id="toc-break-here" class="nav-link" data-scroll-target="#break-here">Break here?</a>
-  <ul class="collapse">
-  <li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test">Likelihood ratio test</a></li>
-  <li><a href="#likelihood-ratio-test-33" id="toc-likelihood-ratio-test-33" class="nav-link" data-scroll-target="#likelihood-ratio-test-33">Likelihood ratio test (3/3)</a></li>
-  <li><a href="#lrt-procedure" id="toc-lrt-procedure" class="nav-link" data-scroll-target="#lrt-procedure">LRT procedure</a></li>
-  <li><a href="#likelihood-ratio-test-33-1" id="toc-likelihood-ratio-test-33-1" class="nav-link" data-scroll-target="#likelihood-ratio-test-33-1">Likelihood ratio test (3/3)</a></li>
-  <li><a href="#reminder-on-nested-models" id="toc-reminder-on-nested-models" class="nav-link" data-scroll-target="#reminder-on-nested-models">Reminder on nested models</a></li>
-  <li><a href="#example-1-single-continuous-variable-age-5" id="toc-example-1-single-continuous-variable-age-5" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age-5">Example 1: Single, continuous variable: Age</a></li>
-  <li><a href="#example-1-single-continuous-variable-age-6" id="toc-example-1-single-continuous-variable-age-6" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age-6">Example 1: Single, continuous variable: Age</a></li>
-  <li><a href="#example-1-single-continuous-variable-age-7" id="toc-example-1-single-continuous-variable-age-7" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age-7">Example 1: Single, continuous variable: Age</a></li>
-  <li><a href="#example-1-single-continuous-variable-age-8" id="toc-example-1-single-continuous-variable-age-8" class="nav-link" data-scroll-target="#example-1-single-continuous-variable-age-8">Example 1: Single, continuous variable: Age</a></li>
-  <li><a href="#example-2-single-2-categorical-variable-race-and-ethnicity" id="toc-example-2-single-2-categorical-variable-race-and-ethnicity" class="nav-link" data-scroll-target="#example-2-single-2-categorical-variable-race-and-ethnicity">Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</a></li>
-  <li><a href="#example-2-single-2-categorical-variable-race-and-ethnicity-1" id="toc-example-2-single-2-categorical-variable-race-and-ethnicity-1" class="nav-link" data-scroll-target="#example-2-single-2-categorical-variable-race-and-ethnicity-1">Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</a></li>
-  <li><a href="#example-2-single-2-categorical-variable-race-and-ethnicity-2" id="toc-example-2-single-2-categorical-variable-race-and-ethnicity-2" class="nav-link" data-scroll-target="#example-2-single-2-categorical-variable-race-and-ethnicity-2">Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</a></li>
-  <li><a href="#example-2-single-2-categorical-variable-race-and-ethnicity-3" id="toc-example-2-single-2-categorical-variable-race-and-ethnicity-3" class="nav-link" data-scroll-target="#example-2-single-2-categorical-variable-race-and-ethnicity-3">Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</a></li>
-  <li><a href="#example-3-set-of-variables-race-and-ethnicity-and-age" id="toc-example-3-set-of-variables-race-and-ethnicity-and-age" class="nav-link" data-scroll-target="#example-3-set-of-variables-race-and-ethnicity-and-age">Example 3: Set of variables: Race and Ethnicity, and Age</a></li>
-  <li><a href="#example-3-set-of-variables-race-and-ethnicity-and-age-1" id="toc-example-3-set-of-variables-race-and-ethnicity-and-age-1" class="nav-link" data-scroll-target="#example-3-set-of-variables-race-and-ethnicity-and-age-1">Example 3: Set of variables: Race and Ethnicity, and Age</a></li>
-  <li><a href="#example-3-set-of-variables-race-and-ethnicity-and-age-2" id="toc-example-3-set-of-variables-race-and-ethnicity-and-age-2" class="nav-link" data-scroll-target="#example-3-set-of-variables-race-and-ethnicity-and-age-2">Example 3: Set of variables: Race and Ethnicity, and Age</a></li>
-  <li><a href="#example-3-set-of-variables-race-and-ethnicity-and-age-3" id="toc-example-3-set-of-variables-race-and-ethnicity-and-age-3" class="nav-link" data-scroll-target="#example-3-set-of-variables-race-and-ethnicity-and-age-3">Example 3: Set of variables: Race and Ethnicity, and Age</a></li>
-  </ul></li>
-  <li><a href="#learning-objectives-3" id="toc-learning-objectives-3" class="nav-link" data-scroll-target="#learning-objectives-3">Learning Objectives</a>
-  <ul class="collapse">
-  <li><a href="#estimatedpredicted-probability-for-mlr" id="toc-estimatedpredicted-probability-for-mlr" class="nav-link" data-scroll-target="#estimatedpredicted-probability-for-mlr">Estimated/Predicted Probability for MLR</a></li>
-  <li><a href="#predicted-probability" id="toc-predicted-probability" class="nav-link" data-scroll-target="#predicted-probability">Predicted Probability</a></li>
-  <li><a href="#predicting-probability-in-r" id="toc-predicting-probability-in-r" class="nav-link" data-scroll-target="#predicting-probability-in-r">Predicting probability in R</a></li>
-  <li><a href="#predicting-probability-in-r-1" id="toc-predicting-probability-in-r-1" class="nav-link" data-scroll-target="#predicting-probability-in-r-1">Predicting probability in R</a></li>
-  <li><a href="#predicting-probability-in-r-2" id="toc-predicting-probability-in-r-2" class="nav-link" data-scroll-target="#predicting-probability-in-r-2">Predicting probability in R</a></li>
-  <li><a href="#predicting-probability-in-r-3" id="toc-predicting-probability-in-r-3" class="nav-link" data-scroll-target="#predicting-probability-in-r-3">Predicting probability in R</a></li>
-  <li><a href="#predicting-probability-in-r-4" id="toc-predicting-probability-in-r-4" class="nav-link" data-scroll-target="#predicting-probability-in-r-4">Predicting probability in R</a></li>
-  </ul></li>
-  <li><a href="#learning-objectives-4" id="toc-learning-objectives-4" class="nav-link" data-scroll-target="#learning-objectives-4">Learning Objectives</a>
-  <ul class="collapse">
-  <li><a href="#how-to-present-odds-ratios-table" id="toc-how-to-present-odds-ratios-table" class="nav-link" data-scroll-target="#how-to-present-odds-ratios-table">How to present odds ratios: Table</a></li>
-  <li><a href="#how-to-present-odds-ratios-forest-plot-setup" id="toc-how-to-present-odds-ratios-forest-plot-setup" class="nav-link" data-scroll-target="#how-to-present-odds-ratios-forest-plot-setup">How to present odds ratios: Forest Plot Setup</a></li>
-  <li><a href="#how-to-present-odds-ratios-forest-plot-setup-1" id="toc-how-to-present-odds-ratios-forest-plot-setup-1" class="nav-link" data-scroll-target="#how-to-present-odds-ratios-forest-plot-setup-1">How to present odds ratios: Forest Plot Setup</a></li>
-  <li><a href="#how-to-present-odds-ratios-forest-plot" id="toc-how-to-present-odds-ratios-forest-plot" class="nav-link" data-scroll-target="#how-to-present-odds-ratios-forest-plot">How to present odds ratios: Forest Plot</a></li>
-  <li><a href="#how-to-present-odds-ratios-forest-plot-1" id="toc-how-to-present-odds-ratios-forest-plot-1" class="nav-link" data-scroll-target="#how-to-present-odds-ratios-forest-plot-1">How to present odds ratios: Forest Plot</a></li>
-  <li><a href="#adding-odds-ratios" id="toc-adding-odds-ratios" class="nav-link" data-scroll-target="#adding-odds-ratios">Adding odds ratios</a></li>
-  <li><a href="#combine-them" id="toc-combine-them" class="nav-link" data-scroll-target="#combine-them">Combine them!!</a></li>
-  </ul></li>
-  <li><a href="#learning-objectives-5" id="toc-learning-objectives-5" class="nav-link" data-scroll-target="#learning-objectives-5">Learning Objectives</a>
-  <ul class="collapse">
-  <li><a href="#multivariable-logistic-regression-model" id="toc-multivariable-logistic-regression-model" class="nav-link" data-scroll-target="#multivariable-logistic-regression-model">Multivariable Logistic Regression Model</a></li>
-  <li><a href="#interpretation-of-coefficients-in-mlr" id="toc-interpretation-of-coefficients-in-mlr" class="nav-link" data-scroll-target="#interpretation-of-coefficients-in-mlr">Interpretation of Coefficients in MLR</a></li>
-  <li><a href="#example-race-and-ethnicity-and-age-model-fit-fixed" id="toc-example-race-and-ethnicity-and-age-model-fit-fixed" class="nav-link" data-scroll-target="#example-race-and-ethnicity-and-age-model-fit-fixed">Example: Race and Ethnicity and Age model fit (FIXED)</a></li>
-  </ul></li>
-  <li><a href="#learning-objectives-6" id="toc-learning-objectives-6" class="nav-link" data-scroll-target="#learning-objectives-6">Learning Objectives</a></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="10_Multiple_logistic_regression.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Lesson 10: Multiple Logistic Regression</h1>
+</div>
 </div>
 
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nicky Wakim </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 6, 2024</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="learning-objectives" class="level1">
+  <p class="date">2024-05-06</p>
+</section>
+<section>
+<section id="learning-objectives" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
 <li><p>Construct and fit a multiple logistic regression model</p></li>
@@ -319,8 +224,9 @@ window.Quarto = {
 }
 </style>
 </div>
-<section id="last-class" class="level2">
-<h2 class="anchored" data-anchor-id="last-class">Last class</h2>
+</section>
+<section id="last-class" class="slide level2">
+<h2>Last class</h2>
 <ul>
 <li><p>Looked at <strong>simple logistic regression</strong> for binary outcome with</p>
 <ul>
@@ -330,8 +236,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="breast-cancer-example" class="level2">
-<h2 class="anchored" data-anchor-id="breast-cancer-example">Breast Cancer example</h2>
+<section id="breast-cancer-example" class="slide level2">
+<h2>Breast Cancer example</h2>
 <ul>
 <li><p>For breast cancer diagnosis example, recall:</p>
 <ul>
@@ -359,9 +265,9 @@ window.Quarto = {
 <ul>
 <li>We want to fit a multiple logistic regression model with both risk factors included as independent variables</li>
 </ul>
-</section>
-</section>
-<section id="learning-objectives-1" class="level1">
+</section></section>
+<section>
+<section id="learning-objectives-1" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <div class="lob">
 <ol type="1">
@@ -374,8 +280,9 @@ window.Quarto = {
 <li><p>Present the odds ratios for multiple variables at once</p></li>
 <li><p>Interpret odds ratios for coefficients while adjusting for other variables</p></li>
 </ol>
-<section id="introduction-to-multiple-logistic-regression" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-multiple-logistic-regression">Introduction to Multiple Logistic Regression</h2>
+</section>
+<section id="introduction-to-multiple-logistic-regression" class="slide level2">
+<h2>Introduction to Multiple Logistic Regression</h2>
 <ul>
 <li><p>In multiple logistic regression model, we have &gt; 1 independent variable</p>
 <ul>
@@ -395,8 +302,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="multiple-logistic-regression-model" class="level2">
-<h2 class="anchored" data-anchor-id="multiple-logistic-regression-model">Multiple Logistic Regression Model</h2>
+<section id="multiple-logistic-regression-model" class="slide level2">
+<h2>Multiple Logistic Regression Model</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
@@ -422,11 +329,10 @@ window.Quarto = {
 <p><span class="math inline">\(\mathbf{X}\)</span> represents the vector of all the <span class="math inline">\(X\)</span>’s. This is how we represent our group of covariates in our model.</p>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="fitting-the-multiple-logistic-regression-model" class="level2">
-<h2 class="anchored" data-anchor-id="fitting-the-multiple-logistic-regression-model">Fitting the Multiple Logistic Regression Model</h2>
+<section id="fitting-the-multiple-logistic-regression-model" class="slide level2">
+<h2>Fitting the Multiple Logistic Regression Model</h2>
 <ul>
 <li>For a multiple logistic regression model with <span class="math inline">\(k\)</span> independent variables, the <strong>vector of coefficients</strong> can be denoted by <span class="math display">\[\boldsymbol{\beta}^{T} = \left(\beta_0, \beta_1, \beta_2, ..., \beta_k \right)\]</span></li>
 </ul>
@@ -445,8 +351,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="breast-cancer-example-population-model" class="level2">
-<h2 class="anchored" data-anchor-id="breast-cancer-example-population-model">Breast Cancer Example: Population Model</h2>
+<section id="breast-cancer-example-population-model" class="slide level2">
+<h2>Breast Cancer Example: Population Model</h2>
 <ul>
 <li>We can fit a logistic regression model with both race and ethnicity and age:</li>
 </ul>
@@ -472,11 +378,11 @@ window.Quarto = {
 <li>6 total coefficients (<span class="math inline">\(\beta_0\)</span> to <span class="math inline">\(\beta_5\)</span>)</li>
 </ul>
 </section>
-<section id="fitting-multiple-logistic-regression-model" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="fitting-multiple-logistic-regression-model">Fitting Multiple Logistic Regression Model</h2>
+<section id="fitting-multiple-logistic-regression-model" class="slide level2 smaller">
+<h2>Fitting Multiple Logistic Regression Model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(multi_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb1-2"><a></a><span class="fu">summary</span>(multi_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -511,8 +417,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 </section>
-<section id="breast-cancer-example-fitted-model" class="level2">
-<h2 class="anchored" data-anchor-id="breast-cancer-example-fitted-model">Breast Cancer Example: Fitted Model</h2>
+<section id="breast-cancer-example-fitted-model" class="slide level2">
+<h2>Breast Cancer Example: Fitted Model</h2>
 <ul>
 <li>We now have the <strong>fitted logistic regression model</strong> with both race and ethnicity and age:</li>
 </ul>
@@ -534,9 +440,9 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <ul>
 <li>6 total coefficients (<span class="math inline">\(\widehat{\beta}_0\)</span> to <span class="math inline">\(\widehat{\beta}_5\)</span>)</li>
 </ul>
-</section>
-</section>
-<section id="learning-objectives-2" class="level1">
+</section></section>
+<section>
+<section id="learning-objectives-2" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
 <li>Construct and fit a multiple logistic regression model</li>
@@ -551,8 +457,9 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li><p>Present the odds ratios for multiple variables at once</p></li>
 <li><p>Interpret odds ratios for coefficients while adjusting for other variables</p></li>
 </ol>
-<section id="testing-significance-of-the-coefficients" class="level2">
-<h2 class="anchored" data-anchor-id="testing-significance-of-the-coefficients">Testing Significance of the Coefficients</h2>
+</section>
+<section id="testing-significance-of-the-coefficients" class="slide level2">
+<h2>Testing Significance of the Coefficients</h2>
 <ul>
 <li>Refer to Lesson 6 for more information on each test!!</li>
 </ul>
@@ -576,8 +483,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Textbook and our class focuses on Wald and LRT only</li>
 </ul>
 </section>
-<section id="a-note-on-wording" class="level2">
-<h2 class="anchored" data-anchor-id="a-note-on-wording">A note on wording</h2>
+<section id="a-note-on-wording" class="slide level2">
+<h2>A note on wording</h2>
 <ul>
 <li><p>When I say “test a single coefficient” or “test multiple coefficients” I am referring to the <span class="math inline">\(\beta\)</span>’s</p>
 <ul>
@@ -602,16 +509,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="all-three-tests-together" class="level2">
-<h2 class="anchored" data-anchor-id="all-three-tests-together">All three tests together</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./images/three_tests.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</section>
-<section id="from-lesson-6-wald-test" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
-<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="from-lesson-6-wald-test">From Lesson 6: Wald test</h2>
+<section id="all-three-tests-together" class="slide level2">
+<h2>All three tests together</h2>
+
+<img data-src="./images/three_tests.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="from-lesson-6-wald-test" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2>From Lesson 6: Wald test</h2>
 <ul>
 <li><p>Assumes test statistic W follows a standard normal distribution under the null hypothesis</p></li>
 <li><p>Test statistic: <span class="math display">\[W=\frac{{\hat{\beta}}_j}{SE_{\hat{\beta}_j}}\sim N(0,1)\]</span></p>
@@ -626,8 +529,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li><p><strong>Important note:</strong> Wald test is best for confidence intervals of our coefficient estimates or estimated odds ratios.</p></li>
 </ul>
 </section>
-<section id="wald-test-procedure-with-confidence-intervals" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
-<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="wald-test-procedure-with-confidence-intervals">Wald test procedure with confidence intervals</h2>
+<section id="wald-test-procedure-with-confidence-intervals" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2>Wald test procedure with confidence intervals</h2>
 <ol type="1">
 <li><p>Set the <span style="color:#5B9BD5"><strong>level of significance</strong></span> <span class="math inline">\(\alpha\)</span></p></li>
 <li><p>Specify the <span style="color:#5B9BD5"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#5B9BD5"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#5B9BD5"><strong>hypotheses</strong></span></p>
@@ -649,8 +552,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ol>
 </section>
-<section id="wald-test-in-our-example" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
-<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="wald-test-in-our-example">Wald test in our example</h2>
+<section id="wald-test-in-our-example" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2>Wald test in our example</h2>
 <ul>
 <li>From our multiple logistic regression model:</li>
 </ul>
@@ -674,8 +577,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="example-1-single-continuous-variable-age" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -692,8 +595,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Write a <strong>conclusion</strong> to the hypothesis test</li>
 </ol>
 </section>
-<section id="example-1-single-continuous-variable-age-1" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age-1">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age-1" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -714,8 +617,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ol>
 </section>
-<section id="example-1-single-continuous-variable-age-2" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age-2">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age-2" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -733,10 +636,10 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(multi_bc, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">28</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">tidy</span>(multi_bc, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">28</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
@@ -1191,7 +1094,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
@@ -1264,11 +1167,10 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="example-1-single-continuous-variable-age-3" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age-3">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age-3" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -1286,10 +1188,10 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <div class="columns">
 <div class="column" style="width:55%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(multi_bc, </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">tbl_regression</span>(multi_bc, </span>
+<span id="cb4-2"><a></a>               <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:45%;">
 <div class="cell">
@@ -1744,7 +1646,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -1817,11 +1719,10 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="example-1-single-continuous-variable-age-4" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age-4">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age-4" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -1834,12 +1735,14 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Write a <strong>conclusion</strong> to the hypothesis test</li>
 </ol>
 <p>Given race and ethnicity is already in the model, the regression model with age is more likely than the model without age (p-val &lt; 0.001).</p>
-</section>
-</section>
-<section id="break-here" class="level1">
+</section></section>
+<section>
+<section id="break-here" class="title-slide slide level1 center">
 <h1>Break here?</h1>
-<section id="likelihood-ratio-test" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
-<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test">Likelihood ratio test</h2>
+
+</section>
+<section id="likelihood-ratio-test" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2>Likelihood ratio test</h2>
 <ul>
 <li><p>Likelihood ratio test answers the question:</p>
 <ul>
@@ -1862,8 +1765,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="likelihood-ratio-test-33" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
-<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test-33">Likelihood ratio test (3/3)</h2>
+<section id="likelihood-ratio-test-33" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2>Likelihood ratio test (3/3)</h2>
 <ul>
 <li><p>If testing <strong>single variable</strong> and it’s <strong>continuous or binary</strong>, still use this hypothesis test:</p>
 <ul>
@@ -1888,8 +1791,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="lrt-procedure" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
-<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="lrt-procedure">LRT procedure</h2>
+<section id="lrt-procedure" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2>LRT procedure</h2>
 <ol type="1">
 <li><p>Set the <span style="color:#70AD47"><strong>level of significance</strong></span> <span class="math inline">\(\alpha\)</span></p></li>
 <li><p>Specify the <span style="color:#70AD47"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#70AD47"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#70AD47"><strong>hypotheses</strong></span></p>
@@ -1906,8 +1809,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ol>
 </section>
-<section id="likelihood-ratio-test-33-1" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
-<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test-33-1">Likelihood ratio test (3/3)</h2>
+<section id="likelihood-ratio-test-33-1" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2>Likelihood ratio test (3/3)</h2>
 <ul>
 <li>From our multiple logistic regression model:</li>
 </ul>
@@ -1935,8 +1838,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="reminder-on-nested-models" class="level2">
-<h2 class="anchored" data-anchor-id="reminder-on-nested-models">Reminder on nested models</h2>
+<section id="reminder-on-nested-models" class="slide level2">
+<h2>Reminder on nested models</h2>
 <ul>
 <li><p>Likelihood ratio test is only suitable to test “nested” models</p></li>
 <li><p>“Nested” models means the bigger model (full model) contains all the independent variables of the smaller model (reduced model)</p></li>
@@ -1948,8 +1851,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li><p>If the two models to be compared are not nested, likelihood ratio test should not be used</p></li>
 </ul>
 </section>
-<section id="example-1-single-continuous-variable-age-5" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age-5">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age-5" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -1966,8 +1869,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Write a <strong>conclusion</strong> to the hypothesis test</li>
 </ol>
 </section>
-<section id="example-1-single-continuous-variable-age-6" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age-6">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age-6" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -1988,8 +1891,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ol>
 </section>
-<section id="example-1-single-continuous-variable-age-7" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age-7">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age-7" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -2002,10 +1905,10 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Calculate the <strong>test statistic</strong> and <strong>p-value</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>re_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(multi_bc, re_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb5-2"><a></a>re_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(multi_bc, re_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio test
 
@@ -2019,8 +1922,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="example-1-single-continuous-variable-age-8" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-single-continuous-variable-age-8">Example 1: Single, continuous variable: Age</h2>
+<section id="example-1-single-continuous-variable-age-8" class="slide level2">
+<h2>Example 1: Single, continuous variable: Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, continuous variable: Age</p>
@@ -2034,8 +1937,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ol>
 <p>Given race and ethnicity is already in the model, the regression model with age is more likely than the model without age (p-val &lt; <span class="math inline">\(2.2\cdot10^{-16}\)</span>).</p>
 </section>
-<section id="example-2-single-2-categorical-variable-race-and-ethnicity" class="level2">
-<h2 class="anchored" data-anchor-id="example-2-single-2-categorical-variable-race-and-ethnicity">Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
+<section id="example-2-single-2-categorical-variable-race-and-ethnicity" class="slide level2">
+<h2>Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, &gt;2 categorical variable: Race and Ethnicity</p>
@@ -2052,8 +1955,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Write a <strong>conclusion</strong> to the hypothesis test</li>
 </ol>
 </section>
-<section id="example-2-single-2-categorical-variable-race-and-ethnicity-1" class="level2">
-<h2 class="anchored" data-anchor-id="example-2-single-2-categorical-variable-race-and-ethnicity-1">Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
+<section id="example-2-single-2-categorical-variable-race-and-ethnicity-1" class="slide level2">
+<h2>Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, &gt;2 categorical variable: Race and Ethnicity</p>
@@ -2074,8 +1977,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul></li>
 </ol>
 </section>
-<section id="example-2-single-2-categorical-variable-race-and-ethnicity-2" class="level2">
-<h2 class="anchored" data-anchor-id="example-2-single-2-categorical-variable-race-and-ethnicity-2">Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
+<section id="example-2-single-2-categorical-variable-race-and-ethnicity-2" class="slide level2">
+<h2>Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, &gt;2 categorical variable: Race and Ethnicity</p>
@@ -2088,10 +1991,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Calculate the <strong>test statistic</strong> and <strong>p-value</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>age_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(multi_bc, age_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb7-2"><a></a>age_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb7-3"><a></a></span>
+<span id="cb7-4"><a></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(multi_bc, age_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio test
 
@@ -2105,8 +2008,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="example-2-single-2-categorical-variable-race-and-ethnicity-3" class="level2">
-<h2 class="anchored" data-anchor-id="example-2-single-2-categorical-variable-race-and-ethnicity-3">Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
+<section id="example-2-single-2-categorical-variable-race-and-ethnicity-3" class="slide level2">
+<h2>Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
 <div class="example">
 <div class="ex-title">
 <p>Single, &gt;2 categorical variable: Race and Ethnicity</p>
@@ -2120,8 +2023,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ol>
 <p>Given age is already in the model, the regression model with race and ethnicity is more likely than the model without race and ethnicity (p-val = <span class="math inline">\(3.1\cdot10^{-5}\)</span> &lt; 0.05).</p>
 </section>
-<section id="example-3-set-of-variables-race-and-ethnicity-and-age" class="level2">
-<h2 class="anchored" data-anchor-id="example-3-set-of-variables-race-and-ethnicity-and-age">Example 3: Set of variables: Race and Ethnicity, and Age</h2>
+<section id="example-3-set-of-variables-race-and-ethnicity-and-age" class="slide level2">
+<h2>Example 3: Set of variables: Race and Ethnicity, and Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Set of variables: Race and Ethnicity, and Age</p>
@@ -2138,8 +2041,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Write a <strong>conclusion</strong> to the hypothesis test</li>
 </ol>
 </section>
-<section id="example-3-set-of-variables-race-and-ethnicity-and-age-1" class="level2">
-<h2 class="anchored" data-anchor-id="example-3-set-of-variables-race-and-ethnicity-and-age-1">Example 3: Set of variables: Race and Ethnicity, and Age</h2>
+<section id="example-3-set-of-variables-race-and-ethnicity-and-age-1" class="slide level2">
+<h2>Example 3: Set of variables: Race and Ethnicity, and Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Set of variables: Race and Ethnicity, and Age</p>
@@ -2160,8 +2063,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul></li>
 </ol>
 </section>
-<section id="example-3-set-of-variables-race-and-ethnicity-and-age-2" class="level2">
-<h2 class="anchored" data-anchor-id="example-3-set-of-variables-race-and-ethnicity-and-age-2">Example 3: Set of variables: Race and Ethnicity, and Age</h2>
+<section id="example-3-set-of-variables-race-and-ethnicity-and-age-2" class="slide level2">
+<h2>Example 3: Set of variables: Race and Ethnicity, and Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Set of variables: Race and Ethnicity, and Age</p>
@@ -2174,10 +2077,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Calculate the <strong>test statistic</strong> and <strong>p-value</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>intercept_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(multi_bc, intercept_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb9-2"><a></a>intercept_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb9-3"><a></a></span>
+<span id="cb9-4"><a></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(multi_bc, intercept_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio test
 
@@ -2191,8 +2094,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="example-3-set-of-variables-race-and-ethnicity-and-age-3" class="level2">
-<h2 class="anchored" data-anchor-id="example-3-set-of-variables-race-and-ethnicity-and-age-3">Example 3: Set of variables: Race and Ethnicity, and Age</h2>
+<section id="example-3-set-of-variables-race-and-ethnicity-and-age-3" class="slide level2">
+<h2>Example 3: Set of variables: Race and Ethnicity, and Age</h2>
 <div class="example">
 <div class="ex-title">
 <p>Set of variables: Race and Ethnicity, and Age</p>
@@ -2205,9 +2108,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Write a <strong>conclusion</strong> to the hypothesis test</li>
 </ol>
 <p>The regression model with race and ethnicity and age is more likely than the model omitting race and ethnicity and age (p-val &lt; <span class="math inline">\(2.2\cdot10^{-16}\)</span>).</p>
-</section>
-</section>
-<section id="learning-objectives-3" class="level1">
+</section></section>
+<section>
+<section id="learning-objectives-3" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
 <li><p>Construct and fit a multiple logistic regression model</p></li>
@@ -2222,8 +2125,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><p>Present the odds ratios for multiple variables at once</p></li>
 <li><p>Interpret odds ratios for coefficients while adjusting for other variables</p></li>
 </ol>
-<section id="estimatedpredicted-probability-for-mlr" class="level2">
-<h2 class="anchored" data-anchor-id="estimatedpredicted-probability-for-mlr">Estimated/Predicted Probability for MLR</h2>
+</section>
+<section id="estimatedpredicted-probability-for-mlr" class="slide level2">
+<h2>Estimated/Predicted Probability for MLR</h2>
 <ul>
 <li>Basic idea for predicting/estimating probability stays the same</li>
 </ul>
@@ -2246,8 +2150,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 \end{aligned}\]</span></li>
 </ul>
 </section>
-<section id="predicted-probability" class="level2">
-<h2 class="anchored" data-anchor-id="predicted-probability">Predicted Probability</h2>
+<section id="predicted-probability" class="slide level2">
+<h2>Predicted Probability</h2>
 <ul>
 <li><p>We may be interested in predicting probability of having a late stage breast cancer diagnosis for a specific age.</p></li>
 <li><p>The predicted probability is the estimated probability of having the event for given values of covariate(s)</p></li>
@@ -2269,8 +2173,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="predicting-probability-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="predicting-probability-in-r">Predicting probability in R</h2>
+<section id="predicting-probability-in-r" class="slide level2">
+<h2>Predicting probability in R</h2>
 <div class="example">
 <div class="ex-title">
 <p>Predicting probability of late stage breast cancer diagnosis</p>
@@ -2291,8 +2195,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><p>Interpret results</p></li>
 </ol>
 </section>
-<section id="predicting-probability-in-r-1" class="level2">
-<h2 class="anchored" data-anchor-id="predicting-probability-in-r-1">Predicting probability in R</h2>
+<section id="predicting-probability-in-r-1" class="slide level2">
+<h2>Predicting probability in R</h2>
 <div class="example">
 <div class="ex-title">
 <p>Predicting probability of late stage breast cancer diagnosis</p>
@@ -2305,10 +2209,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Calculate probability prediction</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>newdata <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Age_c =</span> <span class="dv">60</span> <span class="sc">-</span> mean_age, </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Race_Ethnicity =</span> <span class="st">"NH Asian/Pacific Islander"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pred1 <span class="ot">=</span> <span class="fu">predict</span>(multi_bc, newdata, <span class="at">se.fit =</span> T, <span class="at">type=</span><span class="st">"response"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pred1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>newdata <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Age_c =</span> <span class="dv">60</span> <span class="sc">-</span> mean_age, </span>
+<span id="cb11-2"><a></a>                     <span class="at">Race_Ethnicity =</span> <span class="st">"NH Asian/Pacific Islander"</span>)</span>
+<span id="cb11-3"><a></a>pred1 <span class="ot">=</span> <span class="fu">predict</span>(multi_bc, newdata, <span class="at">se.fit =</span> T, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb11-4"><a></a>pred1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$fit
         1 
@@ -2323,8 +2227,8 @@ $residual.scale
 </div>
 </div>
 </section>
-<section id="predicting-probability-in-r-2" class="level2">
-<h2 class="anchored" data-anchor-id="predicting-probability-in-r-2">Predicting probability in R</h2>
+<section id="predicting-probability-in-r-2" class="slide level2">
+<h2>Predicting probability in R</h2>
 <div class="example">
 <div class="ex-title">
 <p>Predicting probability of late stage breast cancer diagnosis</p>
@@ -2338,14 +2242,14 @@ $residual.scale
 </ol>
 <p>We can use the Normal approximation if: <span class="math inline">\(\widehat{p}n = \widehat{\pi}(X)\cdot n &gt; 10\)</span> and <span class="math inline">\((1-\widehat{p})n = (1-\widehat{\pi}(X))\cdot n &gt; 10\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">nobs</span>(multi_bc)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> pred1<span class="sc">$</span>fit</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>n<span class="sc">*</span>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>n <span class="ot">=</span> <span class="fu">nobs</span>(multi_bc)</span>
+<span id="cb13-2"><a></a>p <span class="ot">=</span> pred1<span class="sc">$</span>fit</span>
+<span id="cb13-3"><a></a>n<span class="sc">*</span>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1 
 2685.667 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>n<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>n<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1 
 7314.333 </code></pre>
@@ -2353,8 +2257,8 @@ $residual.scale
 </div>
 <p>We can use the Normal approximation!</p>
 </section>
-<section id="predicting-probability-in-r-3" class="level2">
-<h2 class="anchored" data-anchor-id="predicting-probability-in-r-3">Predicting probability in R</h2>
+<section id="predicting-probability-in-r-3" class="slide level2">
+<h2>Predicting probability in R</h2>
 <div class="example">
 <div class="ex-title">
 <p>Predicting probability of late stage breast cancer diagnosis</p>
@@ -2365,20 +2269,20 @@ $residual.scale
 </div>
 <p>3b. Calculate confidence interval (Option 2: with Normal approximation)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">=</span> <span class="fu">predict</span>(multi_bc, newdata, <span class="at">se.fit =</span> T, <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>LL_CI <span class="ot">=</span> pred<span class="sc">$</span>fit <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> pred<span class="sc">$</span>se.fit</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>UL_CI <span class="ot">=</span> pred<span class="sc">$</span>fit <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> pred<span class="sc">$</span>se.fit</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">Pred =</span> pred<span class="sc">$</span>fit, LL_CI, UL_CI) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>pred <span class="ot">=</span> <span class="fu">predict</span>(multi_bc, newdata, <span class="at">se.fit =</span> T, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb17-2"><a></a></span>
+<span id="cb17-3"><a></a>LL_CI <span class="ot">=</span> pred<span class="sc">$</span>fit <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> pred<span class="sc">$</span>se.fit</span>
+<span id="cb17-4"><a></a>UL_CI <span class="ot">=</span> pred<span class="sc">$</span>fit <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.05</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> pred<span class="sc">$</span>se.fit</span>
+<span id="cb17-5"><a></a></span>
+<span id="cb17-6"><a></a><span class="fu">c</span>(<span class="at">Pred =</span> pred<span class="sc">$</span>fit, LL_CI, UL_CI) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pred.1      1      1 
  0.269  0.238  0.299 </code></pre>
 </div>
 </div>
 </section>
-<section id="predicting-probability-in-r-4" class="level2">
-<h2 class="anchored" data-anchor-id="predicting-probability-in-r-4">Predicting probability in R</h2>
+<section id="predicting-probability-in-r-4" class="slide level2">
+<h2>Predicting probability in R</h2>
 <div class="example">
 <div class="ex-title">
 <p>Predicting probability of late stage breast cancer diagnosis</p>
@@ -2391,9 +2295,9 @@ $residual.scale
 <li>Interpret results</li>
 </ol>
 <p>For someone who is 60 years old and Non-Hispanic Asian/Pacific Islander, the predicted probability of late stage breast cancer diagnosis is 0.269 (95% CI: 0.238, 0.299).</p>
-</section>
-</section>
-<section id="learning-objectives-4" class="level1">
+</section></section>
+<section>
+<section id="learning-objectives-4" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
 <li><p>Construct and fit a multiple logistic regression model</p></li>
@@ -2408,16 +2312,17 @@ $residual.scale
 <ol start="5" type="1">
 <li>Interpret odds ratios for coefficients while adjusting for other variables</li>
 </ol>
-<section id="how-to-present-odds-ratios-table" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-present-odds-ratios-table">How to present odds ratios: Table</h2>
+</section>
+<section id="how-to-present-odds-ratios-table" class="slide level2">
+<h2>How to present odds ratios: Table</h2>
 <ul>
 <li><code>tbl_regression()</code> in the <code>gtsummary</code> package is helpful for presenting the odds ratios in a clean way</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(multi_bc, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> <span class="co"># allows us to use tab_options()</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">38</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb19-2"><a></a><span class="fu">tbl_regression</span>(multi_bc, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> <span class="co"># allows us to use tab_options()</span></span>
+<span id="cb19-4"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">38</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="tfbbamszoy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#tfbbamszoy table {
@@ -2869,7 +2774,7 @@ $residual.scale
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -2943,10 +2848,10 @@ $residual.scale
 </div>
 </div>
 </section>
-<section id="how-to-present-odds-ratios-forest-plot-setup" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-present-odds-ratios-forest-plot-setup">How to present odds ratios: Forest Plot Setup</h2>
+<section id="how-to-present-odds-ratios-forest-plot-setup" class="slide level2">
+<h2>How to present odds ratios: Forest Plot Setup</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.helpers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(broom.helpers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'broom.helpers'</code></pre>
@@ -2957,12 +2862,12 @@ Attaching package: 'broom.helpers'</code></pre>
     all_categorical, all_continuous, all_contrasts, all_dichotomous,
     all_interaction, all_intercepts</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>MLR_tidy <span class="ot">=</span> <span class="fu">tidy_and_attach</span>(multi_bc, <span class="at">conf.int=</span>T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy_remove_intercept</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy_add_reference_rows</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy_add_estimate_to_reference_rows</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy_add_term_labels</span>()</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(MLR_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>MLR_tidy <span class="ot">=</span> <span class="fu">tidy_and_attach</span>(multi_bc, <span class="at">conf.int=</span>T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a></a>  <span class="fu">tidy_remove_intercept</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a></a>  <span class="fu">tidy_add_reference_rows</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a></a>  <span class="fu">tidy_add_estimate_to_reference_rows</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a></a>  <span class="fu">tidy_add_term_labels</span>()</span>
+<span id="cb23-6"><a></a><span class="fu">glimpse</span>(MLR_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 6
 Columns: 16
@@ -2985,95 +2890,89 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
 </div>
 </div>
 </section>
-<section id="how-to-present-odds-ratios-forest-plot-setup-1" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="how-to-present-odds-ratios-forest-plot-setup-1">How to present odds ratios: Forest Plot Setup</h2>
+<section id="how-to-present-odds-ratios-forest-plot-setup-1" class="slide level2 smaller">
+<h2>How to present odds ratios: Forest Plot Setup</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">var_label =</span> <span class="fu">case_match</span>(var_label, </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Race_Ethnicity"</span> <span class="sc">~</span> <span class="st">"Race and ethnicity"</span>, </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Age_c"</span> <span class="sc">~</span> <span class="st">""</span>), </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">label =</span> <span class="fu">case_match</span>(label, </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"NH White"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic White"</span>, </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"Hispanic-Latino"</span> <span class="sc">~</span> <span class="st">"Hispanic-Latinx"</span>, </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"NH American Indian/Alaskan Native"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic American </span><span class="sc">\n</span><span class="st"> Indian/Alaskan Native"</span>, </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"NH Asian/Pacific Islander"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic </span><span class="sc">\n</span><span class="st"> Asian/Pacific Islander"</span>,</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"NH Black"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic Black"</span>, </span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Age_c"</span> <span class="sc">~</span> <span class="st">"Age (yrs)"</span>))</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># %&gt;%</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                       fct_relevel("Age (yrs)", "Non-Hispanic \n Asian/Pacific Islander", "Non-Hispanic American \n Indian/Alaskan Native", "Non-Hispanic White", "Hispanic-Latinx", "Non-Hispanic Black"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a></a>  <span class="fu">mutate</span>(<span class="at">var_label =</span> <span class="fu">case_match</span>(var_label, </span>
+<span id="cb25-3"><a></a>                               <span class="st">"Race_Ethnicity"</span> <span class="sc">~</span> <span class="st">"Race and ethnicity"</span>, </span>
+<span id="cb25-4"><a></a>                               <span class="st">"Age_c"</span> <span class="sc">~</span> <span class="st">""</span>), </span>
+<span id="cb25-5"><a></a>         <span class="at">label =</span> <span class="fu">case_match</span>(label, </span>
+<span id="cb25-6"><a></a>                            <span class="st">"NH White"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic White"</span>, </span>
+<span id="cb25-7"><a></a>                            <span class="st">"Hispanic-Latino"</span> <span class="sc">~</span> <span class="st">"Hispanic-Latinx"</span>, </span>
+<span id="cb25-8"><a></a>                            <span class="st">"NH American Indian/Alaskan Native"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic American </span><span class="sc">\n</span><span class="st"> Indian/Alaskan Native"</span>, </span>
+<span id="cb25-9"><a></a>                            <span class="st">"NH Asian/Pacific Islander"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic </span><span class="sc">\n</span><span class="st"> Asian/Pacific Islander"</span>,</span>
+<span id="cb25-10"><a></a>                            <span class="st">"NH Black"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic Black"</span>, </span>
+<span id="cb25-11"><a></a>                               <span class="st">"Age_c"</span> <span class="sc">~</span> <span class="st">"Age (yrs)"</span>))</span>
+<span id="cb25-12"><a></a>  <span class="co"># %&gt;%</span></span>
+<span id="cb25-13"><a></a>  <span class="co">#                       fct_relevel("Age (yrs)", "Non-Hispanic \n Asian/Pacific Islander", "Non-Hispanic American \n Indian/Alaskan Native", "Non-Hispanic White", "Hispanic-Latinx", "Non-Hispanic Black"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="how-to-present-odds-ratios-forest-plot" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-present-odds-ratios-forest-plot">How to present odds ratios: Forest Plot</h2>
+<section id="how-to-present-odds-ratios-forest-plot" class="slide level2">
+<h2>How to present odds ratios: Forest Plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">fct_reorder</span>(label, term))</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>plot_MLR <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>MLR_tidy, </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y=</span>label, <span class="at">x=</span>estimate, <span class="at">xmin=</span>conf.low, <span class="at">xmax=</span>conf.high)) <span class="sc">+</span> </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="fu">geom_errorbarh</span>(<span class="at">height=</span>.<span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">'#C2352F'</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">alpha=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">space=</span><span class="st">'free_y'</span>, <span class="at">switch =</span> <span class="st">"y"</span>) <span class="sc">+</span> </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"OR (95% CI)"</span>, </span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Odds ratios of Late Stage Breast Cancer Diagnosis"</span>) <span class="sc">+</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y=</span><span class="fu">element_blank</span>(), </span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.placement =</span> <span class="st">"outside"</span>, </span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co"># plot_MLR</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">fct_reorder</span>(label, term))</span>
+<span id="cb26-2"><a></a></span>
+<span id="cb26-3"><a></a>plot_MLR <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>MLR_tidy, </span>
+<span id="cb26-4"><a></a>       <span class="fu">aes</span>(<span class="at">y=</span>label, <span class="at">x=</span>estimate, <span class="at">xmin=</span>conf.low, <span class="at">xmax=</span>conf.high)) <span class="sc">+</span> </span>
+<span id="cb26-5"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="fu">geom_errorbarh</span>(<span class="at">height=</span>.<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb26-6"><a></a>  </span>
+<span id="cb26-7"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">'#C2352F'</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">alpha=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-8"><a></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb26-9"><a></a>  </span>
+<span id="cb26-10"><a></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
+<span id="cb26-11"><a></a>             <span class="at">space=</span><span class="st">'free_y'</span>, <span class="at">switch =</span> <span class="st">"y"</span>) <span class="sc">+</span> </span>
+<span id="cb26-12"><a></a>  </span>
+<span id="cb26-13"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"OR (95% CI)"</span>, </span>
+<span id="cb26-14"><a></a>       <span class="at">title =</span> <span class="st">"Odds ratios of Late Stage Breast Cancer Diagnosis"</span>) <span class="sc">+</span></span>
+<span id="cb26-15"><a></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb26-16"><a></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb26-17"><a></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb26-18"><a></a>        <span class="at">axis.title.y=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb26-19"><a></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb26-20"><a></a>        <span class="at">strip.placement =</span> <span class="st">"outside"</span>, </span>
+<span id="cb26-21"><a></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb26-22"><a></a><span class="co"># plot_MLR</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="how-to-present-odds-ratios-forest-plot-1" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-present-odds-ratios-forest-plot-1">How to present odds ratios: Forest Plot</h2>
+<section id="how-to-present-odds-ratios-forest-plot-1" class="slide level2">
+<h2>How to present odds ratios: Forest Plot</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
 (`geom_errorbarh()`).</code></pre>
 </div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="10_Multiple_logistic_regression_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1440"></p>
-</figure>
+
 </div>
-</div>
-</div>
-</section>
-<section id="adding-odds-ratios" class="level2">
-<h2 class="anchored" data-anchor-id="adding-odds-ratios">Adding odds ratios</h2>
+<img data-src="10_Multiple_logistic_regression_files/figure-html/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1440"></section>
+<section id="adding-odds-ratios" class="slide level2">
+<h2>Adding odds ratios</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span> </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate_r =</span> <span class="fu">round</span>(estimate, <span class="dv">2</span>), </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">conf.low_r =</span> <span class="fu">round</span>(conf.low, <span class="dv">2</span>), </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">conf.high_r =</span> <span class="fu">round</span>(conf.high, <span class="dv">2</span>), </span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">OR_char =</span> <span class="fu">paste0</span>(estimate_r, <span class="st">" ("</span>, conf.low_r, <span class="st">", "</span>, conf.high_r, <span class="st">")"</span>), </span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">OR_char =</span> <span class="fu">ifelse</span>(reference_row <span class="sc">==</span> F <span class="sc">|</span> <span class="fu">is.na</span>(reference_row), OR_char, <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a></a>  <span class="fu">mutate</span>(<span class="at">estimate_r =</span> <span class="fu">round</span>(estimate, <span class="dv">2</span>), </span>
+<span id="cb28-3"><a></a>         <span class="at">conf.low_r =</span> <span class="fu">round</span>(conf.low, <span class="dv">2</span>), </span>
+<span id="cb28-4"><a></a>         <span class="at">conf.high_r =</span> <span class="fu">round</span>(conf.high, <span class="dv">2</span>), </span>
+<span id="cb28-5"><a></a>         <span class="at">OR_char =</span> <span class="fu">paste0</span>(estimate_r, <span class="st">" ("</span>, conf.low_r, <span class="st">", "</span>, conf.high_r, <span class="st">")"</span>), </span>
+<span id="cb28-6"><a></a>         <span class="at">OR_char =</span> <span class="fu">ifelse</span>(reference_row <span class="sc">==</span> F <span class="sc">|</span> <span class="fu">is.na</span>(reference_row), OR_char, <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>&nbsp;</p>
 <ul>
 <li>“Plot” of the text for odds ratios estimates</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>OR_labs <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>MLR_tidy, <span class="fu">aes</span>(<span class="at">y=</span>label)) <span class="sc">+</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">label =</span> OR_char), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size=</span><span class="dv">8</span>) <span class="sc">+</span>   </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">space=</span><span class="st">'free_y'</span>) <span class="sc">+</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>OR_labs <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>MLR_tidy, <span class="fu">aes</span>(<span class="at">y=</span>label)) <span class="sc">+</span></span>
+<span id="cb29-2"><a></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">label =</span> OR_char), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size=</span><span class="dv">8</span>) <span class="sc">+</span>   </span>
+<span id="cb29-3"><a></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
+<span id="cb29-5"><a></a>             <span class="at">space=</span><span class="st">'free_y'</span>) <span class="sc">+</span></span>
+<span id="cb29-6"><a></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb29-7"><a></a>    <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="combine-them" class="level2">
-<h2 class="anchored" data-anchor-id="combine-them">Combine them!!</h2>
+<section id="combine-them" class="slide level2">
+<h2>Combine them!!</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">library</span>(cowplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'cowplot'</code></pre>
@@ -3093,7 +2992,7 @@ Attaching package: 'cowplot'</code></pre>
 
     stamp</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(plot_MLR, OR_labs, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">align =</span> <span class="st">"h"</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">plot_grid</span>(plot_MLR, OR_labs, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">align =</span> <span class="st">"h"</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
 (`geom_errorbarh()`).</code></pre>
@@ -3102,17 +3001,11 @@ Attaching package: 'cowplot'</code></pre>
 <pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
 (`geom_text()`).</code></pre>
 </div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="10_Multiple_logistic_regression_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1440"></p>
-</figure>
+
 </div>
-</div>
-</div>
-</section>
-</section>
-<section id="learning-objectives-5" class="level1">
+<img data-src="10_Multiple_logistic_regression_files/figure-html/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1440"></section></section>
+<section>
+<section id="learning-objectives-5" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
 <li><p>Construct and fit a multiple logistic regression model</p></li>
@@ -3125,8 +3018,9 @@ Attaching package: 'cowplot'</code></pre>
 <li>Interpret odds ratios for coefficients while adjusting for other variables</li>
 </ol>
 </div>
-<section id="multivariable-logistic-regression-model" class="level2">
-<h2 class="anchored" data-anchor-id="multivariable-logistic-regression-model">Multivariable Logistic Regression Model</h2>
+</section>
+<section id="multivariable-logistic-regression-model" class="slide level2">
+<h2>Multivariable Logistic Regression Model</h2>
 <ul>
 <li>The multivariable model of logistic regression (called multiple logistic regression) is useful in that it statistically adjusts the estimated effect of each variable in the model</li>
 </ul>
@@ -3143,8 +3037,8 @@ Attaching package: 'cowplot'</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="interpretation-of-coefficients-in-mlr" class="level2">
-<h2 class="anchored" data-anchor-id="interpretation-of-coefficients-in-mlr">Interpretation of Coefficients in MLR</h2>
+<section id="interpretation-of-coefficients-in-mlr" class="slide level2">
+<h2>Interpretation of Coefficients in MLR</h2>
 <ul>
 <li>The interpretation of coefficients in multiple logistic regression is <em>essentially the same as the interpretation of coefficients in simple logistic regression</em></li>
 </ul>
@@ -3157,8 +3051,8 @@ Attaching package: 'cowplot'</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="example-race-and-ethnicity-and-age-model-fit-fixed" class="level2">
-<h2 class="anchored" data-anchor-id="example-race-and-ethnicity-and-age-model-fit-fixed">Example: Race and Ethnicity and Age model fit (FIXED)</h2>
+<section id="example-race-and-ethnicity-and-age-model-fit-fixed" class="slide level2">
+<h2>Example: Race and Ethnicity and Age model fit (FIXED)</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <div class="cell">
@@ -3613,7 +3507,7 @@ Attaching package: 'cowplot'</code></pre>
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -3694,437 +3588,415 @@ Attaching package: 'cowplot'</code></pre>
 <li><p>The estimated odds of late stage breast cancer diagnosis for Non-Hispanic Black individuals is 1.43 times that of Non-Hispanic White individuals, controlling for age (95% CI: 1.24, 1.65).</p></li>
 <li><p>For every one year increase in age, there is an 6% increase in the estimated odds of late stage breast cancer diagnosis, adjusting for race and ethnicity (95% CI: 5%, 7%).</p></li>
 </ul>
-</div>
-</div>
-</section>
-</section>
-<section id="learning-objectives-6" class="level1">
+</div></div>
+</section></section>
+<section id="learning-objectives-6" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 
 
 </section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Lesson 10: Multiple Logistic Regression</p>
+</div>
+</div></div>
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1955,
+
+        height: 1100,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
         }
       }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
         }
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
         }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        return note.innerHTML;
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
       }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
       }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
       }
-    }, function(instance) {
     });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
-  }
-});
-</script>
-</div> <!-- /content -->
-
-
-
+    </script>
+    
 
 </body></html>

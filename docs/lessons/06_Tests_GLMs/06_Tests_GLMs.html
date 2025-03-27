@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nicky Wakim">
+<meta name="dcterms.date" content="2024-04-17">
+
+<title>Lesson 6: Tests for GLMs using Likelihood function – Categorical Data Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-62d5ecfa613c5c5644cabfb02a2f4c65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/Bsta513.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Categorical Data Analysis</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../instructors.html"> 
+<span class="menu-text">Instructors</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../homeworks.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../project.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ive-never-explicitly-said-this" id="toc-ive-never-explicitly-said-this" class="nav-link active" data-scroll-target="#ive-never-explicitly-said-this">I’ve never explicitly said this…</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#connection-between-tests-in-linear-models-and-glms" id="toc-connection-between-tests-in-linear-models-and-glms" class="nav-link" data-scroll-target="#connection-between-tests-in-linear-models-and-glms">Connection between tests in linear models and GLMs</a></li>
+  <li><a href="#revisit-the-likelihood-function" id="toc-revisit-the-likelihood-function" class="nav-link" data-scroll-target="#revisit-the-likelihood-function">Revisit the likelihood function</a></li>
+  <li><a href="#introduction-to-three-tests-in-glm" id="toc-introduction-to-three-tests-in-glm" class="nav-link" data-scroll-target="#introduction-to-three-tests-in-glm">Introduction to three tests in GLM</a></li>
+  <li><a href="#poll-everywhere-question-1" id="toc-poll-everywhere-question-1" class="nav-link" data-scroll-target="#poll-everywhere-question-1">Poll Everywhere Question 1</a></li>
+  <li><a href="#revisit-previous-model-with-late-stage-bc-diagnosis-and-age" id="toc-revisit-previous-model-with-late-stage-bc-diagnosis-and-age" class="nav-link" data-scroll-target="#revisit-previous-model-with-late-stage-bc-diagnosis-and-age">Revisit previous model with late stage BC diagnosis and age</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-1" id="toc-learning-objectives-1" class="nav-link" data-scroll-target="#learning-objectives-1">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#wald-test-13" id="toc-wald-test-13" class="nav-link" data-scroll-target="#wald-test-13">Wald test (1/3)</a></li>
+  <li><a href="#wald-test-23" id="toc-wald-test-23" class="nav-link" data-scroll-target="#wald-test-23">Wald test (2/3)</a></li>
+  <li><a href="#wald-test-33" id="toc-wald-test-33" class="nav-link" data-scroll-target="#wald-test-33">Wald test (3/3)</a></li>
+  <li><a href="#wald-test-procedure-with-confidence-intervals" id="toc-wald-test-procedure-with-confidence-intervals" class="nav-link" data-scroll-target="#wald-test-procedure-with-confidence-intervals">Wald test procedure with confidence intervals</a></li>
+  <li><a href="#example-bc-diagnosis-and-age" id="toc-example-bc-diagnosis-and-age" class="nav-link" data-scroll-target="#example-bc-diagnosis-and-age">Example: BC diagnosis and age</a></li>
+  <li><a href="#example-bc-diagnosis-and-age-1" id="toc-example-bc-diagnosis-and-age-1" class="nav-link" data-scroll-target="#example-bc-diagnosis-and-age-1">Example: BC diagnosis and age</a></li>
+  <li><a href="#example-bc-diagnosis-and-age-2" id="toc-example-bc-diagnosis-and-age-2" class="nav-link" data-scroll-target="#example-bc-diagnosis-and-age-2">Example: BC diagnosis and age</a></li>
+  <li><a href="#example-bc-diagnosis-and-age-3" id="toc-example-bc-diagnosis-and-age-3" class="nav-link" data-scroll-target="#example-bc-diagnosis-and-age-3">Example: BC diagnosis and age</a></li>
+  <li><a href="#poll-everywhere-question-2" id="toc-poll-everywhere-question-2" class="nav-link" data-scroll-target="#poll-everywhere-question-2">Poll Everywhere Question 2</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-2" id="toc-learning-objectives-2" class="nav-link" data-scroll-target="#learning-objectives-2">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#score-test" id="toc-score-test" class="nav-link" data-scroll-target="#score-test">Score test</a></li>
+  <li><a href="#score-test-1" id="toc-score-test-1" class="nav-link" data-scroll-target="#score-test-1">Score test</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-3" id="toc-learning-objectives-3" class="nav-link" data-scroll-target="#learning-objectives-3">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#likelihood-ratio-test-13" id="toc-likelihood-ratio-test-13" class="nav-link" data-scroll-target="#likelihood-ratio-test-13">Likelihood ratio test (1/3)</a></li>
+  <li><a href="#likelihood-ratio-test-23" id="toc-likelihood-ratio-test-23" class="nav-link" data-scroll-target="#likelihood-ratio-test-23">Likelihood ratio test (2/3)</a></li>
+  <li><a href="#likelihood-ratio-test-23-1" id="toc-likelihood-ratio-test-23-1" class="nav-link" data-scroll-target="#likelihood-ratio-test-23-1">Likelihood ratio test (2/3)</a></li>
+  <li><a href="#lrt-what-is-deviance" id="toc-lrt-what-is-deviance" class="nav-link" data-scroll-target="#lrt-what-is-deviance">LRT: what is Deviance?</a></li>
+  <li><a href="#lrt-what-is-deviance-1" id="toc-lrt-what-is-deviance-1" class="nav-link" data-scroll-target="#lrt-what-is-deviance-1">LRT: what is Deviance?</a></li>
+  <li><a href="#deviance-to-likelihood-ratio-test" id="toc-deviance-to-likelihood-ratio-test" class="nav-link" data-scroll-target="#deviance-to-likelihood-ratio-test">Deviance to Likelihood Ratio Test</a></li>
+  <li><a href="#for-reference" id="toc-for-reference" class="nav-link" data-scroll-target="#for-reference">For reference</a></li>
+  <li><a href="#poll-everywhere-question-3" id="toc-poll-everywhere-question-3" class="nav-link" data-scroll-target="#poll-everywhere-question-3">Poll Everywhere Question 3</a></li>
+  <li><a href="#likelihood-ratio-test-23-2" id="toc-likelihood-ratio-test-23-2" class="nav-link" data-scroll-target="#likelihood-ratio-test-23-2">Likelihood ratio test (2/3)</a></li>
+  <li><a href="#likelihood-ratio-test-33" id="toc-likelihood-ratio-test-33" class="nav-link" data-scroll-target="#likelihood-ratio-test-33">Likelihood ratio test (3/3)</a></li>
+  <li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test">Likelihood ratio test</a></li>
+  <li><a href="#lrt-procedure" id="toc-lrt-procedure" class="nav-link" data-scroll-target="#lrt-procedure">LRT procedure</a></li>
+  <li><a href="#example-bc-diagnosis-and-age-4" id="toc-example-bc-diagnosis-and-age-4" class="nav-link" data-scroll-target="#example-bc-diagnosis-and-age-4">Example: BC diagnosis and age</a></li>
+  <li><a href="#example-bc-diagnosis-and-age-5" id="toc-example-bc-diagnosis-and-age-5" class="nav-link" data-scroll-target="#example-bc-diagnosis-and-age-5">Example: BC diagnosis and age</a></li>
+  <li><a href="#example-bc-diagnosis-and-age-6" id="toc-example-bc-diagnosis-and-age-6" class="nav-link" data-scroll-target="#example-bc-diagnosis-and-age-6">Example: BC diagnosis and age</a></li>
+  <li><a href="#example-bc-diagnosis-and-age-7" id="toc-example-bc-diagnosis-and-age-7" class="nav-link" data-scroll-target="#example-bc-diagnosis-and-age-7">Example: BC diagnosis and age</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-4" id="toc-learning-objectives-4" class="nav-link" data-scroll-target="#learning-objectives-4">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#all-three-tests-together" id="toc-all-three-tests-together" class="nav-link" data-scroll-target="#all-three-tests-together">All three tests together</a></li>
+  <li><a href="#which-test-to-use" id="toc-which-test-to-use" class="nav-link" data-scroll-target="#which-test-to-use">Which test to use?</a></li>
+  <li><a href="#poll-everywhere-question-4" id="toc-poll-everywhere-question-4" class="nav-link" data-scroll-target="#poll-everywhere-question-4">Poll Everywhere Question 4</a></li>
+  <li><a href="#poll-everywhere-question-5" id="toc-poll-everywhere-question-5" class="nav-link" data-scroll-target="#poll-everywhere-question-5">Poll Everywhere Question 5</a></li>
+  <li><a href="#poll-everywhere-question-6" id="toc-poll-everywhere-question-6" class="nav-link" data-scroll-target="#poll-everywhere-question-6">Poll Everywhere Question 6</a></li>
+  <li><a href="#poll-everywhere-question-7" id="toc-poll-everywhere-question-7" class="nav-link" data-scroll-target="#poll-everywhere-question-7">Poll Everywhere Question 7</a></li>
+  <li><a href="#poll-everywhere-question-8" id="toc-poll-everywhere-question-8" class="nav-link" data-scroll-target="#poll-everywhere-question-8">Poll Everywhere Question 8</a></li>
+  <li><a href="#tests-and-what-theyre-used-for" id="toc-tests-and-what-theyre-used-for" class="nav-link" data-scroll-target="#tests-and-what-theyre-used-for">Tests and what they’re used for</a></li>
+  <li><a href="#tests-and-what-theyre-used-for-1" id="toc-tests-and-what-theyre-used-for-1" class="nav-link" data-scroll-target="#tests-and-what-theyre-used-for-1">Tests and what they’re used for</a></li>
+  <li><a href="#so-how-would-the-wald-test-and-lrt-show-up-in-research" id="toc-so-how-would-the-wald-test-and-lrt-show-up-in-research" class="nav-link" data-scroll-target="#so-how-would-the-wald-test-and-lrt-show-up-in-research">So how would the Wald test and LRT show up in research?</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="06_Tests_GLMs.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 6: Tests for GLMs using Likelihood function</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nicky Wakim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 17, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="ive-never-explicitly-said-this" class="level2">
+<h2 class="anchored" data-anchor-id="ive-never-explicitly-said-this">I’ve never explicitly said this…</h2>
+<ul>
+<li>Because we are in a public health class, we are often analyzing data with sensitive outcomes</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>If you ever need a moment in class because of our topic, feel free to just step out or leave and privately view the lecture</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>If you need extra time on your assignments because you have an emotional response to lectures/homework/lab, just let me know! Extenuating circumstance!</li>
+</ul>
+</section>
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li><p>Use the Wald test to test the significance of an estimated coefficient through confidence intervals.</p></li>
+<li><p>Articulate how the Wald test, Score test, and likelihood ratio test (LRT) calculates a test statistic using the likelihood function.</p></li>
+<li><p>Use the Likelihood ratio test to test the significance of estimated coefficients through formal hypothesis testing.</p></li>
+<li><p>Understand when and how to use each test: Wald, Score, and Likelihood ratio</p></li>
+</ol>
+<div class="cell">
+<style type="text/css">
+.reveal code {
+  max-height: 80% !important;
+}
+</style>
+</div>
+<section id="connection-between-tests-in-linear-models-and-glms" class="level2">
+<h2 class="anchored" data-anchor-id="connection-between-tests-in-linear-models-and-glms">Connection between tests in linear models and GLMs</h2>
+<ul>
+<li><p>In linear regression, we used ordinary least squares (OLS) to find the best fit model, so we could use the following tests:</p>
+<ul>
+<li>t-test for single coefficients</li>
+<li>F-test for single coefficients or groups of coefficients</li>
+</ul></li>
+<li><p>These tests <strong>hinge on the Mean Squared Error (MSE)</strong> which we minimized in OLS and the LINE assumptions</p></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>In GLMs, when we use <strong>maximum likelihood estimation (MLE)</strong>, we <strong>cannot</strong> use t-tests or F-tests</p>
+<ul>
+<li>Because we are now using likelihood to find our estimates (not OLS)</li>
+</ul></li>
+<li><p>But we have <strong>parallel tests in MLE</strong>!!</p>
+<ul>
+<li><p>t-test ⟶ Wald test</p></li>
+<li><p>F-test ⟶ Likelihood ratio test</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="revisit-the-likelihood-function" class="level2">
+<h2 class="anchored" data-anchor-id="revisit-the-likelihood-function">Revisit the likelihood function</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p><span style="color:#F6C342; font-weight: bold;">Likelihood function:</span> expresses the probability of the observed data as a function of the unknown parameters</p>
+<ul>
+<li>Function that enumerates the likelihood (similar to probability) that we observe the data across the range of potential values of our coefficients</li>
+</ul></li>
+<li><p>We often compare likelihoods to see what estimates are more likely given our data</p></li>
+<li><p>Plot to right is a simplistic view of likelihood</p>
+<ul>
+<li>I have flattened the likelihood that would be a function of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> into a 2D plot (instead of 3D: <span class="math inline">\(\beta_0\)</span> vs.&nbsp;<span class="math inline">\(\beta_1\)</span> vs.&nbsp;<span class="math inline">\(L(\beta_0, \beta_1)\)</span>)</li>
+</ul></li>
+<li><p>I use <span class="math inline">\(L\)</span> to represent the log-likelihood and <span class="math inline">\(l\)</span> to represent the likelihood</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/like_fn.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="introduction-to-three-tests-in-glm" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-three-tests-in-glm">Introduction to three tests in GLM</h2>
+<ul>
+<li><p>To introduce these three tests, we will work on a <strong>single coefficient</strong></p>
+<ul>
+<li>To be clear: the <em>Likelihood ratio test can be extended to more coefficients</em></li>
+</ul></li>
+<li><p>Let’s say we fit a GLM using MLE</p>
+<ul>
+<li>We will continue to use logistic regression as our working example</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>Now we want to run a hypothesis test for an individual coefficient <span class="math inline">\(j\)</span>:</p>
+<ul>
+<li><span class="math inline">\(H_0: \beta_j = 0\)</span></li>
+<li><span class="math inline">\(H_1: \beta_j \neq 0\)</span></li>
+</ul></li>
+<li><p>Three potential tests that we use with a Likelihood function are:</p>
+<ul>
+<li><span style="background-color:#D5E2F1;">Wald test</span></li>
+<li><span style="background-color:#F9E7B8;">Score test</span></li>
+<li><span style="background-color:#CADFB8;">Likelihood ratio test (LRT)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="poll-everywhere-question-1" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-1">Poll Everywhere Question 1</h2>
+</section>
+<section id="revisit-previous-model-with-late-stage-bc-diagnosis-and-age" class="level2">
+<h2 class="anchored" data-anchor-id="revisit-previous-model-with-late-stage-bc-diagnosis-and-age">Revisit previous model with late stage BC diagnosis and age</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li>Simple logistic regression model: <span class="math display">\[\text{logit}(\pi(Age)) = \beta_0 + \beta_1 \cdot Age\]</span></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p>&nbsp;</p>
+<p>Don’t forget: <span class="math inline">\(\pi(Age) = P(Y=1 | Age)\)</span></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bc_reg <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bc_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Late_stage_diag ~ Age_c, family = binomial, data = bc)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.989422   0.023205  -42.64   &lt;2e-16 ***
+Age_c        0.056965   0.003204   17.78   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 11861  on 9999  degrees of freedom
+Residual deviance: 11510  on 9998  degrees of freedom
+AIC: 11514
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="learning-objectives-1" class="level1">
+<h1>Learning Objectives</h1>
+<div class="lob">
+<ol type="1">
+<li><p>Use the Wald test to test the significance of an estimated coefficient through confidence intervals.</p></li>
+<li><p>Articulate how the <strong>Wald test</strong>, Score test, and likelihood ratio test (LRT) calculates a test statistic using the likelihood function.</p></li>
+</ol>
+</div>
+<ol start="3" type="1">
+<li><p>Use the Likelihood ratio test to test the significance of estimated coefficients through formal hypothesis testing.</p></li>
+<li><p>Understand when and how to use each test: Wald, Score, and Likelihood ratio</p></li>
+</ol>
+<section id="wald-test-13" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="wald-test-13">Wald test (1/3)</h2>
+<ul>
+<li><p>Very similar to a t-test!</p>
+<ul>
+<li>But slightly different because it based in our likelihood function</li>
+</ul></li>
+<li><p>Assumes test statistic W follows a standard normal distribution under the null hypothesis</p></li>
+<li><p>Test statistic: <span class="math display">\[W=\frac{{\hat{\beta}}_j}{se({\hat{\beta}}_j)}\sim N(0,1)\]</span></p>
+<ul>
+<li>where <span class="math inline">\(\widehat{\beta}_j\)</span> is a MLE of coefficient <span class="math inline">\(j\)</span></li>
+</ul></li>
+<li><p>95% Wald confidence interval: <span class="math display">\[{\hat{\beta}}_1\pm1.96 \cdot SE_{{\hat{\beta}}_j}\]</span></p></li>
+<li><p>The Wald test is a routine output in R (<code>summary()</code> of <code>glm()</code> output)</p>
+<ul>
+<li>Includes <span class="math inline">\(SE_{{\hat{\beta}}_j}\)</span> and can easily find confidence interval with <code>tidy()</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="wald-test-23" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="wald-test-23">Wald test (2/3)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/like_fn.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="wald-test-33" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="wald-test-33">Wald test (3/3)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/wald.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="wald-test-procedure-with-confidence-intervals" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="wald-test-procedure-with-confidence-intervals">Wald test procedure with confidence intervals</h2>
+<ol type="1">
+<li><p>Set the <span style="color:#5B9BD5"><strong>level of significance</strong></span> <span class="math inline">\(\alpha\)</span></p></li>
+<li><p>Specify the <span style="color:#5B9BD5"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#5B9BD5"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#5B9BD5"><strong>hypotheses</strong></span></p>
+<ul>
+<li>In symbols</li>
+<li>In words</li>
+<li>Alternative: one- or two-sided?</li>
+</ul></li>
+<li><p>Calculate the <span style="color:#5B9BD5"><strong>confidence interval</strong></span> and <span style="color:#5B9BD5"><strong>determine if it overlaps with null</strong></span></p>
+<ul>
+<li>Overlap with null (usually 0 for coefficient) = fail to reject null</li>
+<li>No overlap with null (usually 0 for coefficient) = reject null</li>
+</ul></li>
+<li><p>Write a <span style="color:#5B9BD5"><strong>conclusion</strong></span> to the hypothesis test</p>
+<ul>
+<li>What is the estimate and its confidence interval?</li>
+<li>Do we reject or fail to reject <span class="math inline">\(H_0\)</span>?</li>
+<li>Write a conclusion in the context of the problem</li>
+</ul></li>
+</ol>
+</section>
+<section id="example-bc-diagnosis-and-age" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="example-bc-diagnosis-and-age">Example: BC diagnosis and age</h2>
+<div class="example">
+<div class="ex-title">
+<p>Wald test for age coefficient</p>
+</div>
+<div class="ex-cont">
+<p>Interpret the coefficient for age in our model of late stage breast cancer diagnosis.</p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Needed steps:</strong></p>
+<ol type="1">
+<li>Set the <strong>level of significance</strong> <span class="math inline">\(\alpha\)</span></li>
+<li>Specify the <strong>null</strong> ( <span class="math inline">\(H_0\)</span> ) and <strong>alternative</strong> ( <span class="math inline">\(H_A\)</span> ) <strong>hypotheses</strong></li>
+<li>Calculate the <strong>confidence interval</strong> and <strong>determine if it overlaps with null</strong></li>
+<li>Write a <strong>conclusion</strong> to the hypothesis test</li>
+</ol>
+</div><div class="column" style="width:40%;">
+<div class="proof1">
+<div class="proof-title">
+<p>Note</p>
+</div>
+<div class="proof-cont">
+<p>I don’t want us to get fixated on this interpretation. This is more to introduce the process, BUT it’s MUCH better to interpret the coefficient in terms of OR (next class).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-bc-diagnosis-and-age-1" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="example-bc-diagnosis-and-age-1">Example: BC diagnosis and age</h2>
+<div class="example">
+<div class="ex-title">
+<p>Wald test for age coefficient</p>
+</div>
+<div class="ex-cont">
+<p>Interpret the coefficient for age in our model of late stage breast cancer diagnosis.</p>
+</div>
+</div>
+<ol type="1">
+<li>Set the <strong>level of significance</strong> <span class="math inline">\(\alpha\)</span> <span class="math display">\[\alpha=0.05\]</span></li>
+<li>Specify the <strong>null</strong> ( <span class="math inline">\(H_0\)</span> ) and <strong>alternative</strong> ( <span class="math inline">\(H_A\)</span> ) <strong>hypotheses</strong></li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+H_0 &amp;: \beta_{Age} = 0 \\
+H_1 &amp;: \beta_{Age} \neq 0 \\
+\end{aligned}\]</span></p>
+</section>
+<section id="example-bc-diagnosis-and-age-2" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="example-bc-diagnosis-and-age-2">Example: BC diagnosis and age</h2>
+<div class="example">
+<div class="ex-title">
+<p>Wald test for age coefficient</p>
+</div>
+<div class="ex-cont">
+<p>Interpret the coefficient for age in our model of late stage breast cancer diagnosis.</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Calculate the <strong>confidence interval</strong> and <strong>determine if it overlaps with null</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epiDisplay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: foreign</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: survival</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'survival'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:boot':
+
+    aml</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: MASS</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:gtsummary':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:rstatix':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: nnet</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'epiDisplay'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:lmtest':
+
+    lrtest</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    alpha</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bc_reg <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(bc_reg, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="jfackqjurc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jfackqjurc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jfackqjurc thead, #jfackqjurc tbody, #jfackqjurc tfoot, #jfackqjurc tr, #jfackqjurc td, #jfackqjurc th {
+  border-style: none;
+}
+
+#jfackqjurc p {
+  margin: 0;
+  padding: 0;
+}
+
+#jfackqjurc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 35px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jfackqjurc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jfackqjurc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jfackqjurc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jfackqjurc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jfackqjurc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jfackqjurc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jfackqjurc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jfackqjurc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jfackqjurc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jfackqjurc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jfackqjurc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jfackqjurc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jfackqjurc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jfackqjurc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jfackqjurc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jfackqjurc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jfackqjurc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jfackqjurc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jfackqjurc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jfackqjurc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jfackqjurc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jfackqjurc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jfackqjurc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jfackqjurc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jfackqjurc .gt_left {
+  text-align: left;
+}
+
+#jfackqjurc .gt_center {
+  text-align: center;
+}
+
+#jfackqjurc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jfackqjurc .gt_font_normal {
+  font-weight: normal;
+}
+
+#jfackqjurc .gt_font_bold {
+  font-weight: bold;
+}
+
+#jfackqjurc .gt_font_italic {
+  font-style: italic;
+}
+
+#jfackqjurc .gt_super {
+  font-size: 65%;
+}
+
+#jfackqjurc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jfackqjurc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jfackqjurc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jfackqjurc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jfackqjurc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jfackqjurc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jfackqjurc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jfackqjurc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jfackqjurc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p.value</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.low</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">(Intercept)</td>
+<td class="gt_row gt_right" headers="estimate">−0.989</td>
+<td class="gt_row gt_right" headers="std.error">0.023</td>
+<td class="gt_row gt_right" headers="statistic">−42.637</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">−1.035</td>
+<td class="gt_row gt_right" headers="conf.high">−0.944</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">Age_c</td>
+<td class="gt_row gt_right" headers="estimate">0.057</td>
+<td class="gt_row gt_right" headers="std.error">0.003</td>
+<td class="gt_row gt_right" headers="statistic">17.780</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">0.051</td>
+<td class="gt_row gt_right" headers="conf.high">0.063</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="example-bc-diagnosis-and-age-3" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="example-bc-diagnosis-and-age-3">Example: BC diagnosis and age</h2>
+<div class="example">
+<div class="ex-title">
+<p>Wald test for age coefficient</p>
+</div>
+<div class="ex-cont">
+<p>Interpret the coefficient for age in our model of late stage breast cancer diagnosis.</p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ol start="4" type="1">
+<li>Write a <strong>conclusion</strong> to the hypothesis test</li>
+</ol>
+<p>For every one year increase in age, the log-odds of late stage breast cancer diagnosis increases 0.057 (95% CI: 0.051, 0.063).</p>
+<p>There is sufficient evidence that age an breast cancer diagnosis are associated.</p>
+</div><div class="column" style="width:40%;">
+<div class="proof1">
+<div class="proof-title">
+<p>Note</p>
+</div>
+<div class="proof-cont">
+<p>I don’t want us to get fixated on this interpretation. This is more to introduce the process, BUT it’s MUCH better to interpret the coefficient in terms of OR (next class).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="poll-everywhere-question-2" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-2">Poll Everywhere Question 2</h2>
+</section>
+</section>
+<section id="learning-objectives-2" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li>Use the Wald test to test the significance of an estimated coefficient through confidence intervals.</li>
+</ol>
+<div class="lob">
+<ol start="2" type="1">
+<li>Articulate how the Wald test, <strong>Score test</strong>, and likelihood ratio test (LRT) calculates a test statistic using the likelihood function.</li>
+</ol>
+</div>
+<ol start="3" type="1">
+<li><p>Use the Likelihood ratio test to test the significance of estimated coefficients through formal hypothesis testing.</p></li>
+<li><p>Understand when and how to use each test: Wald, Score, and Likelihood ratio</p></li>
+</ol>
+<section id="score-test" class="level2" data-background-image="./images/title_yell.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_yell.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="score-test">Score test</h2>
+<ul>
+<li><p>Score test does not require the computation of MLE for <span class="math inline">\(\beta_1\)</span>, while both likelihood test and Wald test does</p>
+<ul>
+<li>Only need to know <span class="math inline">\(\beta_1\)</span> under the null</li>
+</ul></li>
+<li><p>Score test is based on the first and second derivatives of the log-likelihood under the null hypothesis: <span class="math display">\[S=\frac{\sum_{i=1}^{n}{x_i(y_i-\bar{y})}}{\sqrt{\bar{y}(1-\bar{y})\sum_{i=1}^{n}\left(x_i-\bar{x}\right)^2}} \sim N(0,1)\]</span></p></li>
+</ul>
+</section>
+<section id="score-test-1" class="level2" data-background-image="./images/title_yell.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_yell.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="score-test-1">Score test</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/score.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="learning-objectives-3" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li>Use the Wald test to test the significance of an estimated coefficient through confidence intervals.</li>
+</ol>
+<div class="lob">
+<ol start="2" type="1">
+<li><p>Articulate how the Wald test, Score test, and <strong>likelihood ratio test (LRT)</strong> calculates a test statistic using the likelihood function.</p></li>
+<li><p>Use the Likelihood ratio test to test the significance of estimated coefficients through formal hypothesis testing.</p></li>
+</ol>
+</div>
+<ol start="4" type="1">
+<li>Understand when and how to use each test: Wald, Score, and Likelihood ratio</li>
+</ol>
+<section id="likelihood-ratio-test-13" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test-13">Likelihood ratio test (1/3)</h2>
+<ul>
+<li><p>Likelihood ratio test answers the question:</p>
+<ul>
+<li>For a specific covariate, <strong>which model tell us more about the outcome variable</strong>: the model including the covariate or the model omitting the covariate?</li>
+<li>Aka: Which model is more likely given our data: model including the covariate or the model omitting the covariate?</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>Test a single coefficient by comparing different models</p>
+<ul>
+<li><strong>Very similar to the F-test</strong></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>Important: LRT can be used conduct hypothesis tests for <strong>multiple coefficients</strong></p>
+<ul>
+<li>Just like F-test, we can test a single coefficient, continuous/binary covariate, multi-level covariate, or multiple covariates</li>
+</ul></li>
+</ul>
+</section>
+<section id="likelihood-ratio-test-23" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test-23">Likelihood ratio test (2/3)</h2>
+<ul>
+<li>To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>For a continuous or binary variable, this is equivalent to test: <span class="math inline">\(H_0: \beta_j = 0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \beta_j \neq 0\)</span></p></li>
+<li><p>Test statistic for LRT: <span class="math display">\[G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]\]</span></p></li>
+</ul>
+</section>
+<section id="likelihood-ratio-test-23-1" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test-23-1">Likelihood ratio test (2/3)</h2>
+<ul>
+<li>To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>For a continuous or binary variable, this is equivalent to test: <span class="math inline">\(H_0: \beta_j = 0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \beta_j \neq 0\)</span></p></li>
+<li><p>Test statistic for LRT: <span class="math display">\[G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]\]</span></p></li>
+</ul>
+<p><img src="./images/pause.png" class="absolute" data-bottom="7%" data-right="0%" width="300" height="300"></p>
+</section>
+<section id="lrt-what-is-deviance" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="lrt-what-is-deviance">LRT: what is Deviance?</h2>
+<ul>
+<li><p><strong>Deviance:</strong> quantifies the difference in likelihoods between a <span style="color:#F6C342; font-weight: bold;">fitted</span> and <span style="color:#ED7D31; font-weight: bold;">saturated</span> model</p>
+<ul>
+<li><p><span style="color:#F6C342; font-weight: bold;">Fitted model:</span></p>
+<ul>
+<li>Your proposed fitted model</li>
+</ul></li>
+<li><p><span style="color:#ED7D31; font-weight: bold;">Saturated model:</span></p>
+<ul>
+<li>A model that contains as many parameters as there are data points = <strong>perfect fit</strong>
+<ul>
+<li>Basically every individual has their own covariate</li>
+</ul></li>
+<li>Perfect fit = maximum possible likelihood</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>All fitted models will have likelihood less than saturated model</strong></li>
+</ul>
+<p><img src="./images/tiny_pause.png" class="absolute" data-top="83%" data-right="0%" width="120" height="120"></p>
+</section>
+<section id="lrt-what-is-deviance-1" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="lrt-what-is-deviance-1">LRT: what is Deviance?</h2>
+<ul>
+<li><p>The <strong>deviance</strong> is mathematically defined as: <span class="math display">\[D=-2[L_{\text{fitted}}-L_{\text{saturated}}]\]</span></p></li>
+<li><p>An alternative way to write it is: <span class="math display">\[D=-2ln\left[\frac{\text{likelihood of the fitted model}}{\text{likelihood of the saturated model}}\right]\]</span></p></li>
+<li><p>Using ‘-2’ is to make the deviance follow a chi-square distribution</p></li>
+</ul>
+<p><img src="./images/tiny_pause.png" class="absolute" data-top="83%" data-right="0%" width="120" height="120"></p>
+</section>
+<section id="deviance-to-likelihood-ratio-test" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="deviance-to-likelihood-ratio-test">Deviance to Likelihood Ratio Test</h2>
+<ul>
+<li>In the LRT, we are NOT comparing the likelihood of saturated model to the fitted model</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>We ARE comparing the Deviance of the model with x and the model without x</p>
+<ul>
+<li>We just use the saturated model to calculate Deviance</li>
+<li>Both are considered fitted models with their own respective Deviance</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>So our LRT is: <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
+</ul>
+<p><img src="./images/tiny_pause.png" class="absolute" data-top="83%" data-right="0%" width="120" height="120"></p>
+</section>
+<section id="for-reference" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="for-reference">For reference</h2>
+<p><span class="math display">\[ \begin{aligned}
+G&amp;=D\left(\text{model without } x\right)-D\left(\text{model with }x\right) \\
+G&amp;=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of saturated model}}\right]-\left(-2ln\left[\frac{\text{likelihood of model with } x}{\text{likelihood of saturated model}}\right]\right) \\
+G&amp;=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of saturated model}}\times\frac{\text{likelihood of saturated model}}{\text{likelihood of model with } x}\right] \\
+G&amp;=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of model with }}\right] \\
+G&amp;=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]
+\end{aligned}\]</span></p>
+<p><img src="./images/tiny_pause.png" class="absolute" data-top="83%" data-right="0%" width="120" height="120"></p>
+</section>
+<section id="poll-everywhere-question-3" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-3">Poll Everywhere Question 3</h2>
+</section>
+<section id="likelihood-ratio-test-23-2" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test-23-2">Likelihood ratio test (2/3)</h2>
+<ul>
+<li>To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>For a continuous or binary variable, this is equivalent to test: <span class="math inline">\(H_0: \beta_j = 0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \beta_j \neq 0\)</span></p></li>
+<li><p>Test statistic for LRT: <span class="math display">\[G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]\]</span></p></li>
+</ul>
+<p><img src="./images/play.png" class="absolute" data-bottom="7%" data-right="0%" width="300" height="300"></p>
+</section>
+<section id="likelihood-ratio-test-33" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test-33">Likelihood ratio test (3/3)</h2>
+<ul>
+<li><p>Under the null hypothesis, with adequate sample size, LRT statistic follows a chi-square distribution: <span class="math display">\[G \sim \chi^2(df)\]</span></p>
+<ul>
+<li><span class="math inline">\(df = (\# \text{coefficients in larger model}) − (\# \text{coefficients in smaller model})\)</span></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>If we are testing a single coefficient, like age, then <span class="math inline">\(df=1\)</span></li>
+</ul>
+</section>
+<section id="likelihood-ratio-test" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="likelihood-ratio-test">Likelihood ratio test</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/lrt.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="lrt-procedure" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="lrt-procedure">LRT procedure</h2>
+<ol type="1">
+<li><p>Set the <span style="color:#70AD47"><strong>level of significance</strong></span> <span class="math inline">\(\alpha\)</span></p></li>
+<li><p>Specify the <span style="color:#70AD47"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#70AD47"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#70AD47"><strong>hypotheses</strong></span></p>
+<ul>
+<li>In symbols</li>
+<li>In words</li>
+<li>Alternative: one- or two-sided?</li>
+</ul></li>
+<li><p>Calculate the <span style="color:#70AD47"><strong>test statistic</strong></span> and <span style="color:#70AD47"><strong>p-value</strong></span></p></li>
+<li><p>Write a <span style="color:#70AD47"><strong>conclusion</strong></span> to the hypothesis test</p>
+<ul>
+<li>Do we reject or fail to reject <span class="math inline">\(H_0\)</span>?</li>
+<li>Write a conclusion in the context of the problem</li>
+</ul></li>
+</ol>
+</section>
+<section id="example-bc-diagnosis-and-age-4" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="example-bc-diagnosis-and-age-4">Example: BC diagnosis and age</h2>
+<div class="example">
+<div class="ex-title">
+<p>LRT</p>
+</div>
+<div class="ex-cont">
+<p>Determine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?</p>
+</div>
+</div>
+<p><strong>Needed steps:</strong></p>
+<ol type="1">
+<li>Set the <strong>level of significance</strong> <span class="math inline">\(\alpha\)</span></li>
+<li>Specify the <strong>null</strong> ( <span class="math inline">\(H_0\)</span> ) and <strong>alternative</strong> ( <span class="math inline">\(H_A\)</span> ) <strong>hypotheses</strong></li>
+<li>Calculate the <strong>test statistic</strong> and <strong>p-value</strong></li>
+<li>Write a <strong>conclusion</strong> to the hypothesis test</li>
+</ol>
+</section>
+<section id="example-bc-diagnosis-and-age-5" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="example-bc-diagnosis-and-age-5">Example: BC diagnosis and age</h2>
+<div class="example">
+<div class="ex-title">
+<p>LRT</p>
+</div>
+<div class="ex-cont">
+<p>Determine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?</p>
+</div>
+</div>
+<ol type="1">
+<li>Set the <strong>level of significance</strong> <span class="math inline">\(\alpha\)</span> <span class="math display">\[\alpha=0.05\]</span></li>
+<li>Specify the <strong>null</strong> ( <span class="math inline">\(H_0\)</span> ) and <strong>alternative</strong> ( <span class="math inline">\(H_A\)</span> ) <strong>hypotheses</strong></li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+H_0 &amp;: \beta_{Age} = 0 \\
+H_1 &amp;: \beta_{Age} \neq 0 \\
+\end{aligned}\]</span></p>
+</section>
+<section id="example-bc-diagnosis-and-age-6" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="example-bc-diagnosis-and-age-6">Example: BC diagnosis and age</h2>
+<div class="example">
+<div class="ex-title">
+<p>LRT</p>
+</div>
+<div class="ex-cont">
+<p>Determine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Calculate the <strong>test statistic</strong> and <strong>p-value</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>bc_age <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>bc_int <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(bc_age, bc_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio test
+
+Model 1: Late_stage_diag ~ Age_c
+Model 2: Late_stage_diag ~ 1
+  #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
+1   2 -5754.8                         
+2   1 -5930.5 -1 351.27  &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="example-bc-diagnosis-and-age-7" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="example-bc-diagnosis-and-age-7">Example: BC diagnosis and age</h2>
+<div class="example">
+<div class="ex-title">
+<p>LRT</p>
+</div>
+<div class="ex-cont">
+<p>Determine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?</p>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Write a <strong>conclusion</strong> to the hypothesis test</li>
+</ol>
+<p>We reject the null hypothesis that the coefficient corresponding to age is 0 (<span class="math inline">\(p-value &lt;&lt; 0.05\)</span>). There is sufficient evidence that there is an association between age and late stage breast cancer diagnosis.</p>
+</section>
+</section>
+<section id="learning-objectives-4" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li><p>Use the Wald test to test the significance of an estimated coefficient through confidence intervals.</p></li>
+<li><p>Articulate how the Wald test, Score test, and likelihood ratio test (LRT) calculates a test statistic using the likelihood function.</p></li>
+<li><p>Use the Likelihood ratio test to test the significance of estimated coefficients through formal hypothesis testing.</p></li>
+</ol>
+<div class="lob">
+<ol start="4" type="1">
+<li>Understand when and how to use each test: Wald, Score, and Likelihood ratio</li>
+</ol>
+</div>
+<section id="all-three-tests-together" class="level2">
+<h2 class="anchored" data-anchor-id="all-three-tests-together">All three tests together</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/three_tests.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqhow-are-the-likelihood-ratio-wald-and-lagrange-multiplier-score-tests-different-andor-similar/">UCLA FAQ on Tests</a></p>
+</section>
+<section id="which-test-to-use" class="level2">
+<h2 class="anchored" data-anchor-id="which-test-to-use">Which test to use?</h2>
+<ul>
+<li><p>All three tests are asymptotically equivalent</p>
+<ul>
+<li>As sample approaches infinity</li>
+</ul></li>
+<li><p>For testing significance of single covariate coefficient:</p>
+<ul>
+<li><p><span style="background-color:#CADFB8;">LRT</span></p>
+<ul>
+<li>Wald and score are only approximations of LRT</li>
+<li>For smaller samples, LRT better</li>
+</ul></li>
+<li><p><span style="background-color:#D5E2F1;">Wald test</span> is very convenient</p>
+<ul>
+<li>Automatically performed in R</li>
+<li>Does not need to estimate two models (LRT does)</li>
+<li>Good for constructing confidence intervals of coefficients and odds ratios</li>
+</ul></li>
+<li><p><span style="background-color:#F9E7B8;">Score test</span></p>
+<ul>
+<li>Does not need to estimate two models (LRT does)</li>
+<li>I don’t really see people use this…</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="poll-everywhere-question-4" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-4">Poll Everywhere Question 4</h2>
+</section>
+<section id="poll-everywhere-question-5" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-5">Poll Everywhere Question 5</h2>
+</section>
+<section id="poll-everywhere-question-6" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-6">Poll Everywhere Question 6</h2>
+</section>
+<section id="poll-everywhere-question-7" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-7">Poll Everywhere Question 7</h2>
+</section>
+<section id="poll-everywhere-question-8" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-8">Poll Everywhere Question 8</h2>
+</section>
+<section id="tests-and-what-theyre-used-for" class="level2">
+<h2 class="anchored" data-anchor-id="tests-and-what-theyre-used-for">Tests and what they’re used for</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Wald test</th>
+<th>Score test</th>
+<th>LRT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Used to test significance of single coefficient</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><em>Can be</em> used to report confidence interval for a single coefficient</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Confidence interval reported by R for a single coefficient (and most commonly used)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Use to test significance/contribution to outcome prediction of multi-level categorical covariate</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Used for comparing two models with different (but nested) covariates</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tests-and-what-theyre-used-for-1" class="level2" data-visibility="hidden">
+<h2 data-visibility="hidden" class="anchored" data-anchor-id="tests-and-what-theyre-used-for-1">Tests and what they’re used for</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Wald test</th>
+<th>Score test</th>
+<th>LRT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Used to test significance of single coefficient</td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+</tr>
+<tr class="even">
+<td><em>Can be</em> used to report confidence interval for a single coefficient</td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+</tr>
+<tr class="odd">
+<td>Confidence interval reported by R for a single coefficient (and most commonly used)</td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+</tr>
+<tr class="even">
+<td>Use to test significance/contribution to outcome prediction of multi-level categorical covariate</td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+</tr>
+<tr class="odd">
+<td>Used for comparing two models with different (but nested) covariates</td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="so-how-would-the-wald-test-and-lrt-show-up-in-research" class="level2">
+<h2 class="anchored" data-anchor-id="so-how-would-the-wald-test-and-lrt-show-up-in-research">So how would the Wald test and LRT show up in research?</h2>
+<ul>
+<li><p>Wald test</p>
+<ul>
+<li><p>Often used when reporting estimates</p></li>
+<li><p>Generally presented using a forest plot or table of ORs or RRs</p>
+<ul>
+<li>Then we highlight the specific variable of interest in text</li>
+<li>Will include the OR/RR estimate (not the coefficient like we saw today) with the 95% CI and proper interpretation of result</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>LRT</p>
+<ul>
+<li><p>Often when performing model selection and comparing two models</p>
+<ul>
+<li><a href="https://stats.stackexchange.com/questions/27479/model-selection-in-a-paper-what-to-say-about-the-dropped-variables">Reporting model selection Cross Validated post</a></li>
+</ul></li>
+<li><p>Often does not show up explicitly in our reports, but is essential to get to our final model!!</p></li>
+</ul></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

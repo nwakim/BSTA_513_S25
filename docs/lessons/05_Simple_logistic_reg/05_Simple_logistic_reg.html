@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nicky Wakim">
+<meta name="dcterms.date" content="2024-04-15">
+
+<title>Lesson 5: Simple Logistic Regression – Categorical Data Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-62d5ecfa613c5c5644cabfb02a2f4c65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/Bsta513.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Categorical Data Analysis</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../instructors.html"> 
+<span class="menu-text">Instructors</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../homeworks.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../project.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#learning-objectives-1" id="toc-learning-objectives-1" class="nav-link" data-scroll-target="#learning-objectives-1">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#health-disparities-in-breast-cancer-diagnosis-working-example" id="toc-health-disparities-in-breast-cancer-diagnosis-working-example" class="nav-link" data-scroll-target="#health-disparities-in-breast-cancer-diagnosis-working-example">Health disparities in breast cancer diagnosis: working example</a></li>
+  <li><a href="#please-note-that-this-question-has-been-answered" id="toc-please-note-that-this-question-has-been-answered" class="nav-link" data-scroll-target="#please-note-that-this-question-has-been-answered">Please note that this question has been answered</a></li>
+  <li><a href="#example-health-disparities-in-breast-cancer-diagnosis-12" id="toc-example-health-disparities-in-breast-cancer-diagnosis-12" class="nav-link" data-scroll-target="#example-health-disparities-in-breast-cancer-diagnosis-12">Example: Health disparities in breast cancer diagnosis (1/2)</a></li>
+  <li><a href="#example-health-disparities-in-breast-cancer-diagnosis-22" id="toc-example-health-disparities-in-breast-cancer-diagnosis-22" class="nav-link" data-scroll-target="#example-health-disparities-in-breast-cancer-diagnosis-22">Example: Health disparities in breast cancer diagnosis (2/2)</a></li>
+  <li><a href="#poll-everywhere-question-1" id="toc-poll-everywhere-question-1" class="nav-link" data-scroll-target="#poll-everywhere-question-1">Poll Everywhere Question 1</a></li>
+  <li><a href="#how-do-we-determine-differences-in-diagnosis-12" id="toc-how-do-we-determine-differences-in-diagnosis-12" class="nav-link" data-scroll-target="#how-do-we-determine-differences-in-diagnosis-12">How do we determine differences in diagnosis? (1/2)</a></li>
+  <li><a href="#how-do-we-determine-differences-in-diagnosis-22" id="toc-how-do-we-determine-differences-in-diagnosis-22" class="nav-link" data-scroll-target="#how-do-we-determine-differences-in-diagnosis-22">How do we determine differences in diagnosis? (2/2)</a></li>
+  <li><a href="#how-do-we-determine-differences-in-diagnosis-22-1" id="toc-how-do-we-determine-differences-in-diagnosis-22-1" class="nav-link" data-scroll-target="#how-do-we-determine-differences-in-diagnosis-22-1">How do we determine differences in diagnosis? (2/2)</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-2" id="toc-learning-objectives-2" class="nav-link" data-scroll-target="#learning-objectives-2">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#reference-individual-components" id="toc-reference-individual-components" class="nav-link" data-scroll-target="#reference-individual-components">Reference: individual components</a></li>
+  <li><a href="#building-towards-simple-logistic-regression" id="toc-building-towards-simple-logistic-regression" class="nav-link" data-scroll-target="#building-towards-simple-logistic-regression">Building towards simple logistic regression</a></li>
+  <li><a href="#simple-logistic-regression-model-components" id="toc-simple-logistic-regression-model-components" class="nav-link" data-scroll-target="#simple-logistic-regression-model-components">Simple Logistic Regression Model: Components</a></li>
+  <li><a href="#can-we-apply-ols-to-our-binary-outcome" id="toc-can-we-apply-ols-to-our-binary-outcome" class="nav-link" data-scroll-target="#can-we-apply-ols-to-our-binary-outcome">Can we apply OLS to our binary outcome?</a></li>
+  <li><a href="#review-of-simple-linear-regression12" id="toc-review-of-simple-linear-regression12" class="nav-link" data-scroll-target="#review-of-simple-linear-regression12">Review of simple linear regression(1/2)</a>
+  <ul class="collapse">
+  <li><a href="#components" id="toc-components" class="nav-link" data-scroll-target="#components">Components</a></li>
+  </ul></li>
+  <li><a href="#review-of-simple-linear-regression-22" id="toc-review-of-simple-linear-regression-22" class="nav-link" data-scroll-target="#review-of-simple-linear-regression-22">Review of simple linear regression (2/2)</a></li>
+  <li><a href="#violated-linearity" id="toc-violated-linearity" class="nav-link" data-scroll-target="#violated-linearity">Violated: Linearity</a></li>
+  <li><a href="#violated-normality" id="toc-violated-normality" class="nav-link" data-scroll-target="#violated-normality">Violated: Normality</a></li>
+  <li><a href="#violated-homoscedasticity" id="toc-violated-homoscedasticity" class="nav-link" data-scroll-target="#violated-homoscedasticity">Violated: Homoscedasticity</a></li>
+  <li><a href="#poll-everywhere-question-2" id="toc-poll-everywhere-question-2" class="nav-link" data-scroll-target="#poll-everywhere-question-2">Poll Everywhere Question 2</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-3" id="toc-learning-objectives-3" class="nav-link" data-scroll-target="#learning-objectives-3">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#how-do-we-fix-these-violations" id="toc-how-do-we-fix-these-violations" class="nav-link" data-scroll-target="#how-do-we-fix-these-violations">How do we fix these violations?</a></li>
+  <li><a href="#slide-transform" id="toc-slide-transform" class="nav-link" data-scroll-target="#slide-transform">How do we transform our outcome? (1/2)</a></li>
+  <li><a href="#how-do-we-transform-our-outcome-22" id="toc-how-do-we-transform-our-outcome-22" class="nav-link" data-scroll-target="#how-do-we-transform-our-outcome-22">How do we transform our outcome? (2/2)</a></li>
+  <li><a href="#simple-logistic-regression-model" id="toc-simple-logistic-regression-model" class="nav-link" data-scroll-target="#simple-logistic-regression-model">Simple Logistic Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#components-1" id="toc-components-1" class="nav-link" data-scroll-target="#components-1">Components</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#learning-objectives-4" id="toc-learning-objectives-4" class="nav-link" data-scroll-target="#learning-objectives-4">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#generalized-linear-models-glms-12" id="toc-generalized-linear-models-glms-12" class="nav-link" data-scroll-target="#generalized-linear-models-glms-12">Generalized Linear Models (GLMs) (1/2)</a></li>
+  <li><a href="#poll-everywhere-question-3" id="toc-poll-everywhere-question-3" class="nav-link" data-scroll-target="#poll-everywhere-question-3">Poll Everywhere Question 3</a></li>
+  <li><a href="#generalized-linear-models-glms-22" id="toc-generalized-linear-models-glms-22" class="nav-link" data-scroll-target="#generalized-linear-models-glms-22">Generalized Linear Models (GLMs) (2/2)</a></li>
+  <li><a href="#glm-random-component" id="toc-glm-random-component" class="nav-link" data-scroll-target="#glm-random-component">GLM: Random Component</a></li>
+  <li><a href="#glm-systematic-component" id="toc-glm-systematic-component" class="nav-link" data-scroll-target="#glm-systematic-component">GLM: Systematic Component</a></li>
+  <li><a href="#glm-link-function" id="toc-glm-link-function" class="nav-link" data-scroll-target="#glm-link-function">GLM: Link Function</a></li>
+  <li><a href="#glm-link-function-1" id="toc-glm-link-function-1" class="nav-link" data-scroll-target="#glm-link-function-1">GLM: Link Function</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-5" id="toc-learning-objectives-5" class="nav-link" data-scroll-target="#learning-objectives-5">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#reminder-simple-logistic-regression-model" id="toc-reminder-simple-logistic-regression-model" class="nav-link" data-scroll-target="#reminder-simple-logistic-regression-model">Reminder: Simple Logistic Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#components-2" id="toc-components-2" class="nav-link" data-scroll-target="#components-2">Components</a></li>
+  </ul></li>
+  <li><a href="#estimation-for-logistic-regression-model" id="toc-estimation-for-logistic-regression-model" class="nav-link" data-scroll-target="#estimation-for-logistic-regression-model">Estimation for Logistic Regression Model</a></li>
+  <li><a href="#poll-everywhere-question-4" id="toc-poll-everywhere-question-4" class="nav-link" data-scroll-target="#poll-everywhere-question-4">Poll Everywhere Question 4</a></li>
+  <li><a href="#how-to-find-maximum-likelihood-estimator-mle" id="toc-how-to-find-maximum-likelihood-estimator-mle" class="nav-link" data-scroll-target="#how-to-find-maximum-likelihood-estimator-mle">How to find Maximum Likelihood Estimator (MLE)?</a></li>
+  <li><a href="#construct-a-likelihood-function-for-an-individual" id="toc-construct-a-likelihood-function-for-an-individual" class="nav-link" data-scroll-target="#construct-a-likelihood-function-for-an-individual">1. Construct a likelihood function for an individual</a></li>
+  <li><a href="#construct-the-likelihood-function-across-the-sample" id="toc-construct-the-likelihood-function-across-the-sample" class="nav-link" data-scroll-target="#construct-the-likelihood-function-across-the-sample">2. Construct the likelihood function across the sample</a></li>
+  <li><a href="#convert-to-log-likelihood" id="toc-convert-to-log-likelihood" class="nav-link" data-scroll-target="#convert-to-log-likelihood">3. Convert to log-likelihood</a></li>
+  <li><a href="#find-mles-that-maximize-log-likelihood" id="toc-find-mles-that-maximize-log-likelihood" class="nav-link" data-scroll-target="#find-mles-that-maximize-log-likelihood">4. Find MLEs that maximize log-likelihood</a></li>
+  <li><a href="#poll-everywhere-question-5" id="toc-poll-everywhere-question-5" class="nav-link" data-scroll-target="#poll-everywhere-question-5">Poll Everywhere Question 5</a></li>
+  <li><a href="#how-do-perform-mle-in-r" id="toc-how-do-perform-mle-in-r" class="nav-link" data-scroll-target="#how-do-perform-mle-in-r">How do perform MLE in R?</a></li>
+  <li><a href="#example-breast-cancer-diagnosis-13" id="toc-example-breast-cancer-diagnosis-13" class="nav-link" data-scroll-target="#example-breast-cancer-diagnosis-13">Example: Breast cancer diagnosis (1/3)</a></li>
+  <li><a href="#example-breast-cancer-diagnosis-23" id="toc-example-breast-cancer-diagnosis-23" class="nav-link" data-scroll-target="#example-breast-cancer-diagnosis-23">Example: Breast cancer diagnosis (2/3)</a></li>
+  <li><a href="#example-breast-cancer-diagnosis-33" id="toc-example-breast-cancer-diagnosis-33" class="nav-link" data-scroll-target="#example-breast-cancer-diagnosis-33">Example: Breast cancer diagnosis (3/3)</a></li>
+  <li><a href="#example-breast-cancer-diagnosis-33-1" id="toc-example-breast-cancer-diagnosis-33-1" class="nav-link" data-scroll-target="#example-breast-cancer-diagnosis-33-1">Example: Breast cancer diagnosis (3/3)</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-6" id="toc-learning-objectives-6" class="nav-link" data-scroll-target="#learning-objectives-6">Learning Objectives</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="05_Simple_logistic_reg.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 5: Simple Logistic Regression</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nicky Wakim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 15, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li><p>Recognize why the tests we’ve learned so far are not flexible enough for continuous covariates or multiple covariates.</p></li>
+<li><p>Recognize why linear regression cannot be applied to categorical outcomes with two levels</p></li>
+<li><p>Identify the simple logistic regression model and define key notation in statistics language</p></li>
+<li><p>Connect linear and logistic regression to the larger group of models, generalized linear model</p></li>
+<li><p>Determine coefficient estimates using maximum likelihood estimation (MLE) and apply it in R</p></li>
+</ol>
+<div class="cell">
+<style type="text/css">
+.reveal code {
+  max-height: 80% !important;
+}
+</style>
+</div>
+</section>
+<section id="learning-objectives-1" class="level1">
+<h1>Learning Objectives</h1>
+<div class="lob">
+<ol type="1">
+<li>Recognize why the tests we’ve learned so far are not flexible enough for continuous covariates or multiple covariates.</li>
+</ol>
+</div>
+<ol start="2" type="1">
+<li><p>Recognize why linear regression cannot be applied to categorical outcomes with two levels</p></li>
+<li><p>Identify the simple logistic regression model and define key notation in statistics language</p></li>
+<li><p>Connect linear and logistic regression to the larger group of models, generalized linear model</p></li>
+<li><p>Determine coefficient estimates using maximum likelihood estimation (MLE) and apply it in R</p></li>
+</ol>
+<section id="health-disparities-in-breast-cancer-diagnosis-working-example" class="level2">
+<h2 class="anchored" data-anchor-id="health-disparities-in-breast-cancer-diagnosis-working-example">Health disparities in breast cancer diagnosis: working example</h2>
+<ul>
+<li><p><strong>Question:</strong> Is race/ethnicity and/or age associated with an individual’s diagnosed stage of breast cancer?</p>
+<ul>
+<li>For now, consider each covariate separately</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Population:</strong> individuals who are assigned female at birth who have been diagnosed with breast cancer in the United States</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Data from the Surveillance, Epidemiology, and End Results (SEER) Program (2014-2018)</li>
+</ul>
+</section>
+<section id="please-note-that-this-question-has-been-answered" class="level2">
+<h2 class="anchored" data-anchor-id="please-note-that-this-question-has-been-answered">Please note that this question has been answered</h2>
+<ul>
+<li><p>You can take a look at the Breast Cancer Research Foundation’s page: <a href="https://www.bcrf.org/understanding-breast-cancer-racial-disparities/#:~:text=Breast%20cancer%20disparities%20statistics&amp;text=While%20white%20women%20of%20European,cancer%20compared%20to%20white%20women.">Understanding Breast Cancer Racial Disparities</a></p></li>
+<li><p>Big contributors to racial disparities include:</p>
+<ul>
+<li>Underrepresentation in clinical trials</li>
+<li>Access to healthcare</li>
+<li>More aggressive cancers more likely in people of Native American, African, Hispanic, and Latin American descent</li>
+</ul></li>
+<li><p>Our analysis will not be new, but this kind of work has shed light on the importance of focused research on people of color to better serve people of color who develop breast cancer</p>
+<ul>
+<li><a href="https://www.bcrf.org/researchers/melissa-b-davis/">Dr.&nbsp;Davis</a> focuses research on genomics and tumor microenvironment in African and African American patients</li>
+<li><a href="https://www.bcrf.org/researchers/christine-b-ambrosone/">Dr.&nbsp;Ambrosone</a> focuses research on how immune cells differ between patients. Specifically on the DARC gene, which is an evolved gene that helps fight malaria, that is found at a higher rate in people with African descent.</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-health-disparities-in-breast-cancer-diagnosis-12" class="level2">
+<h2 class="anchored" data-anchor-id="example-health-disparities-in-breast-cancer-diagnosis-12">Example: Health disparities in breast cancer diagnosis (1/2)</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/bc_outcome.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+
+</div>
+</div>
+</section>
+<section id="example-health-disparities-in-breast-cancer-diagnosis-22" class="level2">
+<h2 class="anchored" data-anchor-id="example-health-disparities-in-breast-cancer-diagnosis-22">Example: Health disparities in breast cancer diagnosis (2/2)</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/bc_outcome.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/bc_age.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/bc_RE.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="poll-everywhere-question-1" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-1">Poll Everywhere Question 1</h2>
+</section>
+<section id="how-do-we-determine-differences-in-diagnosis-12" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-we-determine-differences-in-diagnosis-12">How do we determine differences in diagnosis? (1/2)</h2>
+<ul>
+<li>Breast cancer diagnosis study: two variables that are categorical</li>
+<li>We could use a contingency table (or two-way table)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/bc_ct.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="how-do-we-determine-differences-in-diagnosis-22" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-we-determine-differences-in-diagnosis-22">How do we determine differences in diagnosis? (2/2)</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<ul>
+<li><p>Contingency table does not work for…</p>
+<ul>
+<li>Continuous covariates</li>
+<li>Multiple covariates</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Logistic regression models can handle multiple covariates that are continuous or categorical</strong></li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:63%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/bc_long.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="how-do-we-determine-differences-in-diagnosis-22-1" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-we-determine-differences-in-diagnosis-22-1">How do we determine differences in diagnosis? (2/2)</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<ul>
+<li><p>Contingency table does not work for…</p>
+<ul>
+<li>Continuous covariates</li>
+<li>Multiple covariates</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Logistic regression models can handle multiple covariates that are continuous or categorical</strong></li>
+</ul>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:63%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/bc_long.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/bc_long_log.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="learning-objectives-2" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li>Recognize why the tests we’ve learned so far are not flexible enough for continuous covariates or multiple covariates.</li>
+</ol>
+<div class="lob">
+<ol start="2" type="1">
+<li>Recognize why linear regression cannot be applied to categorical outcomes with two levels</li>
+</ol>
+</div>
+<ol start="3" type="1">
+<li><p>Identify the simple logistic regression model and define key notation in statistics language</p></li>
+<li><p>Connect linear and logistic regression to the larger group of models, generalized linear model</p></li>
+<li><p>Determine coefficient estimates using maximum likelihood estimation (MLE) and apply it in R</p></li>
+</ol>
+<section id="reference-individual-components" class="level2">
+<h2 class="anchored" data-anchor-id="reference-individual-components">Reference: individual components</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/ref_ind.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="building-towards-simple-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="building-towards-simple-logistic-regression">Building towards simple logistic regression</h2>
+<ul>
+<li><p><strong>Goal:</strong> model the probability of our outcome (<span class="math inline">\(\pi(X)\)</span>) with the covariate (<span class="math inline">\(X_1\)</span>)</p></li>
+<li><p>In simple linear regression, we use the model in its various forms: <span class="math display">\[\begin{aligned} Y&amp;=\beta_0+\beta_1X_1+\epsilon \\ E[Y|X] &amp;= \beta_0 + \beta_1X_1 \\ \widehat{Y} &amp;= \beta_0 + \beta_1X_1 \end{aligned}\]</span></p></li>
+<li><p>Potential problem? Probabilities can only take values from 0 to 1</p></li>
+</ul>
+</section>
+<section id="simple-logistic-regression-model-components" class="level2">
+<h2 class="anchored" data-anchor-id="simple-logistic-regression-model-components">Simple Logistic Regression Model: Components</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li><p>Outcome: <span class="math inline">\(Y\)</span> - binary (two-level) categorical variable</p>
+<ul>
+<li><span class="math inline">\(Y=1\)</span></li>
+<li><span class="math inline">\(Y=0\)</span></li>
+</ul></li>
+</ul>
+</div><div class="column">
+<ul>
+<li><p>Covariate: <span class="math inline">\(X_1\)</span></p>
+<ul>
+<li>For today: simple logistic regression with one covariate</li>
+<li><span class="math inline">\(X_1\)</span> can be continuous or categorical</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<ul>
+<li><p>Probability of outcome for individual with observed covariates</p>
+<ul>
+<li><span class="math inline">\(P\left(Y=1|X\right)=\pi\left(X\right)\)</span></li>
+<li><span class="math inline">\(P\left(Y=0|X\right)=1-\pi(X)\)</span></li>
+</ul></li>
+<li><p>Because the expected value is a weighted average, we can say: <span class="math display">\[\begin{aligned} E(Y|X) &amp; = P(Y=1|X) \cdot 1 + P(Y=1|X) \cdot 0 \\ &amp; = P(Y=1|X) \cdot 1 \\ &amp; = P(Y=1|X) \\ &amp; = \pi(X) \end{aligned}\]</span></p>
+<ul>
+<li>For categorical outcomes, <span class="math inline">\(\pi(X)\)</span> (or <span class="math inline">\(\pi\)</span> for shorthand), is more widely used than <span class="math inline">\(E(Y|X)\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="can-we-apply-ols-to-our-binary-outcome" class="level2">
+<h2 class="anchored" data-anchor-id="can-we-apply-ols-to-our-binary-outcome">Can we apply OLS to our binary outcome?</h2>
+<ul>
+<li>Let’s see if we can apply OLS/linear regression to our binary outcome</li>
+<li>What assumptions do our data need to meet in order to use OLR?</li>
+<li>Let’s review OLR assumptions!</li>
+</ul>
+</section>
+<section id="review-of-simple-linear-regression12" class="level2">
+<h2 class="anchored" data-anchor-id="review-of-simple-linear-regression12">Review of simple linear regression(1/2)</h2>
+<p>The (population) regression model is denoted by:</p>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:20%;">
+
+</div><div class="column" style="width:60%;">
+<div class="heq">
+<p><span class="math display">\[Y =  \beta_0 + \beta_1X + \epsilon\]</span></p>
+</div>
+</div><div class="column" style="width:20%;">
+
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="components" class="level3">
+<h3 class="anchored" data-anchor-id="components">Components</h3>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(Y\)</span></td>
+<td>response, outcome, dependent variable</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_0\)</span></td>
+<td>intercept</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\beta_1\)</span></td>
+<td>slope</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X\)</span></td>
+<td>predictor, covariate, independent variable</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\epsilon\)</span></td>
+<td>residuals, error term</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="review-of-simple-linear-regression-22" class="level2">
+<h2 class="anchored" data-anchor-id="review-of-simple-linear-regression-22">Review of simple linear regression (2/2)</h2>
+<ul>
+<li><p>Assumptions of the linear regression model:</p>
+<ul>
+<li><p>Independence: observations are independent</p></li>
+<li><p>Linearity: linear relationship between <span class="math inline">\(E[Y|X]\)</span> and <span class="math inline">\(X\)</span> <span class="math display">\[E[Y|X] = \beta_0 + \beta_1 \cdot X\]</span></p></li>
+<li><p>Normality and homoscedasticity assumption for residuals (<span class="math inline">\(\epsilon\)</span>):</p>
+<ul>
+<li>Normality: residuals are normally distributed</li>
+<li>Homoscedasticity (equal variance): Variance of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> (<span class="math inline">\(\sigma_{Y|X}^2\)</span>), is the same for any <span class="math inline">\(X\)</span></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>Which assumptions are violated if dependent variable is categorical?</p>
+<ul>
+<li>Think in terms of binary dependent variable</li>
+</ul></li>
+</ul>
+</section>
+<section id="violated-linearity" class="level2">
+<h2 class="anchored" data-anchor-id="violated-linearity">Violated: Linearity</h2>
+<div class="columns">
+<div class="column" style="width:72%;">
+<ul>
+<li><p>The relationship between the variables is linear (a straight line):</p>
+<ul>
+<li><span class="math inline">\(E[Y|X]\)</span> or <span class="math inline">\(\pi(X)\)</span>, is a straight-line function of <span class="math inline">\(X\)</span></li>
+</ul></li>
+<li><p>The independent variable <span class="math inline">\(X\)</span> can take any value, while <span class="math inline">\(\pi(X)\)</span> is a probability that should be bounded by [0,1]</p>
+<ul>
+<li>We cannot use linear mapping to translate <span class="math inline">\(X\)</span> to <span class="math inline">\(\pi(X)\)</span></li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_abline(se = FALSE, size = 3, colour = "#D6295E"): Ignoring
+unknown parameters: `se`</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05_Simple_logistic_reg_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:28%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/linearity.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="violated-normality" class="level2">
+<h2 class="anchored" data-anchor-id="violated-normality">Violated: Normality</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<ul>
+<li>In linear regression, <span class="math inline">\(\epsilon\)</span> is distributed normally</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Recall that <span class="math inline">\(Y\)</span> can take only one of the two values: 0 or 1</li>
+<li>And the fitted <span class="math inline">\(Y\)</span>, <span class="math inline">\(\widehat{Y}\)</span> can also only take values 0 or 1</li>
+<li>Thus, <span class="math inline">\(\epsilon = Y - \widehat{Y}\)</span> can only take values -1, 0, or 1</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Then <span class="math inline">\(\epsilon\)</span> <strong>cannot follow a normal distribution</strong>, which would require <span class="math inline">\(\epsilon\)</span> to have a continuum of values and no upper or lower bound</li>
+</ul>
+</div><div class="column" style="width:48%;">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/normality.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="violated-homoscedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="violated-homoscedasticity">Violated: Homoscedasticity</h2>
+<ul>
+<li><p>In linear regression, <span class="math inline">\(\text{var}(\epsilon) = \sigma^2\)</span></p>
+<ul>
+<li>Variance does not depend on <span class="math inline">\(X\)</span></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>When Y is a binary outcome <span class="math display">\[\begin{aligned} \text{var}\left(Y\right) &amp; =\pi\left(1-\pi\right)\\ &amp; = \left(\beta_0+\beta_1X\right)\left(1-\beta_0-\beta_1X\right) \end{aligned}\]</span></p>
+<ul>
+<li>Variance depends on <span class="math inline">\(X\)</span></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>Because variance depends on <span class="math inline">\(X\)</span>: no homoscedasticity</p>
+<ul>
+<li>Variance will not be equal across X-values</li>
+</ul></li>
+</ul>
+</section>
+<section id="poll-everywhere-question-2" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-2">Poll Everywhere Question 2</h2>
+</section>
+</section>
+<section id="learning-objectives-3" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li><p>Recognize why the tests we’ve learned so far are not flexible enough for continuous covariates or multiple covariates.</p></li>
+<li><p>Recognize why linear regression cannot be applied to categorical outcomes with two levels</p></li>
+</ol>
+<div class="lob">
+<ol start="3" type="1">
+<li>Identify the simple logistic regression model and define key notation in statistics language</li>
+</ol>
+</div>
+<ol start="4" type="1">
+<li><p>Connect linear and logistic regression to the larger group of models, generalized linear model</p></li>
+<li><p>Determine coefficient estimates using maximum likelihood estimation (MLE) and apply it in R</p></li>
+</ol>
+<section id="how-do-we-fix-these-violations" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-we-fix-these-violations">How do we fix these violations?</h2>
+<ul>
+<li><strong>Question:</strong> How do we manipulate our response variable so that we fix these violations?</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p><strong>Answer:</strong> We need to <em>transform the outcome</em> so we can map differences in covariates to the two levels</p>
+<ul>
+<li>Will discuss in a few slides: called link function</li>
+</ul></li>
+</ul>
+</section>
+<section id="slide-transform" class="level2">
+<h2 class="anchored" data-anchor-id="slide-transform">How do we transform our outcome? (1/2)</h2>
+<p><img src="./images/transform.png" class="img-fluid"></p>
+</section>
+<section id="how-do-we-transform-our-outcome-22" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-we-transform-our-outcome-22">How do we transform our outcome? (2/2)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/transform_plot.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="05_Simple_logistic_reg_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-left figure-img" width="1920"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="simple-logistic-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="simple-logistic-regression-model">Simple Logistic Regression Model</h2>
+<p>The (population) regression model is denoted by:</p>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:20%;">
+
+</div><div class="column" style="width:60%;">
+<div class="heq">
+<p><span class="math display">\[ \text{logit} (\pi) =  \beta_0 + \beta_1X\]</span></p>
+</div>
+</div><div class="column" style="width:20%;">
+
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="components-1" class="level3">
+<h3 class="anchored" data-anchor-id="components-1">Components</h3>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\pi\)</span></td>
+<td>probability that the outcome occurs (<span class="math inline">\(Y=1\)</span>) given <span class="math inline">\(X\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_0\)</span></td>
+<td>intercept</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\beta_1\)</span></td>
+<td>slope</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X\)</span></td>
+<td>predictor, covariate, independent variable</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="learning-objectives-4" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li><p>Recognize why the tests we’ve learned so far are not flexible enough for continuous covariates or multiple covariates.</p></li>
+<li><p>Recognize why linear regression cannot be applied to categorical outcomes with two levels</p></li>
+<li><p>Identify the simple logistic regression model and define key notation in statistics language</p></li>
+</ol>
+<div class="lob">
+<ol start="4" type="1">
+<li>Connect linear and logistic regression to the larger group of models, generalized linear model</li>
+</ol>
+</div>
+<ol start="5" type="1">
+<li>Determine coefficient estimates using maximum likelihood estimation (MLE) and apply it in R</li>
+</ol>
+<section id="generalized-linear-models-glms-12" class="level2">
+<h2 class="anchored" data-anchor-id="generalized-linear-models-glms-12">Generalized Linear Models (GLMs) (1/2)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p><span style="color:#4472C4; font-weight: bold;">Generalized Linear Models</span> are a class of models that includes regression models for <strong>continuous and categorical responses</strong></p>
+<ul>
+<li>Responses follow <em>exponential family distribution</em></li>
+<li>Helps us set up other types of regressions using each outcome’s needed transformations</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>Here we will focus on the GLMs for <strong>categorical/count data</strong></p>
+<ul>
+<li><p><span style="color:#F6C342; font-weight: bold;">Logistic regression</span> is just a one type of GLM</p></li>
+<li><p><span style="color:#5B9BD5; font-weight: bold;">Poisson regression</span> – for counts</p></li>
+<li><p><span style="color:#ED7D31; font-weight: bold;">Log-binomial</span> can be used to focus on risk ratio</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/GLMs.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="poll-everywhere-question-3" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-3">Poll Everywhere Question 3</h2>
+</section>
+<section id="generalized-linear-models-glms-22" class="level2">
+<h2 class="anchored" data-anchor-id="generalized-linear-models-glms-22">Generalized Linear Models (GLMs) (2/2)</h2>
+<p><img src="./images/GLM_comp.png" class="img-fluid"></p>
+</section>
+<section id="glm-random-component" class="level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="glm-random-component">GLM: Random Component</h2>
+<ul>
+<li>The random component specifies the response variable <span class="math inline">\(Y\)</span> and selects a probability distribution for it</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<ul>
+<li><p>Basically, we are just identifying the distribution for our outcome</p>
+<ul>
+<li><p>If Y is <span style="color:#F6C342; font-weight: bold;">binary</span>: assumes a <span style="color:#F6C342; font-weight: bold;">binomial</span> distribution of Y</p></li>
+<li><p>If Y is <span style="color:#5B9BD5; font-weight: bold;">count</span>: assumes <span style="color:#5B9BD5; font-weight: bold;">Poisson</span> or negative binomial distribution of Y</p></li>
+<li><p>If Y is <span style="color:#70AD47; font-weight: bold;">continuous</span>: assumea <span style="color:#70AD47; font-weight: bold;">Normal</span> distribution of Y</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="glm-systematic-component" class="level2" data-background-image="./images/title_yell.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_yell.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="glm-systematic-component">GLM: Systematic Component</h2>
+<ul>
+<li>The systematic component specifies the explanatory variables, which enter linearly as predictors <span class="math display">\[\beta_0+\beta_1X_1+\ldots+\beta_kX_k\]</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>Above equation includes:</p>
+<ul>
+<li>Centered variables</li>
+<li>Interactions</li>
+<li>Transformations of variables (like squares)</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Systematic component is the <strong>same</strong> as what we learned in Linear Models</li>
+</ul>
+</section>
+<section id="glm-link-function" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="glm-link-function">GLM: Link Function</h2>
+<ul>
+<li><p>If <span class="math inline">\(\mu = E(Y)\)</span>, then the link function specifies a function <span class="math inline">\(g(.)\)</span> that relates <span class="math inline">\(\mu\)</span> to the linear predictor as: <span class="math display">\[g\left(\mu\right)=\beta_0+\beta_1X_1+\ldots+\beta_kX_k\]</span></p>
+<ul>
+<li><span class="math inline">\(g\left(\mu\right)\)</span> is the transformation we make to <span class="math inline">\(E(Y)\)</span> (aka <span class="math inline">\(\mu\)</span>) so that the linear predictors (right side of equation) can be linked to the outcome</li>
+</ul></li>
+<li><p>The link function connects the random component with the systematic component</p></li>
+<li><p>Can also think of this as: <span class="math display">\[\mu=g^{-1}\left(\beta_0+\beta_1X_1+\ldots+\beta_kX_k\right)\]</span></p></li>
+</ul>
+</section>
+<section id="glm-link-function-1" class="level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<h2 data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top" class="anchored" data-anchor-id="glm-link-function-1">GLM: Link Function</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/links.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="learning-objectives-5" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li><p>Recognize why the tests we’ve learned so far are not flexible enough for continuous covariates or multiple covariates.</p></li>
+<li><p>Recognize why linear regression cannot be applied to categorical outcomes with two levels</p></li>
+<li><p>Identify the simple logistic regression model and define key notation in statistics language</p></li>
+<li><p>Connect linear and logistic regression to the larger group of models, generalized linear model</p></li>
+</ol>
+<div class="lob">
+<ol start="5" type="1">
+<li>Determine coefficient estimates using maximum likelihood estimation (MLE) and apply it in R</li>
+</ol>
+</div>
+<section id="reminder-simple-logistic-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="reminder-simple-logistic-regression-model">Reminder: Simple Logistic Regression Model</h2>
+<p>The (population) regression model is denoted by:</p>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:20%;">
+
+</div><div class="column" style="width:60%;">
+<div class="heq">
+<p><span class="math display">\[ \text{logit} (\pi) =  \beta_0 + \beta_1X\]</span></p>
+</div>
+</div><div class="column" style="width:20%;">
+
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="components-2" class="level3">
+<h3 class="anchored" data-anchor-id="components-2">Components</h3>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\pi\)</span></td>
+<td>probability that the outcome occurs (<span class="math inline">\(Y=1\)</span>) given <span class="math inline">\(X\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_0\)</span></td>
+<td>intercept</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\beta_1\)</span></td>
+<td>slope</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X\)</span></td>
+<td>predictor, covariate, independent variable</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="estimation-for-logistic-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-for-logistic-regression-model">Estimation for Logistic Regression Model</h2>
+<ul>
+<li>Same as linear regression model: we need to estimate the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p><span style="color:#5B9BD5; font-weight: bold;">Maximum likelihood</span>: yields values for the unknown parameters that <em>maximize the probability of obtaining observed set of data</em></p>
+<ul>
+<li>In linear regression, this leads to least squares estimation</li>
+<li><span style="color:#70AD47; font-weight: bold;">Maximum likelihood estimators (MLE)</span>: values of parameters that maximize likelihood</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><span style="color:#F6C342; font-weight: bold;">Likelihood function:</span> expresses the probability of the observed data as a function of the unknown parameters</li>
+</ul>
+</section>
+<section id="poll-everywhere-question-4" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-4">Poll Everywhere Question 4</h2>
+</section>
+<section id="how-to-find-maximum-likelihood-estimator-mle" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-find-maximum-likelihood-estimator-mle">How to find Maximum Likelihood Estimator (MLE)?</h2>
+<ol type="1">
+<li>Construct a likelihood function for an individual</li>
+</ol>
+<p>&nbsp;</p>
+<ol start="2" type="1">
+<li>Construct the likelihood function across the sample</li>
+</ol>
+<p>&nbsp;</p>
+<ol start="3" type="1">
+<li>Convert to log-likelihood</li>
+</ol>
+<p>&nbsp;</p>
+<ol start="4" type="1">
+<li>Find parameter values that maximize log-likelihood (MLEs)</li>
+</ol>
+</section>
+<section id="construct-a-likelihood-function-for-an-individual" class="level2">
+<h2 class="anchored" data-anchor-id="construct-a-likelihood-function-for-an-individual">1. Construct a likelihood function for an individual</h2>
+<div class="columns">
+<div class="column" style="width:67%;">
+<ul>
+<li><p>Within a dataset with n subjects, for the <span class="math inline">\(i\)</span>th subject:</p>
+<ul>
+<li><p>if <span class="math inline">\(Y_i=1\)</span>, the contribution to the likelihood function is <span class="math inline">\(\pi\left(X_i\right)\)</span></p></li>
+<li><p>if <span class="math inline">\(Y_i=0\)</span>, the contribution to the likelihood function is <span class="math inline">\(1-\pi\left(X_i\right)\)</span></p></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>The <strong>contribution from the <span class="math inline">\(i\)</span>th subject</strong> to the likelihood function can be expressed as: <span class="math display">\[\pi\left(X_i\right)^{Y_i}\left[1-\pi\left(X_i\right)\right]^{1-Y_i}\]</span></li>
+</ul>
+</div><div class="column" style="width:33%;">
+<div class="example">
+<div class="ex-title">
+<p>Recall</p>
+</div>
+<div class="ex-cont">
+<ul>
+<li><span class="math inline">\(Y_i\)</span>: Response variable of the <span class="math inline">\(i\)</span>th subject</li>
+<li><span class="math inline">\(X_i\)</span>: Independent variable for the <span class="math inline">\(i\)</span>th subject</li>
+<li><span class="math inline">\(\pi\left(X_i\right)=\Pr{\left(Y_i=1\middle|\ X_i\right)}\)</span></li>
+<li><span class="math inline">\(1-\pi\left(X_i\right)=\Pr(Y_i=0|X_i)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="construct-the-likelihood-function-across-the-sample" class="level2">
+<h2 class="anchored" data-anchor-id="construct-the-likelihood-function-across-the-sample">2. Construct the likelihood function across the sample</h2>
+<div class="columns">
+<div class="column" style="width:67%;">
+<ul>
+<li>Since there are <span class="math inline">\(n\)</span> subjects in the data, and <strong>each subject is considered independent of each other</strong>, the likelihood function for the whole data can be expressed as:</li>
+</ul>
+<p><span class="math display">\[l(\beta_0, \beta_1) = \prod_{i=1}^{n}{\pi(X_i)^{Y_i} (1-\pi(X_i)) ^ {1-Y_i}}\]</span></p>
+</div><div class="column" style="width:33%;">
+<div class="example">
+<div class="ex-title">
+<p>Recall</p>
+</div>
+<div class="ex-cont">
+<ul>
+<li><span class="math inline">\(Y_i\)</span>: Response variable of the <span class="math inline">\(i\)</span>th subject</li>
+<li><span class="math inline">\(X_i\)</span>: Independent variable for the <span class="math inline">\(i\)</span>th subject</li>
+<li><span class="math inline">\(\pi\left(X_i\right)=\Pr{\left(Y_i=1\middle|\ X_i\right)}\)</span></li>
+<li><span class="math inline">\(1-\pi\left(X_i\right)=\Pr(Y_i=0|X_i)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="convert-to-log-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="convert-to-log-likelihood">3. Convert to log-likelihood</h2>
+<div class="columns">
+<div class="column" style="width:67%;">
+<ul>
+<li><p>Mathematically, it is easier to work with the <strong>log likelihood</strong> function for maximization</p></li>
+<li><p>The log likelihood function is: <span class="math display">\[\begin{aligned}L\left(\beta_0,\beta_1\right) &amp;=\ln{\left(l\left(\beta_0,\beta_1\right)\right)} \\ &amp; =
+\sum_{i=1}^{n}\bigg[Y_i\cdot\text{ln}[\pi(X_i)] + (1-Y_i)\cdot\text{ln}[1-\pi(X_i)] \bigg]
+\end{aligned}\]</span></p></li>
+</ul>
+</div><div class="column" style="width:33%;">
+<div class="example">
+<div class="ex-title">
+<p>Recall</p>
+</div>
+<div class="ex-cont">
+<ul>
+<li><span class="math inline">\(Y_i\)</span>: Response variable of the <span class="math inline">\(i\)</span>th subject</li>
+<li><span class="math inline">\(X_i\)</span>: Independent variable for the <span class="math inline">\(i\)</span>th subject</li>
+<li><span class="math inline">\(\pi\left(X_i\right)=\Pr{\left(Y_i=1\middle|\ X_i\right)}\)</span></li>
+<li><span class="math inline">\(1-\pi\left(X_i\right)=\Pr(Y_i=0|X_i)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="find-mles-that-maximize-log-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="find-mles-that-maximize-log-likelihood">4. Find MLEs that maximize log-likelihood</h2>
+<ul>
+<li><p>To find <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that maximizes <span class="math inline">\(L\left(\beta_0,\beta_1\right)\)</span>:</p>
+<ul>
+<li>We <strong>differentiate <span class="math inline">\(L\left(\beta_0,\beta_1\right)\)</span></strong> with respect to <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>…</li>
+<li>And <strong>set the resulting expression to zero</strong></li>
+</ul>
+<p>&nbsp;</p></li>
+<li><p>Such equations are called likelihood equations.</p>
+<ul>
+<li><span class="math inline">\(\sum\left[Y_i-\pi\left(X_i\right)\right]=0\)</span></li>
+<li><span class="math inline">\(\sum\ X_i\left[Y_i-\pi\left(X_i\right)\right]=0\)</span></li>
+</ul>
+<p>&nbsp;</p></li>
+<li><p>In logistic regression, there is no “closed form” solution to the above equations</p></li>
+<li><p>Need to use iterative algorithm, such as iteratively reweighted least squares (IRLS) algorithm, should be used to find the MLEs for logistic regression</p></li>
+</ul>
+</section>
+<section id="poll-everywhere-question-5" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-5">Poll Everywhere Question 5</h2>
+</section>
+<section id="how-do-perform-mle-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-perform-mle-in-r">How do perform MLE in R?</h2>
+<ul>
+<li><p><code>glm()</code> function automatically does MLE for you</p>
+<ul>
+<li>For logistic regression with a binary outcome, we need to set the <code>family</code> within <code>glm()</code> to “binomial” which will automatically set the logit link</li>
+</ul></li>
+<li><p>You can explore other algorithms (other than IRLS) to maximize the likelihood</p>
+<ul>
+<li>Pretty good <a href="https://stats.stackexchange.com/questions/178492/which-optimization-algorithm-is-used-in-glm-function-in-r">Cross Validated</a> post on algorithms in <code>glm()</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="example-breast-cancer-diagnosis-13" class="level2">
+<h2 class="anchored" data-anchor-id="example-breast-cancer-diagnosis-13">Example: Breast cancer diagnosis (1/3)</h2>
+<ul>
+<li>Let’s start with simple logistic regression with late stage breast cancer diagnosis as the outcome and age as our independent variable</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>We want to fit: <span class="math display">\[\text{logit}(\pi(Age)) = \beta_0 + \beta_1 \cdot Age\]</span></p>
+<ul>
+<li>Don’t forget: <span class="math inline">\(\pi(Age) = P(Y=1 | Age) = P(\text{Late stage BC diagnosis}| Age)\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="example-breast-cancer-diagnosis-23" class="level2">
+<h2 class="anchored" data-anchor-id="example-breast-cancer-diagnosis-23">Example: Breast cancer diagnosis (2/3)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bc_reg <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bc_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Late_stage_diag ~ Age_c, family = binomial, data = bc)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.989422   0.023205  -42.64   &lt;2e-16 ***
+Age_c        0.056965   0.003204   17.78   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 11861  on 9999  degrees of freedom
+Residual deviance: 11510  on 9998  degrees of freedom
+AIC: 11514
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</section>
+<section id="example-breast-cancer-diagnosis-33" class="level2">
+<h2 class="anchored" data-anchor-id="example-breast-cancer-diagnosis-33">Example: Breast cancer diagnosis (3/3)</h2>
+<ul>
+<li><p>Translate the results back to an equation!</p></li>
+<li><p>Just going to pull the coefficients so I have a reference as I create the fitted regression model:</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bc_reg)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error   z value     Pr(&gt;|z|)
+(Intercept) -0.9894225  0.0232055 -42.63742 0.000000e+00
+Age_c        0.0569645  0.0032039  17.77974 1.014557e-70</code></pre>
+</div>
+</div>
+<ul>
+<li>Fitted logistic regression model: <span class="math display">\[\text{logit}(\widehat{\pi}(Age)) = -0.989 + 0.057 \cdot Age\]</span></li>
+</ul>
+<p><span style="color:white;">We will need to reverse the transformation process in slide 24-25 to find the odds ratios</span></p>
+</div><div class="column" style="width:35%;">
+
+</div>
+</div>
+</section>
+<section id="example-breast-cancer-diagnosis-33-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-breast-cancer-diagnosis-33-1">Example: Breast cancer diagnosis (3/3)</h2>
+<ul>
+<li><p>Translate the results back to an equation!</p></li>
+<li><p>Just going to pull the coefficients so I have a reference as I create the fitted regression model:</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bc_reg)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error   z value     Pr(&gt;|z|)
+(Intercept) -0.9894225  0.0232055 -42.63742 0.000000e+00
+Age_c        0.0569645  0.0032039  17.77974 1.014557e-70</code></pre>
+</div>
+</div>
+<ul>
+<li>Fitted logistic regression model: <span class="math display">\[\text{logit}(\widehat{\pi}(Age)) = -0.989 + 0.057 \cdot Age\]</span></li>
+</ul>
+<p>We will need to reverse the transformation process in slide 24-25 to find the odds ratios</p>
+<ul>
+<li>Will do in next week’s lessons</li>
+</ul>
+</div><div class="column" style="width:35%;">
+<ul>
+<li>This is the fitted line:</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_Simple_logistic_reg_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="learning-objectives-6" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li><p>Recognize why the tests we’ve learned so far are not flexible enough for continuous covariates or multiple covariates.</p></li>
+<li><p>Recognize why linear regression cannot be applied to categorical outcomes with two levels</p></li>
+<li><p>Identify the simple logistic regression model and define key notation in statistics language</p></li>
+<li><p>Connect linear and logistic regression to the larger group of models, generalized linear model</p></li>
+<li><p>Determine coefficient estimates using maximum likelihood estimation (MLE) and apply it in R</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

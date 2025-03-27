@@ -46,9 +46,9 @@ At the end of this course, students should be able to...
 
 ## Meeting Times
 
-Mondays          1:00 PM -- 2:50 PM PST in RPV Room A/B
+Mondays          1:00 PM -- 2:50 PM PST in RLSB 3A001
 
-Wednesdays    1:00 PM -- 2:50 PM PST in RPV Room A/B
+Wednesdays    1:00 PM -- 2:50 PM PST in RLSB 3A001
 
 ```{r}
 #| echo: false
@@ -190,27 +190,27 @@ Letter grades will be assigned roughly according to the following scheme: A (\>=
 
 Grades will be based on homework assignments, midterm exam, class "attendance", and final exam, as follows:
 
-+:-------------------------:+:----------------------:+:------------------------:+:----------------------------------------:+:----------------------------------------:+
-| **Course activity**       | **Type of Assessment** | **Due Date**             | **Percentage of final grade (BSTA 513)** | **Percentage of final grade (BSTA 613)** |
-+---------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
-| Homework                  | Formative              | Every 1-2 weeks          | 33%                                      | 28%                                      |
-+---------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
-| Quizzes                   | Summative              | 4/22, 5/13, 6/3          | 25%                                      | 25%                                      |
-+---------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
-| Project Labs              | Formative              | Every 2-3 weeks          | 25%                                      | 25%                                      |
-+---------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
-| Project Report            | Summative              | 6/13                     | 10%                                      | 10%                                      |
-+---------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
-| Exit tickets (Attendance) | N/A                    | Twice Weekly             | 5%                                       | 5%                                       |
-+---------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
-| Mid-Quarter Feedback      | N/A                    | 5/2                      | 2%                                       | 2%                                       |
-+---------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
-| 613 Readings              | Formative              | Approx. every other week | 0%                                       | 5%                                       |
-+---------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
++:----------------------------:+:----------------------:+:------------------------:+:----------------------------------------:+:----------------------------------------:+
+| **Course activity**          | **Type of Assessment** | **Due Date**             | **Percentage of final grade (BSTA 513)** | **Percentage of final grade (BSTA 613)** |
++------------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
+| Homework                     | Formative              | Every 1-2 weeks          | 30%                                      | 25%                                      |
++------------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
+| Quizzes                      | Summative              | 4/27, 5/18, 6/1          | 25%                                      | 25%                                      |
++------------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
+| Project Labs                 | Formative/Summative    | Every 2-3 weeks          | 25%                                      | 25%                                      |
++------------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
+| Lab Discussion Participation | N/A                    | Every 2-3 weeks          | 5%                                       | 5%                                       |
++------------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
+| Project Poster               | Summative              | 6/13                     | 10%                                      | 10%                                      |
++------------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
+| Exit tickets (Attendance)    | N/A                    | Twice Weekly             | 5%                                       | 5%                                       |
++------------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
+| 613 Readings                 | Formative              | Approx. every other week | 0%                                       | 5%                                       |
++------------------------------+------------------------+--------------------------+------------------------------------------+------------------------------------------+
 
 ### Homework grading
 
-No student has the same amount of time available to dedicate to homework. This class may not be a priority to you, you may be taking several other courses, or you may need to dedicate time to other activities. Homeworks are **formative assessments**, meaning its purpose is to help you learn and practice. To reduce the pressure on you to have perfect or complete homework, I have a very simple grading policy: **Your homework will be given a check mark if you turn in 50% of the questions parts completed (whether the 50% is correct or wrong).** I highly encourage you to stay up-to-date with the homeworks and put in as much effort as you can. This will be the most helpful work in this class!
+No student has the same amount of time available to dedicate to homework. This class may not be a priority to you, you may be taking several other courses, or you may need to dedicate time to other activities. Homeworks are **formative assessments**, meaning its purpose is to help you learn and practice. To reduce the pressure on you to have perfect or complete homework, I have a very simple grading policy: **Your homework will be given a check mark if you turn in 75% of the questions parts completed (whether the 75% is correct or wrong).** I highly encourage you to stay up-to-date with the homeworks and put in as much effort as you can. This will be the most helpful work in this class!
 
 If you turn in the homework on time, the TAs will give you feedback (on one or more complete problems). There is no penalty for turning in the homework late, but you will not get feedback on your work. Please make sure to check the solutions or go to office hours to assess your work.
 
@@ -235,10 +235,6 @@ Throughout the duration of the course, you are also welcome to informally and an
 -   Dr. W asked me a question about my experience that made me feel like a monolith. Please do not assume I can speak on behalf of my social identity groups.
 
 -   The in-class examples do not make me more interested in the material.
-
-### Mid-quarter Feedback
-
-During the middle of the quarter, I will ask you to submit guided, anonymous feedback. Completion of feedback will be count towards your grade. To insure anonymity, I will ask you to sign a separate, written statement that you completed the feedback.
 
 ### Final Course Feedback
 
