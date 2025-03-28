@@ -2,7 +2,6 @@
 title: "Lab 1 Instructions"
 author: "Nicky Wakim"
 subtitle: "BSTA 513/613"
-description: "Due: April 18, 2024 at 11pm"
 date-modified: "today"
 categories: [""]
 format: 
