@@ -64,5 +64,6 @@ format:
 |  |  |  |  |  |  |  |  |  |  |  |
 | 11 | 6/9 |  | **Required in-person attendance:** Project Day!! |  |  |  |  |  |  |  |
 |  | [**6/9**]{style="color:#5B9BD5;"} |  | [**Project due 11pm**]{style="color:#5B9BD5;"} |  |  |  |  |  |  |  |
+|  | [**6/15**]{style="color:#5B9BD5;"} |  | [**All late coursework due 11pm**]{style="color:#5B9BD5;"} |  |  |  |  |  |  |  |
 
 : {.striped .hover tbl-colwidths="\[6, 6, 6, 30, 6, 6, 6,6, 6\]"}
