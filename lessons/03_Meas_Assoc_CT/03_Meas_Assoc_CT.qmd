@@ -204,6 +204,8 @@ SHS_ct_disp = SHS %>% tabyl(glucimp, case) %>%
   opt_stylize(style = 2) %>%
   tab_options(table.font.size = 45)
 
+
+
 SHS_ct_disp
 ```
 :::

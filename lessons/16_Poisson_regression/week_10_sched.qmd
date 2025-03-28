@@ -1,0 +1,134 @@
+---
+title: "Week 10"
+description: "Other generalized linear regressions"
+date: "6/3/24"
+date-modified: "today"
+categories: [""]
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+::: callout-important
+## Room Locations for the week
+
+On Monday, 6/3, we will be in RPV Room A (1217)
+:::
+
+```{css, echo=FALSE}
+.title{
+  font-size: 40px;
+  color: #C2352F;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.description{
+  font-size: 20px;
+  color: #fff;
+  background-color: #C2352F;
+  padding: 10px;
+}
+```
+
+## Resources
+
+| Lesson | Topic                                   |                                                               Slides                                                               |                                                                   Annotated Slides                                                                    |                                                               Recording                                                                |
+|--------|-----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------:|
+| 16     | Poisson Regression                      | [[{{< iconify ri slideshow-fill size=30px >}}](/lectures/16_Poisson_regression/16_Poisson_regression.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify pepicons-pop pen-circle-filled size=29px >}}](/lectures/16_Poisson_regression/16_Poisson_regression_notes.pdf)]{style="color:#f8f5f0;"} | [[{{< iconify mdi video size=34px >}}](https://echo360.org/media/90d582c9-8cfe-42f8-a2ee-2fe4317323b1/public)]{style="color:#f8f5f0;"} |
+| 17     | Other types of categorical regressions! |            [[{{< iconify ri slideshow-fill size=30px >}}](/lectures/17_Wrap_up/17_Wrap_up.qmd)]{style="color:#f8f5f0;"}            |            [[{{< iconify pepicons-pop pen-circle-filled size=29px >}}](/lectures/17_Wrap_up/17_Wrap_up_notes.pdf)]{style="color:#f8f5f0;"}            | [[{{< iconify mdi video size=34px >}}](https://echo360.org/media/d76da6ea-7c7b-48b0-94f1-0e1774ef00f9/public)]{style="color:#f8f5f0;"} |
+
+## On the Horizon
+
+-   Quiz 3 open 6/3 at 2pm
+
+    -   Closes on 6/5 at 1pm
+
+-   Lab 4 due yesterday!
+
+-   HW 5 due 6/6 at 11pm
+
+-   Project report due 6/13 at 11pm
+
+## Announcements
+
+### Monday 6/3
+
+-   In the last stretch of the project
+
+    -   Class time next week dedicated to project report help
+
+    -   I *may* have other time slots for project help next week. I just need to take a serious look at my calendar
+
+        -   I'm attending a virtual stat ed conference, so I just need to balance meetings with conference attendance
+
+-   No office hours this Wednesday 6/5
+
+-   **#3 “The Last Bounce: Bunnies, Burritos, and DIY Bath Salts”**
+
+    -   **Wednesday, June 5^th^ Noon-2pm**
+
+    -   **Student Success Center, 6^th^ floor Vanport**
+
+### Wednesday 6/5
+
+-   Last day of lecture!!
+
+-   Quiz 2: added 3 points to everyone's grade for that one confusing question (I forget the number, maybe question 6?)
+
+-   Lab 4
+
+    -   Your starting variables should be the TEN from lab 2, not the 5 from Lab 3
+
+    -   g-value for Hosmer-Lemeshow test
+
+        -   Please look at Lesson 12!! There is a note on how to pick the g-value when we have many samples!!
+
+        -   Some of us are getting NA's when we put the correct `g`
+
+            -   Double check that your observed values are in numeric form
+
+    -   If doing LASSO, make sure you describe the process!
+
+        -   We used LASSO regression with a penalty of 0.001 to identify important predictors. We used a single test and training split of 80% and 20%, respectively. Only main effects were considered in our LASSO regression.
+
+        -   Always think: what are the key pieces of information that someone else might need to recreate this method?
+
+-   The class will end on June 14, 2024. **All coursework is expected to be completed by June 16, 2024 at 11pm.**
+
+    -   I need to have grades in on June 21st. In order to grade fairly and thoroughly, I need the whole week to grade the project report and any late assignments.
+
+-   [A word on project grading](https://nwakim.github.io/S2024_BSTA_513/project/Project_report_instructions.html#grading)
+
+    -   In the final lab, I gave you the option to do LASSO regression and focus on prediction. I know this created some confusion since we mostly set up the project as a question of association in Lab 1-3. We can still interpret the odds ratios from LASSO regression. I will be fairly lenient if reports are confused between prediction and association aims. I will try to give feedback on it, but I will not penalize any minor confusions.
+
+        Another word: My process starts harsh. I want to give you as much feedback as possible, and this will also reflect in lower assigned scores. At this point, I put the report grades into Sakai. I check to see if anyone's overall course letter grade goes down. If less than \~5 course grades go down, then I revisit their project reports. If their report fails to demonstrate the most important learning objectives from the course, then I will keep the lower grade. If they demonstrate an understanding of the most important learning objectives, then I will adjust their score to increase their course grade. If more than 5 grades go down, then I revisit everyone's reports. I will make a class wide grade bump in all reports.
+
+    -   The most important learning objectives are: understanding when and what test is appropriate, and interpreting odds ratios (from main effects and interactions)
+
+-   Project: LASSO
+
+    -   You can take the finalized formula for LASSO and use it in `glm()`
+
+        -   In this case, use the test data to come up with predictive values (like AUC)
+
+        -   You can run it on the full dataset to get the coefficient estimates and other diagnostic information
+
+-   [Guide on figures](https://nwakim.github.io/S2024_BSTA_513/project/Project_report_instructions.html#guide-on-figures)
+
+## Class Exit Tickets
+
+[[{{< iconify healthicons health-worker-form-negative size=30px >}}](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUMkFER0lXTDdTUzIxN1A1QkJWUUVDNkRNRC4u)]{style="color:#f8f5f0;"} Monday (6/3)
+
+[[{{< iconify healthicons health-worker-form-negative size=30px >}}](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhURFlUQUhaRURCTEJVVlBKUEc5RDhCN04zQS4u)]{style="color:#f8f5f0;"} Wednesday (6/5)
+
+## Muddiest Points
+
+```{r}
+#| echo: false
+
+g=3
+```

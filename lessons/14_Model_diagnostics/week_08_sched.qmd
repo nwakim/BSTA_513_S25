@@ -1,0 +1,120 @@
+---
+title: "Week 8"
+description: "Model Diagnostics and Model Building"
+date: "5/20/2024"
+date-modified: "today"
+categories: [""]
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+::: callout-important
+## Room Locations for the week
+
+On Wednesday, 5/22, we will be in RPV Room A (1217)
+:::
+
+```{css, echo=FALSE}
+.title{
+  font-size: 40px;
+  color: #C2352F;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.description{
+  font-size: 20px;
+  color: #fff;
+  background-color: #C2352F;
+  padding: 10px;
+}
+```
+
+## Resources
+
+| Lesson | Topic             |                                                              Slides                                                              |                                                                  Annotated Slides                                                                   |                                                               Recording                                                                |
+|--------|-------------------|:--------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------:|
+| 14     | Model Diagnostics | [[{{< iconify ri slideshow-fill size=30px >}}](/lectures/14_Model_diagnostics/14_Model_diagnostics.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify pepicons-pop pen-circle-filled size=29px >}}](/lectures/14_Model_diagnostics/14_Model_diagnostics_notes.pdf)]{style="color:#f8f5f0;"} | [[{{< iconify mdi video size=34px >}}](https://echo360.org/media/81e8b1c4-1c1a-4747-9b1d-f154a6702c36/public)]{style="color:#f8f5f0;"} |
+| 15     | Model Building    |    [[{{< iconify ri slideshow-fill size=30px >}}](/lectures/15_Model_building/15_Model_Building.qmd)]{style="color:#f8f5f0;"}    |    [[{{< iconify pepicons-pop pen-circle-filled size=29px >}}](/lectures/15_Model_building/15_Model_Building_notes.pdf)]{style="color:#f8f5f0;"}    | [[{{< iconify mdi video size=34px >}}](https://echo360.org/media/476f0600-a8e1-4698-b44c-6879e48aff3a/public)]{style="color:#f8f5f0;"} |
+
+## Announcements
+
+### Monday 5/20
+
+-   HW 4 part d UPDATED!!
+
+    -   [Help from Monday class](week_08/HW4_help.pdf) on Part e
+
+-   Homework 3
+
+    -   Remember to include the indicator function for different categories of your variables!!
+
+    -   LOC has three levels: there should be two indicator functions and two coefficients for this variable!!
+
+        ![](week_08/loc.png)
+
+### Wednesday 5/22
+
+-   Lab 3
+
+    -   When interpreting ORs...
+
+        -   You all are correct by including as much detail about the covariate as possible
+
+            -   For example: If I was using `UNMETCARE_Y` and I wrote "The estimated odds of food insecurity for individuals who needed medical care in the last 12 months but could not get it because they could not afford it..."
+
+                -   This is correct!
+
+                -   BUT within our longer written report, we should define "unmet care" earlier on. Thus, once we get to interpreting ORs, we can just say "unmet care."
+
+        -   Also, correct for including a list of the variables that you are adjusting for!
+
+            -   But again, we hopefully defined our final model and specifically mentioned the variables that we are adjusting for
+
+            -   Thus, once we get to our interpretation, we can say something more like "adjusting for the previously listed variables in our model"
+
+    -   For output of \`tbl_regression()\` make sure to edit the variable names into more common language
+
+        -   `set_variable_labels()` [from tibbleOne package might help!](https://rdrr.io/cran/tibbleOne/man/set_variable_labels.html)
+
+## Class Exit Tickets
+
+[[{{< iconify healthicons health-worker-form-negative size=30px >}}](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUNzhJTkoyOEtZNEExQjQ1U1hIVTM4UTJKMy4u)]{style="color:#f8f5f0;"} Monday (5/20)
+
+[[{{< iconify healthicons health-worker-form-negative size=30px >}}](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhURTNFQ1haMjNWN1FSMVFHSjdaNFNIV0w4RC4u)]{style="color:#f8f5f0;"} Wednesday (5/22)
+
+## Muddiest Points / Questions
+
+### 1. How did you determine the ages for the R output on slide 24 (standardized deviance residuals)
+
+The centered ages are centered around the mean age. A few classes ago I mentioned that the mean was 69 years old, might have gotten lost in this lesson. So calculating the actual ages is just adding the mean age and centered age. So centered age of 6 is 69+6 = 75. Also, very confusing because apparently I can't add!
+
+### 2. From comment on shrinkage vs. regularization vs. penalized methods
+
+All these terms are used intercahngeably!
+
+Penalized regression means that penalty is added to our likelihood function! This may feel like a more generic form of shrinkage or regularization. However, within statistics, I do not see penalized regression used for anything other than minimizing the coefficient values towards zero. I often see it defined as: form of regression that uses a penalty to shrink coefficients towards zero.
+
+Definitions of regularized regression mirror the above for penalized regression.
+
+Shrinkage is more the action of reducing coefficient values towards zero. Many people will refer to regularization and penalized regression as shrinkage methods.
+
+-   LASSO, ridge, and Elastic net are all types of penalized/regularization/shrinkage methods
+
+### 3. Sign column within `vi()` output
+
+The sign column is in fact the sign of the coefficient within the model.
+
+So within our interaction model, the sign for smoking status is negative. Since smoking status had many interactions, we cannot make claims about the association between smoking and fracture without considering all other variables that it interacts with. ALSO, remember that our goal here is prediction, NOT association.
+
+```{r}
+#| echo: false
+
+g=3
+```
+
+### 

@@ -3,7 +3,7 @@ title: "Lesson 2: Introduction to Categorical Data Analysis"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "04/03/2024"
+date: "03/31/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -40,9 +40,9 @@ library(here)
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -62,9 +62,9 @@ library(here)
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -128,9 +128,9 @@ library(here)
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 :::
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -219,6 +219,10 @@ dbinom(2, 10, 0.2) %>% round(4)
 
 -   [Pretty good video behind the intuition of this](https://www.youtube.com/watch?v=CCqWkJ_pqNU&ab_channel=jbstatistics) (Watch 00:00 - 05:40)
 
+## Different tests of association
+
+![](./images/test_organization.png){fig-align="center"}
+
 # Learning Objectives
 
 1.  Recognize the motivation for and focus of our course (categorical responses)
@@ -226,10 +230,10 @@ dbinom(2, 10, 0.2) %>% round(4)
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
 ::: lob
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 :::
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -319,10 +323,10 @@ Additional interpretation of CI: We are 95% confident that the (population) prop
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
 ::: lob
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 :::
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
@@ -518,9 +522,9 @@ Additional interpretation of CI: We are 95% confident that the difference in (po
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 ::: lob
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
@@ -641,9 +645,9 @@ If [one or both variables are ordinal]{style="color:#70AD47; font-weight: bold;"
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -777,9 +781,9 @@ We reject the null hypothesis that glucose tolerance and diabetes are not associ
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -828,17 +832,49 @@ $$P(a, b, c, d) = \dfrac{(a+b)!\cdot(c+d)!\cdot(a+c)!\cdot(b+d)!}{n!\cdot a!\cdo
     -   Do we reject or fail to reject $H_0$?
     -   Write a conclusion in the context of the problem
 
-## Fisher's Exact test: SHS Example (not appropriate use of Fisher's Exact)
+## Fisher's Exact test: Postop neuropathy in gender affirming care (1/2)
+
+- Study on new postoperative neuropathy after receiving gender affirming care ([Study link](https://pmc.ncbi.nlm.nih.gov/articles/PMC10686520/))
+  - Postop neuropathy = nerve damage following surgery
+- Study comprised of 232 trans men and trans women receiving their respective hormone therapies
+- They measured different aspects of the surgery to see if there was an association with development of postop neuropathy
+- **Goal in this example:** see if estimated blood loss, greater than or less than 250 ml, is associated with postop neuropathy
+
+```{r}
+#| echo: false
+
+GAC = data.frame(
+  EBL_g250ml = c(rep("Yes", 5), rep("No", 4), 
+                 rep("Yes", 78), rep("No", 145)),  
+  Postop_neuro = c(rep("Yes", 9), rep("No", 223))
+)
+
+GAC_ct_disp = GAC %>% tabyl(EBL_g250ml, Postop_neuro) %>% 
+  adorn_totals(where = c("row", "col")) %>% 
+  gt(rowname_col = "EBL_g250ml") %>% 
+  #cols_label(`0` ~ "No", `1`~"Yes") %>%
+  tab_spanner(label = "Postoperative Neuropathy", 
+              columns = c("No", "Yes")) %>%
+  tab_stubhead(label = "EBL > 250ml") %>%
+  opt_stylize(style = 2) %>%
+  tab_options(table.font.size = 45)
+
+GAC_table = table(GAC$EBL_g250ml, GAC$Postop_neuro)
+
+GAC_ct_disp
+```
+
+## Fisher's Exact test: Postop neuropathy in gender affirming care (2/2) 
 
 ::: columns
-::: column
+::: {.column width="40%"}
 1.  Check expected cell counts threshold
 
 ```{r}
-expected(SHS_table)
+expected(GAC_table)
 ```
 
-We're going to pretend they are less than 5.
+One cell has an expected count less than 5
 
 2.  $\alpha = 0.05$
 
@@ -848,16 +884,16 @@ We're going to pretend they are less than 5.
     -   $H_1$ : There is an association between glucose tolerance and diabetes
 :::
 
-::: column
-4.  Calculate the test statistic and p-value for Chi-squared test in R
+::: {.column width="60%"}
+4.  Calculate the test statistic and p-value for Fisher Exact test
 
 ```{r}
-fisher.test(x = SHS_table)
+fisher.test(x = GAC_table)
 ```
 
 5.  Conclusion to the hypothesis test
 
-We reject the null hypothesis that glucose tolerance and diabetes are not associated ($p<2.2\cdot10^{-16}$). There is sufficient evidence that glucose tolerance and diabetes incidence are associated among American Indians.
+We fail to reject the null hypothesis that estimated blood loss and postop neuropathy are not associated ($p=0.29$). There is insufficient evidence that estimated blood loss and postop neuropathy are associated.
 :::
 :::
 
@@ -867,9 +903,9 @@ We reject the null hypothesis that glucose tolerance and diabetes are not associ
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -1036,9 +1072,9 @@ We reject the null hypothesis that proportions of breast cancer are the same for
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -1168,9 +1204,9 @@ We reject the null hypothesis that there is no correlation between washability a
 
 2.  Recall features of the Binomial distribution for categorical data analysis and utilize the normal approximation
 
-3.  Determine if a single proportion differs from a population value
+3.  Estimate a single proportion
 
-4.  Determine if two proportions differ from each other
+4.  Estimate a difference in proportions
 
 5.  Display data from two categorical variables, each with 2 or more categories, using R X C contingency tables
 
@@ -1183,6 +1219,10 @@ We reject the null hypothesis that there is no correlation between washability a
 9.  Determine if an ordinal response and ordinal explanatory variable are associated with one another using the Mantel-Haenszel test
 
 ## More resources
+
+- [Review from my EPI 525 class in F25](https://nwakim.github.io/F24_EPI_525/schedule.html)
+
+  - Schedule from class: Lessons 15, 16, 19
 
 -   [For a refresher or review](https://niederhausen.github.io/BSTA_511_F23/weeks/week_07.html) of one proportion and differences in proportions
 

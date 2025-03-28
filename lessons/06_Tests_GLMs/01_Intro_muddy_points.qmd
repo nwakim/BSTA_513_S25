@@ -1,0 +1,15 @@
+---
+title: "Muddy Points"
+subtitle: "Lesson 1: Welcome"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Muddy Points from Spring 2025
+
+## Muddy Points from Spring 2024
+

@@ -22,6 +22,10 @@ execute:
 
 # Still me!
 
+## Check the Echo360 link
+
+-   Let's check the link and make sure we can see everything!
+
 ## Course Learning Objectives
 
 At the end of this course, students should be able to...
@@ -97,48 +101,42 @@ countdown::countdown(5)
 | Homework | Formative | Every 1-2 weeks | 30% | 25% |
 | **Quizzes** | **Summative** | **4/27, 5/18, 6/1** | **25%** | **25%** |
 | Project Labs | Formative/Summative | Every 2-3 weeks | 25% | 25% |
-| **Lab Discussion Participation** | **N/A** | **Every 2-3 weeks** | **5%** | **5%** |
+| **Lab Discussion + Poster Day Participation** | **N/A** | **Every 2-3 weeks** | **5%** | **5%** |
 | Project Poster | Summative | 6/13 | 10% | 10% |
 | Exit tickets (Attendance) | N/A | Twice Weekly | 5% | 5% |
 | 613 Readings | Formative | Approx. every other week | 0% | 5% |
 
 ## Quizzes
 
--   Might be delivered slightly differently
+-   Last quarter, I removed the quizzes that I implemented in W24
 
--   We will still have the 50 minutes at the end of class to take the quiz
+-   I noticed there were some key learning objectives that many of us were not meeting in the project
 
-    -   And the quiz should only take 30 minutes
+    -   Not your fault
 
--   However, RPV does not have private rooms for those who need it
+-   Leading me to implement some new assessment practices
 
--   I am work-shopping ideas on how to deliver the quiz, including:
+-   I think quizzes are a helpful way to embed a checkpoint for understanding
 
-    -   Take home and turn in on Wednesday
+-   Quizzes will NOT be in class
 
-    -   Online vs. on paper
+    -   Quizzes will open at 3pm on Wednesday and close at 11pm on Sunday
 
-    -   Ways to mitigate cheating
+    -   I'm open to changing the exact timing of this
 
-## Homework grading
+## Lab Discussion + Poster Day Participation
 
--   Slightly new grading
+-   We will have 5 classes with required in-person attendance
 
--   Now, need to turn in 50% of the homework **completed** to get check mark
+    -   4 lab discussion days
 
--   Noticed that demonstrating understanding in the project was correlated with completing the homework\*
+    -   1 poster day
 
-    -   No formal analysis was done on this
+-   Lab discussions will either take the full or half class time
 
-    -   And there may be confounders like time available to commit to this class in general
+    -   They will always follow the due date for a lab
 
--   Either way, I think practice is the most important tool for learning
-
-    -   So I want to us to practice the work, but I'm trying to balance this with added stress
-
-## Homework grading in syllabus
-
-![](images/HW_grading.png){fig-align="center"}
+-   You will spend the time in a pair or group to discuss what you did in your lab
 
 # Any questions on how this quarter is going to go?
 

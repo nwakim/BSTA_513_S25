@@ -1,0 +1,122 @@
+---
+title: "Week 6"
+description: "Confounders and Interactions"
+date: "5/6/2024"
+date-modified: "today"
+categories: [""]
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{css, echo=FALSE}
+.title{
+  font-size: 40px;
+  color: #C2352F;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.description{
+  font-size: 20px;
+  color: #fff;
+  background-color: #C2352F;
+  padding: 10px;
+}
+```
+
+::: callout-important
+## Room Locations for the week
+
+On Monday, 5/6, we will be in RPV Room A (1217)
+:::
+
+## Resources
+
+| Lesson | Topic                        |                                                                         Slides                                                                         |                                                                             Annotated Slides                                                                              |                                                               Recording                                                                |
+|--------|------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------:|
+| 10     | Multiple Logistic Regression | [[{{< iconify ri slideshow-fill size=30px >}}](/lectures/10_Multiple_logistic_regression/10_Multiple_logistic_regression.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify pepicons-pop pen-circle-filled size=29px >}}](/lectures/10_Multiple_logistic_regression/10_Multiple_logistic_regression_notes.pdf)]{style="color:#f8f5f0;"} | [[{{< iconify mdi video size=34px >}}](https://echo360.org/media/bde13efd-786f-445e-99c8-1e78cadf5981/public)]{style="color:#f8f5f0;"} |
+| 11     | Interactions                 |                 [[{{< iconify ri slideshow-fill size=30px >}}](/lectures/11_Interactions/11_Interactions.qmd)]{style="color:#f8f5f0;"}                 |                 [[{{< iconify pepicons-pop pen-circle-filled size=29px >}}](/lectures/11_Interactions/11_Interactions_notes.pdf)]{style="color:#f8f5f0;"}                 | [[{{< iconify mdi video size=34px >}}](https://echo360.org/media/262f895d-25ac-4dc2-a3b9-cb467d2750c6/public)]{style="color:#f8f5f0;"} |
+
+## On the Horizon
+
+-   Homework 3 due 5/9 at 11pm
+
+-   Mid-quarter feedback due 5/9 at 11pm
+
+## Class Exit Tickets
+
+[[{{< iconify healthicons health-worker-form-negative size=30px >}}](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUOTFZQU00TUVQSVJZQjI4SEJRVTI2OVlXSi4u)]{style="color:#f8f5f0;"} Monday (5/6)
+
+[[{{< iconify healthicons health-worker-form-negative size=30px >}}](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUM1AyRjhDRzBNVEQ3WDYxVjhOTFRLMDhZMi4u)]{style="color:#f8f5f0;"} Wednesday (5/8)
+
+## Announcements
+
+### Monday 5/6
+
+-   Nicky's office hours move to 3-4pm on Wednesdays
+
+    -   I will stay after class and open Webex
+
+-   Notes on Homework 2
+
+    -   Contingency tables
+
+        -   `Rev=”b”`
+
+            -   Know the appropriate rev option
+
+            -   `riskratio()` and `oddsratio()` reads first row as reference and first column as reference.
+
+        -   Question 3 part h
+
+            -   Both a and b are correct
+
+            -   Most ppl only marked one or the other
+
+    -   Ways to change outcome into factor or appropriate form for `glm()`
+
+        -   `icu$STA <- ifelse(icu$STA=="Died",1,0)`
+
+        -   OR: `icu = icu %>% mutate(STA = as.factor(STA) %\>% relevel(ref = “Lived”))`
+
+    -   Question 4, part d
+
+        -   Test for intercept wrong
+
+        -   Used coefficient for age
+
+### Wednesday 5/8
+
+-   Lab 3 is up!
+
+## Muddiest Points
+
+### 1. Why use logistic instead of linear regression?
+
+From waaay back in our slides from Lesson 5! We violate several of the assumptions for linear regression when our outcome has only two options. One of the most important reasons is that we cannot map our predictors (that can be continuous of categorical) onto a binary outcome. We need to transform our binary outcome so it is on a continuous and unbounded scale (logit does that!)
+
+### 2. Where can we find more resources for making forest plots?
+
+You can either use the code I gave in Lesson 10 or use the reference links from Lab 4 in Linear Models.
+
+### 3. And how do we make a likelihood probability table instead of a plot?
+
+I'm not sure what this means. Please post on Slack so we can clarify! We have discussed plotting predicted probability in Lesson 7.
+
+### 4. I am confused on why we would do the odds ratio of prior fracture vs no prior fracture (in Lesson 11).
+
+The odds ratio is mostly used to compare the two cases using one value. We want to compare the odds of a new fracture. We want to see how those odds of a new fracture change when we have a prior fracture or when we do not have a prior fracture. We can calculate the odds ratio for prior fracture to do that. When we only have main effects in our model, this is easier to calculate. We only have one odds ratio. However, when we have an interaction between prior fracture and age, we need a way to demonstrate how the odds ratio for prior fracture changes with age.
+
+### 5. I'm still confused about the difference between Model 3 and the estimated odd ratio table on slide 39 and what each is telling us.
+
+Ah, yes! I'll clarify a little more in the slide. The first table includes the coefficient estimates ($\widehat\beta_1$,$\widehat\beta_2$, $\widehat\beta_3$), and the second table includes the odds ratios ($\exp(\widehat\beta_1)$,$\exp(\widehat\beta_2)$, $\exp(\widehat\beta_3)$)
+
+```{r}
+#| echo: false
+
+g=3
+```
