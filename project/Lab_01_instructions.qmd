@@ -21,7 +21,7 @@ execute:
 ---
 
 ::: callout-caution
-This project includes analysis on food insecurity. 
+This project includes analysis on food insecurity. Please let Nicky know if this is a triggering topic for you. I can find a different dataset for you to work on!
 :::
 
 ```{r}

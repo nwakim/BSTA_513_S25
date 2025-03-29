@@ -1,20 +1,14 @@
 ---
-title: "Homework Assignments and Solutions"
+title: "Homework"
 format: 
   html:
-    listing: 
-      - id: homework
-        contents: homework
-        type: table
-        fields: [date, title, reading-time]
-        table-hover: true
-        sort: "date asc"
-        date-format: "short"
+    page-layout: full
     link-external-newwindow: true
+    toc: false
 ---
 
 | Homework | Assignment | Assignment due (\@11pm) | Answers | Solutions (`.qmd`) | Solutions (`.html`)\* |
-|------------|-------------------------|--------------|-------------------|-------------------------|-----------------------|
+|------------|------------|------------|------------|------------|------------|
 | 1 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_01.qmd)]{style="color:#f8f5f0;"} | 4/18 | [{{< iconify ph key-fill size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify mingcute web-fill size=29px >}}]{style="color:#f8f5f0;"} |
 | 2 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_02.qmd)]{style="color:#f8f5f0;"} | 5/2 | [{{< iconify ph key-fill size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify mingcute web-fill size=29px >}}]{style="color:#f8f5f0;"} |
 | 3 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_03.qmd)]{style="color:#f8f5f0;"} | 5/16 | [{{< iconify ph key-fill size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify mingcute web-fill size=29px >}}]{style="color:#f8f5f0;"} |
