@@ -20,6 +20,10 @@ execute:
   freeze: auto  # re-render only when source changes
 ---
 
+::: callout-caution
+Nicky needs to edit
+:::
+
 ::: callout-note
 **This lab looks short, but there is a lot of work here!!**
 :::
@@ -38,7 +42,7 @@ library(here)
 
 ## Directions
 
-[You can download the `.qmd` file for this lab here.](https://github.com/nwakim/S2024_BSTA_513/blob/main/project/LastName_FirstInit_Lab_04.qmd)
+[You can download the `.qmd` file for this lab here.](https://github.com/nwakim/BSTA_513_S25/blob/main/project/LastName_FirstInit_Lab_04.qmd)
 
 The above link will take you to your **editing** file. **Please do not remove anything from this editing file!!** You will only add your code and work to this file.
 

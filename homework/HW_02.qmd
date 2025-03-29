@@ -31,6 +31,10 @@ library(gtsummary) ## Added this package!!
 library(kableExtra)
 ```
 
+::: callout-caution
+Nicky needs to edit
+:::
+
 ## Purpose
 This homework is designed to help you practice the following important skills and knowledge that we covered in Lessons 3-6:
 

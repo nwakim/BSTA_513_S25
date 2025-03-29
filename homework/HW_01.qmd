@@ -27,7 +27,7 @@ library(kableExtra)
 ```
 
 ::: callout-caution
-I took out likelihood ratio tests in Question 5. We did not cover them!
+Nicky needs to edit
 :::
 
 ## Purpose
