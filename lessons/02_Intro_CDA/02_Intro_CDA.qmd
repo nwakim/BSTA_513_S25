@@ -843,13 +843,13 @@ $$P(a, b, c, d) = \dfrac{(a+b)!\cdot(c+d)!\cdot(a+c)!\cdot(b+d)!}{n!\cdot a!\cdo
 ```{r}
 #| echo: false
 
-GAC = data.frame(
+neuropathy = data.frame(
   EBL_g250ml = c(rep("Yes", 5), rep("No", 4), 
                  rep("Yes", 78), rep("No", 145)),  
   Postop_neuro = c(rep("Yes", 9), rep("No", 223))
 )
 
-GAC_ct_disp = GAC %>% tabyl(EBL_g250ml, Postop_neuro) %>% 
+neuro_ct_disp = neuropathy %>% tabyl(EBL_g250ml, Postop_neuro) %>% 
   adorn_totals(where = c("row", "col")) %>% 
   gt(rowname_col = "EBL_g250ml") %>% 
   #cols_label(`0` ~ "No", `1`~"Yes") %>%
@@ -859,9 +859,9 @@ GAC_ct_disp = GAC %>% tabyl(EBL_g250ml, Postop_neuro) %>%
   opt_stylize(style = 2) %>%
   tab_options(table.font.size = 45)
 
-GAC_table = table(GAC$EBL_g250ml, GAC$Postop_neuro)
+neuro_table = table(neuropathy$EBL_g250ml, neuropathy$Postop_neuro)
 
-GAC_ct_disp
+neuro_ct_disp
 ```
 
 ## Fisher's Exact test: Postop neuropathy in gender affirming care (2/2) 
@@ -871,7 +871,7 @@ GAC_ct_disp
 1.  Check expected cell counts threshold
 
 ```{r}
-expected(GAC_table)
+expected(neuro_table)
 ```
 
 One cell has an expected count less than 5
@@ -888,7 +888,7 @@ One cell has an expected count less than 5
 4.  Calculate the test statistic and p-value for Fisher Exact test
 
 ```{r}
-fisher.test(x = GAC_table)
+fisher.test(x = neuro_table)
 ```
 
 5.  Conclusion to the hypothesis test

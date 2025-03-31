@@ -54,19 +54,11 @@ At the end of this course, students should be able to...
 
     -   No need to tell me if you cannot make class
 
--   [Here is the link to the Echo site!](echo360.org) I'll keep posting it on the weekly pages
+-   [Here is the link to the Echo site!](https://echo360.org/section/6e6935cc-2428-4a3e-842c-537121bffd64/home) I'll keep posting it on the weekly pages
 
-    -   Currently a public link, but working on getting everyone an account so we can make it private
+    -   Everyone should be added! Please check that you have access.
 
 -   I don't have to post anything after class, so no issues with me forgetting to post it
-
-## New Exit ticket style
-
--   All the questions are optional
-
--   But still open the link and submit!
-
--   4 of the exit tickets are dropped!
 
 ## Some important tasks
 
@@ -76,7 +68,7 @@ At the end of this course, students should be able to...
 
     -   If your calendar feels set, take 5 minutes to fill this out now!
 
-    -   Complete by Thursday at 11pm!!!
+    -   **Complete by Thursday at 11pm!!!**
 
 -   Highly suggest that you make an appointment with a learning specialist through [Student Academic Support Services](https://sakai.ohsu.edu/portal/site/Student_Support)!
 
@@ -87,13 +79,15 @@ countdown::countdown(5)
 
 ## Syllabus
 
--   Not many changes from last quarters syllabus
--   Let's look at the schedule!
+-   Not *many* changes from last quarters syllabus
+-   Changes from last quarter
+    -   **Lab discussion days**
+    -   **Quizzes**
+    -   No midterm feedback
 
 ## Assessment Breakdown
 
 -   We will have quizzes and required in-person lab discussions (on schedule)
--   Getting rid of midterm feedback - felt exhaustive
 
 |  |  |  |  |  |
 |:--------------|:--------------|:--------------|:--------------|:--------------|
@@ -108,13 +102,13 @@ countdown::countdown(5)
 
 ## Quizzes
 
--   Last quarter, I removed the quizzes that I implemented in W24
+-   In BSTA 512/612, I removed the quizzes that I implemented in W24
 
 -   I noticed there were some key learning objectives that many of us were not meeting in the project
 
     -   Not your fault
 
--   Leading me to implement some new assessment practices
+-   Leading me to implement some new assessment practices (quizzes and lab discussions)
 
 -   I think quizzes are a helpful way to embed a checkpoint for understanding
 
@@ -122,7 +116,7 @@ countdown::countdown(5)
 
     -   Quizzes will open at 3pm on Wednesday and close at 11pm on Sunday
 
-    -   I'm open to changing the exact timing of this
+    -   I'm open to changing the exact timing of this, so let me know in the exit ticket!
 
 ## Lab Discussion + Poster Day Participation
 
@@ -137,6 +131,8 @@ countdown::countdown(5)
     -   They will always follow the due date for a lab
 
 -   You will spend the time in a pair or group to discuss what you did in your lab
+
+-   If you have extenuating circumstances, you can complete a make-up assignment for credit (Syllabus)
 
 # Any questions on how this quarter is going to go?
 
