@@ -43,7 +43,7 @@ Welcome to BSTA 513/613! In this course, we will continue to learn about regress
 
 
 ::: {.g-col-4}
-[{{< iconify mdi video size=34px >}}](https://echo360.org/section/1a08bcdf-51d3-46e9-8618-870cf0ef1282/public) Echo360
+[{{< iconify mdi video size=34px >}}](https://echo360.org/section/1f512230-df7b-40f0-86b4-1d3d2e23478f/home) Echo360
 :::
 
 :::
