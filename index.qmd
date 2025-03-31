@@ -38,7 +38,7 @@ Welcome to BSTA 513/613! In this course, we will continue to learn about regress
 :::
 
 ::: {.g-col-4}
-[{{< iconify material-symbols folder size=34px >}}](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EpUBcHEh3gxFpNbGHtayubkB_CZdoO2_u-TyTn2UW36dcQ) OneDrive Folder
+[{{< iconify material-symbols folder size=34px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/S25_BSTA_513/Student_files?csf=1&web=1&e=uO9lgt) OneDrive Folder
 :::
 
 
