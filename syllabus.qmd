@@ -305,6 +305,14 @@ If you think a question was incorrectly graded, first compare your answer to the
 
 You are expected to attend class, participate in-class polls, and complete the exit ticket. For students who miss class or need a review, I will make video and audio recordings of lectures available. There are no guarantees against technical or other challenges for the recording availability or quality. For students who are unable to attend the class in-person and synchronously, **viewing the recording within 7 days** is acceptable. This is meant to keep you on track within the course and prevent a pile up of material. Make sure to complete the exit ticket to demonstrate attendance.
 
+#### Attendance for the required in-person days
+
+The goal of the lab discussions is to get feedback from a fellow student and gain insight from someone else's approach to the analysis.
+
+If you have extenuating circumstances and cannot make one of the four lab discussion days, please email Nicky to explain your situation before class. From those who were unable to attend, you will be placed in a group of 2-3 people and exchange labs. You will read your groups work and complete a make-up assignment.
+
+**The make-up assignment will be due one week after the in-class discussion day. To turn in the assignment, you can email your document to Nicky.**
+
 ### Plagiarism and Attribution
 
 Please note that this section has been motivated by [Dr. Steven Bedrick's Course Policies and Grading site](https://dmice.ohsu.edu/bedricks/courses/bmi525/policies.html) for BMI 525. (Note that this is a good example of informal attribution of someone else's work.)

@@ -14,11 +14,10 @@ format:
   pdf: default 
 editor_options: 
   chunk_output_type: console
-bibliography: references.bib
 ---
 
 ::: callout-important
-Poster instructions are ready to go!! (2/26)
+Poster instructions will be edited for clarity, specifics about our dataset, and an in-depth rubric. - Nicky (3/31)
 :::
 
 ------------------------------------------------------------------------

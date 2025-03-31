@@ -1,0 +1,21 @@
+---
+title: "Lab Discussion Make-up Assignment"
+format: html
+---
+
+::: callout-caution
+This is not set yet. I am still working on the details of this make-up assignment.
+:::
+
+## Logistics
+
+The make-up assignment will be due one week after the in-class discussion day. To turn in the assignment, you can email your document to Nicky. 
+
+## Directions
+
+In a half page to one page, please answer the following questions about your peer's (or peers') lab assignment:
+
+- What was their research question?
+- What were three differences in your approach to the lab?
+- What did you learn from their work?
+- What would you improve from your own lab?

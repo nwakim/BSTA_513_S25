@@ -23,12 +23,14 @@ editor_options:
 
 ## Labs
 
-| Lab | Due Date | Topics |
-|----------------------------------|---------------|-----------------------|
-| [Lab 1](/project/Lab_01_instructions.qmd) | 4/11 | Exploring the question and data |
-| [Lab 2](/project/Lab_02_instructions.qmd) | 4/25 | EDA continued + Simple logistic regression |
-| [Lab 3](/project/Lab_03_instructions.qmd) | 5/9 | Temporary multiple logistic regression + practice interpreting ORs |
-| [Lab 4](/project/Lab_04_instructions.qmd) | 5/23 | Building and interpreting final model |
+| Lab | Due Date | Discussion Date | Topics |
+|--------------|-------------|----------------|----------------------|
+| [Lab 1](/project/Lab_01_instructions.qmd) | 4/11 | 4/16 | Exploring the question and data |
+| [Lab 2](/project/Lab_02_instructions.qmd) | 4/25 | 4/30 | EDA continued + Simple logistic regression |
+| [Lab 3](/project/Lab_03_instructions.qmd) | 5/9 | 5/12 | Temporary multiple logistic regression + practice interpreting ORs |
+| [Lab 4](/project/Lab_04_instructions.qmd) | 5/23 | 5/28 | Building and interpreting final model |
+
+-   [Lab make-up assignment](/project/Lab_discussion_make-up.qmd) if you missed a discussion day
 
 ## Report
 

@@ -1,0 +1,1008 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Project Poster Instructions},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Project Poster Instructions}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{BSTA 512/612}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, toprule=.15mm, left=2mm, toptitle=1mm, breakable, colback=white, bottomtitle=1mm, arc=.35mm, leftrule=.75mm, titlerule=0mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-important-color!10!white, colframe=quarto-callout-important-color-frame]
+
+Poster instructions will be edited for clarity, specifics about our
+dataset, and an in-depth rubric. - Nicky (3/31)
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+The purpose section was partially developed using ChatGPT by feeding in
+my previous project report instructions and asking ChatGPT to edit for a
+poster.
+
+\subsection{Directions}\label{directions}
+
+\subsubsection{Purpose}\label{purpose}
+
+A scientific poster serves as a visual and concise way to communicate
+research findings. For this project, your poster should highlight your
+linear regression analysis and results while ensuring the context and
+methods are clearly explained. Posters should balance visuals (e.g.,
+tables, figures) with text to engage an audience effectively.
+
+\subsubsection{Formatting guide}\label{formatting-guide}
+
+\paragraph{Poster specifications}\label{poster-specifications}
+
+\begin{itemize}
+\tightlist
+\item
+  This poster can be done in any program you would like
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Powerpoint is a common way to make a poster
+
+    \begin{itemize}
+    \tightlist
+    \item
+      This option is easier to start but more annoying when you have to
+      edit visuals and fix the poster
+    \item
+      \href{https://www.slidesai.io/blog/how-to-make-a-poster-powerpoint}{Some
+      help creating it}
+    \end{itemize}
+  \item
+    There are poster templates in Quarto
+
+    \begin{itemize}
+    \tightlist
+    \item
+      This will be a little harder to start, but easier to edit visuals
+    \item
+      \href{https://github.com/quarto-ext/typst-templates/tree/main/poster}{Quarto
+      template}
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Please submit a PDF of your poster}
+\item
+  Poster dimensions: 36'' by 24''
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Mostly important to keep the ratio as 6:4
+  \item
+    Use a landscape layout
+  \end{itemize}
+\item
+  Font size should be no less than 36pt
+\item
+  Sectioning of the report
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Main sections that were required: Introduction, Methods, Results,
+    Conclusion, and References
+  \item
+    Other sections that might help group specific methods or results
+  \end{itemize}
+\item
+  Title information at the top of the poster
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This includes the title itself, your name, and the date
+  \end{itemize}
+\item
+  Poster printing for class on 3/17
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Print in color!!
+  \item
+    Using your PDF, and opening in Adobe Reader, then use the print
+    function
+  \item
+    You should see something like this:
+    \pandocbounded{\includegraphics[keepaspectratio]{../labs/images/poster_printing.png}}
+  \item
+    Choose the poster print option then choose the appropriate Tile
+    Scale to make the poster span 4 pages
+  \item
+    Note: not all printers accommodate this
+  \item
+    You should be able to print in Vanport
+
+    \begin{itemize}
+    \tightlist
+    \item
+      I do not want you to pay for printing - please let me know if you
+      are unable to print for free
+    \item
+      Here are two documents in the Student files to help with printing
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \href{https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Project/Resources/Printers.pdf?csf=1&web=1&e=2CD9k5}{Printer
+        info}
+      \item
+        \href{https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Project/Resources/Printing,\%20Copying,\%20Scanning\%20Overview\%20(OHSU\%20and\%20PSU).pdf?csf=1&web=1&e=K93grX}{Printer
+        guidance}
+      \end{itemize}
+    \end{itemize}
+  \item
+    \textbf{Posters presented on 3/17 in class do NOT need to be what
+    you turn in at 11pm in Sakai}
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Tables and figures}\label{tables-and-figures}
+
+\begin{itemize}
+\tightlist
+\item
+  Tables and figures should NOT have variable names as they appear in
+  the data frame
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Variable names should be understood by a reader
+  \item
+    Variable names should be written in full words
+  \item
+    Include a title or caption for all figures
+  \item
+    Figure and tables appear on same page or close to same page where
+    they are first referenced
+  \item
+    Tables and figures are an appropriate size in the html
+  \item
+    Nicky is able to read all words in figures and tables
+  \end{itemize}
+\item
+  Figures and tables should be clear and crisp
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Make sure they are not blurred
+  \item
+    Screenshots are okay, but will likely make them blurry if you're not
+    careful
+  \item
+    Best option is to use the \texttt{save()} to save a jpg or png
+  \end{itemize}
+\end{itemize}
+
+\paragraph{Writing}\label{writing}
+
+\begin{itemize}
+\tightlist
+\item
+  Writing, spelling, and grammar should be admissible
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This means I can generally follow your thought/what you are trying
+    to communicate
+  \item
+    Some spelling and grammar mistakes are allowed
+
+    \begin{itemize}
+    \tightlist
+    \item
+      I will not take off points if there are a few sprinkled in
+    \item
+      If \emph{every or close to every} sentence has mistakes, then I
+      will take off
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, toprule=.15mm, left=2mm, toptitle=1mm, breakable, colback=white, bottomtitle=1mm, arc=.35mm, leftrule=.75mm, titlerule=0mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{The project report is a separate file from the labs}, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame]
+
+You can save tables and figures from labs or separate files, then load
+them in the report
+
+\begin{itemize}
+\tightlist
+\item
+  Save R objects in analyses file:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Suppose you named the Table 1 as \texttt{table1}
+  \item
+    \texttt{save(table1,\ file\ =\ "table1.Rdata")}
+  \end{itemize}
+\item
+  Load R objects in report file: \texttt{load(file\ =\ "table1.Rdata")}
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsubsection{Poster template}\label{poster-template}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://ohsuitg-my.sharepoint.com/:p:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Project/Resources/poster_template.pptx?d=w171b4f2e4f1d4ee1a72f499f15d736af&csf=1&web=1&e=Nsqqqs}{Powerpoint
+  Template}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Feel free to adjust this poster visually
+  \end{itemize}
+\item
+  \href{../labs/Poster-example.qmd}{Quarto Template}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Only works if you followed the steps in the Quarto template in the
+    Formatting Guide
+  \item
+    Feel free to adjust this poster visually
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Poster examples}\label{poster-examples}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Project/Sample_poster/McVeety_Trans_Single_Payer_Poster.pdf?csf=1&web=1&e=PsN3TI}{Poster
+  1}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Good example of layouts and well-executed visuals
+  \end{itemize}
+\item
+  \href{https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Project/Sample_poster/Analysis\%20of\%20Veterans\%27\%20Non-disclosure\%20of\%20Suicidal\%20Thoughts.pdf?csf=1&web=1&e=z7V8cv}{Poster
+  2}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Good example of a forest plot to display coefficient estimates of
+    many covariates
+  \item
+    Good example of patient information displayed
+  \item
+    Good highlight of the study goals in the background
+  \end{itemize}
+\item
+  \href{https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Project/Sample_poster/nwakim_prop_score.pdf?csf=1&web=1&e=xefr7T}{Poster
+  3}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Done by Nicky (a long time ago) so please excuse a lot of the poor
+    language around race/ethnicity
+
+    \begin{itemize}
+    \tightlist
+    \item
+      I have learned a lot since then! My statistics education did not
+      do a great job of incorporating responsible practice around
+      participant's identities
+    \end{itemize}
+  \item
+    Showing this poster because it is a good example of the level of
+    detail expected in our poster's background, methods, and conclusions
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Grading}\label{grading}
+
+\paragraph{Grading}
+
+The project report is out of 36 points. Note that the Statistical
+Methods and Results sections are graded on an 8-point scale, while all
+other components are graded on a 4-point scale.
+
+\paragraph{Rubric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+4 points
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+3 points
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2 points
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+1 point
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+0 points
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Formatting & Poster submitted on Sakai with PDF file. Report is written
+in well-constructed bullets with very few grammatical or spelling
+errors. With little editing, the poster can be presented at a
+conference. & Poster submitted on Sakai with PDF file. Report is written
+in well-constructed bullets with some (around 2 per section) grammatical
+or spelling errors. With some editing, the report can be distributed. &
+Poster submitted on Sakai with PDF file. Report is written in
+well-constructed bullets, but have many grammatical or spelling errors.
+With major editing, the report can be distributed. & Poster submitted on
+Sakai with PDF file. Report is written in well-constructed bullets, but
+are very hard to follow due to grammar mistakes. & Poster not submitted
+on Sakai. Poster not in PDF file type. Report language cannot be
+followed. With major editing, the report can be distributed. \\
+Figures and work & All requested output is displayed, including 2
+required figures and tables, and at least one additional figure. Figures
+and tables look professional, are easily interpreted by the reader, and
+easily convey the intended message. & All requested output is displayed,
+including 2 required figures and tables, and at least one additional
+figure. For the most part, figures and tables look professional, are
+easily interpreted by the reader, and easily convey the intended
+message. A few mistakes in the figures are made. & All requested output
+is displayed, including 2 required figures and tables, and at least one
+additional figure. Figures and tables look semi-professional, are not so
+easily interpreted by the reader, and convey the intended message but
+after some work by the reader. Some mistakes in the figures are made. &
+All requested output is displayed, including 2 required figures and
+tables, and at least one additional figure. Figures and tables do not
+look professional, are not easily interpreted by the reader, and/or do
+not convey the intended message. Many mistakes in the figures are made.
+& Requested output is not displayed, Missing one or more figures. \\
+Introduction & Provides a good background for the research question,
+includes motivation for the question, and references previous research
+that justifies this analysis. & Provides a decent background for the
+research question and includes motivation for the question. Previous
+research is mentioned, but feels disconnected to the current analysis. &
+Provides a decent background for the research question and includes
+motivation for the question. Previous research is mentioned, but feels
+disconnected to the current analysis. & Does not provide a background
+that connects to the research question. Motivation and previous research
+are not mentioned. & No introduction included. \\
+Methods (8 points) & Describes statistical methods concisely and
+highlights pertinent information to the reader (listed Sections below).
+Demonstrates proper analyses were performed. & Describes statistical
+methods and highlights pertinent information to the reader (listed
+Sections below). Details were omitted or added that were not needed to
+explain the overarching methods. Demonstrates proper analyses were
+performed. & Describes statistical methods and highlights pertinent
+information to the reader (listed Sections below). Details were omitted
+or added that were not needed to explain the overarching methods. Some
+incorrect analyses included in the description. & Describes statistical
+methods, but lacks clarity. Demonstrates a lack of understanding about
+the overall process of regression analysis. Incorrect analyses included
+in the description. & No methods included. \\
+Results (8 points) & Correctly interprets coefficients for the
+explanatory variable and identifies any other interesting trends.
+Highlights pertinent results to the reader (listed Sections below). &
+Correctly interprets coefficients, but does correctly incorporate the
+interaction (if in the model). Highlights pertinent results to the
+reader (listed Sections below). & Incorrectly interprets coefficients.
+Highlights pertinent results to the reader (listed Sections below). &
+Incorrectly interprets coefficients.Omits pertinent results to the
+reader (listed Sections below). & No results included. \\
+Conclusion/ Discussion & Main research question is answered and
+statistical caveats described to non-technical person. Thoroughly and
+concisely discusses limitations and considerations of the results, and
+their consequences. & Main research question is answered and statistical
+caveats described to non-technical person. Discusses limitations and
+considerations of the results and their consequences, but misses some
+big considerations. & Main research question is somewhat answered (but
+focus is not on the research question) and statistical caveats described
+to non-technical person. Discusses limitations and considerations of the
+results, but does not discuss the consequences. & Main research question
+is somewhat answered (but not the focus at all) and statistical caveats
+are not described.Discusses limitations and considerations of the
+results, but misses many considerations and does not discuss
+consequences. & No conclusion included. \\
+References & References are mostly cited consistently within the report,
+and in the Reference section. This includes the data source! &
+References are sometimes cited consistently within the report, and in
+the Reference section. This includes the data source! & References are
+sometimes cited consistently within the report, and in the Reference
+section. This includes the data source! & References are not cited
+consistently within the report, and in the Reference section. This
+includes the data source! & References are not included at all. \\
+\end{longtable}
+
+\begin{itemize}
+\item
+  In formatting, an example of a report with little editing needed is
+  one that has zero to some grammar or spelling mistakes, no code chunks
+  showing, and no output warnings nor messages showing.
+\item
+  Professional figures mean
+
+  \begin{itemize}
+  \item
+    I can read the words and numbers in the html
+
+    \begin{itemize}
+    \item
+      Variable names are converted from the data frame version to
+      readable text
+    \item
+      For example: \texttt{iam\_001} does not show up on axes, instead
+      something like: \texttt{Response\ to\ "Currently,\ I\ am..."}
+    \end{itemize}
+  \item
+    Colors are only used if conveying information
+  \item
+    Intended message of the figure is easily understood
+
+    \begin{itemize}
+    \tightlist
+    \item
+      If you are trying to show a trend of mean IAT vs.~an ordered
+      categorical variable, then the variable is ordered on the x-axis
+    \end{itemize}
+  \end{itemize}
+\item
+  For the references
+
+  \begin{itemize}
+  \item
+    I will not be overly critical about the formatting
+  \item
+    By consistency, I mean that you if you are citing things like (Last
+    Name, Year) it doesn't suddenly change to number citations.
+  \item
+    If you would like to use Quarto's citation tool, you can! I actually
+    pair it with Zotero and it works beautifully! (But I would not
+    embark on this if you haven't used Zotero before)
+  \end{itemize}
+\end{itemize}
+
+\subsection{Sections}\label{sections}
+
+\subsubsection{Title}\label{title}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Purpose:} Create an identifiable name for your research
+  project that includes the main research question's variables and gives
+  some context to the analysis or results
+\end{itemize}
+
+\subsubsection{Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Length: 5-8 bullets}
+\item
+  \textbf{Purpose:} Introduce the research question and why it is
+  important to study
+\item
+  This section is non-technical.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    By reading just the introduction and conclusion, someone without a
+    technical background should have an idea of what they study was
+    about, why it is important, and what the main results are
+  \end{itemize}
+\item
+  You may start with your bullets from Lab 1, but you should edit it and
+  make sure it flows into your report well!
+\item
+  Should contain some references
+\end{itemize}
+
+\subsubsection{Methods}\label{methods}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Length: 8-10 bullets}
+\item
+  \textbf{Purpose:} Describe the analyses that were conducted and
+  methods used to select variables and check diagnostics
+\item
+  \textbf{Some important methods to discuss} (You may divide these into
+  your sections, not necessarily with these names)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    General approach to the dataset
+
+    \begin{itemize}
+    \tightlist
+    \item
+      2-3 bullets
+    \item
+      Where did the data come from?
+    \item
+      Did you need to do any quality control?
+    \item
+      Missing data: we performed complete case analysis
+
+      \begin{itemize}
+      \tightlist
+      \item
+        1 bullet
+      \item
+        Can be included in the Exploratory data analysis section
+      \end{itemize}
+    \item
+      What program did you use to analyze the data?
+    \end{itemize}
+  \item
+    Variables and variable creation
+
+    \begin{itemize}
+    \tightlist
+    \item
+      This includes a description of analyses for Table 1 and what
+      statistics were used to summarize the variables
+
+      \begin{itemize}
+      \tightlist
+      \item
+        More on creation of Table 1, not discussing the results of Table
+        1
+      \end{itemize}
+    \item
+      Includes (only include if you did one of the following)
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Indicators for gender identity or race
+      \item
+        Creating BMI
+      \item
+        Categorizing a continuous variable (even if performed in model
+        selection)
+      \item
+        Using scoring for an ordered categorical variable (that is not
+        your explanatory variable)
+      \end{itemize}
+    \item
+      1 bullet for all variables
+    \end{itemize}
+  \item
+    Model building: we performed purposeful selection
+
+    \begin{itemize}
+    \tightlist
+    \item
+      1-3 bullets
+    \item
+      Includes
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Describe purposeful selection: combining existing literature,
+        clinical significance, and analysis
+      \item
+        How did you build the model? Describe the process
+      \item
+        Did you consider confounders and effect modifiers?
+      \end{itemize}
+    \item
+      Example: We considered the following potential confounders: list
+      fo them. Based on our research question, existing literature, and
+      clinical significance, we used purposeful selection to identify
+      confounders and effect modifiers.
+    \end{itemize}
+  \item
+    Final model
+
+    \begin{itemize}
+    \tightlist
+    \item
+      1 bullet
+    \item
+      Write out your final model equation
+    \item
+      I would include the main exploratory variable then a placeholder
+      for all the other covariates
+    \end{itemize}
+  \item
+    Model diagnostics
+
+    \begin{itemize}
+    \tightlist
+    \item
+      1-3 sentences
+    \item
+      Includes
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Process of investigating model diagnostics
+      \item
+        By the time you build the model, LINE assumptions should be met
+      \item
+        If assumptions were not met, what process did you use to fix it?
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, toprule=.15mm, left=2mm, toptitle=1mm, breakable, colback=white, bottomtitle=1mm, arc=.35mm, leftrule=.75mm, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Important to keep in mind}, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame]
+
+Methods typically describe your approach and process, not the results of
+that process
+
+\begin{itemize}
+\tightlist
+\item
+  For example: I might say ``We investigated the linearity of each
+  continuous covariate visually. If continuous variables were not
+  linear, then we divided the variable into categories using existing
+  guidelines from \textless insert reference here\textgreater{} or
+  creating quartiles.''
+\item
+  In the methods section, I would NOT say: ``We investigated the
+  linearity of each continuous covariate visually. We found that age was
+  not linearly related to IAT scores. Thus, we categorized age into the
+  following groups: \_\_\_, \_\_\_\_, \_\_\_\_, \_\_\_\_, and
+  \_\_\_\_.''
+\item
+  The last two sentences about age would be more appropriate in the
+  Results section
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsubsection{Results}\label{results}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, rightrule=.15mm, toprule=.15mm, left=2mm, toptitle=1mm, breakable, colback=white, bottomtitle=1mm, arc=.35mm, leftrule=.75mm, titlerule=0mm, title=\textcolor{quarto-callout-caution-color}{\faFire}\hspace{0.5em}{Caution}, bottomrule=.15mm, coltitle=black, colbacktitle=quarto-callout-caution-color!10!white, colframe=quarto-callout-caution-color-frame]
+
+Note: I took out ``and \textbf{stratified by your primary independent
+variable}'' for Table 1.
+
+\end{tcolorbox}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Length: mostly figures with 2-3 bullet points}
+\item
+  \textbf{Purpose:} Relay the results from our sample's analysis
+  typically focusing on the numbers and interpretations
+\item
+  Tables \& figures (2-3 tables or figures)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The following are required tables or figures
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Table 1 summarizing participant characteristics both
+      \textbf{overall}
+    \item
+      Table or figure with regression results
+
+      \begin{itemize}
+      \tightlist
+      \item
+        Can be a forest plot
+      \item
+        If you have A LOT of coefficient estimates, the forest plot may
+        not work well!
+      \end{itemize}
+    \end{itemize}
+  \item
+    \textbf{1-2 figures that you think are helpful in understanding the
+    results, for example}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      DAG explaining connection between variables (if you did this)
+    \item
+      Table or figure to compare model fit statistics (if you did this)
+    \item
+      Table or figure for unadjusted relationship between outcome and
+      explanatory variables
+    \end{itemize}
+  \end{itemize}
+\item
+  Interpret the \textbf{important} model coefficients in the context of
+  the research question
+
+  \begin{itemize}
+  \tightlist
+  \item
+    2-3 bullets
+  \item
+    Interpreting the explanatory variable's relationship with IAT score
+    is the most important thing to report!!
+
+    \begin{itemize}
+    \tightlist
+    \item
+      When doing this, make sure you account for ALL interactions: If
+      your explanatory variable has multiple interactions and you are
+      trying to interpret one, then what does that mean about the other
+      variables involved in the other interactions? If this is
+      confusing, please make an appointment with me!!
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Conclusion}\label{conclusion}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Length: 3-6 bullets}
+\item
+  \textbf{Purpose:} Describe the main conclusions to a non-technical
+  audience
+\item
+  What was the answer to your research question?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Mention the direction of the association if there was one
+  \end{itemize}
+\item
+  Any other interesting results?
+\end{itemize}
+
+\subsubsection{Discussion}\label{discussion}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Length: 3-5 bullets}
+\item
+  \textbf{Purpose:} Discuss the results and give them context outside of
+  the sample and its analysis
+\item
+  Some important things to include
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Include limitations of the results
+
+    \begin{itemize}
+    \tightlist
+    \item
+      You don't need to hit all the limitations, but think about the big
+      ones (generalizability? independence of samples? large sample size
+      vs.~clinical significance? the way we handled variables?)
+    \end{itemize}
+  \item
+    After limitations, discuss the positive parts of the results
+
+    \begin{itemize}
+    \tightlist
+    \item
+      What can we do with these results? What impact can it have?
+    \end{itemize}
+  \item
+    Any overarching trends that are worth noting? {[}@Giebel2024{]}
+  \end{itemize}
+\item
+  Should contain some references
+\end{itemize}
+
+\subsubsection{References}\label{references}
+
+\begin{itemize}
+\tightlist
+\item
+  Include your references here!
+\item
+  You introduction should have references, especially when discussing
+  the social science behind the analysis
+\item
+  You must reference the IAT data source!!
+\end{itemize}
+
+
+
+
+\end{document}
