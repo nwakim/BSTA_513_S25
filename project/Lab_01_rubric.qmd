@@ -6,7 +6,7 @@ format:
 ---
 
 | Lab activity | 3 points | 2 points | 1 point | 0 points |
-|----|----|----|----|----|
+|---------------|---------------|-------------|---------------|---------------|
 | **Familiarize yourself with the Well-Being and Basic Needs Survey** | Clearly answers all three questions with well-supported reasoning | Answers all questions but lacks depth in explanation | Answers some questions with minimal explanation | Answers are unclear or missing |
 | **File organization** | Correctly sets up folders, `.Rproj`, and uses `here()` | Minor issues with folder setup or `here()` usage | Some structure but missing key components | No clear organization or incorrect setup |
 | **Decide on list of variables to focus on** | Correctly selects 10 predictors with all requirements met | Selects 10 predictors but some do not meet criteria | Selects fewer than 10 predictors or incorrect types | Selects incorrect variables or missing response |
