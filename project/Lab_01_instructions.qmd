@@ -13,6 +13,7 @@ format:
     number-sections: true
     number-depth: 4
     code-annotations: hover
+    page-layout: full
   pdf: default 
 editor_options: 
   chunk_output_type: console
@@ -25,7 +26,7 @@ This project includes analysis on food insecurity. Please let Nicky know if this
 :::
 
 ::: callout-caution
-Nicky needs to edit
+This lab is ready to go!! (Nicky, 4/1)
 :::
 
 ```{r}
@@ -90,7 +91,9 @@ Answer the following questions using information on WBNS:
 
 ### File organization
 
-Before downloading the data, go back to Lesson 2 and follow the file setup for our project. This includes making an `.Rproj` file within the main folder. Make sure you are working with the project by using the `here()` function to display your working directory. 
+Before downloading the data, set up your folders for the class and project, including making an `.Rproj` file. Make sure you are working with the project by using the `here()` function to display your working directory. 
+
+- You can reference [Lesson 2 from BSTA 512/612](https://nwakim.github.io/BSTA_512_W25/schedule.html) for help on folder organization and the here package
 
 ::: callout-important
 #### Task
@@ -135,7 +138,7 @@ You can look under survey questions to get a better sense of how questions were 
 ::: callout-important
 #### Task
 
-List the 10 predictors that you plan to use in your analysis. Note which variables are numeric, binary, or multi-level categorical. 
+List the 10 predictors that you plan to use in your analysis. Note the type of variable (numeric and continuous, counts, binary, or multi-level categorical)
 :::
 
 ### Get a sense of how you would like to analyze the data
@@ -200,5 +203,5 @@ Please [check out this source](https://www.scribbr.com/research-paper/research-p
 ::: callout-important
 #### Task
 
-Write an introduction to the analysis. 
+Write an introduction to the analysis using 3-5 bullets. 
 :::

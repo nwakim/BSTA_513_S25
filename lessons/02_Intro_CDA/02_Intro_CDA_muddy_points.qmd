@@ -11,6 +11,12 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### 2. For Chi-squared test I was wondering whether or not it is always one-sided and under what circumstances it is two-sided. I vaguely remember that certain distributions (F-distribution, z-distribution, chi-squared, etc.)
+
+Be careful with how you use "one-sided." It usually refers to the hypothesis test statements ($H_0$ vs. $H_A$). For example, $H_0: \beta_1 = 0$ vs. $H_0: \beta_1 \neq 0$ is two-sided test and $H_0: \beta_1 = 0$ vs. $H_0: \beta_1 > 0$ is a one-sided test. 
+
+However, I think you are asking if the probabilities can we calculate are always $P(F > F_{stat})$. For the F-distribution and Chi-squared distribution, we only ever calculate the probability from the area under the curve to the right of our F-statistic.
+
 ## Muddy Points from Spring 2024
 
 ### 1. Why does the test of trend treat ordinal variables as quantitative rather than qualitative?
