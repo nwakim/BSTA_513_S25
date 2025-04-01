@@ -81,7 +81,7 @@ For the binary and multi-level categorical variables, please identify a referenc
 
 #### Part c
 
-Refer back to [Part c from Homework 2's Question 4](https://nwakim.github.io/S2024_BSTA_513/homework/HW2.html#part-c-2). Interpret the odds ratio for age in the simple logistic regression model. Please include the 95% confidence interval.
+Refer back to [Part c from Homework 2's Question 1](https://nwakim.github.io/S2024_BSTA_513/homework/HW2.html#part-c-2). Interpret the odds ratio for age in the simple logistic regression model. Please include the 95% confidence interval.
 
 #### Part d
 
@@ -118,7 +118,3 @@ Check the number of observations that have a deep stupor and death at discharge 
 #### Part k
 
 Write a sentence interpreting the odds ratio of death for the indicator of coma. Please include the 95% confidence interval.
-
-### Question 2
-
-Did you take the [mid-quarter survey](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUOEZVVERIT1NaVVk3R0ZHRTFZQlIyOE1VVS4u)?? 

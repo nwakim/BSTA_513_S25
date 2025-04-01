@@ -2,15 +2,14 @@
 title: "Homework 1"
 subtitle: "BSTA 513/613"
 author: "Your name here - update this!!!!"
-description: "Due: Thursday April 11, 2024 at 11pm"
 date-modified: "today"
-date: "4/11/2024"
 format: 
   html: 
     link-external-newwindow: true
     toc: true
     embed-resources: true
     self-contained: true
+    page-layout: full
   pdf: default 
 editor_options: 
   chunk_output_type: console
@@ -27,21 +26,25 @@ library(kableExtra)
 ```
 
 ::: callout-caution
-Nicky needs to edit
+This homework is ready to go! (Nicky 4/1/25)
 :::
 
 ## Purpose
-This homework is designed to help you practice the following important skills and knowledge that we covered in Lessons 1-2:
+This homework is designed to help you practice the following important skills and knowledge that we covered in Lessons 2-5:
 
 *	Practicing and outlining your decision process to analyze the relationship between two categorical variables 
 *	Interpreting research aims into questions/tests that can be answered with statistics
 *	Using R to calculate sample proportions 
 * Using R to calculate test statistic values for inference tests
 *	Interpreting new phrasing of questions that were introduced in class
+* Calculate and interpret the estimated risk difference, relative risk, and odds ratios, and their confidence intervals
+* Expand work on contingency tables to evaluate the agreement or reproducibility using Cohen’s Kappa
+* Understand important differences between linear regression and logistic regression
+* Construct a simple logistic regression model
 
 ## Directions
 
--   [Download the `.qmd` file here.](https://github.com/nwakim/S2024_BSTA_513/blob/main/homework/HW1.qmd)
+-   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_513_S25/blob/main/homework/HW_01.qmd)
 
 -   You will not need to download datasets for this homework.
 
@@ -136,12 +139,46 @@ Conduct a statistical test to examine **general** association between adolescent
 #### Part b
 Is there a trend of increased risk perception for smokeless tobacco users? What test would you use? Make sure to follow the entire test process demonstrated in the slides.
 
+### Question 5
+A study looked at the effects of oral contraceptive (OC) use on heart disease in women 40 to 44 years of age. The researchers prospectively tracked whether or not the women developed a myocardial infarction (MI) over a 3-year period. The table below summarizes their results with columns indicating whether or not women developed MI and rows indicating their OC use. 
+```{r echo=FALSE}
+t1 <- matrix(c(13,4987,7,9993),ncol=2,byrow=TRUE)
+colnames(t1) <- c("Yes","No")
+rownames(t1) <- c("OC users","Non-OC users")
+# t1 <- as.table(t1)
+# kable(t1) %>% kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
+t1 %>% kable(table.attr = 'data-quarto-disable-processing="true"') %>% 
+  kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
+```
+
+#### Part a
+Compute the estimated risk difference comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value. 
+
+
+#### Part b
+Compute the estimated relative risk comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value. 
+
+
+#### Part c
+Compute the estimated odds ratio comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value. 
+
+#### Part d
+Is the OR a good approximation of the RR? Explain why or why not. 
+
+### Question 6
+One important aspect of medical diagnosis is its reproducibility. Suppose that two different doctors examine 100 patients for dyspnea in a respiratory-disease clinic, and that doctor A diagnosed 15 patients as having dyspnea (while doctor B did not), doctor B diagnosed 10 patients as having dyspnea (while doctor A did not), and both doctor A and doctor B diagnosed 7 patients as having dyspnea. 
+
+#### Part a
+Construct a two-way contingency table to summarize the dyspnea diagnoses from doctor A and B.
+
+#### Part b
+Compute the Cohen's kappa, 95% confidence interval, and interpret the results. What level of agreement does your kappa indicate?
 
 ## Questions Part 2
 
 The following questions are intended to give you **practice in connecting concepts** that will help you make decisions in real world applications. 
 
-### Question 5
+### Question 7
 Start making a comprehensive table or outline for the inference tests that we have covered. Here is a list of the tests we have covered:
 
 * Single proportion
@@ -164,7 +201,7 @@ And here is a list of attributes to include:
 For example, I could make a table with different rows corresponding to different tests and different columns for each attribute.
 
 
-### Question 6
+### Question 8
 
 I want you to gain experience exploring a package and function. This is an important skill in coding that can help you grow as an applied statistician. 
 
@@ -185,8 +222,67 @@ How does the glm() function fit our model? (Hint: see "method")
 #### Part d
 Do you think the output of summary() will be the same for lm() and glm()?
 
+### Question 9
+This question is meant to emphasize the differences between linear regression and logistic regression. Each part will ask about different aspects of the two regression models. If the question has multiple choice answers, then you must write 1-2 sentences justifying your answer.
 
-### Question 7
+
+#### Part a
+In **linear** regression, what type of variable is our response/outcome variable?
+
+a. binary
+b. continuous
+c. count
+d. ordinal
+
+
+#### Part b
+In **logistic** regression, what type of variable is our response/outcome variable?
+
+a. binary
+b. continuous
+c. count
+d. normal
+
+
+#### Part c
+What assumptions in linear regression? Please state the assumption name and characteristics of that assumption.
+
+#### Part d
+
+Which assumptions of linear regression are violated if we try to fit a binary response using linear regression? You may choose more than one answer.
+
+a. Independence
+b. Linearity
+c. Normality
+d. Homoscedasticity
+
+
+#### Part e
+Please use our notes on generalized linear models (GLMs) to answer this question. What is the random component used in linear regression? What is the random component used in logistic regression? Name the specific variable type and distribution for it.
+
+#### Part f
+Please use our notes on generalized linear models (GLMs) to answer this question. What link function do we use in linear regression? What link function do we use in logistic regression? Name the link and write out the function.
+
+
+#### Part g
+Please use our notes on generalized linear models (GLMs) to answer this question. What is the systematic component used in simple linear regression? What is the systematic component used in simple logistic regression? Please write out the function for the systematic component for a single covariate. 
+
+
+#### Part h
+How do we determine our coefficient estimates (estimates of the parameter values) in linear regression? You may choose more than one answer.
+
+a. Ordinary least squares
+b. Maximum likelihood estimation
+
+
+#### Part i
+How do we determine our coefficient estimates (estimates of the parameter values) in logistic regression? You may choose more than one answer.
+
+a. Ordinary least squares
+b. Maximum likelihood estimation
+
+
+### Question 10
 
 **OPTIONAL**
 

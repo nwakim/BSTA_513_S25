@@ -26,7 +26,7 @@ This project includes analysis on food insecurity. Please let Nicky know if this
 :::
 
 ::: callout-caution
-This lab is ready to go!! (Nicky, 4/1)
+This lab is ready to go!! (Nicky, 4/1/25)
 :::
 
 ```{r}

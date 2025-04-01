@@ -11,6 +11,7 @@ format:
     link-external-newwindow: true
     toc: true
     self-contained: true
+    page-layout: full
   pdf: default 
 editor_options: 
   chunk_output_type: console
@@ -38,10 +39,6 @@ Nicky needs to edit
 ## Purpose
 This homework is designed to help you practice the following important skills and knowledge that we covered in Lessons 3-6:
 
-* Calculate and interpret the estimated risk difference, relative risk, and odds ratios, and their confidence intervals
-* Expand work on contingency tables to evaluate the agreement or reproducibility using Cohen’s Kappa
-* Understand important differences between linear regression and logistic regression
-* Construct a simple logistic regression model
 * Test a covariate for significance using the Wald test and LRT
 
 ## Directions
@@ -69,100 +66,6 @@ It is a good idea to try rendering your document from time to time as you go alo
 ## Questions
 
 ### Question 1
-A study looked at the effects of oral contraceptive (OC) use on heart disease in women 40 to 44 years of age. The researchers prospectively tracked whether or not the women developed a myocardial infarction (MI) over a 3-year period. The table below summarizes their results with columns indicating whether or not women developed MI and rows indicating their OC use. 
-```{r echo=FALSE}
-t1 <- matrix(c(13,4987,7,9993),ncol=2,byrow=TRUE)
-colnames(t1) <- c("Yes","No")
-rownames(t1) <- c("OC users","Non-OC users")
-# t1 <- as.table(t1)
-# kable(t1) %>% kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
-t1 %>% kable(table.attr = 'data-quarto-disable-processing="true"') %>% 
-  kable_styling(full_width = F, bootstrap_options = c("striped", "hover"))
-```
-
-#### Part a
-Compute the estimated risk difference comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value. 
-
-
-#### Part b
-Compute the estimated relative risk comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value. 
-
-
-#### Part c
-Compute the estimated odds ratio comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value. 
-
-#### Part d
-Is the OR a good approximation of the RR? Explain why or why not. 
-
-### Question 2
-One important aspect of medical diagnosis is its reproducibility. Suppose that two different doctors examine 100 patients for dyspnea in a respiratory-disease clinic, and that doctor A diagnosed 15 patients as having dyspnea (while doctor B did not), doctor B diagnosed 10 patients as having dyspnea (while doctor A did not), and both doctor A and doctor B diagnosed 7 patients as having dyspnea. 
-
-#### Part a
-Construct a two-way contingency table to summarize the dyspnea diagnoses from doctor A and B.
-
-#### Part b
-Compute the Cohen's kappa, 95% confidence interval, and interpret the results. What level of agreement does your kappa indicate?
-
-### Question 3
-This question is meant to emphasize the differences between linear regression and logistic regression. Each part will ask about different aspects of the two regression models. If the question has multiple choice answers, then you must write 1-2 sentences justifying your answer.
-
-
-#### Part a
-In **linear** regression, what type of variable is our response/outcome variable?
-
-a. binary
-b. continuous
-c. count
-d. ordinal
-
-
-#### Part b
-In **logistic** regression, what type of variable is our response/outcome variable?
-
-a. binary
-b. continuous
-c. count
-d. normal
-
-
-#### Part c
-What assumptions in linear regression? Please state the assumption name and characteristics of that assumption.
-
-#### Part d
-
-Which assumptions of linear regression are violated if we try to fit a binary response using linear regression? You may choose more than one answer.
-
-a. Independence
-b. Linearity
-c. Normality
-d. Homoscedasticity
-
-
-#### Part e
-Please use our notes on generalized linear models (GLMs) to answer this question. What is the random component used in linear regression? What is the random component used in logistic regression? Name the specific variable type and distribution for it.
-
-#### Part f
-Please use our notes on generalized linear models (GLMs) to answer this question. What link function do we use in linear regression? What link function do we use in logistic regression? Name the link and write out the function.
-
-
-#### Part g
-Please use our notes on generalized linear models (GLMs) to answer this question. What is the systematic component used in simple linear regression? What is the systematic component used in simple logistic regression? Please write out the function for the systematic component for a single covariate. 
-
-
-#### Part h
-How do we determine our coefficient estimates (estimates of the parameter values) in linear regression? You may choose more than one answer.
-
-a. Ordinary least squares
-b. Maximum likelihood estimation
-
-
-#### Part i
-How do we determine our coefficient estimates (estimates of the parameter values) in logistic regression? You may choose more than one answer.
-
-a. Ordinary least squares
-b. Maximum likelihood estimation
-
-### Question 4
 
 This question is taken from the Hosmer and Lemeshow textbook. The ICU study data set consists of a sample of 200 subjects who were part of a much larger study on survival of patients following admission to an adult intensive care unit (ICU). The dataset should be available within Course Materials. The major goal of this study was to develop a logistic regression model to predict the probability of survival to hospital discharge of these patients. In this question, the primary outcome variable is vital status at hospital discharge, STA. Clinicians associated with the study felt that a key determinant of survival was the patient’s age at admission, AGE.
 
@@ -191,6 +94,58 @@ Use the Wald test to test whether or not the intercept ($\beta_0$) of the logist
 #### Part e
 Use the Likelihood Ratio test to test whether or not the coefficient for age ($\beta_1$) of the logistic regression model is significantly different from 0. Make sure to include your: hypothesis test, code/work leading to the computed test statistic, output including the test statistic and p-value, and conclusion. Please refer to the Additional Tips to guide you on what a complete/correct answer contains. **You do not need to include an interpretation of the coefficient since we have not covered this.**
 
+### Question 2
+
+Same as above
+
+#### Part a
+
+From the above list (AGE, CAN, CPR, INF, and LOC) of independent variables, identify if each is a continuous, binary, or multi-level (\>2) categorical variable.
+
+#### Part b
+
+For the binary and multi-level categorical variables, please identify a reference group for each. Include justification for the reference group.
+
+
+#### Part c
+
+Refer back to [Part c from Homework 2's Question 1](https://nwakim.github.io/S2024_BSTA_513/homework/HW2.html#part-c-2). Interpret the odds ratio for age in the simple logistic regression model. Please include the 95% confidence interval.
+
+#### Part d
+
+Compute the predicted probability of hospital discharge for a subject who is 63 years old. Compute the 95% confidence interval for the predicted probability and interpret the predicted probability.
+
+#### Part e
+
+For the categorical variables (binary and multi-group), please mutate the variables within the ICU dataset to set your chosen reference groups.
+
+#### Part f
+
+Write down the equation for the logistic regression model of STA on CPR.
+
+#### Part g
+
+Using the `glm()` function, obtain the maximum likelihood estimates of the coefficient parameters of the logistic regression model in Part f. Using these estimates, write down fitted logistic regression model.
+
+#### Part h
+
+Write a sentence interpreting the odds ratio for the coefficients in Part g's model. Please include the 95% confidence interval.
+
+#### Part i
+
+Write down the equation for the logistic regression model of STA on LOC.
+
+#### Part j
+
+Using the `glm()` function, obtain the maximum likelihood estimates of the coefficient parameters of the logistic regression model in Part i. Present the coefficient estimates. No need to write out the fitted regression equation. 
+
+Please take note of the warnings that you receive from fitting the `glm()` model and any large coefficient estimate with large confidence intervals. In this case, we have a category within LOC that has very few observations. (We will discuss this more in Lesson 14: Numerical Problems)
+
+Check the number of observations that have a deep stupor and death at discharge and the number of observations that have a deep stupor and live at discharge. You can do this using the `table()` function to create a contingency table. 
+
+#### Part k
+
+Write a sentence interpreting the odds ratio of death for the indicator of coma. Please include the 95% confidence interval.
 
 
 

@@ -7,8 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Your name here - update this!!!!">
-<meta name="dcterms.date" content="2024-04-11">
-<meta name="description" content="Due: Thursday April 11, 2024 at 11pm">
 
 <title>Homework 1 – Categorical Data Analysis</title>
 <style>
@@ -4986,7 +4984,7 @@ border: 0;
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -5002,18 +5000,21 @@ border: 0;
   <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
   <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
   <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
+  <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
   </ul></li>
   <li><a href="#questions-part-2" id="toc-questions-part-2" class="nav-link" data-scroll-target="#questions-part-2">Questions Part 2</a>
   <ul class="collapse">
-  <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
-  <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
   <li><a href="#question-7" id="toc-question-7" class="nav-link" data-scroll-target="#question-7">Question 7</a></li>
+  <li><a href="#question-8" id="toc-question-8" class="nav-link" data-scroll-target="#question-8">Question 8</a></li>
+  <li><a href="#question-9" id="toc-question-9" class="nav-link" data-scroll-target="#question-9">Question 9</a></li>
+  <li><a href="#question-10" id="toc-question-10" class="nav-link" data-scroll-target="#question-10">Question 10</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="HW_01.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -5021,14 +5022,9 @@ border: 0;
 <p class="subtitle lead">BSTA 513/613</p>
 </div>
 
-<div>
-  <div class="description">
-    Due: Thursday April 11, 2024 at 11pm
-  </div>
-</div>
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -5037,17 +5033,11 @@ border: 0;
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">April 11, 2024</p>
-    </div>
-  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 28, 2025</p>
+      <p class="date-modified">April 1, 2025</p>
     </div>
   </div>
     
@@ -5068,24 +5058,28 @@ Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Nicky needs to edit</p>
+<p>This homework is ready to go! (Nicky 4/1/25)</p>
 </div>
 </div>
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>This homework is designed to help you practice the following important skills and knowledge that we covered in Lessons 1-2:</p>
+<p>This homework is designed to help you practice the following important skills and knowledge that we covered in Lessons 2-5:</p>
 <ul>
 <li>Practicing and outlining your decision process to analyze the relationship between two categorical variables</li>
 <li>Interpreting research aims into questions/tests that can be answered with statistics</li>
 <li>Using R to calculate sample proportions</li>
 <li>Using R to calculate test statistic values for inference tests</li>
 <li>Interpreting new phrasing of questions that were introduced in class</li>
+<li>Calculate and interpret the estimated risk difference, relative risk, and odds ratios, and their confidence intervals</li>
+<li>Expand work on contingency tables to evaluate the agreement or reproducibility using Cohen’s Kappa</li>
+<li>Understand important differences between linear regression and logistic regression</li>
+<li>Construct a simple logistic regression model</li>
 </ul>
 </section>
 <section id="directions" class="level2">
 <h2 class="anchored" data-anchor-id="directions">Directions</h2>
 <ul>
-<li><p><a href="https://github.com/nwakim/S2024_BSTA_513/blob/main/homework/HW1.qmd">Download the <code>.qmd</code> file here.</a></p></li>
+<li><p><a href="https://github.com/nwakim/BSTA_513_S25/blob/main/homework/HW_01.qmd">Download the <code>.qmd</code> file here.</a></p></li>
 <li><p>You will not need to download datasets for this homework.</p></li>
 <li><p>Please upload your homework to Sakai. Upload both your .qmd code file and the rendered .html file</p>
 <ul>
@@ -5237,12 +5231,71 @@ Tip
 <p>Is there a trend of increased risk perception for smokeless tobacco users? What test would you use? Make sure to follow the entire test process demonstrated in the slides.</p>
 </section>
 </section>
+<section id="question-5" class="level3">
+<h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
+<p>A study looked at the effects of oral contraceptive (OC) use on heart disease in women 40 to 44 years of age. The researchers prospectively tracked whether or not the women developed a myocardial infarction (MI) over a 3-year period. The table below summarizes their results with columns indicating whether or not women developed MI and rows indicating their OC use.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped table-hover caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Yes</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">No</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">OC users</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">4987</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-OC users</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">9993</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<section id="part-a-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-a-2">Part a</h4>
+<p>Compute the estimated risk difference comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value.</p>
+</section>
+<section id="part-b-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-b-2">Part b</h4>
+<p>Compute the estimated relative risk comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value.</p>
+</section>
+<section id="part-c-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-c-1">Part c</h4>
+<p>Compute the estimated odds ratio comparing OC users to non-OC users. Include a 95% CI for the estimate and interpretation of the estimated value.</p>
+</section>
+<section id="part-d" class="level4">
+<h4 class="anchored" data-anchor-id="part-d">Part d</h4>
+<p>Is the OR a good approximation of the RR? Explain why or why not.</p>
+</section>
+</section>
+<section id="question-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-6">Question 6</h3>
+<p>One important aspect of medical diagnosis is its reproducibility. Suppose that two different doctors examine 100 patients for dyspnea in a respiratory-disease clinic, and that doctor A diagnosed 15 patients as having dyspnea (while doctor B did not), doctor B diagnosed 10 patients as having dyspnea (while doctor A did not), and both doctor A and doctor B diagnosed 7 patients as having dyspnea.</p>
+<section id="part-a-3" class="level4">
+<h4 class="anchored" data-anchor-id="part-a-3">Part a</h4>
+<p>Construct a two-way contingency table to summarize the dyspnea diagnoses from doctor A and B.</p>
+</section>
+<section id="part-b-3" class="level4">
+<h4 class="anchored" data-anchor-id="part-b-3">Part b</h4>
+<p>Compute the Cohen’s kappa, 95% confidence interval, and interpret the results. What level of agreement does your kappa indicate?</p>
+</section>
+</section>
 </section>
 <section id="questions-part-2" class="level2">
 <h2 class="anchored" data-anchor-id="questions-part-2">Questions Part 2</h2>
 <p>The following questions are intended to give you <strong>practice in connecting concepts</strong> that will help you make decisions in real world applications.</p>
-<section id="question-5" class="level3">
-<h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
+<section id="question-7" class="level3">
+<h3 class="anchored" data-anchor-id="question-7">Question 7</h3>
 <p>Start making a comprehensive table or outline for the inference tests that we have covered. Here is a list of the tests we have covered:</p>
 <ul>
 <li>Single proportion</li>
@@ -5264,30 +5317,96 @@ Tip
 </ul>
 <p>For example, I could make a table with different rows corresponding to different tests and different columns for each attribute.</p>
 </section>
-<section id="question-6" class="level3">
-<h3 class="anchored" data-anchor-id="question-6">Question 6</h3>
+<section id="question-8" class="level3">
+<h3 class="anchored" data-anchor-id="question-8">Question 8</h3>
 <p>I want you to gain experience exploring a package and function. This is an important skill in coding that can help you grow as an applied statistician.</p>
 <p>In your previous course, the function lm() was introduced to perform linear regression. In this class, we will heavily use the function glm(). By typing “?glm” in the R console, we can open the Help page for glm(). The following questions ask about the glm() function. You can Google or use <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/glm">R documentation</a> to answer the questions.</p>
 <p>Feel free to <a href="https://www.statology.org/glm-vs-lm-in-r/">read more</a> about the differences between lm() and glm().</p>
-<section id="part-a-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-a-2">Part a</h4>
+<section id="part-a-4" class="level4">
+<h4 class="anchored" data-anchor-id="part-a-4">Part a</h4>
 <p>What does the input “family” mean? If I wanted to perform regression using a Poisson distribution, what would I input into family?</p>
 </section>
-<section id="part-b-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-b-2">Part b</h4>
+<section id="part-b-4" class="level4">
+<h4 class="anchored" data-anchor-id="part-b-4">Part b</h4>
 <p>What is the default action for the “na.action” input?</p>
 </section>
-<section id="part-c-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-c-1">Part c</h4>
+<section id="part-c-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-c-2">Part c</h4>
 <p>How does the glm() function fit our model? (Hint: see “method”)</p>
 </section>
-<section id="part-d" class="level4">
-<h4 class="anchored" data-anchor-id="part-d">Part d</h4>
+<section id="part-d-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-d-1">Part d</h4>
 <p>Do you think the output of summary() will be the same for lm() and glm()?</p>
 </section>
 </section>
-<section id="question-7" class="level3">
-<h3 class="anchored" data-anchor-id="question-7">Question 7</h3>
+<section id="question-9" class="level3">
+<h3 class="anchored" data-anchor-id="question-9">Question 9</h3>
+<p>This question is meant to emphasize the differences between linear regression and logistic regression. Each part will ask about different aspects of the two regression models. If the question has multiple choice answers, then you must write 1-2 sentences justifying your answer.</p>
+<section id="part-a-5" class="level4">
+<h4 class="anchored" data-anchor-id="part-a-5">Part a</h4>
+<p>In <strong>linear</strong> regression, what type of variable is our response/outcome variable?</p>
+<ol type="a">
+<li>binary</li>
+<li>continuous</li>
+<li>count</li>
+<li>ordinal</li>
+</ol>
+</section>
+<section id="part-b-5" class="level4">
+<h4 class="anchored" data-anchor-id="part-b-5">Part b</h4>
+<p>In <strong>logistic</strong> regression, what type of variable is our response/outcome variable?</p>
+<ol type="a">
+<li>binary</li>
+<li>continuous</li>
+<li>count</li>
+<li>normal</li>
+</ol>
+</section>
+<section id="part-c-3" class="level4">
+<h4 class="anchored" data-anchor-id="part-c-3">Part c</h4>
+<p>What assumptions in linear regression? Please state the assumption name and characteristics of that assumption.</p>
+</section>
+<section id="part-d-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-d-2">Part d</h4>
+<p>Which assumptions of linear regression are violated if we try to fit a binary response using linear regression? You may choose more than one answer.</p>
+<ol type="a">
+<li>Independence</li>
+<li>Linearity</li>
+<li>Normality</li>
+<li>Homoscedasticity</li>
+</ol>
+</section>
+<section id="part-e" class="level4">
+<h4 class="anchored" data-anchor-id="part-e">Part e</h4>
+<p>Please use our notes on generalized linear models (GLMs) to answer this question. What is the random component used in linear regression? What is the random component used in logistic regression? Name the specific variable type and distribution for it.</p>
+</section>
+<section id="part-f" class="level4">
+<h4 class="anchored" data-anchor-id="part-f">Part f</h4>
+<p>Please use our notes on generalized linear models (GLMs) to answer this question. What link function do we use in linear regression? What link function do we use in logistic regression? Name the link and write out the function.</p>
+</section>
+<section id="part-g" class="level4">
+<h4 class="anchored" data-anchor-id="part-g">Part g</h4>
+<p>Please use our notes on generalized linear models (GLMs) to answer this question. What is the systematic component used in simple linear regression? What is the systematic component used in simple logistic regression? Please write out the function for the systematic component for a single covariate.</p>
+</section>
+<section id="part-h" class="level4">
+<h4 class="anchored" data-anchor-id="part-h">Part h</h4>
+<p>How do we determine our coefficient estimates (estimates of the parameter values) in linear regression? You may choose more than one answer.</p>
+<ol type="a">
+<li>Ordinary least squares</li>
+<li>Maximum likelihood estimation</li>
+</ol>
+</section>
+<section id="part-i" class="level4">
+<h4 class="anchored" data-anchor-id="part-i">Part i</h4>
+<p>How do we determine our coefficient estimates (estimates of the parameter values) in logistic regression? You may choose more than one answer.</p>
+<ol type="a">
+<li>Ordinary least squares</li>
+<li>Maximum likelihood estimation</li>
+</ol>
+</section>
+</section>
+<section id="question-10" class="level3">
+<h3 class="anchored" data-anchor-id="question-10">Question 10</h3>
 <p><strong>OPTIONAL</strong></p>
 <p>Let’s make a decision tree on the different tests we learned! I would like you to make a flow chart for the different tests we learned in Classes 1 and 2. You’ll need to include characteristics for:</p>
 <ul>
