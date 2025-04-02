@@ -3,7 +3,7 @@ title: "Lesson 3: Measurement of Association for Contingency Tables"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "04/08/2024"
+date: "04/02/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -70,7 +70,7 @@ library(here)
 
 ## Review of Test of Association (1/2)
 
--   Last week: learned some tests of association for contingency tables
+-   Last class: learned some tests of association for contingency tables
 
  
 
@@ -90,25 +90,29 @@ library(here)
 ![](./images/test_organization.png){fig-align="center"}
 
 
-## Test of association does not measure association
+## Test of association *does not* measure association
 
--   Test of association does not provide an effective measure of association. The p-value alone is not enough
+-   Test of association **does not** provide an effective measure of association. 
+
+ 
+
+-   The p-value alone is not enough
 
     -   $\text{p-value} < 0.05$ suggests there is a statistically significant association between the group and outcome
 
-    -   $\text{p-value} = 0.00001$ vs. $\text{p-value} = 0.01$ does not mean the magnistude of association is different
+    -   $\text{p-value} = 0.00001$ vs. $\text{p-value} = 0.01$ does not mean the **magnitude** of association is different
 
  
 
--   But it does not tell how different the risks are between the two groups
+-   But it does not tell **how different** the risks are between the two groups
 
  
 
--   We want to find out one or more measurements for quantifying the risks across the groups.
+-   We want a measurement to quantify different risks across the groups
 
 ## Measures of Association
 
--   When we have a 2x2 contingency table and independent samples, we have an option of three measures of association:
+-   When we have a **2x2 contingency table** (binary outcome and explanatory variable) and **independent samples**, we have three main options to measure of association:
 
      
 
@@ -148,7 +152,7 @@ Let's define the cells within a 2x2 contingency table:
 
 -   Then we can define risk: the proportion of "successes"
 
-    -   With $\text{Risk}_1 = \dfrac{n_{11}}{n_1}$
+    -   Risk of successful response for explanatory group 1: $\text{Risk}_1 = \dfrac{n_{11}}{n_1}$
 
 # Learning Objectives
 
@@ -166,9 +170,17 @@ Let's define the cells within a 2x2 contingency table:
 
 -   Risk difference computes the absolute difference in risk for the two groups (from the explanatory variable)
 
+::: columns
+::: {.column width="60%"}
 -   Point estimate: $$\widehat{RD} = \widehat{p}_1 - \widehat{p}_1 = \dfrac{n_{11}}{n_1} - \dfrac{n_{21}}{n_2}$$
 
     -   With range of point estimate from $[-1, 1]$
+:::
+
+::: {.column width="40%"}
+![](./images/ct.png){fig-align="center"}
+:::
+:::
 
 -   Approximate standard error:
 
@@ -363,7 +375,7 @@ SHS_ct_disp %>%
 
 3.  Interpret the estimate
 
-The diabetes diagnosis risk difference between impaired and normal glucose tolerance is 0.2591 (95% CI: 0.2141, 0.3041). Since the 95% confidence interval contains 0, we do not have sufficient evidence that the risk of diabetes diagnosis between impaired and normal glucose tolerance is different.
+The diabetes diagnosis risk difference between impaired and normal glucose tolerance is 0.2591 (95% CI: 0.2141, 0.3041). Since the 95% confidence interval does not contain 0, we have sufficient evidence that the risk of diabetes diagnosis within 4 year follow-up for people with impaired versus normal glucose tolerance is different.
 
 ## When is the risk difference misleading?
 
@@ -398,27 +410,36 @@ The diabetes diagnosis risk difference between impaired and normal glucose toler
 
 ## Relative Risk (RR)
 
--   Relative risk computes the ratio of each group’s proportions of "success"
+-   Relative risk computes the **ratio** of each group’s proportions of "success"
 
     -   Also called **risk ratio**    
 
+
+::: columns
+::: {.column width="60%"}
 -   Point estimate: $$\widehat{RR}=\dfrac{\hat{p}_1}{\hat{p}_2} = \dfrac{n_{11}/n_1}{n_{21}/n_2}$$
 
     -   Range: $[0, \infty]$
+:::
+
+::: {.column width="40%"}
+![](./images/ct.png){fig-align="center"}
+:::
+:::
 
 ## Poll Everywhere Question 2
 
 ## Log-transformation of RR
 
--   Sampling distribution of the relative risk is highly skewed unless sample sizes are quite large
+-   Sampling distribution of the relative risk is **highly skewed** unless sample sizes are quite large
 
-    -   Log transformation results in approximately normal distribution
-    -   Thus, compute confidence interval using normally distributed, log-transformed RR
+    -   **Log transformation** results in *approximately normal distribution*
+    -   Thus, **compute confidence interval using normally distributed, log-transformed RR**
     -   Then we convert back to the RR
 
 -   We take the log (natural log) of RR: $\ln(\widehat{RR})$ or $log(\widehat{RR})$
 
-    -   Whenever I say "log" I mean natural log (very common in statistics)
+    -   Whenever I say "log" I mean natural log (base $e$, very common in statistics)
 
 ::: columns
 ::: {.column width="60%"}
@@ -436,31 +457,35 @@ The diabetes diagnosis risk difference between impaired and normal glucose toler
 
 ## How do we get back to the RR scale?
 
--   We computed confidence interval using normally distributed, log-transformed RR ($\ln(\widehat{RR})$):
+-   We **computed confidence interval** using normally distributed, log-transformed RR ($\ln(\widehat{RR})$):
 
 $$ \bigg(\ln(\widehat{RR}) - 1.96 \times SE_{\ln(\widehat{RR})}, \ \ln(\widehat{RR}) + 1.96 \times SE_{\ln(\widehat{RR})}\bigg)$$
 
 -   Now we need to exponentiate the CI to get back to interpretable values
 
-    -   Take exponential of lower and upper bounds
+    -   **Take exponential of lower and upper bounds**
 
 -   95% confidence interval for RR: two ways to display equation
 
-$$ \bigg(e^{\ln(\widehat{RR}) - 1.96 \times SE_{\ln(\widehat{RR})}}, \ e^{\ln(\widehat{RR}) + 1.96 \times SE_{\ln(\widehat{RR})}}\bigg)$$ $$ \bigg(\exp\big(\ln(\widehat{RR}) - 1.96 \times SE_{\ln(\widehat{RR})}\big), \ \exp\big(\ln(\widehat{RR}) + 1.96 \times SE_{\ln(\widehat{RR})}\big)\bigg)$$
+$$ \bigg(e^{\ln(\widehat{RR}) - 1.96 \times SE_{\ln(\widehat{RR})}}, \ e^{\ln(\widehat{RR}) + 1.96 \times SE_{\ln(\widehat{RR})}}\bigg)$$ $$ \bigg(\exp\big[\ln(\widehat{RR}) - 1.96 \times SE_{\ln(\widehat{RR})}\big], \ \exp\big[\ln(\widehat{RR}) + 1.96 \times SE_{\ln(\widehat{RR})}\big]\bigg)$$
 
 ## Relative Risk (RR)
 
 -   Can you compute the estimated RRs for the previous example?
 
-    -   If the risk for Trt A is 0.01 and Trt B is 0.001? $\widehat{RR}= 10$
-    -   If the risk for Trt A is 0.41 and Trt B is 0.401? $\widehat{RR}= 1.02$
+    -   If the risk for Trt A is 0.01 and Trt B is 0.001?  $\widehat{RR}= 10$ 
+    -   If the risk for Trt A is 0.41 and Trt B is 0.401?  $\widehat{RR}= 1.02$
+
+ 
 
 -   When $\widehat{RR}= 1$ ...
 
     -   Risk is the same for the two groups
-    -   In other words, the group and the outcome are independent
+    -   In other words, the **group and the outcome are independent**
 
--   When computing $\widehat{RR}$ it is important to identify which variable is the response variable and which is explanatory variable
+ 
+
+-   When computing $\widehat{RR}$ it is important to **identify which variable is the response variable and which is explanatory variable**
 
     -   We may say "risk for Trt A" but this translates to the risk (or probability) of outcome success for those receiving Trt A
 
@@ -680,24 +705,40 @@ Since the 95% confidence interval does not include 1, there is sufficient eviden
 :::
 
 ## Odds (building up to Odds Ratio)
+    
+::: columns
+::: {.column width="60%"}
+-   For a probability of success $p$ (or sometimes referred to as $\pi$), the odds of success is: $$\widehat{\text{odds}}=\frac{\widehat{p}}{1-\widehat{p}}=\frac{\widehat{\pi}}{1-\widehat{\pi}}$$
 
--   For a probability of success $p$ (or sometimes referred to as $\pi$), the odds of success is: $$\text{odds}=\frac{p}{1-p}=\frac{\pi}{1-\pi}$$
+    -   **Example:** if $\widehat{\pi}=0.75$, then odds of success $= \dfrac{0.75}{0.25}=3$
+:::
 
-    -   **Example:** if $\pi=0.75$, then odds of success $= \dfrac{0.75}{0.25}=3$
+::: {.column width="40%"}
+![](./images/ct.png){fig-align="center"}
+:::
+:::
 
 -   If odds \> 1, it implies a success is more likely than a failure
 
-    -   Example: for $odds = 3$, we expect to observe three times as many successes as failures
+    -   Example: for $\widehat{\text{odds}} = 3$, we expect to observe three times as many successes as failures
 
--   If odds is known, the probability of success can be computed $$\pi = \dfrac{\text{odds}}{\text{odds}+1}$$
+-   If odds is known, the probability of success can be computed $$\widehat{\pi} = \dfrac{\widehat{\text{odds}}}{\widehat{\text{odds}}+1}$$
 
 ## Odds Ratio (OR)
 
--   Odds ratio is the ratio of two odds:$$\widehat{OR}=\frac{odds_1}{odds_2}=\frac{{\hat{p}}_1/(1-{\hat{p}}_1)}{{\hat{p}}_2/(1-{\hat{p}}_2)}$$
+::: columns
+::: {.column width="60%"}
+-   Odds ratio is the ratio of two odds:$$\widehat{OR}=\frac{\widehat{\text{odds}}_1}{\widehat{\text{odds}}_2}=\frac{{\hat{p}}_1/(1-{\hat{p}}_1)}{{\hat{p}}_2/(1-{\hat{p}}_2)}$$
 
     -   **Range:** $[0, \infty]$
 
     -   **Interpretation:** The odds of success for "group 1" is "$\widehat{OR}$" times the odds of success for "group 2"
+:::
+
+::: {.column width="40%"}
+![](./images/ct.png){fig-align="center"}
+:::
+:::
 
  
 
@@ -753,17 +794,17 @@ Since the 95% confidence interval does not include 1, there is sufficient eviden
 
 ## How do we get back to the OR scale?
 
--   We computed confidence interval using normally distributed, log-transformed RR ($\ln(\widehat{OR})$):
+-   We computed confidence interval using normally distributed, log-transformed 0R ($\ln(\widehat{OR})$):
 
 $$ \bigg(\ln(\widehat{OR}) - 1.96 \times SE_{\ln(\widehat{OR})}, \ \ln(\widehat{OR}) + 1.96 \times SE_{\ln(\widehat{OR})}\bigg)$$
 
--   Now we need to exponentiate the CI to get back to interpretable values
+-   Now we need to **exponentiate the CI to get back to interpretable values**
 
     -   Take exponential of lower and upper bounds
 
 -   95% confidence interval for RR: two ways to display equation
 
-$$ \bigg(e^{\ln(\widehat{OR}) - 1.96 \times SE_{\ln(\widehat{OR})}}, \ e^{\ln(\widehat{OR}) + 1.96 \times SE_{\ln(\widehat{OR})}}\bigg)$$ $$ \bigg(\exp\big(\ln(\widehat{OR}) - 1.96 \times SE_{\ln(\widehat{OR})}\big), \ \exp\big(\ln(\widehat{OR}) + 1.96 \times SE_{\ln(\widehat{OR})}\big)\bigg)$$
+$$ \bigg(e^{\ln(\widehat{OR}) - 1.96 \times SE_{\ln(\widehat{OR})}}, \ e^{\ln(\widehat{OR}) + 1.96 \times SE_{\ln(\widehat{OR})}}\bigg)$$ $$ \bigg(\exp\big[\ln(\widehat{OR}) - 1.96 \times SE_{\ln(\widehat{OR})}\big], \ \exp\big[\ln(\widehat{OR}) + 1.96 \times SE_{\ln(\widehat{OR})}\big]\bigg)$$
 
 ## SHS Example: Odds Ratio (1/6)
 
@@ -974,11 +1015,13 @@ Since the 95% confidence interval does not include 1, there is sufficient eviden
 
 ## Inversing an Odds Ratio
 
--   Some clinicians may prefer interpretations of OR \> 1 instead of an OR \< 1
+-   Some people prefer interpretations of OR \> 1 instead of an OR \< 1
 
 -   The transformation can easily be done by inverse
 
-    -   Remember we discussed that OR = 4 is an equivalent a strong association as OR = 0.25 (1/4)
+    -   Remember we discussed that $OR = 4$ is an equivalent a strong association as $OR = 0.25$ (1/4)
+
+ 
 
 -   OR comparing [group 1]{style="color:#70AD47; font-weight: bold;"} to [group 2]{style="color:#4472C4; font-weight: bold;"} = inverse of OR comparing [group 2]{style="color:#4472C4; font-weight: bold;"} to [group 1]{style="color:#70AD47; font-weight: bold;"}
 

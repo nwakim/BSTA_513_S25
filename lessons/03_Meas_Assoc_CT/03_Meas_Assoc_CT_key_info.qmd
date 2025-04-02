@@ -10,6 +10,23 @@ editor_options:
 
 ## Announcements
 
+- Public Health Week starting next week on 4/8
+  - Schedule: <https://ohsu-psu-sph.org/this-is-public-health/>
+- Annual Public Health Week Conference on 4/11
+  - Please submit your BSTA 512 poster!! 
+  - If you email the Student Leadership Council, I'm sure they would love to include your poster!
+
+### Tour of the Center for Infectious Diseases
+
+For National Public Health Week, join us for an exclusive tour of the School of Public Health's only clinical laboratory, the Center for Infectious Disease (CIDS) on **Tuesday, April 8 from 3:00 - 3:45pm**. 
+
+Getting a peek into the work of CIDS, you'll witness first hand how applied public health research shapes real-world solutions and directly supports community well-being. Their expert-led research delves into the depths of pharmacoepidemiology and rheumatologic diseases, enhancing drug safety and efficacy for the broader population. Join us for a tour to expand your academic horizons, ask questions of the research team on what their day-to-day work and career path looks like, and to see what options you have as a pivotal researcher who is advancing health equity and enhancing community health outcomes.
+
 ## Key Dates
 
+- Lab 1 due 4/11
+
 ## Last class
+
+- Reviewed ways to estimate proportions (and differences) for categorical data
+- Reviewed different tests for comparing proportions and for association
