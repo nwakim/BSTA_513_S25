@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -126,8 +155,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a></li>
-  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
+  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a>
+  <ul class="collapse">
+  <li><a href="#a.-the-beautiful-math-for-the-odds-ratio-being-either-a-measurement-of-the-odds-of-event-exposed-vs.-unexposed-and-the-odds-of-exposure-of-the-individual." id="toc-a.-the-beautiful-math-for-the-odds-ratio-being-either-a-measurement-of-the-odds-of-event-exposed-vs.-unexposed-and-the-odds-of-exposure-of-the-individual." class="nav-link" data-scroll-target="#a.-the-beautiful-math-for-the-odds-ratio-being-either-a-measurement-of-the-odds-of-event-exposed-vs.-unexposed-and-the-odds-of-exposure-of-the-individual.">1a. The “beautiful math” for the odds ratio being either a measurement of the odds of event (exposed vs.&nbsp;unexposed) and the odds of exposure of the individual.</a></li>
+  <li><a href="#b.-i-would-like-some-clarification-on-the-difference-between-the-odds-of-an-event-and-the-odds-of-the-exposure-for-example-odds-ration-can-be-both-the-odds-that-someone-has-lung-cancer-event-is-lung-cancer-between-smokers-and-non-smokers-and-the-odds-someone-is-a-smoker-between-people-that-have-and-do-not-have-lung-cancer" id="toc-b.-i-would-like-some-clarification-on-the-difference-between-the-odds-of-an-event-and-the-odds-of-the-exposure-for-example-odds-ration-can-be-both-the-odds-that-someone-has-lung-cancer-event-is-lung-cancer-between-smokers-and-non-smokers-and-the-odds-someone-is-a-smoker-between-people-that-have-and-do-not-have-lung-cancer" class="nav-link" data-scroll-target="#b.-i-would-like-some-clarification-on-the-difference-between-the-odds-of-an-event-and-the-odds-of-the-exposure-for-example-odds-ration-can-be-both-the-odds-that-someone-has-lung-cancer-event-is-lung-cancer-between-smokers-and-non-smokers-and-the-odds-someone-is-a-smoker-between-people-that-have-and-do-not-have-lung-cancer">1b. I would like some clarification on the difference between the odds of an event and the odds of the exposure? For example odds ration can be both the odds that someone has lung cancer (event is lung cancer) between smokers and non-smokers and the odds someone is a smoker between people that have and do not have lung cancer?</a></li>
+  </ul></li>
+  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a>
+  <ul class="collapse">
+  <li><a href="#in-epi-we-were-very-strictly-told-that-odds-ratios-were-only-to-be-used-in-one-type-of-study.-i.e.-we-can-not-use-them-in-cross-sectional-and-cohort-studies-only-case-control.-so-what-is-the-application-of-attempting-to-utilize-them-if-each-respective-type-of-study-already-has-a-pre-assigned-statistical-method-that-suits-it-best" id="toc-in-epi-we-were-very-strictly-told-that-odds-ratios-were-only-to-be-used-in-one-type-of-study.-i.e.-we-can-not-use-them-in-cross-sectional-and-cohort-studies-only-case-control.-so-what-is-the-application-of-attempting-to-utilize-them-if-each-respective-type-of-study-already-has-a-pre-assigned-statistical-method-that-suits-it-best" class="nav-link" data-scroll-target="#in-epi-we-were-very-strictly-told-that-odds-ratios-were-only-to-be-used-in-one-type-of-study.-i.e.-we-can-not-use-them-in-cross-sectional-and-cohort-studies-only-case-control.-so-what-is-the-application-of-attempting-to-utilize-them-if-each-respective-type-of-study-already-has-a-pre-assigned-statistical-method-that-suits-it-best">1. In Epi, we were very strictly told that Odds Ratios were only to be used in one type of study. (I.e. we CAN NOT use them in cross-sectional and cohort studies) only case-control. So what is the application of attempting to utilize them, if each respective type of study already has a “pre-assigned” statistical method that suits it best?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -137,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Lesson 1: Welcome</p>
+<p class="subtitle lead">Lesson 4: Measurements of association and agreement</p>
 </div>
 
 
@@ -162,11 +198,144 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="muddy-points-from-spring-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2025">Muddy Points from Spring 2025</h2>
+<section id="a.-the-beautiful-math-for-the-odds-ratio-being-either-a-measurement-of-the-odds-of-event-exposed-vs.-unexposed-and-the-odds-of-exposure-of-the-individual." class="level3">
+<h3 class="anchored" data-anchor-id="a.-the-beautiful-math-for-the-odds-ratio-being-either-a-measurement-of-the-odds-of-event-exposed-vs.-unexposed-and-the-odds-of-exposure-of-the-individual.">1a. The “beautiful math” for the odds ratio being either a measurement of the odds of event (exposed vs.&nbsp;unexposed) and the odds of exposure of the individual.</h3>
+<p>We can start by using the fact that:</p>
+<p><span class="math display">\[
+\widehat{p}_1 = \dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# in grp 1}
+}
+\]</span></p>
+<p>and that:</p>
+<p><span class="math display">\[
+1- \widehat{p}_1 = \dfrac{
+\text{\# failures in grp 1}
+}{
+\text{\# in grp 1}
+}
+\]</span></p>
+<p>since <span class="math inline">\(1- \widehat{p}_1\)</span> is the proportion of failures.</p>
+<p>We can write the same definitions for group 2 and substitute it in our odds ratio estimate. In this case, we are writing the <strong>odds ratio of an event comparing group 1 to group 2</strong>.</p>
+<p><span class="math display">\[
+\widehat{OR} =
+\dfrac{\dfrac{\widehat{p}_1}{1-\widehat{p}_1}}{\dfrac{\widehat{p}_2}{1-\widehat{p}_2}} =
+\dfrac{
+\dfrac{
+\dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# in grp 1}
+}
+}{
+\dfrac{
+\text{\# failures in grp 1}
+}{
+\text{\# in grp 1}
+}
+}
+}{
+\dfrac{
+\dfrac{
+\text{\# successes in grp 2}
+}{
+\text{\# in grp 2}
+}
+}{
+\dfrac{
+\text{\# failures in grp 2}
+}{
+\text{\# in grp 2}
+}
+}
+}
+\]</span></p>
+<p>The <span class="math inline">\(\text{\# in grp 1}\)</span> and <span class="math inline">\(\text{\# in grp 1}\)</span> get cancelled out by each other, and the same goes with <span class="math inline">\(\text{\# in grp 2}\)</span>. So we’re left with:</p>
+<p><span class="math display">\[
+\widehat{OR} =
+\dfrac{
+\dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# failures in grp 1}
+}
+}{
+\dfrac{
+\text{\# successes in grp 2}
+}{
+\text{\# failures in grp 2}
+}
+}
+\]</span></p>
+<p>If we want an estimated odds ratio of being in group 1 comparing the successes to failures, then we need to think about what our denominator will be each odds. For successes, what are the odds of being in group 1? Thus, I would want the # of successes to be my denominator.</p>
+<p>That means I can rearrange my successes and failures to get a different representation of the odds ratio:</p>
+<p><span class="math display">\[
+\widehat{OR} =
+\dfrac{
+\dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# successes in grp 2}
+}
+}{
+\dfrac{
+\text{\# failures in grp 1}
+}{
+\text{\# failures in grp 2}
+}
+}
+\]</span></p>
+<p>Notice now that it looks more like I have the odds of grp 1 (over group 2) for both successes and failures.</p>
+<p>I can multiply by “1” to get the denominators I want. For the top part,<span class="math inline">\(\dfrac{\text{\# successes in grp 1}}{\text{\# successes in grp 2}}\)</span> I can multiply by <span class="math inline">\(\dfrac{\text{\# successes}}{\text{\# successes}}\)</span>. Technically this is 1 but I’ll add in the denominator I want. We can do the same for the number of failures</p>
+<p><span class="math display">\[
+\widehat{OR} =
+\dfrac{
+\dfrac{
+\dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# successes}
+}
+}{
+\dfrac{
+\text{\# successes in grp 2}
+}{
+\text{\# successes}
+}
+}
+}{
+\dfrac{
+\dfrac{
+\text{\# failures in grp 1}
+}{
+\text{\# failures}
+}
+}{
+\dfrac{
+\text{\# failures in grp 2}
+}{
+\text{\# failures}
+}
+}
+}
+\]</span></p>
+<p>Now I have the odds ratio of being in group 1 comparing successes to failures. We did not change the actually estimate of the odds ratio. We only rearranged the values.</p>
+</section>
+<section id="b.-i-would-like-some-clarification-on-the-difference-between-the-odds-of-an-event-and-the-odds-of-the-exposure-for-example-odds-ration-can-be-both-the-odds-that-someone-has-lung-cancer-event-is-lung-cancer-between-smokers-and-non-smokers-and-the-odds-someone-is-a-smoker-between-people-that-have-and-do-not-have-lung-cancer" class="level3">
+<h3 class="anchored" data-anchor-id="b.-i-would-like-some-clarification-on-the-difference-between-the-odds-of-an-event-and-the-odds-of-the-exposure-for-example-odds-ration-can-be-both-the-odds-that-someone-has-lung-cancer-event-is-lung-cancer-between-smokers-and-non-smokers-and-the-odds-someone-is-a-smoker-between-people-that-have-and-do-not-have-lung-cancer">1b. I would like some clarification on the difference between the odds of an event and the odds of the exposure? For example odds ration can be both the odds that someone has lung cancer (event is lung cancer) between smokers and non-smokers and the odds someone is a smoker between people that have and do not have lung cancer?</h3>
+<p>Yep! That’s exactly it! Typically we are interested in the odds of lung cancer because smoking is more easily observable, but the two interpretations are linked to the same calculation!</p>
+</section>
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2024">Muddy Points from Spring 2024</h2>
+<section id="in-epi-we-were-very-strictly-told-that-odds-ratios-were-only-to-be-used-in-one-type-of-study.-i.e.-we-can-not-use-them-in-cross-sectional-and-cohort-studies-only-case-control.-so-what-is-the-application-of-attempting-to-utilize-them-if-each-respective-type-of-study-already-has-a-pre-assigned-statistical-method-that-suits-it-best" class="level3">
+<h3 class="anchored" data-anchor-id="in-epi-we-were-very-strictly-told-that-odds-ratios-were-only-to-be-used-in-one-type-of-study.-i.e.-we-can-not-use-them-in-cross-sectional-and-cohort-studies-only-case-control.-so-what-is-the-application-of-attempting-to-utilize-them-if-each-respective-type-of-study-already-has-a-pre-assigned-statistical-method-that-suits-it-best">1. In Epi, we were very strictly told that Odds Ratios were only to be used in one type of study. (I.e. we CAN NOT use them in cross-sectional and cohort studies) only case-control. So what is the application of attempting to utilize them, if each respective type of study already has a “pre-assigned” statistical method that suits it best?</h3>
+<p>Odds ratios CAN be used in cross-sectional AND cohort studies. It is often an over-estimate of the relative risk in those situations, so it is important to interpret it ONLY as the odds ratio.</p>
+<p>Each respective study does not have a pre-assigned method. The only restriction is that relative risk cannot be used in case-control studies.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

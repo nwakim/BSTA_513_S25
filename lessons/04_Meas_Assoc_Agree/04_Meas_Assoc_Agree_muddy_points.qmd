@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 4: Measurements of association and agreement"
 date-modified: "today"
 format: 
   html:
@@ -11,4 +11,155 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### 1a. The "beautiful math" for the odds ratio being either a measurement of the odds of event (exposed vs. unexposed) and the odds of exposure of the individual. 
+
+We can start by using the fact that: 
+
+$$
+\widehat{p}_1 = \dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# in grp 1}
+}
+$$
+
+and that:
+
+$$
+1- \widehat{p}_1 = \dfrac{
+\text{\# failures in grp 1}
+}{
+\text{\# in grp 1}
+}
+$$
+
+since $1- \widehat{p}_1$ is the proportion of failures.
+
+We can write the same definitions for group 2 and substitute it in our odds ratio estimate. In this case, we are writing the **odds ratio of an event comparing group 1 to group 2**.  
+
+$$
+\widehat{OR} = 
+\dfrac{\dfrac{\widehat{p}_1}{1-\widehat{p}_1}}{\dfrac{\widehat{p}_2}{1-\widehat{p}_2}} = 
+\dfrac{
+\dfrac{
+\dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# in grp 1}
+}
+}{
+\dfrac{
+\text{\# failures in grp 1}
+}{
+\text{\# in grp 1}
+}
+}
+}{
+\dfrac{
+\dfrac{
+\text{\# successes in grp 2}
+}{
+\text{\# in grp 2}
+}
+}{
+\dfrac{
+\text{\# failures in grp 2}
+}{
+\text{\# in grp 2}
+}
+}
+}
+$$
+
+The $\text{\# in grp 1}$ and $\text{\# in grp 1}$ get cancelled out by each other, and the same goes with $\text{\# in grp 2}$. So we're left with:
+
+$$
+\widehat{OR} = 
+\dfrac{
+\dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# failures in grp 1}
+}
+}{
+\dfrac{
+\text{\# successes in grp 2}
+}{
+\text{\# failures in grp 2}
+}
+}
+$$
+
+If we want an estimated odds ratio of being in group 1 comparing the successes to failures, then we need to think about what our denominator will be each odds. For successes, what are the odds of being in group 1? Thus, I would want the # of successes to be my denominator. 
+
+That means I can rearrange my successes and failures to get a different representation of the odds ratio:
+
+$$
+\widehat{OR} = 
+\dfrac{
+\dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# successes in grp 2}
+}
+}{
+\dfrac{
+\text{\# failures in grp 1}
+}{
+\text{\# failures in grp 2}
+}
+}
+$$
+
+Notice now that it looks more like I have the odds of grp 1 (over group 2) for both successes and failures. 
+
+I can multiply by "1" to get the denominators I want. For the top part,$\dfrac{\text{\# successes in grp 1}}{\text{\# successes in grp 2}}$ I can multiply by $\dfrac{\text{\# successes}}{\text{\# successes}}$. Technically this is 1 but I'll add in the denominator I want. We can do the same for the number of failures
+
+$$
+\widehat{OR} = 
+\dfrac{
+\dfrac{
+\dfrac{
+\text{\# successes in grp 1}
+}{
+\text{\# successes}
+}
+}{
+\dfrac{
+\text{\# successes in grp 2}
+}{
+\text{\# successes}
+}
+}
+}{
+\dfrac{
+\dfrac{
+\text{\# failures in grp 1}
+}{
+\text{\# failures}
+}
+}{
+\dfrac{
+\text{\# failures in grp 2}
+}{
+\text{\# failures}
+}
+}
+}
+$$
+
+Now I have the odds ratio of being in group 1 comparing successes to failures. We did not change the actually estimate of the odds ratio. We only rearranged the values. 
+
+
+
+### 1b. I would like some clarification on the difference between the odds of an event and the odds of the exposure? For example odds ration can be both the odds that someone has lung cancer (event is lung cancer) between smokers and non-smokers and the odds someone is a smoker between people that have and do not have lung cancer?
+
+Yep! That's exactly it! Typically we are interested in the odds of lung cancer because smoking is more easily observable, but the two interpretations are linked to the same calculation! 
+
 ## Muddy Points from Spring 2024
+
+### 1. In Epi, we were very strictly told that Odds Ratios were only to be used in one type of study. (I.e. we CAN NOT use them in cross-sectional and cohort studies) only case-control. So what is the application of attempting to utilize them, if each respective type of study already has a "pre-assigned" statistical method that suits it best?
+
+Odds ratios CAN be used in cross-sectional AND cohort studies. It is often an over-estimate of the relative risk in those situations, so it is important to interpret it ONLY as the odds ratio.
+
+Each respective study does not have a pre-assigned method. The only restriction is that relative risk cannot be used in case-control studies.

@@ -413,7 +413,7 @@ Compute the point estimate and 95% confidence interval for the agreement between
 
 ```{r}
 library(epiR)
-moods = matrix(c(100, 40, 10, 30), nrow = 2, byrow = T)
+moods = matrix(c(80, 80, 20, 20), nrow = 2, byrow = T)
 moods
 epi.kappa(moods, method = "cohen")$kappa 
 ```
