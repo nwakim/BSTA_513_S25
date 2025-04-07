@@ -3,7 +3,7 @@ title: "Lesson 4: Measurements of Association and Agreement"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "04/10/2024"
+date: "04/07/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -67,46 +67,48 @@ SHS_ct_disp = SHS %>% tabyl(glucimp, case) %>%
 -   Used contingency tables to test and measure association between two variables
 
     -   Categorical outcome variable (Y)
-    -   One categorical explanatory variable (X)
+    -   One categorical explanatory variable (X) with groups 1 and 2
 
 -   We looked at risk difference, risk ratio, and odds ratio to measure association
 
-| Measure                    | Estimate                                                                                               |
-|-----------------|------------------------------------------------------|
-| Risk difference            | $$\widehat{RD} = \widehat{p}_1 - \widehat{p}_1 = \dfrac{n_{11}}{n_1} - \dfrac{n_{21}}{n_2}$$           |
-| Relative risk / risk ratio | $$\widehat{RR}=\dfrac{\hat{p}_1}{\hat{p}_2} = \dfrac{n_{11}/n_1}{n_{21}/n_2}$$                         |
-| Odds ratio                 | $$\widehat{OR}=\frac{odds_1}{odds_2}=\frac{{\hat{p}}_1/(1-{\hat{p}}_1)}{{\hat{p}}_2/(1-{\hat{p}}_2)}$$ |
+| Measure | Formula for Estimate |
+|-------------------|-----------------------------------|
+| Risk difference | $\widehat{RD} = \widehat{p}_1 - \widehat{p}_1 = \dfrac{n_{11}}{n_1} - \dfrac{n_{21}}{n_2}$ |
+| Relative risk / risk ratio | $\widehat{RR}=\dfrac{\widehat{p}_1}{\widehat{p}_2} = \dfrac{n_{11}/n_1}{n_{21}/n_2}$ |
+| Odds ratio | $\widehat{OR}=\frac{\widehat{\text{odds}}_1}{\widehat{\text{odds}}_2}=\frac{{\widehat{p}}_1/(1-{\widehat{p}}_1)}{{\widehat{p}}_2/(1-{\widehat{p}}_2)}$ |
 
 -   Discussed how OR will be an important measurement in logistic regression
 
-## A taste of regression for a binary outcome (we will come back to this!!)
+## Our example with Strong Heart Study
 
 ```{r}
-logreg = glm(case ~ glucimp, data = SHS, family = binomial)
-```
-
-::: columns
-::: {.column width="60%"}
-```{r}
-summary(logreg)
-```
-:::
-
-::: {.column width="40%"}
-```{r}
-library(epiDisplay)
-logistic.display(logreg)
-```
-
-```{r}
-#| eval: false
 #| echo: false
 
-library(oddsratio)
-or_glm(data = SHS, model = logreg)
+SHS = read.csv(here("Data", "SHS_data.csv")) %>% 
+  mutate(glucimp = case_match(glucimp, 
+                              "impaired" ~ "Impaired", 
+                              "normal" ~ "Normal"))
+
+SHS_ct_disp = SHS %>% tabyl(glucimp, case) %>% 
+  adorn_totals(where = c("row", "col")) %>% 
+  gt(rowname_col = "glucimp") %>% 
+  cols_label(`0` ~ "No", `1`~"Yes") %>%
+  tab_spanner(label = "Diabetes", 
+              columns = c("0", "1")) %>%
+  tab_stubhead(label = "Glucose tolerance") %>%
+  opt_stylize(style = 2) %>%
+  tab_options(table.font.size = 45)
+
+
+
+SHS_ct_disp
 ```
-:::
-:::
+
+| Measure | Formula | Interpretation |
+|------------|--------------------|------------------------------------------|
+| Risk difference | $\widehat{RD} = \widehat{p}_1 - \widehat{p}_1$ | The diabetes diagnosis risk difference between impaired and normal glucose tolerance is 0.2591 (95% CI: 0.2141, 0.3041). |
+| Relative risk / risk ratio | $\widehat{RR}=\dfrac{\widehat{p}_1}{\widehat{p}_2} = \dfrac{n_{11}/n_1}{n_{21}/n_2}$ | The estimated risk of diabetes for American Indians with impaired glucose is 3.29 times the  with normal glucose tolerance (95% CI: 2.70, 4.01). |
+| Odds ratio | $\widehat{OR}=\frac{\widehat{\text{odds}}_1}{\widehat{\text{odds}}_2}=\frac{{\widehat{p}}_1/(1-{\widehat{p}}_1)}{{\widehat{p}}_2/(1-{\widehat{p}}_2)}$ | The estimated odds of diabetes for American Indians with impaired glucose tolerance is 4.65 times the odds for American Indians with normal glucose tolerance. |
 
 # Learning Objectives
 
@@ -122,7 +124,7 @@ or_glm(data = SHS, model = logreg)
 
  
 
--   However, when the **probability of "success" is small** (e.g., rare disease), $\widehat{OR}$ is a nice approximation of $\widehat{RR}$ $$\widehat{OR}=\frac{{\hat{p}}_1/(1-{\hat{p}}_1)}{{\hat{p}}_2/(1-{\hat{p}}_2)}=\widehat{RR}\cdot \frac{1-\widehat{p_2}}{1-\widehat{p_1}}$$
+-   However, when the **probability of "success" is small** (e.g., rare disease), $\widehat{OR}$ is a nice approximation of $\widehat{RR}$ $$\widehat{OR}=\frac{{\widehat{p}}_1/(1-{\widehat{p}}_1)}{{\widehat{p}}_2/(1-{\widehat{p}}_2)}=\widehat{RR}\cdot \frac{1-\widehat{p_2}}{1-\widehat{p_1}}$$
 
     -   The fraction in the last term of the above expression approximately equals to 1.0 if $\widehat{p}_1$ and $\widehat{p}_2$ BOTH quite small (\< 0.1)
 
@@ -166,7 +168,7 @@ $$\widehat{RR}=\frac{0.5}{0.00102}=490 \text{ and } \widehat{OR} = \frac{0.5(1-0
 
 -   Assume a 1:2 case-control study summarized in below table:
 
-::: columns
+:::::: columns
 ::: {.column width="15%"}
 :::
 
@@ -176,17 +178,17 @@ $$\widehat{RR}=\frac{0.5}{0.00102}=490 \text{ and } \widehat{OR} = \frac{0.5(1-0
 
 ::: {.column width="15%"}
 :::
-:::
+::::::
 
 -   Assume we compute the RR as if it is from a cohort study:
 
 $$\widehat{RR}=\frac{\widehat{p_1}}{\widehat{p_2}}=\frac{n_{11}/n_{1+}}{n_{21}/n_{2+}}=\frac{40/80}{60/220}=1.8333$$
 
-## RR in retrospective case-control study (3/3)
+## RR in prospective cohort study
 
 -   In real world, the proportion of controls (not diseased) is typically much higher. Assume the table below shows the **proportion in the population in a cohort study**
 
-::: columns
+:::::: columns
 ::: {.column width="15%"}
 :::
 
@@ -196,7 +198,7 @@ $$\widehat{RR}=\frac{\widehat{p_1}}{\widehat{p_2}}=\frac{n_{11}/n_{1+}}{n_{21}/n
 
 ::: {.column width="15%"}
 :::
-:::
+::::::
 
 -   The estimated RR for the patient population is:
 
@@ -231,7 +233,7 @@ $$\widehat{RR}=\frac{\widehat{p_1}}{\widehat{p_2}}=\frac{400/4400}{600/16600}=2.
 
  
 
-::: columns
+::::: columns
 ::: column
 -   For case-control study where the probability of having outcome is small, the $\widehat{OR}$ is a nice approximation to $\widehat{RR}$
 
@@ -243,7 +245,7 @@ $$\widehat{RR}=\frac{\widehat{p_1}}{\widehat{p_2}}=\frac{400/4400}{600/16600}=2.
 ::: column
 ![](./images/retro_RR_tab1.png){fig-align="center"}
 :::
-:::
+:::::
 
 ## Which measurement should one use?
 
@@ -280,7 +282,7 @@ $$\widehat{RR}=\frac{\widehat{p_1}}{\widehat{p_2}}=\frac{400/4400}{600/16600}=2.
 
 ## Let's get our mood data down!
 
-::: columns
+:::::: columns
 ::: {.column width="10%"}
 :::
 
@@ -290,7 +292,7 @@ $$\widehat{RR}=\frac{\widehat{p_1}}{\widehat{p_2}}=\frac{400/4400}{600/16600}=2.
 
 ::: {.column width="10%"}
 :::
-:::
+::::::
 
 ## Measuring Agreement
 
@@ -310,25 +312,25 @@ $$\widehat{RR}=\frac{\widehat{p_1}}{\widehat{p_2}}=\frac{400/4400}{600/16600}=2.
 
  
 
-::: columns
+:::::: columns
 ::: {.column width="48%"}
--   **Cohen's Kappa** is based on the difference between $p_o$ and $p_E$: $$\hat{\kappa}=\frac{p_o-p_E}{1-p_E}$$
+-   **Cohen's Kappa** is based on the difference between $p_o$ and $p_E$: $$\widehat{\kappa}=\frac{p_o-p_E}{1-p_E}$$
 :::
 
 ::: {.column width="4%"}
 :::
 
 ::: {.column width="48%"}
--   $\hat{\kappa} = 0$: No agreement between surveys/raters other than what would be expected by chance
--   $\hat{\kappa} = 1$: Complete agreement
+-   $\widehat{\kappa} = 0$: No agreement between surveys/raters other than what would be expected by chance
+-   $\widehat{\kappa} = 1$: Complete agreement
 :::
-:::
+::::::
 
 ## Measuring Agreement: Cohen's Kappa
 
-::: columns
+::::::::: columns
 ::: {.column width="52%"}
--   Point estimate: $$\hat{\kappa}=\frac{p_o-p_E}{1-p_E}$$
+-   Point estimate: $$\widehat{\kappa}=\frac{p_o-p_E}{1-p_E}$$
 
     -   With $p_o=\ \frac{\sum_{i}\ n_{ii}}{n}$ (sum of diagonals divided by total)
     -   With $p_E=\sum_{i}{a_ib_i}$
@@ -338,8 +340,8 @@ $$\widehat{RR}=\frac{\widehat{p_1}}{\widehat{p_2}}=\frac{400/4400}{600/16600}=2.
 ::: {.column width="4%"}
 :::
 
-::: {.column width="44%"}
-::: definition
+:::::: {.column width="44%"}
+::::: definition
 ::: def-title
 What’s $\sum_{i}{a_ib_i}$?
 :::
@@ -347,9 +349,9 @@ What’s $\sum_{i}{a_ib_i}$?
 ::: def-cont
 For $i$ responses (row/columns), $a_i$ is proportion of $i$ response category in first survey and $b_i$ is proportion of $i$ response category in second survey (we'll show this in the example)
 :::
-:::
-:::
-:::
+:::::
+::::::
+:::::::::
 
 -   Approximate standard error:
 
@@ -361,9 +363,9 @@ $$\widehat{\kappa} \pm 1.96 \cdot SE_{\widehat{\kappa}}$$
 
 ## Example: Our moods (1/3)
 
-::: columns
-::: {.column width="68%"}
-::: example
+:::::::: columns
+:::::: {.column width="68%"}
+::::: example
 ::: ex-title
 Agreement of surveys
 :::
@@ -371,13 +373,13 @@ Agreement of surveys
 ::: ex-cont
 Compute the point estimate and 95% confidence interval for the agreement between our Monday and Wednesday moods.
 :::
-:::
-:::
+:::::
+::::::
 
 ::: {.column width="32%"}
 ![](./images/mood_ct.png){fig-align="center"}
 :::
-:::
+::::::::
 
 **Needed steps:**
 
@@ -387,9 +389,9 @@ Compute the point estimate and 95% confidence interval for the agreement between
 
 ## Example: Our moods (2/3)
 
-::: columns
-::: {.column width="68%"}
-::: example
+:::::::: columns
+:::::: {.column width="68%"}
+::::: example
 ::: ex-title
 Agreement of surveys
 :::
@@ -397,13 +399,13 @@ Agreement of surveys
 ::: ex-cont
 Compute the point estimate and 95% confidence interval for the agreement between our Monday and Wednesday moods.
 :::
-:::
-:::
+:::::
+::::::
 
 ::: {.column width="32%"}
 ![](./images/mood_ct.png){fig-align="center"}
 :::
-:::
+::::::::
 
 **Needed steps:**
 
@@ -418,9 +420,9 @@ epi.kappa(moods, method = "cohen")$kappa
 
 ## Example: Our moods (3/3)
 
-::: columns
-::: {.column width="68%"}
-::: example
+:::::::: columns
+:::::: {.column width="68%"}
+::::: example
 ::: ex-title
 Agreement of surveys
 :::
@@ -428,19 +430,19 @@ Agreement of surveys
 ::: ex-cont
 Compute the point estimate and 95% confidence interval for the agreement between our Monday and Wednesday moods.
 :::
-:::
-:::
+:::::
+::::::
 
 ::: {.column width="32%"}
 ![](./images/mood_ct.png){fig-align="center"}
 :::
-:::
+::::::::
 
 **Needed steps:**
 
 3.  Interpret the estimate
 
-The kappa statistic is \_\_\_\_ (95% CI: \_\_\_\_\_, \_\_\_\_\_), indicating \_\_\_\_\_\_ agreement.
+The kappa statistic is \_\_\_\_\_\_\_\_\_\_\_\_ (95% CI: \_\_\_\_\_\_\_\_\_\_\_\_\_, \_\_\_\_\_\_\_\_\_\_\_\_\_), indicating \_\_\_\_\_\_\_\_\_\_\_\_\_\_ agreement.
 
 Since the 95% confidence interval does/does not contain 0, we have/do not have sufficient evidence that there is \_\_\_\_\_\_\_\_\_ agreement between our mood on Monday and our mood on Wednesday.
 
@@ -450,19 +452,19 @@ Since the 95% confidence interval does/does not contain 0, we have/do not have s
 
      
 
-    -   **Excellent agreement** if $\hat\kappa \geq 0.75$
+    -   **Excellent agreement** if $\widehat\kappa \geq 0.75$
 
      
 
-    -   **Fair to good agreement** if $0.4 < \hat\kappa < 0.75$
+    -   **Fair to good agreement** if $0.4 < \widehat\kappa < 0.75$
 
      
 
-    -   **Poor agreement** if $\hat\kappa \leq 0.4$
+    -   **Poor agreement** if $\widehat\kappa \leq 0.4$
 
  
 
-If $\hat\kappa<0$, suggest agreement less than by chance
+If $\widehat\kappa<0$, suggest agreement less than by chance
 
 # Learning Objectives
 
@@ -498,9 +500,9 @@ A diet questionnaire was mailed to 537 female American nurses on two separate oc
 
 ## Example: Beef Consumption in Survey (1/3)
 
-::: columns
-::: {.column width="62%"}
-::: example
+:::::::: columns
+:::::: {.column width="62%"}
+::::: example
 ::: ex-title
 Agreement of surveys
 :::
@@ -508,13 +510,13 @@ Agreement of surveys
 ::: ex-cont
 Compute the point estimate and 95% confidence interval for the agreement between beef consumption surveys. Similar to question: Are results reproducible for the beef-consumption in the survey?
 :::
-:::
-:::
+:::::
+::::::
 
 ::: {.column width="38%"}
 ![](./images/beef.png){fig-align="center"}
 :::
-:::
+::::::::
 
 **Needed steps:**
 
@@ -524,9 +526,9 @@ Compute the point estimate and 95% confidence interval for the agreement between
 
 ## Example: Beef Consumption in Survey (2/3)
 
-::: columns
-::: {.column width="62%"}
-::: example
+:::::::: columns
+:::::: {.column width="62%"}
+::::: example
 ::: ex-title
 Agreement of surveys
 :::
@@ -534,13 +536,13 @@ Agreement of surveys
 ::: ex-cont
 Compute the point estimate and 95% confidence interval for the agreement between beef consumption surveys. Similar to question: Are results reproducible for the beef-consumption in the survey?
 :::
-:::
-:::
+:::::
+::::::
 
 ::: {.column width="38%"}
 ![](./images/beef.png){fig-align="center"}
 :::
-:::
+::::::::
 
 **Needed steps:**
 
@@ -559,9 +561,9 @@ kb = epi.kappa(beef, method = "cohen")$kappa
 
 ## Example: Beef Consumption in Survey (3/3)
 
-::: columns
-::: {.column width="62%"}
-::: example
+:::::::: columns
+:::::: {.column width="62%"}
+::::: example
 ::: ex-title
 Agreement of surveys
 :::
@@ -569,13 +571,13 @@ Agreement of surveys
 ::: ex-cont
 Compute the point estimate and 95% confidence interval for the agreement between beef consumption surveys. Similar to question: Are results reproducible for the beef-consumption in the survey?
 :::
-:::
-:::
+:::::
+::::::
 
 ::: {.column width="38%"}
 ![](./images/beef.png){fig-align="center"}
 :::
-:::
+::::::::
 
 **Needed steps:**
 

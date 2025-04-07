@@ -3028,7 +3028,7 @@
     "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree_key_info.html#key-dates",
     "title": "Key Info and Announcements",
     "section": "Key Dates",
-    "text": "Key Dates"
+    "text": "Key Dates\n\nLab 1 dues 4/11"
   },
   {
     "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree_key_info.html#last-class",
@@ -5003,5 +5003,222 @@
     "title": "Homework 1 Answers",
     "section": "Questions Part 2",
     "text": "Questions Part 2\nThe following questions are intended to give you practice in connecting concepts that will help you make decisions in real world applications.\n\nQuestion 7\nStart making a comprehensive table or outline for the inference tests that we have covered. Here is a list of the tests we have covered:\n\nSingle proportion\nChi-squared test for general association\nFisher’s Exact test for general association\nCochran-Armitage test for trend\nMantel-Haenszel test for linear trend\n\nAnd here is a list of attributes to include:\n\nNumber of variables testing\nTypes of variables\nCriteria (if any)\nHypothesis test\nR code for test\nSample size / Power calculation (optional, not discussed in class)\nSpecial notes (optional)\n\nFor example, I could make a table with different rows corresponding to different tests and different columns for each attribute.\n\n\n\n\n\n\n\n\n\n\n\n\nTests\nNumber of Variables\nTypes of Variables\nCriteria\nHypothesis Test\nR Function\n\n\n\n\nSingle proportion\n1\nNominal, binary\nNone\n\\(H_0: \\widehat{p}=p, H_1: \\widehat{p} \\neq p\\)\nprop.test()\n\n\nChi-squared test for general association\n\n\n\n\n\n\n\nFisher’s Exact test for general association\n\n\n\n\n\n\n\nCochran-Armitage test for trend\n\n\n\n\n\n\n\nMantel-Haenszel test for linear trend\n\n\n\n\n\n\n\n\n\n\n\nQuestion 8\nI want you to gain experience exploring a package and function. This is an important skill in coding that can help you grow as an applied statistician.\nIn your previous course, the function lm() was introduced to perform linear regression. In this class, we will heavily use the function glm(). By typing “?glm” in the R console, we can open the Help page for glm(). The following questions ask about the glm() function. You can Google or use R documentation to answer the questions.\nFeel free to read more about the differences between lm() and glm().\n\nPart a\nWhat does the input “family” mean? If I wanted to perform regression using a Poisson distribution, what would I input into family?\n\nNot given\n\n\n\nPart b\nWhat is the default action for the “na.action” input?\n\nNot given\n\n\n\nPart c\nHow does the glm() function fit our model? (Hint: see “method”)\n\nNot given\n\n\n\nPart d\nDo you think the output of summary() will be the same for lm() and glm()?\n\nNot given\n\n\n\n\nQuestion 9\nThis question is meant to emphasize the differences between linear regression and logistic regression. Each part will ask about different aspects of the two regression models. If the question has multiple choice answers, then you must write 1-2 sentences justifying your answer.\n\nPart a\nIn linear regression, what type of variable is our response/outcome variable?\n\nbinary\ncontinuous\ncount\nordinal\n\nAnswer:\n\n\ncontinuous\n\n\n\n\nPart b\nIn logistic regression, what type of variable is our response/outcome variable?\n\nbinary\ncontinuous\ncount\nnormal\n\nAnswer:\n\n\nbinary\n\n\n\n\nPart c\nWhat assumptions in linear regression? Please state the assumption name and characteristics of that assumption.\nAnswer:\n\nLINE!\n\n\n\nPart d\nWhich assumptions of linear regression are violated if we try to fit a binary response using linear regression? You may choose more than one answer.\n\nIndependence\nLinearity\nNormality\nHomoscedasticity\n\nAnswer:\n\n\nLinearity\nNormality\nHomoscedasticity\n\n\n\n\nPart e\nPlease use our notes on generalized linear models (GLMs) to answer this question. What is the random component used in linear regression? What is the random component used in logistic regression? Name the specific variable type and distribution for it.\nAnswer:\n\nNot given\n\n\n\nPart f\nPlease use our notes on generalized linear models (GLMs) to answer this question. What link function do we use in linear regression? What link function do we use in logistic regression? Name the link and write out the function.\nAnswer:\n\nNot given\n\n\n\nPart g\nPlease use our notes on generalized linear models (GLMs) to answer this question. What is the systematic component used in simple linear regression? What is the systematic component used in simple logistic regression? Please write out the function for the systematic component for a single covariate.\nAnswer:\n\nNot given\n\n\n\nPart h\nHow do we determine our coefficient estimates (estimates of the parameter values) in linear regression? You may choose more than one answer.\n\nOrdinary least squares\nMaximum likelihood estimation\n\nAnswer:\n\n\nOrdinary least squares\nMaximum likelihood estimation\n\n\n\n\nPart i\nHow do we determine our coefficient estimates (estimates of the parameter values) in logistic regression? You may choose more than one answer.\n\nOrdinary least squares\nMaximum likelihood estimation\n\nAnswer:\n\n\nMaximum likelihood estimation\n\n\n\n\n\nQuestion 10\nOPTIONAL\nLet’s make a decision tree on the different tests we learned! I would like you to make a flow chart for the different tests we learned in Classes 1 and 2. You’ll need to include characteristics for:\n\nNumber of variables (1, 2, or 3 - we will go over 3 variables in Class 4)\nNumber of categories in each variable\nSample size is small\nOrdinal/nominal independent variable\nOrdinal/nominal response variable(s)\n\nFor example, if I make a decision tree that includes end nodes for different animals (cat, dog, snake, turtle, and hawk) using yes/no characteristics (has a shell, woof/meows, has fur, or flies), then my flow chart would look like: See my example under Sakai Resources. You are welcome to draw this chart. I used SmartArt under the Insert tab in Word to create mine."
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#poll-everywhere-question-1",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#poll-everywhere-question-1",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Poll Everywhere Question 1",
+    "text": "Poll Everywhere Question 1"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#last-class",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#last-class",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Last class",
+    "text": "Last class\n\nUsed contingency tables to test and measure association between two variables\n\nCategorical outcome variable (Y)\nOne categorical explanatory variable (X) with groups 1 and 2\n\nWe looked at risk difference, risk ratio, and odds ratio to measure association\n\n\n\n\n\n\n\n\nMeasure\nFormula for Estimate\n\n\n\n\nRisk difference\n\\(\\widehat{RD} = \\widehat{p}_1 - \\widehat{p}_1 = \\dfrac{n_{11}}{n_1} - \\dfrac{n_{21}}{n_2}\\)\n\n\nRelative risk / risk ratio\n\\(\\widehat{RR}=\\dfrac{\\widehat{p}_1}{\\widehat{p}_2} = \\dfrac{n_{11}/n_1}{n_{21}/n_2}\\)\n\n\nOdds ratio\n\\(\\widehat{OR}=\\frac{\\widehat{\\text{odds}}_1}{\\widehat{\\text{odds}}_2}=\\frac{{\\widehat{p}}_1/(1-{\\widehat{p}}_1)}{{\\widehat{p}}_2/(1-{\\widehat{p}}_2)}\\)\n\n\n\n\nDiscussed how OR will be an important measurement in logistic regression"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#a-taste-of-regression-for-a-binary-outcome-we-will-come-back-to-this",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#a-taste-of-regression-for-a-binary-outcome-we-will-come-back-to-this",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "A taste of regression for a binary outcome (we will come back to this!!)",
+    "text": "A taste of regression for a binary outcome (we will come back to this!!)\n\nlogreg = glm(case ~ glucimp, data = SHS, family = binomial)\n\n\n\n\nsummary(logreg)\n\n\nCall:\nglm(formula = case ~ glucimp, family = binomial, data = SHS)\n\nCoefficients:\n              Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)   -0.52287    0.08969   -5.83 5.55e-09 ***\nglucimpNormal -1.53684    0.12982  -11.84  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 1646.3  on 1663  degrees of freedom\nResidual deviance: 1501.3  on 1662  degrees of freedom\nAIC: 1505.3\n\nNumber of Fisher Scoring iterations: 4\n\n\n\n\nlibrary(epiDisplay)\nlogistic.display(logreg)\n\n\nLogistic regression predicting case \n \n                     OR(95%CI)         P(Wald's test) P(LR-test)\nglucimp (cont. var.) 0.22 (0.17,0.28)  &lt; 0.001        &lt; 0.001   \n                                                                \nLog-likelihood = -750.6533\nNo. of observations = 1664\nAIC value = 1505.3066"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#relationship-between-rr-and-or-12",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#relationship-between-rr-and-or-12",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Relationship Between RR and OR (1/2)",
+    "text": "Relationship Between RR and OR (1/2)\n\nNotice that odds ratio is not equivalent to relative risk (or risk ratio)\n\n \n\nHowever, when the probability of “success” is small (e.g., rare disease), \\(\\widehat{OR}\\) is a nice approximation of \\(\\widehat{RR}\\) \\[\\widehat{OR}=\\frac{{\\widehat{p}}_1/(1-{\\widehat{p}}_1)}{{\\widehat{p}}_2/(1-{\\widehat{p}}_2)}=\\widehat{RR}\\cdot \\frac{1-\\widehat{p_2}}{1-\\widehat{p_1}}\\]\n\nThe fraction in the last term of the above expression approximately equals to 1.0 if \\(\\widehat{p}_1\\) and \\(\\widehat{p}_2\\) BOTH quite small (&lt; 0.1)\n\n\n \n\nThe \\(\\widehat{OR}\\) and \\(\\widehat{RR}\\) are not very close to each other in SHS: diabetes not a rare disease\n\n\\(\\widehat{OR} = 4.65\\)\n\\(\\widehat{RR} = 3.29\\)"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#relationship-between-rr-and-or-22",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#relationship-between-rr-and-or-22",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Relationship Between RR and OR (2/2)",
+    "text": "Relationship Between RR and OR (2/2)\n\nAn example where a disease rare over the whole sample (~1%), but …\n\n\\(\\widehat{OR}\\) is not a good estimate of \\(\\widehat{RR}\\) in “rare” disease\n\n\n\n\n\\(\\widehat{p}_1\\) is 0.5: thus \\(\\widehat{OR}\\) and \\(\\widehat{RR}\\) are very different\n\n\\[\\widehat{RR}=\\frac{0.5}{0.00102}=490 \\text{ and } \\widehat{OR} = \\frac{0.5(1-0.5)}{0.00102(1-0.00102)}=981\\]"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#poll-everywhere-question-2",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#poll-everywhere-question-2",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Poll Everywhere Question 2",
+    "text": "Poll Everywhere Question 2"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-retrospective-case-control-study-13",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-retrospective-case-control-study-13",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "RR in retrospective case-control study (1/3)",
+    "text": "RR in retrospective case-control study (1/3)\n\nIn retrospective case-control studies: we identify cases (patients with the outcome), then select a number of controls (patients without the outcome)\n\nCase-control study to require much smaller sample size than equivalent cohort studies\nSo we pick out the cases and controls first, then see if there is exposure\n\n\n \n\nHowever, the proportion of cases in the sample does not represent the proportion of cases in the population\n\nRR compares probability of the outcome (case) for exposed and unexposed groups\nNumber of outcomes has been artificially inflated for case-control study"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-retrospective-case-control-study-23",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-retrospective-case-control-study-23",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "RR in retrospective case-control study (2/3)",
+    "text": "RR in retrospective case-control study (2/3)\n\nAssume a 1:2 case-control study summarized in below table:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAssume we compute the RR as if it is from a cohort study:\n\n\\[\\widehat{RR}=\\frac{\\widehat{p_1}}{\\widehat{p_2}}=\\frac{n_{11}/n_{1+}}{n_{21}/n_{2+}}=\\frac{40/80}{60/220}=1.8333\\]"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-retrospective-case-control-study-33",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-retrospective-case-control-study-33",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "RR in retrospective case-control study (3/3)",
+    "text": "RR in retrospective case-control study (3/3)\n\nIn real world, the proportion of controls (not diseased) is typically much higher. Assume the table below shows the proportion in the population in a cohort study\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe estimated RR for the patient population is:\n\n\\[\\widehat{RR}=\\frac{\\widehat{p_1}}{\\widehat{p_2}}=\\frac{400/4400}{600/16600}=2.5152\\]"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#notes-for-odds-ratios",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#notes-for-odds-ratios",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Notes for Odds Ratios",
+    "text": "Notes for Odds Ratios\n\nThe OR is valid for\n\nCase-control studies (where the RR is not appropriate)\nProspective cohort studies\nCross-sectional studies\n\n\n \n\nIt can be interpreted either as…\n\nOdds of event for exposed vs. unexposed individuals, or\nOdds of exposure for individuals with vs. without the event of interest\n\n\n \n\nPay attention to the numerator and denominator for the OR"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#or-in-retrospective-case-control-study",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#or-in-retrospective-case-control-study",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "OR in retrospective case-control study",
+    "text": "OR in retrospective case-control study\n\nWhile we cannot estimate RR from a case-control study, we can still estimate OR for case-control study\n\nOR does not require us to distinguish between the outcome variable and explanatory variable in the contingency table\n\nAKA: Odds ratio of disease comparing exposed to not exposed is same as odds ratio of being exposed comparing diseased and not diseased\n\n\n\n \n\n\n\nFor case-control study where the probability of having outcome is small, the \\(\\widehat{OR}\\) is a nice approximation to \\(\\widehat{RR}\\)\n\nFor the 1:2 case-control table: \\(\\widehat{OR}=\\frac{40\\cdot160}{40\\cdot60} = 2.667\\)\nPopulation cohort study: \\(\\widehat{RR}=2.5152\\)"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#which-measurement-should-one-use",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#which-measurement-should-one-use",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Which measurement should one use?",
+    "text": "Which measurement should one use?"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measuring-agreement",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measuring-agreement",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Measuring Agreement",
+    "text": "Measuring Agreement\n\nStill within the realm of contingency tables\nWhat if we are NOT looking at the association between two variables?\n\n \n\nWhat if we want to look at the agreement between two things?\n\nAnswers of same subjects for same survey taken at different times\nTwo different radiologists’ assessment of the same X-ray\n\n\n \n\nCohen’s Kappa statistics: widely used as a measure of agreement\n\nExample: Reliability studies, interobserver agreement"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#poll-everywhere-question-3",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#poll-everywhere-question-3",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Poll Everywhere Question 3",
+    "text": "Poll Everywhere Question 3"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#lets-get-our-mood-data-down",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#lets-get-our-mood-data-down",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Let’s get our mood data down!",
+    "text": "Let’s get our mood data down!"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measuring-agreement-1",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measuring-agreement-1",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Measuring Agreement",
+    "text": "Measuring Agreement\n\nIf perfect agreement among the two raters/surveys:\n\nWe would expect nonzero entries only in the diagonal cells of the table\n\n\n \n\n\\(p_o\\) is the observed proportion of complete agreement (concordance)\n\\(p_E\\) is the expected proportion of complete agreement if the agreement is just due to chance\nIf the \\(p_o\\) is much greater than \\(p_E\\), then the agreement level is high.\n\nOtherwise, the agreement level is low\n\n\n \n\n\n\nCohen’s Kappa is based on the difference between \\(p_o\\) and \\(p_E\\): \\[\\widehat{\\kappa}=\\frac{p_o-p_E}{1-p_E}\\]\n\n\n\n\n\n\\(\\widehat{\\kappa} = 0\\): No agreement between surveys/raters other than what would be expected by chance\n\\(\\widehat{\\kappa} = 1\\): Complete agreement"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measuring-agreement-cohens-kappa",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measuring-agreement-cohens-kappa",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Measuring Agreement: Cohen’s Kappa",
+    "text": "Measuring Agreement: Cohen’s Kappa\n\n\n\nPoint estimate: \\[\\widehat{\\kappa}=\\frac{p_o-p_E}{1-p_E}\\]\n\nWith \\(p_o=\\ \\frac{\\sum_{i}\\ n_{ii}}{n}\\) (sum of diagonals divided by total)\nWith \\(p_E=\\sum_{i}{a_ib_i}\\)\nWith range of point estimate from \\([-1, 1]\\)\n\n\n\n\n\n\n\nWhat’s \\(\\sum_{i}{a_ib_i}\\)?\n\n\nFor \\(i\\) responses (row/columns), \\(a_i\\) is proportion of \\(i\\) response category in first survey and \\(b_i\\) is proportion of \\(i\\) response category in second survey (we’ll show this in the example)\n\n\n\n\nApproximate standard error:\n\n\\[ SE_{\\widehat{\\kappa}} = \\sqrt{\\frac{1}{{n\\left(1-p_e\\right)}^2}\\left\\{p_e^2+p_e-\\sum_{i}\\left[a_ib_i\\left(a_i+b_i\\right)\\right]\\right\\}}\\]\n\n95% Wald confidence interval for \\(\\widehat{\\kappa}\\):\n\n\\[\\widehat{\\kappa} \\pm 1.96 \\cdot SE_{\\widehat{\\kappa}}\\]"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-our-moods-13",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-our-moods-13",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Example: Our moods (1/3)",
+    "text": "Example: Our moods (1/3)\n\n\n\n\nAgreement of surveys\n\n\nCompute the point estimate and 95% confidence interval for the agreement between our Monday and Wednesday moods.\n\n\n\n\n\n\n\n\n\nNeeded steps:\n\nCompute the kappa statistic\nFind confidence interval of kappa\nInterpret the estimate"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-our-moods-23",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-our-moods-23",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Example: Our moods (2/3)",
+    "text": "Example: Our moods (2/3)\n\n\n\n\nAgreement of surveys\n\n\nCompute the point estimate and 95% confidence interval for the agreement between our Monday and Wednesday moods.\n\n\n\n\n\n\n\n\n\nNeeded steps:\n1/2. Compute the kappa statistic and find confidence interval of kappa\n\nlibrary(epiR)\nmoods = matrix(c(100, 40, 10, 30), nrow = 2, byrow = T)\nmoods\n\n     [,1] [,2]\n[1,]  100   40\n[2,]   10   30\n\nepi.kappa(moods, method = \"cohen\")$kappa \n\n        est         se     lower     upper\n1 0.3661972 0.07617362 0.2168996 0.5154947"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-our-moods-33",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-our-moods-33",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Example: Our moods (3/3)",
+    "text": "Example: Our moods (3/3)\n\n\n\n\nAgreement of surveys\n\n\nCompute the point estimate and 95% confidence interval for the agreement between our Monday and Wednesday moods.\n\n\n\n\n\n\n\n\n\nNeeded steps:\n\nInterpret the estimate\n\nThe kappa statistic is ____________ (95% CI: _____________, _____________), indicating ______________ agreement.\nSince the 95% confidence interval does/does not contain 0, we have/do not have sufficient evidence that there is _________ agreement between our mood on Monday and our mood on Wednesday."
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measuring-agreement-oberved-kappas",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measuring-agreement-oberved-kappas",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Measuring Agreement: Oberved Kappas",
+    "text": "Measuring Agreement: Oberved Kappas\n\nGuidelines for evaluating Kappa (Rosner TB)\n \n\nExcellent agreement if \\(\\widehat\\kappa \\geq 0.75\\)\n\n \n\nFair to good agreement if \\(0.4 &lt; \\widehat\\kappa &lt; 0.75\\)\n\n \n\nPoor agreement if \\(\\widehat\\kappa \\leq 0.4\\)\n\n\n \nIf \\(\\widehat\\kappa&lt;0\\), suggest agreement less than by chance"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measurement-of-association-so-far",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#measurement-of-association-so-far",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Measurement of Association So Far",
+    "text": "Measurement of Association So Far\n\nUsed contingency tables to test and measure association between two variables\n\nCategorical outcome variable (Y)\nOne categorical explanatory variable (X)\n\nWe looked at risk difference, risk ratio, and odds ratio to measure association\nSuch an association is called crude association\n\nNo adjustment for possible confounding factors\nAlso called marginal association\n\nBut we cannot expand analysis based on contingency tables past 3 variables\n\nWe can get into stratified contingency tables to bring in a 3rd variable\nBut I don’t think it’s worth it because regression can bring in (adjust for) many variables"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#just-in-case-our-data-doesnt-work-out-beef-consumption-in-survey",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#just-in-case-our-data-doesnt-work-out-beef-consumption-in-survey",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Just in case our data doesn’t work out: Beef Consumption in Survey",
+    "text": "Just in case our data doesn’t work out: Beef Consumption in Survey\nA diet questionnaire was mailed to 537 female American nurses on two separate occasions several months apart. The questions asked included the quantities eaten of more than 100 separate food items. The data from the two surveys for the amount of beef consumption are presented in the below table. How can reproducibility of response for the beef-consumption data be quantified?"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-beef-consumption-in-survey-13",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-beef-consumption-in-survey-13",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Example: Beef Consumption in Survey (1/3)",
+    "text": "Example: Beef Consumption in Survey (1/3)\n\n\n\n\nAgreement of surveys\n\n\nCompute the point estimate and 95% confidence interval for the agreement between beef consumption surveys. Similar to question: Are results reproducible for the beef-consumption in the survey?\n\n\n\n\n\n\n\n\n\nNeeded steps:\n\nCompute the kappa statistic\nFind confidence interval of kappa\nInterpret the estimate"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-beef-consumption-in-survey-23",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-beef-consumption-in-survey-23",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Example: Beef Consumption in Survey (2/3)",
+    "text": "Example: Beef Consumption in Survey (2/3)\n\n\n\n\nAgreement of surveys\n\n\nCompute the point estimate and 95% confidence interval for the agreement between beef consumption surveys. Similar to question: Are results reproducible for the beef-consumption in the survey?\n\n\n\n\n\n\n\n\n\nNeeded steps:\n1/2. Compute the kappa statistic and find confidence interval of kappa\n\nlibrary(epiR)\nbeef = matrix(c(136, 92, 69, 240), nrow = 2, byrow = T)\nepi.kappa(beef, method = \"cohen\")$kappa \n\n        est         se     lower     upper\n1 0.3781906 0.04100635 0.2978196 0.4585616"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-beef-consumption-in-survey-33",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#example-beef-consumption-in-survey-33",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Example: Beef Consumption in Survey (3/3)",
+    "text": "Example: Beef Consumption in Survey (3/3)\n\n\n\n\nAgreement of surveys\n\n\nCompute the point estimate and 95% confidence interval for the agreement between beef consumption surveys. Similar to question: Are results reproducible for the beef-consumption in the survey?\n\n\n\n\n\n\n\n\n\nNeeded steps:\n\nInterpret the estimate\n\nThe kappa statistic is 0.378 (95% CI: 0.298, 0.459), indicating fair agreement.\nSince the 95% confidence interval does not contain 0, we have sufficient evidence that there is fair agreement between the surveys for beef consumption. The survey is not reliably reproducible since we did not achieve excellent agreement."
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#our-example-with-strong-heart-study",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#our-example-with-strong-heart-study",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "Our example with Strong Heart Study",
+    "text": "Our example with Strong Heart Study\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGlucose tolerance\n\nDiabetes\n\nTotal\n\n\nNo\nYes\n\n\n\n\nImpaired\n334\n198\n532\n\n\nNormal\n1004\n128\n1132\n\n\nTotal\n1338\n326\n1664\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasure\nFormula\nInterpretation\n\n\n\n\nRisk difference\n\\(\\widehat{RD} = \\widehat{p}_1 - \\widehat{p}_1\\)\nThe diabetes diagnosis risk difference between impaired and normal glucose tolerance is 0.2591 (95% CI: 0.2141, 0.3041).\n\n\nRelative risk / risk ratio\n\\(\\widehat{RR}=\\dfrac{\\widehat{p}_1}{\\widehat{p}_2} = \\dfrac{n_{11}/n_1}{n_{21}/n_2}\\)\nThe estimated risk of diabetes for American Indians with impaired glucose is 3.29 times the with normal glucose tolerance (95% CI: 2.70, 4.01).\n\n\nOdds ratio\n\\(\\widehat{OR}=\\frac{\\widehat{\\text{odds}}_1}{\\widehat{\\text{odds}}_2}=\\frac{{\\widehat{p}}_1/(1-{\\widehat{p}}_1)}{{\\widehat{p}}_2/(1-{\\widehat{p}}_2)}\\)\nThe estimated odds of diabetes for American Indians with impaired glucose tolerance is 4.65 times the odds for American Indians with normal glucose tolerance."
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-prospective-case-control-study",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-prospective-case-control-study",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "RR in prospective case-control study",
+    "text": "RR in prospective case-control study\n\nIn real world, the proportion of controls (not diseased) is typically much higher. Assume the table below shows the proportion in the population in a cohort study\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe estimated RR for the patient population is:\n\n\\[\\widehat{RR}=\\frac{\\widehat{p_1}}{\\widehat{p_2}}=\\frac{400/4400}{600/16600}=2.5152\\]"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-prospective-cohort-study",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree.html#rr-in-prospective-cohort-study",
+    "title": "Lesson 4: Measurements of Association and Agreement",
+    "section": "RR in prospective cohort study",
+    "text": "RR in prospective cohort study\n\nIn real world, the proportion of controls (not diseased) is typically much higher. Assume the table below shows the proportion in the population in a cohort study\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe estimated RR for the patient population is:\n\n\\[\\widehat{RR}=\\frac{\\widehat{p_1}}{\\widehat{p_2}}=\\frac{400/4400}{600/16600}=2.5152\\]"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree_key_info.html",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree_key_info.html",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Office Hours\n\nMiyuki will have office hours today, 3-4pm, on Webex\n\nLink to OH\n\nI will have office hours on Wednesdays after class, in-person, 3-4pm\nI think Katie will have OH on Friday 11am-12pm - still waiting on confirmation\n\nPublic Health Week THIS WEEK!\n\nSchedule: https://ohsu-psu-sph.org/this-is-public-health/\n\nAnnual Public Health Week Conference on 4/11"
+  },
+  {
+    "objectID": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree_key_info.html#announcements",
+    "href": "lessons/04_Meas_Assoc_Agree/04_Meas_Assoc_Agree_key_info.html#announcements",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Office Hours\n\nMiyuki will have office hours today, 3-4pm, on Webex\n\nLink to OH\n\nI will have office hours on Wednesdays after class, in-person, 3-4pm\nI think Katie will have OH on Friday 11am-12pm - still waiting on confirmation\n\nPublic Health Week THIS WEEK!\n\nSchedule: https://ohsu-psu-sph.org/this-is-public-health/\n\nAnnual Public Health Week Conference on 4/11"
   }
 ]
