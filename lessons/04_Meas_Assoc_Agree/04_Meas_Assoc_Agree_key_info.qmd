@@ -13,7 +13,7 @@ editor_options:
 - Office Hours
   - Today, Monday, 3-4pm, virtual
     - With Miyuki, [Link to OH](https://ohsu.webex.com/ohsu/j.php?MTID=m9dee83f01330f54f7787ba9fd95737fb)
-  - Wednesday, 3-4pm, in-person
+  - Wednesday, 3-4pm, in-person, RLSB 3A003B
     - With me
   - Friday, 11am-12pm, virtual
     - With Katie

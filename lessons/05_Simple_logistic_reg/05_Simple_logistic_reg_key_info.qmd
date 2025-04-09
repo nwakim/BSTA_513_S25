@@ -10,6 +10,24 @@ editor_options:
 
 ## Announcements
 
+- I never sent out my Project Poster overview from last quarter! 
+  - I need to make an announcement in that Sakai
+- Office Hours - posted on Instructor page
+  - Monday, 3-4pm, virtual
+    - With Miyuki, [Link to OH](https://ohsu.webex.com/ohsu/j.php?MTID=m9dee83f01330f54f7787ba9fd95737fb)
+  - Wednesday, 3-4pm, in-person, RLSB 3A003B
+    - With me
+  - Friday, 11am-12pm, virtual
+    - With Katie
+- Annual Public Health Week Conference on 4/10
+
+
 ## Key Dates
 
+- Lab 1 dues 4/11
+
 ## Last class
+
+- Discussed the pros and cons of each measurement of **association**
+  - risk difference, risk ratio, and odds ratio
+- Calculated Cohen's Kappa: measurement of **agreement**

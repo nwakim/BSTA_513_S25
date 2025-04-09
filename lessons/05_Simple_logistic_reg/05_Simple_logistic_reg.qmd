@@ -3,7 +3,7 @@ title: "Lesson 5: Simple Logistic Regression"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "04/15/2024"
+date: "04/9/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -100,7 +100,8 @@ load(here("data", "bc_diagnosis.Rda"))
 -   Our analysis will not be new, but this kind of work has shed light on the importance of focused research on people of color to better serve people of color who develop breast cancer
 
     -   [Dr. Davis](https://www.bcrf.org/researchers/melissa-b-davis/) focuses research on genomics and tumor microenvironment in African and African American patients
-    -   [Dr. Ambrosone](https://www.bcrf.org/researchers/christine-b-ambrosone/) focuses research on how immune cells differ between patients. Specifically on the DARC gene, which is an evolved gene that helps fight malaria, that is found at a higher rate in people with African descent.
+    -   [Dr. Ambrosone](https://www.bcrf.org/researchers/christine-b-ambrosone/) focuses research on how immune cells differ between patients. Specifically on the DARC gene, which is an evolved gene that helps fight malaria, that is found at a higher rate in people with African descent
+    - More public health work focused on access to healthcare and patient-doctor relationships
 
 ## Example: Health disparities in breast cancer diagnosis (1/2)
 
@@ -147,29 +148,7 @@ load(here("data", "bc_diagnosis.Rda"))
 
  
 
--   **Logistic regression models can handle multiple covariates that are continuous or categorical**
-:::
-
-::: {.column width="2%"}
-:::
-
-::: {.column width="63%"}
-![](./images/bc_long.png){fig-align="center"}
-:::
-:::
-
-## How do we determine differences in diagnosis? (2/2)
-
-::: columns
-::: {.column width="35%"}
--   Contingency table does not work for...
-
-    -   Continuous covariates
-    -   Multiple covariates
-
- 
-
--   **Logistic regression models can handle multiple covariates that are continuous or categorical**
+-   [Logistic regression]{style="color:#F6C342; font-weight: bold;"} **models can handle multiple covariates that are continuous or categorical**
 :::
 
 ::: {.column width="2%"}
@@ -230,7 +209,7 @@ load(here("data", "bc_diagnosis.Rda"))
     -   $P\left(Y=1|X\right)=\pi\left(X\right)$
     -   $P\left(Y=0|X\right)=1-\pi(X)$
 
--   Because the expected value is a weighted average, we can say: $$\begin{aligned} E(Y|X) & = P(Y=1|X) \cdot 1 + P(Y=1|X) \cdot 0 \\ & = P(Y=1|X) \cdot 1 \\ & = P(Y=1|X) \\ & = \pi(X) \end{aligned}$$
+-   Because the [expected value is a weighted average](https://nwakim.github.io/F24_EPI_525/lessons/05_RVs_Binomial/05_RVs_Binomial.html#/expectation-of-random-variables), we can say: $$\begin{aligned} E(Y|X) & = P(Y=1|X) \cdot 1 + P(Y=1|X) \cdot 0 \\ & = P(Y=1|X) \cdot 1 \\ & = P(Y=1|X) \\ & = \pi(X) \end{aligned}$$
 
     -   For categorical outcomes, $\pi(X)$ (or $\pi$ for shorthand), is more widely used than $E(Y|X)$
 
@@ -239,8 +218,8 @@ load(here("data", "bc_diagnosis.Rda"))
 ## Can we apply OLS to our binary outcome?
 
 -   Let’s see if we can apply OLS/linear regression to our binary outcome
--   What assumptions do our data need to meet in order to use OLR?
--   Let’s review OLR assumptions!
+-   What assumptions do our data need to meet in order to use OLS?
+-   Let’s review OLS assumptions!
 
 ## Review of simple linear regression(1/2)
 
@@ -284,7 +263,7 @@ $$Y =  \beta_0 + \beta_1X + \epsilon$$
 
     -   Normality and homoscedasticity assumption for residuals ($\epsilon$):
 
-        -   Normality: residuals are normally distributed
+        -   Normality: residuals are normally distributed ($\epsilon \sim N(0, \sigma^2)$)
         -   Homoscedasticity (equal variance): Variance of $Y$ given $X$ ($\sigma_{Y|X}^2$), is the same for any $X$
 
  
@@ -357,7 +336,7 @@ ggplot(data = bc, aes(x=Age_c, y = Late_stage_diag)) +
 :::
 :::
 
-## Violated: Homoscedasticity
+## Violated: Homoscedasticity / equal variance
 
 -   In linear regression, $\text{var}(\epsilon) = \sigma^2$
 
@@ -419,7 +398,7 @@ stage = ggplot(data = bc, aes(x=Age_c, y = Late_stage_num)) +
   labs(x = "Age centered (yrs)", 
        y = "\n Late stage BC diagnosis")  + theme_classic() +
     theme(axis.title = element_text(
-        size = 30), 
+        size = 24), 
         axis.text = element_text(
         size = 25), 
         title = element_text(
@@ -434,7 +413,7 @@ prob_stage = ggplot(data = bc_aug, aes(x=Age_c, y = inv.logit(.fitted))) +
   labs(x = "Age centered (yrs)", 
        y = "Probability of \n Late stage BC diagnosis")  + theme_classic() +
     theme(axis.title = element_text(
-        size = 30), 
+        size = 24), 
         axis.text = element_text(
         size = 25), 
         title = element_text(
@@ -458,7 +437,7 @@ log_odds_stage = ggplot(data = bc_aug, aes(x=Age_c, y = .fitted)) +
   labs(x = "Age centered (yrs)", 
        y = "Log-odds of \n Late stage BC diagnosis")  + theme_classic() +
       theme(axis.title = element_text(
-        size = 30), 
+        size = 24), 
         axis.text = element_text(
         size = 25), 
         title = element_text(
@@ -529,7 +508,7 @@ $$ \text{logit} (\pi) =  \beta_0 + \beta_1X$$
 
     -   [Poisson regression]{style="color:#5B9BD5; font-weight: bold;"} – for counts
 
-    -   [Log-binomial]{style="color:#ED7D31; font-weight: bold;"} can be used to focus on risk ratio
+    -   [Log-binomial]{style="color:#ED7D31; font-weight: bold;"} can be used to focus on prevalence/risk ratio
   
 :::
 
@@ -546,7 +525,7 @@ $$ \text{logit} (\pi) =  \beta_0 + \beta_1X$$
 
 ## GLM: Random Component {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
 
--   The random component specifies the response variable $Y$ and selects a probability distribution for it
+-   The random component specifies the response variable $Y$ and identifies a probability distribution for it
 
  
 
@@ -582,7 +561,7 @@ $$ \text{logit} (\pi) =  \beta_0 + \beta_1X$$
 
 -   If $\mu = E(Y)$, then the link function specifies a function $g(.)$ that relates $\mu$ to the linear predictor as: $$g\left(\mu\right)=\beta_0+\beta_1X_1+\ldots+\beta_kX_k$$
 
-    -   $g\left(\mu\right)$ is  the transformation we make to $E(Y)$ (aka $\mu$) so that the linear predictors (right side of equation) can be linked to the outcome
+    -   $g\left(\mu\right)$ is the transformation we make to $E(Y)$ (aka $\mu$) so that the linear predictors (right side of equation) can be linked to the outcome
     
 -   The link function connects the random component with the systematic component
 -   Can also think of this as: $$\mu=g^{-1}\left(\beta_0+\beta_1X_1+\ldots+\beta_kX_k\right)$$
@@ -590,6 +569,14 @@ $$ \text{logit} (\pi) =  \beta_0 + \beta_1X$$
 ## GLM: Link Function {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
 ![](./images/links.png){fig-align="center"}
+
+## GLM: Link Function {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
+
+- Note that $$g\left(\mu\right)=\beta_0+\beta_1X_1+\ldots+\beta_kX_k$$ is the general form, but $g\left(\mu\right)$ just represents the transformation we make to mean $\mu$
+
+ 
+
+- It's basically like saying $g\left(\mu\right) = \text{logit} (\mu)$ and thus $$ \text{logit} (\mu)=\beta_0+\beta_1X_1+\ldots+\beta_kX_k$$
 
 # Learning Objectives
 
@@ -644,7 +631,7 @@ $$ \text{logit} (\pi) =  \beta_0 + \beta_1X$$
 
 -   [Maximum likelihood]{style="color:#5B9BD5; font-weight: bold;"}: yields values for the unknown parameters that *maximize the probability of obtaining observed set of data*
 
-    -   In linear regression, this leads to least squares estimation
+    -   In linear regression, this leads to [least squares estimation (OLS)](https://nwakim.github.io/BSTA_512_W25/lessons/03_SLR/03_SLR.html#/learning-objectives-4)
     -   [Maximum likelihood estimators (MLE)]{style="color:#70AD47; font-weight: bold;"}: values of parameters that maximize likelihood
 
  
@@ -668,7 +655,7 @@ $$ \text{logit} (\pi) =  \beta_0 + \beta_1X$$
 
  
 
-4. Find parameter values that maximize log-likelihood (MLEs)
+4. Find parameter estimates that maximize log-likelihood: MLEs
 
 
 ## 1. Construct a likelihood function for an individual
@@ -685,6 +672,12 @@ $$ \text{logit} (\pi) =  \beta_0 + \beta_1X$$
  
 
 -   The **contribution from the $i$th subject** to the likelihood function can be expressed as: $$\pi\left(X_i\right)^{Y_i}\left[1-\pi\left(X_i\right)\right]^{1-Y_i}$$
+- Because... 
+
+$$\begin{aligned}
+\text{if } Y=1 &:& P(Y=1)^1P(Y=0)^0\\
+\text{if } Y=0 &:& P(Y=1)^0P(Y=0)^1
+\end{aligned}$$
 
 
 :::
@@ -738,7 +731,7 @@ Recall
 
 -   Mathematically, it is easier to work with the **log likelihood** function for maximization
 
--   The log likelihood function is: $$\begin{aligned}L\left(\beta_0,\beta_1\right) &=\ln{\left(l\left(\beta_0,\beta_1\right)\right)} \\ & = 
+-   The log-likelihood function is: $$\begin{aligned}L\left(\beta_0,\beta_1\right) &=\ln{\left(l\left(\beta_0,\beta_1\right)\right)} \\ & = 
 \sum_{i=1}^{n}\bigg[Y_i\cdot\text{ln}[\pi(X_i)] + (1-Y_i)\cdot\text{ln}[1-\pi(X_i)] \bigg] 
 \end{aligned}$$
 
@@ -769,7 +762,7 @@ Recall
 
      
 
--   Such equations are called likelihood equations.
+-   Such equations are called likelihood equations: result of differentation and setting to 0
 	
 	   -   $\sum\left[Y_i-\pi\left(X_i\right)\right]=0$
 	   -   $\sum\ X_i\left[Y_i-\pi\left(X_i\right)\right]=0$
@@ -777,6 +770,7 @@ Recall
      
 
 -   In logistic regression, there is no "closed form" solution to the above equations
+    - Meaning we cannot manipulate the math to find the solution
 -   Need to use iterative algorithm, such as iteratively reweighted least squares (IRLS) algorithm, should be used to find the MLEs for logistic regression
 
 ## Poll Everywhere Question 5
