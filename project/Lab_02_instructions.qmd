@@ -34,7 +34,7 @@ library(here)
 ```
 
 ::: callout-caution
-Nicky needs to edit
+This lab is ready to be worked on!! (Nicky 4/10/25)
 :::
 
 ## Directions
@@ -46,20 +46,6 @@ The above link will take you to your **editing** file. **Please do not remove an
 ### Purpose
 
 The purpose of this lab is to explore our data further, set up the unadjusted odds ratio, and create code to later help us present our final model.
-
-### Grading
-
-**This lab is graded out of 12 points.** The TAs will go through and grade your lab. They will make sure each section is complete and will follow the rubric below. I have instructed them that completion and clear effort is all that is needed to receive 100%. Nicky will go through the labs to give you feedback.
-
-#### Rubric
-
-|             | 4 points                                                                                                                                                                                                        | 3 points                                                                                                                                                                                       | 2 points                                                                                                                                                                                                   | 1 point                                                                                                                                                                                  | 0 points                                                                                                               |
-|------------|------------|------------|------------|------------|------------|
-| Formatting  | Lab submitted on Sakai with `.html` file. Answers are written in complete sentences with no major grammatical nor spelling errors. With little editing, the answer can be incorporated into the project report. | Lab submitted on Sakai with `.html` file. Answers are written in complete sentences with grammatical or spelling errors. With editing, the answer can be incorporated into the project report. | Lab submitted on Sakai with `.html` file. Answers are written in complete sentences with major grammatical or spelling errors. With major editing, the answer can be incorporated into the project report. | Lab submitted on Sakai with `.html` file. Answers are bulletted or do not use complete sentences.                                                                                        | Lab *not* submitted on Sakai with `.html` file.                                                                        |
-| Code/Work   | All tasks are directly followed or answered. This includes all the needed code, in code chunks, with the requested output.                                                                                      | All tasks are directly followed or answered. This includes all the needed code, in code chunks, with the requested output. In a few tasks, the code syntax or output is not quite right.       | Most tasks are directly followed or answered. This includes all the needed code, in code chunks, with the requested output.                                                                                | Some tasks are directly followed or answered.This includes all the needed code, in code chunks, with the requested output. In a few tasks, the code syntax or output is not quite right. | More than a quarter of the tasks are not completed properly.                                                           |
-| Reasoning\* | Answers demonstrate understanding of research context and investigation of the data. Answers are thoughtful and can be easily integrated into the final report.                                                 | Answers demonstrate understanding of research context and investigation of the data. Answers are thoughtful, but lack the clarity needed to easily integrate into the final report.            | Answers demonstrate some understanding of research context and investigation of the data. Answers are fairly thoughtful, but lack connection to the research.                                              | Answers demonstrate some understanding of research context and investigation of the data. Answers seem rushed and with minimal thought.                                                  | Answers lack understanding of research context and investigation of the data. Answers seem rushed and without thought. |
-
-\*Applies to questions with reasoning
 
 ## Lab activities
 
@@ -123,6 +109,8 @@ Fill in the below table (or any other way you wish to present the same informati
 ### Create contingency tables for categorical predictors
 
 For each categorical covariate, create a contingency table between it and food insecurity. You can create a data frame with only categorical covariattes, then use `lapply()` to make a table for each column. Take note of any cells that have less than 10 observations. **No need to make these tables pretty.**
+
+This is something we have not covered yet, but it's important to check before we get too far into our analysis. We will discuss this further in Lesson 13: Numerical Problems. 
 
 ```{r}
 #| eval: false
