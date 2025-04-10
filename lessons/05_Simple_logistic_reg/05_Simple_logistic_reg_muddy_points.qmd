@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 5: Simple Logistic Regression"
 date-modified: "today"
 format: 
   html:
@@ -11,5 +11,48 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### 1. Likelihood function: Everything about contribution flew right over my head, but I think I understood most everything else.
+
+Yeah... I felt how confusing it was when I was saying it. The main thing is that the likelihood function measures how well the sample data fit the model with different parameter values ($\beta$ values). When we find the maximum likelihood, we find the $\beta$ values that fit our data best. 
+
+Because the likelihood function depends on our sample, we need a functional representation of each observation's information (outcome and covariates) and how they fit into the potential model. 
+
+### 2. The math always confuses me a little bit, and the link function was a bit confusing too, why is it the transformation?
+
+The link function is a transformation on $E(Y|X)$ so that we can connect the expected value to the covariates. This connection needs to by linear, which means our parameters ($\beta$s) will represent that **line** that takes us from $X$ to $E(Y|X)$. 
+
+With categorical outcomes, we want to transform our outcome so we can make that linear connection to the covariates. 
+
 ## Muddy Points from Spring 2024
 
+### 1. Not entirely sure I understand what IRLS is about
+
+Fair enough. It's a little confusing. IRLS is an iterative solving technique that let's us solve the coefficient estimates ( $\beta_0$ , $\beta_1$) without solving the equations theoretically.
+
+We start with an educated guess of the estimates, put them into the likelihood, and calculate the likelihood. Then we update the estimates using some complicated math, put them into the likelihood, and calculate the likelihood again. We compare the two likelihoods, and if the likelihood increases, then we keep going. We stop when the increase in likelihood between iterations is small. This means we are at or very close to the maximum likelihood.
+
+### 2. Link functions
+
+Yes! Link functions are the important transformations we need to make to our outcome in order to connect them to our perdictors/covariates. Specifically, it's the transformation we make to our mean/expected value.
+
+The same link function can be used different types of outcomes. And here's a few examples:
+
+-   Continuous data: identity
+
+-   Binary: logit, log
+
+-   Count/Poisson: log
+
+Our goal with link functions is to put our outcome on a flexible range so that any range of covariates can be mapped to it with coefficients. So think about trying to map age onto a 0 or 1... We can't come up with an equation like $\beta_0 + \beta_1 Age$ that perfectly maps to only 0's and 1's.
+
+### 3. Is GLM the umbrella over the other functions? The 4 functions all use different distributions, yes?
+
+GLM is the umbrella term for different types of regression! Not all types of regression have different outcome distributions. For example, a binary outcome can be used in logistic regression with the logit link or log-binomial regression with the log link.
+
+### 4. What would you need to change in your model to reduce a high IRLS number? As I understand it from the lecture, a high number suggests convergence but it appeared like something unfavorable even though a model that converges might be closer to maximum likelihood or maybe the distance to maximum likelihood
+
+A high number suggests that the model did NOT converge! Thus, we did not land on an estimate close to our maximum likelihood. You can think of the IRLS number as the number of iterations it is taking to find the maximum likelihood estimate (MLE). If it takes too many iterations, then it just stops without finding the MLE.
+
+### 5. We're using linear vs logistic, but which are we focusing on? Regarding linear, how does linear used in categorical differ from continuous?
+
+We are focusing on logistic! We cannot use linear regression on our binary outcomes anymore. When I say "linear" mapping I mean the mapping between our covariates and the transformed mean outcome using the link function.

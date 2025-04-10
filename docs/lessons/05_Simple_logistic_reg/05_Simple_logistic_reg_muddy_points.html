@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -126,8 +155,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a></li>
-  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
+  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a>
+  <ul class="collapse">
+  <li><a href="#likelihood-function-everything-about-contribution-flew-right-over-my-head-but-i-think-i-understood-most-everything-else." id="toc-likelihood-function-everything-about-contribution-flew-right-over-my-head-but-i-think-i-understood-most-everything-else." class="nav-link" data-scroll-target="#likelihood-function-everything-about-contribution-flew-right-over-my-head-but-i-think-i-understood-most-everything-else.">1. Likelihood function: Everything about contribution flew right over my head, but I think I understood most everything else.</a></li>
+  <li><a href="#the-math-always-confuses-me-a-little-bit-and-the-link-function-was-a-bit-confusing-too-why-is-it-the-transformation" id="toc-the-math-always-confuses-me-a-little-bit-and-the-link-function-was-a-bit-confusing-too-why-is-it-the-transformation" class="nav-link" data-scroll-target="#the-math-always-confuses-me-a-little-bit-and-the-link-function-was-a-bit-confusing-too-why-is-it-the-transformation">2. The math always confuses me a little bit, and the link function was a bit confusing too, why is it the transformation?</a></li>
+  </ul></li>
+  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a>
+  <ul class="collapse">
+  <li><a href="#not-entirely-sure-i-understand-what-irls-is-about" id="toc-not-entirely-sure-i-understand-what-irls-is-about" class="nav-link" data-scroll-target="#not-entirely-sure-i-understand-what-irls-is-about">1. Not entirely sure I understand what IRLS is about</a></li>
+  <li><a href="#link-functions" id="toc-link-functions" class="nav-link" data-scroll-target="#link-functions">2. Link functions</a></li>
+  <li><a href="#is-glm-the-umbrella-over-the-other-functions-the-4-functions-all-use-different-distributions-yes" id="toc-is-glm-the-umbrella-over-the-other-functions-the-4-functions-all-use-different-distributions-yes" class="nav-link" data-scroll-target="#is-glm-the-umbrella-over-the-other-functions-the-4-functions-all-use-different-distributions-yes">3. Is GLM the umbrella over the other functions? The 4 functions all use different distributions, yes?</a></li>
+  <li><a href="#what-would-you-need-to-change-in-your-model-to-reduce-a-high-irls-number-as-i-understand-it-from-the-lecture-a-high-number-suggests-convergence-but-it-appeared-like-something-unfavorable-even-though-a-model-that-converges-might-be-closer-to-maximum-likelihood-or-maybe-the-distance-to-maximum-likelihood" id="toc-what-would-you-need-to-change-in-your-model-to-reduce-a-high-irls-number-as-i-understand-it-from-the-lecture-a-high-number-suggests-convergence-but-it-appeared-like-something-unfavorable-even-though-a-model-that-converges-might-be-closer-to-maximum-likelihood-or-maybe-the-distance-to-maximum-likelihood" class="nav-link" data-scroll-target="#what-would-you-need-to-change-in-your-model-to-reduce-a-high-irls-number-as-i-understand-it-from-the-lecture-a-high-number-suggests-convergence-but-it-appeared-like-something-unfavorable-even-though-a-model-that-converges-might-be-closer-to-maximum-likelihood-or-maybe-the-distance-to-maximum-likelihood">4. What would you need to change in your model to reduce a high IRLS number? As I understand it from the lecture, a high number suggests convergence but it appeared like something unfavorable even though a model that converges might be closer to maximum likelihood or maybe the distance to maximum likelihood</a></li>
+  <li><a href="#were-using-linear-vs-logistic-but-which-are-we-focusing-on-regarding-linear-how-does-linear-used-in-categorical-differ-from-continuous" id="toc-were-using-linear-vs-logistic-but-which-are-we-focusing-on-regarding-linear-how-does-linear-used-in-categorical-differ-from-continuous" class="nav-link" data-scroll-target="#were-using-linear-vs-logistic-but-which-are-we-focusing-on-regarding-linear-how-does-linear-used-in-categorical-differ-from-continuous">5. We’re using linear vs logistic, but which are we focusing on? Regarding linear, how does linear used in categorical differ from continuous?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -137,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Lesson 1: Welcome</p>
+<p class="subtitle lead">Lesson 5: Simple Logistic Regression</p>
 </div>
 
 
@@ -149,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 27, 2025</p>
+      <p class="date-modified">April 9, 2025</p>
     </div>
   </div>
     
@@ -162,11 +202,49 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="muddy-points-from-spring-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2025">Muddy Points from Spring 2025</h2>
+<section id="likelihood-function-everything-about-contribution-flew-right-over-my-head-but-i-think-i-understood-most-everything-else." class="level3">
+<h3 class="anchored" data-anchor-id="likelihood-function-everything-about-contribution-flew-right-over-my-head-but-i-think-i-understood-most-everything-else.">1. Likelihood function: Everything about contribution flew right over my head, but I think I understood most everything else.</h3>
+<p>Yeah… I felt how confusing it was when I was saying it. The main thing is that the likelihood function measures how well the sample data fit the model with different parameter values (<span class="math inline">\(\beta\)</span> values). When we find the maximum likelihood, we find the <span class="math inline">\(\beta\)</span> values that fit our data best.</p>
+<p>Because the likelihood function depends on our sample, we need a functional representation of each observation’s information (outcome and covariates) and how they fit into the potential model.</p>
+</section>
+<section id="the-math-always-confuses-me-a-little-bit-and-the-link-function-was-a-bit-confusing-too-why-is-it-the-transformation" class="level3">
+<h3 class="anchored" data-anchor-id="the-math-always-confuses-me-a-little-bit-and-the-link-function-was-a-bit-confusing-too-why-is-it-the-transformation">2. The math always confuses me a little bit, and the link function was a bit confusing too, why is it the transformation?</h3>
+<p>The link function is a transformation on <span class="math inline">\(E(Y|X)\)</span> so that we can connect the expected value to the covariates. This connection needs to by linear, which means our parameters (<span class="math inline">\(\beta\)</span>s) will represent that <strong>line</strong> that takes us from <span class="math inline">\(X\)</span> to <span class="math inline">\(E(Y|X)\)</span>.</p>
+<p>With categorical outcomes, we want to transform our outcome so we can make that linear connection to the covariates.</p>
+</section>
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2024">Muddy Points from Spring 2024</h2>
+<section id="not-entirely-sure-i-understand-what-irls-is-about" class="level3">
+<h3 class="anchored" data-anchor-id="not-entirely-sure-i-understand-what-irls-is-about">1. Not entirely sure I understand what IRLS is about</h3>
+<p>Fair enough. It’s a little confusing. IRLS is an iterative solving technique that let’s us solve the coefficient estimates ( <span class="math inline">\(\beta_0\)</span> , <span class="math inline">\(\beta_1\)</span>) without solving the equations theoretically.</p>
+<p>We start with an educated guess of the estimates, put them into the likelihood, and calculate the likelihood. Then we update the estimates using some complicated math, put them into the likelihood, and calculate the likelihood again. We compare the two likelihoods, and if the likelihood increases, then we keep going. We stop when the increase in likelihood between iterations is small. This means we are at or very close to the maximum likelihood.</p>
+</section>
+<section id="link-functions" class="level3">
+<h3 class="anchored" data-anchor-id="link-functions">2. Link functions</h3>
+<p>Yes! Link functions are the important transformations we need to make to our outcome in order to connect them to our perdictors/covariates. Specifically, it’s the transformation we make to our mean/expected value.</p>
+<p>The same link function can be used different types of outcomes. And here’s a few examples:</p>
+<ul>
+<li><p>Continuous data: identity</p></li>
+<li><p>Binary: logit, log</p></li>
+<li><p>Count/Poisson: log</p></li>
+</ul>
+<p>Our goal with link functions is to put our outcome on a flexible range so that any range of covariates can be mapped to it with coefficients. So think about trying to map age onto a 0 or 1… We can’t come up with an equation like <span class="math inline">\(\beta_0 + \beta_1 Age\)</span> that perfectly maps to only 0’s and 1’s.</p>
+</section>
+<section id="is-glm-the-umbrella-over-the-other-functions-the-4-functions-all-use-different-distributions-yes" class="level3">
+<h3 class="anchored" data-anchor-id="is-glm-the-umbrella-over-the-other-functions-the-4-functions-all-use-different-distributions-yes">3. Is GLM the umbrella over the other functions? The 4 functions all use different distributions, yes?</h3>
+<p>GLM is the umbrella term for different types of regression! Not all types of regression have different outcome distributions. For example, a binary outcome can be used in logistic regression with the logit link or log-binomial regression with the log link.</p>
+</section>
+<section id="what-would-you-need-to-change-in-your-model-to-reduce-a-high-irls-number-as-i-understand-it-from-the-lecture-a-high-number-suggests-convergence-but-it-appeared-like-something-unfavorable-even-though-a-model-that-converges-might-be-closer-to-maximum-likelihood-or-maybe-the-distance-to-maximum-likelihood" class="level3">
+<h3 class="anchored" data-anchor-id="what-would-you-need-to-change-in-your-model-to-reduce-a-high-irls-number-as-i-understand-it-from-the-lecture-a-high-number-suggests-convergence-but-it-appeared-like-something-unfavorable-even-though-a-model-that-converges-might-be-closer-to-maximum-likelihood-or-maybe-the-distance-to-maximum-likelihood">4. What would you need to change in your model to reduce a high IRLS number? As I understand it from the lecture, a high number suggests convergence but it appeared like something unfavorable even though a model that converges might be closer to maximum likelihood or maybe the distance to maximum likelihood</h3>
+<p>A high number suggests that the model did NOT converge! Thus, we did not land on an estimate close to our maximum likelihood. You can think of the IRLS number as the number of iterations it is taking to find the maximum likelihood estimate (MLE). If it takes too many iterations, then it just stops without finding the MLE.</p>
+</section>
+<section id="were-using-linear-vs-logistic-but-which-are-we-focusing-on-regarding-linear-how-does-linear-used-in-categorical-differ-from-continuous" class="level3">
+<h3 class="anchored" data-anchor-id="were-using-linear-vs-logistic-but-which-are-we-focusing-on-regarding-linear-how-does-linear-used-in-categorical-differ-from-continuous">5. We’re using linear vs logistic, but which are we focusing on? Regarding linear, how does linear used in categorical differ from continuous?</h3>
+<p>We are focusing on logistic! We cannot use linear regression on our binary outcomes anymore. When I say “linear” mapping I mean the mapping between our covariates and the transformed mean outcome using the link function.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
