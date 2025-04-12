@@ -10,6 +10,21 @@ editor_options:
 
 ## Announcements
 
+- Lab 1 Discussion is on 4/16
+  - In-person attendance will count for 1% of your grade
+  
+
 ## Key Dates
 
+- Homework 1 due 4/18
+- Lab 1 Discussion on 4/16
+- Quiz 1 opens on 4/23
+- Lab 2 due 4/25
+
 ## Last class
+
+- We learned about generalized linear models: umbrella term for a lot of regressions that have different types of outcomes
+- We learned about maximum likelihood estimation
+  - Another way to estimate regression parameters that best fit the data
+- We fit a simple logistic regression model!
+- This time: how do we interpret the coefficients from our estimated model?
