@@ -6675,7 +6675,7 @@
     "href": "lessons/06_Interpretations_SLR/06_Interpretations_SLR_muddy_points.html#muddy-points-from-spring-2024",
     "title": "Muddy Points",
     "section": "Muddy Points from Spring 2024",
-    "text": "Muddy Points from Spring 2024"
+    "text": "Muddy Points from Spring 2024\nNone?? Wowza!"
   },
   {
     "objectID": "lessons/06_Interpretations_SLR/week_04_sched.html#resources",
@@ -6816,5 +6816,19 @@
     "title": "Lesson 6: Interpretations and Visualizations of Odds Ratios",
     "section": "Reference: Using estimable() in Option 2",
     "text": "Reference: Using estimable() in Option 2\n\nWe could use estimable() to calculate this linear combination of coefficients (see BSTA 512 Lesson)\n\n\nlibrary(gmodels)\nRE_glm %&gt;% estimable(\n                   c(\"(Intercept)\"                                     = 0,   # beta0\n                     \"Race_EthnicityHispanic-Latino\"                   = 0,   # beta1\n                     \"Race_EthnicityNH American Indian/Alaskan Native\" = 0,   # beta2\n                     \"Race_EthnicityNH Asian/Pacific Islander\"         = 1,   # beta3\n                     \"Race_EthnicityNH Black\"                          = -1), # beta4\n                   conf.int = 0.95) %&gt;% \n  exp(.)\n\n              Estimate Std. Error X^2 value       DF Pr(&gt;|X^2|)  Lower.CI\n(0 0 0 1 -1) 0.8051811   1.107021  93.89366 2.718282   1.033623 0.6580966\n              Upper.CI\n(0 0 0 1 -1) 0.9851389"
+  },
+  {
+    "objectID": "lessons/06_Interpretations_SLR/06_Interpretations_SLR_muddy_points.html",
+    "href": "lessons/06_Interpretations_SLR/06_Interpretations_SLR_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "\\(c\\) represents any scalar value. Scalar just means it can be a single numerical quantity, so it can be 10, 5, -3, 0.01, etc. If we want to estimate the odds ratio for a 8-year difference in age, then we’ll look at \\(c=8\\) so that we compare two ages that are 8 years apart.\n\n\n\nHead back to Lesson 5 on Simple Logistic Regression. We are transforming our outcome (y-axis as you put it) so that we can map \\(X\\) to \\(Y\\) only using the parameters (\\(\\beta\\) coefficients). The “linear” part refers to the parameters taking on this intercept and slope that make a line."
+  },
+  {
+    "objectID": "lessons/06_Interpretations_SLR/06_Interpretations_SLR_muddy_points.html#muddy-points-from-spring-2025",
+    "href": "lessons/06_Interpretations_SLR/06_Interpretations_SLR_muddy_points.html#muddy-points-from-spring-2025",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "\\(c\\) represents any scalar value. Scalar just means it can be a single numerical quantity, so it can be 10, 5, -3, 0.01, etc. If we want to estimate the odds ratio for a 8-year difference in age, then we’ll look at \\(c=8\\) so that we compare two ages that are 8 years apart.\n\n\n\nHead back to Lesson 5 on Simple Logistic Regression. We are transforming our outcome (y-axis as you put it) so that we can map \\(X\\) to \\(Y\\) only using the parameters (\\(\\beta\\) coefficients). The “linear” part refers to the parameters taking on this intercept and slope that make a line."
   }
 ]

@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -126,7 +155,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a></li>
+  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a>
+  <ul class="collapse">
+  <li><a href="#for-transformations-of-continuous-variable-to-make-more-interpretable-what-does-the-c-actually-represent" id="toc-for-transformations-of-continuous-variable-to-make-more-interpretable-what-does-the-c-actually-represent" class="nav-link" data-scroll-target="#for-transformations-of-continuous-variable-to-make-more-interpretable-what-does-the-c-actually-represent">1. For “Transformations of continuous variable to make more interpretable,” what does the “c” actually represent?</a></li>
+  <li><a href="#also-what-makes-the-scale-if-logitpix-linear-is-it-because-we-are-changing-the-values-of-x-itself-or-is-it-because-we-change-the-scale-of-our-y-axis" id="toc-also-what-makes-the-scale-if-logitpix-linear-is-it-because-we-are-changing-the-values-of-x-itself-or-is-it-because-we-change-the-scale-of-our-y-axis" class="nav-link" data-scroll-target="#also-what-makes-the-scale-if-logitpix-linear-is-it-because-we-are-changing-the-values-of-x-itself-or-is-it-because-we-change-the-scale-of-our-y-axis">2. Also, what makes the scale if Logit(pi(x)) linear? Is it because we are changing the values of x itself or is it because we change the scale of our y-axis?</a></li>
+  </ul></li>
   <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
   </ul>
 </nav>
@@ -137,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Lesson 1: Welcome</p>
+<p class="subtitle lead">Lesson 6: Interpretations and Visualizations of Odds Ratios</p>
 </div>
 
 
@@ -149,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 10, 2025</p>
+      <p class="date-modified">April 14, 2025</p>
     </div>
   </div>
     
@@ -162,9 +195,18 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="muddy-points-from-spring-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2025">Muddy Points from Spring 2025</h2>
+<section id="for-transformations-of-continuous-variable-to-make-more-interpretable-what-does-the-c-actually-represent" class="level3">
+<h3 class="anchored" data-anchor-id="for-transformations-of-continuous-variable-to-make-more-interpretable-what-does-the-c-actually-represent">1. For “Transformations of continuous variable to make more interpretable,” what does the “c” actually represent?</h3>
+<p><span class="math inline">\(c\)</span> represents any scalar value. Scalar just means it can be a single numerical quantity, so it can be 10, 5, -3, 0.01, etc. If we want to estimate the odds ratio for a 8-year difference in age, then we’ll look at <span class="math inline">\(c=8\)</span> so that we compare two ages that are 8 years apart.</p>
+</section>
+<section id="also-what-makes-the-scale-if-logitpix-linear-is-it-because-we-are-changing-the-values-of-x-itself-or-is-it-because-we-change-the-scale-of-our-y-axis" class="level3">
+<h3 class="anchored" data-anchor-id="also-what-makes-the-scale-if-logitpix-linear-is-it-because-we-are-changing-the-values-of-x-itself-or-is-it-because-we-change-the-scale-of-our-y-axis">2. Also, what makes the scale if Logit(pi(x)) linear? Is it because we are changing the values of x itself or is it because we change the scale of our y-axis?</h3>
+<p>Head back to <a href="https://nwakim.github.io/BSTA_513_S25/lessons/05_Simple_logistic_reg/05_Simple_logistic_reg.html#/how-do-we-transform-our-outcome-22">Lesson 5 on Simple Logistic Regression</a>. We are transforming our outcome (y-axis as you put it) so that we can map <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span> only using the parameters (<span class="math inline">\(\beta\)</span> coefficients). The “linear” part refers to the parameters taking on this intercept and slope that make a line.</p>
+</section>
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2024">Muddy Points from Spring 2024</h2>
+<p>None?? Wowza!</p>
 
 
 </section>

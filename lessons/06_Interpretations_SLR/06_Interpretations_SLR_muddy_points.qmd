@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 6: Interpretations and Visualizations of Odds Ratios"
 date-modified: "today"
 format: 
   html:
@@ -11,5 +11,15 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### 1. For "Transformations of continuous variable to make more interpretable," what does the "c" actually represent?
+
+$c$ represents any scalar value. Scalar just means it can be a single numerical quantity, so it can be 10, 5, -3, 0.01, etc. If we want to estimate the odds ratio for a 8-year difference in age, then we'll look at $c=8$ so that we compare two ages that are 8 years apart. 
+
+### 2. Also, what makes the scale if Logit(pi(x)) linear? Is it because we are changing the values of x itself or is it because we change the scale of our y-axis?
+
+Head back to [Lesson 5 on Simple Logistic Regression](https://nwakim.github.io/BSTA_513_S25/lessons/05_Simple_logistic_reg/05_Simple_logistic_reg.html#/how-do-we-transform-our-outcome-22). We are transforming our outcome (y-axis as you put it) so that we can map $X$ to $Y$ only using the parameters ($\beta$ coefficients). The "linear" part refers to the parameters taking on this intercept and slope that make a line. 
+
+
 ## Muddy Points from Spring 2024
 
+None?? Wowza!

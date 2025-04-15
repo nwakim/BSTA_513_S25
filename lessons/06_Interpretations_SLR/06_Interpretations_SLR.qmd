@@ -526,8 +526,6 @@ $$\begin{aligned}
 :::
 :::
 
-## Poll Everywhere Question 3
-
 ## How does this relate to a 2x2 table? {visibility="hidden"}
 
 $$ 
