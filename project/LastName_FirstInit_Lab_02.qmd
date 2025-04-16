@@ -27,10 +27,6 @@ This is your **editing** file. **Please do not remove anything from this editing
 
 The purpose of this lab is to explore our data further, set up the unadjusted odds ratio, and create code to later help us present our final model.
 
-### Grading
-
-**This lab is graded out of 12 points.** The TAs will go through and grade your lab. They will make sure each section is complete and will follow the rubric below. I have instructed them that completion and clear effort is all that is needed to receive 100%. Nicky will go through the labs to give you feedback.
-
 ## Lab activities
 
 ::: callout-note

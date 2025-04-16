@@ -6830,5 +6830,334 @@
     "title": "Muddy Points",
     "section": "",
     "text": "\\(c\\) represents any scalar value. Scalar just means it can be a single numerical quantity, so it can be 10, 5, -3, 0.01, etc. If we want to estimate the odds ratio for a 8-year difference in age, then we’ll look at \\(c=8\\) so that we compare two ages that are 8 years apart.\n\n\n\nHead back to Lesson 5 on Simple Logistic Regression. We are transforming our outcome (y-axis as you put it) so that we can map \\(X\\) to \\(Y\\) only using the parameters (\\(\\beta\\) coefficients). The “linear” part refers to the parameters taking on this intercept and slope that make a line."
+  },
+  {
+    "objectID": "project/LastName_FirstInit_Lab_01.html",
+    "href": "project/LastName_FirstInit_Lab_01.html",
+    "title": "Lab 1",
+    "section": "",
+    "text": "Task\n\n\n\nAnswer the following questions using information on WBNS:\n\nWhat is the motivation for this study?\nHow could an analysis that looks at associations with food insecurity help facilitate change in policy?\nWhy is it important to study food insecurity?\n\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nDisplay your working directory using the here package and here() function.\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nNo task to report back on. Just make sure you have the data!\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nList the 10 predictors that you plan to use in your analysis. Note which variables are numeric, binary, or multi-level categorical.\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nComplete the following statement to identify your research question:\nWe will investigate the association between food insecurity and ____.\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nInclude a screenshot showing the new .Rda file within your Data folder.\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\n\nSelect the variables that will be used in your analysis and make a new dataset. Include the code that you used.\nRemove the parentheses with values that are in front of the category names.\n\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\n\nTo check that you have looked that the variables, please report the percent of respondents that were food insecure in the past 12 months.\nList any categorical variables that have less than 100 observations in a group\n\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nWrite an introduction to the analysis."
+  },
+  {
+    "objectID": "project/LastName_FirstInit_Lab_01.html#lab-activities",
+    "href": "project/LastName_FirstInit_Lab_01.html#lab-activities",
+    "title": "Lab 1",
+    "section": "",
+    "text": "Task\n\n\n\nAnswer the following questions using information on WBNS:\n\nWhat is the motivation for this study?\nHow could an analysis that looks at associations with food insecurity help facilitate change in policy?\nWhy is it important to study food insecurity?\n\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nDisplay your working directory using the here package and here() function.\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nNo task to report back on. Just make sure you have the data!\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nList the 10 predictors that you plan to use in your analysis. Note which variables are numeric, binary, or multi-level categorical.\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nComplete the following statement to identify your research question:\nWe will investigate the association between food insecurity and ____.\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nInclude a screenshot showing the new .Rda file within your Data folder.\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\n\nSelect the variables that will be used in your analysis and make a new dataset. Include the code that you used.\nRemove the parentheses with values that are in front of the category names.\n\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\n\nTo check that you have looked that the variables, please report the percent of respondents that were food insecure in the past 12 months.\nList any categorical variables that have less than 100 observations in a group\n\n\n\n\n\n\n\n\n\n\n\n\nTask\n\n\n\nWrite an introduction to the analysis."
+  },
+  {
+    "objectID": "project/LastName_FirstInit_Lab_02.html",
+    "href": "project/LastName_FirstInit_Lab_02.html",
+    "title": "Lab 2",
+    "section": "",
+    "text": "This is your editing file. Please do not remove anything from this editing file!! You will only add your code and work to this file.\n\n\nThe purpose of this lab is to explore our data further, set up the unadjusted odds ratio, and create code to later help us present our final model."
+  },
+  {
+    "objectID": "project/LastName_FirstInit_Lab_02.html#directions",
+    "href": "project/LastName_FirstInit_Lab_02.html#directions",
+    "title": "Lab 2",
+    "section": "",
+    "text": "This is your editing file. Please do not remove anything from this editing file!! You will only add your code and work to this file.\n\n\nThe purpose of this lab is to explore our data further, set up the unadjusted odds ratio, and create code to later help us present our final model."
+  },
+  {
+    "objectID": "project/LastName_FirstInit_Lab_02.html#lab-activities",
+    "href": "project/LastName_FirstInit_Lab_02.html#lab-activities",
+    "title": "Lab 2",
+    "section": "2 Lab activities",
+    "text": "2 Lab activities\n\n\n\n\n\n\nNote\n\n\n\nI have left it up to you to load the needed packages for this lab.\n\n\n\n2.1 Restate research question\n\n\n\n\n\n\nTask\n\n\n\nPlease restate your research question below using the provided format (1 sentence). You can change the wording if you’d like, but please make sure it is still clear. It’s repetitive, but it helps me contextualize my feedback as I look through your lab.\n\n\nIn this study, we will investigate the association between food insecurity and ________.\n\n\n2.2 Make sure variables are coded correctly\n\n\n\n\n\n\nTask\n\n\n\n\nUse class() to determine the class of each of the 11 variables you selected from Lab 1 (including the outcome).\nChange the variable type to the appropriate type.\n\n\n\n\n\n2.3 Consider potential confounders and effect modifiers\n\n\n\n\n\n\nTask\n\n\n\nFill in the below table (or any other way you wish to present the same information).\n\n\n\n\n\n\n\n\n\n\nVariable name\nConfounder, Effect modifier, or nothing?\nReasoning (1-2 sentences)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2.4 Create contingency tables for categorical predictors\n\n\n\n\n\n\nTask\n\n\n\n\nCreate contingency tables for all categorical covariates with food insecurity.\nTake note of any cell counts that are less than 10\n\n\n\n\n\n2.5 Bivariate exploratory data analysis\n\n\n\n\n\n\nTask\n\n\n\n\nUse ggpairs() (introduced in BSTA 512 Lesson 13) to quickly look at the relationship between variables.\nList predictors with which there is a clear trend with food insecurity.\n\n\n\n\n\n2.6 Fit simple logistic regression\n\n\n\n\n\n\nTask\n\n\n\n\nUsing glm(), run a logistic regression with food insecurity and your main variable of interest.\nDisplay the unadjusted odds ratio of the regression. You can use logistic.display()\nInterpret the unadjusted odds ratio (with 95% confidence interval). If you’re main variable is multi-level, then you will need to interpret multiple odds ratios.\n\n\n\n\n\n2.7 Plot the predicted probability\n\n\n\n\n\n\nTask\n\n\n\nPlot or make a table of your predicted probabilities."
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#recall-our-example-late-stage-breast-cancer-diagnosis",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#recall-our-example-late-stage-breast-cancer-diagnosis",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Recall our example: Late stage breast cancer diagnosis",
+    "text": "Recall our example: Late stage breast cancer diagnosis\n\nRecall that we fitted a simple logistic regression for late stage breast cancer diagnosis using the predictor, age:\n\n\nbc_reg = glm(Late_stage_diag ~ Age_c, data = bc, family = binomial)\ntidy(bc_reg, conf.int=T) %&gt;% gt() %&gt;% tab_options(table.font.size = 38) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n−0.989\n0.023\n−42.637\n0.000\n−1.035\n−0.944\n\n\nAge_c\n0.057\n0.003\n17.780\n0.000\n0.051\n0.063\n\n\n\n\n\n\n\n \n\n\n\nFitted logistic regression model: \\[\\text{logit}(\\widehat{\\pi}(Age)) = -0.989 + 0.057 \\cdot Age\\]\n\n\n\nNow we want to calculate the predicted/estimated probability from the above fitted model\nWe will need to calculate the predicted probability and its confidence interval\n\nThen we will visualize the fitted probability"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#recall-our-example-late-stage-breast-cancer-diagnosis-1",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#recall-our-example-late-stage-breast-cancer-diagnosis-1",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Recall our example: Late stage breast cancer diagnosis",
+    "text": "Recall our example: Late stage breast cancer diagnosis\n\nFitted logistic regression model: \\[\\text{logit}(\\widehat{\\pi}(Age)) = -0.989 + 0.057 \\cdot Age\\]\n\n     \n\nNow we want to caclulate the predicted/estimated probability from the above fitted model\nWe will need to calculate the predicted probability and its confidence interval\n\nThen we will visualize the fitted probability"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#predicted-probability",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#predicted-probability",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Predicted Probability",
+    "text": "Predicted Probability\n\nWe may be interested in predicting probability of having a late stage breast cancer diagnosis for a specific age.\nThe predicted probability is the estimated probability of having the event for given values of covariate(s)\nIn simple logistic regression, the fitted model is:\\[\\text{logit}(\\widehat{\\pi}(X)) = \\widehat{\\beta}_0 +{\\widehat{\\beta}}_1X \\]\nWe can convert it to the predicted probability: \\[\\widehat{\\pi}\\left(X\\right)=\\frac{\\exp({\\widehat{\\beta}}_0+{\\widehat{\\beta}}_1X)}{1+\\exp({\\widehat{\\beta}}_0+{\\widehat{\\beta}}_1X)}\\]\n\nThis is an inverse logit calculation\n\nWe can calculate this using the the predict() function like in BSTA 512\n\nAnother option: taking inverse logit of fitted values from augment() function"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#reference-inverse-logit",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#reference-inverse-logit",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Reference: Inverse logit",
+    "text": "Reference: Inverse logit\n\nIf we have \\(\\text{logit}(a) = b\\), then \\[\\begin{aligned}\n\\text{logit}(a) & = b \\\\\n\\text{log}\\left(\\dfrac{a}{1-a}\\right) & = b \\\\\n\\exp \\left[ \\text{log}\\left(\\dfrac{a}{1-a}\\right) \\right] & = \\exp[b] \\\\\n\\dfrac{a}{1-a} & = \\exp[b] \\\\\na & = \\exp[b]\\cdot(1-a) \\\\\na & = \\exp[b] - a\\cdot \\exp[b] \\\\\na +  a\\cdot \\exp[b]& = \\exp[b] \\\\\na\\cdot ( 1 + \\exp[b] )& = \\exp[b] \\\\\na& = \\dfrac{\\exp[b]}{1 + \\exp[b]} \\\\\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#confidence-interval-of-predicted-probability",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#confidence-interval-of-predicted-probability",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Confidence Interval of Predicted Probability",
+    "text": "Confidence Interval of Predicted Probability\n\nNot as easy to construct\nI have searched around for a function that does this for us, but I cannot find one\nSo we have to construct the confidence interval “by hand”\n\n \nThere are a two ways to do this:\n\nConstruct the 95% confidence interval in the logit scale, then convert to probability scale\nUse Normal approximation (if appropriate) to construct confidence interval in probability scale"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#option-1-95-confidence-interval-in-logit-scale-12",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#option-1-95-confidence-interval-in-logit-scale-12",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Option 1: 95% confidence interval in logit scale (1/2)",
+    "text": "Option 1: 95% confidence interval in logit scale (1/2)\n\nRecall our our fitted simple logistic regression model with a continuous predictor \\[\\text{logit}(\\widehat{\\pi}(X)) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\cdot X\\]\nWe can first find the predicted \\(\\text{logit}(\\widehat{\\pi}(X))\\) and then find the 95% confidence interval around it: \\[\\text{logit}(\\widehat{\\pi}(X)) \\pm 1.96 \\cdot SE_{\\text{logit}(\\widehat{\\pi}(X))}\\]\nWe’ll call this 95% CI: \\[\\left(\\text{logit}(\\widehat{\\pi}(X)) - 1.96 \\cdot SE_{\\text{logit}(\\widehat{\\pi}(X))}, \\ \\text{logit}(\\widehat{\\pi}(X)) + 1.96 \\cdot SE_{\\text{logit}(\\widehat{\\pi}(X))} \\right)\\] \\[\\left(\\text{logit}_{L}, \\ \\text{logit}_{U} \\right)\\]"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#option-1-95-confidence-interval-in-logit-scale-22",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#option-1-95-confidence-interval-in-logit-scale-22",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Option 1: 95% confidence interval in logit scale (2/2)",
+    "text": "Option 1: 95% confidence interval in logit scale (2/2)\n\nThen we need to convert to the probability scale\nTo convert from \\(\\text{logit}(\\widehat{\\pi}(X))\\) to \\(\\widehat{\\pi}(X)\\), we take the inverse logit\nThus, 95% CI in the probability scale is: \\[\\left(\\dfrac{\\exp\\left[\\text{logit}_{L}\\right]}{1 + \\exp\\left[\\text{logit}_{L}\\right]}, \\ \\dfrac{\\exp\\left[\\text{logit}_{U}\\right]}{1 + \\exp\\left[\\text{logit}_{U}\\right]} \\right)\\]"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#option-2-using-normal-approximation",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#option-2-using-normal-approximation",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Option 2: Using Normal approximation",
+    "text": "Option 2: Using Normal approximation\n\nIf we meet the Normal approximation criteria, we can construct our confidence interval directly in the probability scale\n\nWe can use the Normal approximation if:\n\n\\(\\widehat{p}n = \\widehat{\\pi}(X)\\cdot n &gt; 10\\) and\n\\((1-\\widehat{p})n = (1-\\widehat{\\pi}(X))\\cdot n &gt; 10\\)\n\n\n\n \n\nWe can first find the predicted \\(\\widehat{\\pi}(X)\\) and then find the 95% confidence interval around it: \\[\\widehat{\\pi}(X) \\pm 1.96 \\cdot SE_{\\widehat{\\pi}(X)}\\]"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Example: Late stage breast cancer diagnosis",
+    "text": "Example: Late stage breast cancer diagnosis\n\n\nPredicting probability of late stage breast cancer diagnosis\n\n\nFor someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?\n\n\nNeeded steps:\n\nCalculate probability prediction\nCheck if we can use Normal approximation\nCalculate confidence interval\n\nUsing logit scale then convert to probability scale\nUsing Normal approximation directly on probability scale\n\nInterpret results"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-1",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-1",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Example: Late stage breast cancer diagnosis",
+    "text": "Example: Late stage breast cancer diagnosis\n\n\nPredicting probability of late stage breast cancer diagnosis\n\n\nFor someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?\n\n\n\nCalculate probability prediction\n\n\nbc_reg = glm(Late_stage_diag ~ Age_c, data = bc, family = binomial)\nnewdata = data.frame(Age_c = 60 - mean_age)\npred1 = predict(bc_reg, newdata = newdata, se.fit = T, type = \"response\")\npred1\n\n$fit\n        1 \n0.2522616 \n\n$se.fit\n          1 \n0.004709743 \n\n$residual.scale\n[1] 1"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-2",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-2",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Example: Late stage breast cancer diagnosis",
+    "text": "Example: Late stage breast cancer diagnosis\n\n\nPredicting probability of late stage breast cancer diagnosis\n\n\nFor someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?\n\n\n\nCheck if we can use Normal approximation\n\nWe can use the Normal approximation if: \\(\\widehat{p}n = \\widehat{\\pi}(X)\\cdot n &gt; 10\\) and \\((1-\\widehat{p})n = (1-\\widehat{\\pi}(X))\\cdot n &gt; 10\\).\n\nn = nobs(bc_reg)\np = pred1$fit\nn*p\n\n       1 \n2522.616 \n\nn*(1-p)\n\n       1 \n7477.384 \n\n\nWe can use the Normal approximation!"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-3",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-3",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Example: Late stage breast cancer diagnosis",
+    "text": "Example: Late stage breast cancer diagnosis\n\n\nPredicting probability of late stage breast cancer diagnosis\n\n\nFor someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?\n\n\n3a. Calculate confidence interval (Option 1: logit scale, we could skip previous step)\n\npred1 = predict(bc_reg, newdata = newdata, se.fit = T, type = \"link\")\nLL_CI1 = pred1$fit - qnorm(1-0.05/2) * pred1$se.fit\nUL_CI1 = pred1$fit + qnorm(1-0.05/2) * pred1$se.fit\npred_link = c(Pred = pred1$fit, LL_CI1, UL_CI1)\n\n\n\n\nUsing definition of inverse logit\n\n\n(exp(pred_link)/(1+exp(pred_link))) %&gt;% \n  round(., digits=3)\n\nPred.1      1      1 \n 0.252  0.243  0.262 \n\n\n\n\nUsing inverse logit in boot library\n\n\ninv.logit(pred_link) %&gt;% \n  round(., digits=3)\n\nPred.1      1      1 \n 0.252  0.243  0.262"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-4",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-4",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Example: Late stage breast cancer diagnosis",
+    "text": "Example: Late stage breast cancer diagnosis\n\n\nPredicting probability of late stage breast cancer diagnosis\n\n\nFor someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?\n\n\n3b. Calculate confidence interval (Option 2: with Normal approximation)\n\npred = predict(bc_reg, newdata = newdata, se.fit = T, type = \"response\")\n\nLL_CI = pred$fit - qnorm(1-0.05/2) * pred$se.fit\nUL_CI = pred$fit + qnorm(1-0.05/2) * pred$se.fit\n\nc(Pred = pred$fit, LL_CI, UL_CI) %&gt;% round(digits=3)\n\nPred.1      1      1 \n 0.252  0.243  0.261"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-5",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#example-late-stage-breast-cancer-diagnosis-5",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Example: Late stage breast cancer diagnosis",
+    "text": "Example: Late stage breast cancer diagnosis\n\n\nPredicting probability of late stage breast cancer diagnosis\n\n\nFor someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?\n\n\n\nInterpret results\n\nFor someone who is 60 years old, the predicted probability of late stage breast cancer diagnosis is 0.252 (95% CI: 0.243, 0.261)."
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#predictedestimated-probability",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#predictedestimated-probability",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Predicted/Estimated probability",
+    "text": "Predicted/Estimated probability\n\nPredicted probability is NOT our predicted outcome\n\nWe cannot interpret it as the predicted \\(Y\\) for individuals with certain covariate values\nExample: our predicted probability does not tell us if one individual will or will not be diagnosed with late stage breast cancer\n\n\n \n\nThe predicted probability is the estimate of the mean (i.e., proportion) of individuals at a certain age who are diagnosed with late stage breast cancer\nWe can use the predicted/estimated probability to predict the outcome"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#predicted-outcome",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#predicted-outcome",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Predicted outcome",
+    "text": "Predicted outcome\n\nTypically, the predicted probability is the most important thing to use in a clinical setting\n\n \n\nIf you ever need to predict the outcome itself (from logistic regression with binary outcome):\n\nRemember that the predicted probability can be used in a Bernoulli (or Binomial with \\(n=1\\)) distribution to find the predicted outcome\n\nIf outcome is something like counts, then we would use a Poisson distribution\n\n \n\nBy putting it back through a Bernoulli/binomial distribution, we are re-introducing the random component of our observed outcome\n\n\nset.seed(8392)\nrbinom(n=1, size=1, prob = pred$fit)\n\n[1] 0\n\nrbinom(n=10, size=1, prob = pred$fit)\n\n [1] 0 0 0 0 1 0 0 0 1 0"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-also-make-a-plot-of-all-the-predicted-probabilities-12",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-also-make-a-plot-of-all-the-predicted-probabilities-12",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "We can also make a plot of all the predicted probabilities (1/2)",
+    "text": "We can also make a plot of all the predicted probabilities (1/2)\n\nbc_reg = glm(Late_stage_diag ~ Age_c, data = bc, family = binomial)\nbc_aug = augment(bc_reg)\n\n\nThen we plot the fitted values from the fitted model\n\n\nlibrary(boot) # for inv.logit()\nprob_stage = ggplot(data = bc_aug, aes(x=Age_c + mean(bc$Age), y = inv.logit(.fitted))) + \n  # geom_point(size = 4, color = \"#70AD47\", shape = 1) +\n  geom_smooth(size = 4, color = \"#70AD47\") +\n  labs(x = \"Age (yrs)\", \n       y = \"Estimated probability of \\n Late stage BC diagnosis\")  + \n  theme_classic() +\n  theme(axis.title = element_text(size = 30), \n        axis.text = element_text(size = 25), \n        title = element_text(size = 30)) +\n  ylim(0, 1)"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-also-make-a-plot-of-all-the-predicted-probabilities-22",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-also-make-a-plot-of-all-the-predicted-probabilities-22",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "We can also make a plot of all the predicted probabilities (2/2)",
+    "text": "We can also make a plot of all the predicted probabilities (2/2)\n\nIf we are interested in seeing all the predicted probabilities across the sample’s age range\nNote that the probabilities do not need to fill the full range of 0 to 1."
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-add-the-confidence-intervals-13",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-add-the-confidence-intervals-13",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "We can add the confidence intervals (1/3)",
+    "text": "We can add the confidence intervals (1/3)\n\nnewdata2 = data.frame(Age_c = seq(min(bc$Age_c), max(bc$Age_c), by = 0.1))\npred2 = predict(bc_reg, newdata = newdata2, se.fit = T, type = \"link\")\nLL_CI1 = pred2$fit - qnorm(1-0.05/2) * pred2$se.fit\nUL_CI1 = pred2$fit + qnorm(1-0.05/2) * pred2$se.fit\n\nwith_CI = data.frame(Age = newdata2$Age_c + mean(bc$Age), # back to age \n                     pred = inv.logit(pred2$fit), \n                     LL = inv.logit(LL_CI1), \n                     UL = inv.logit(UL_CI1))"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-add-the-confidence-intervals-23",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-add-the-confidence-intervals-23",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "We can add the confidence intervals (2/3)",
+    "text": "We can add the confidence intervals (2/3)\n\nprob_stage_CI = ggplot(data = with_CI, aes(x = Age)) +\n  geom_ribbon(aes(ymin = LL, ymax = UL), fill = \"grey\") +\n  geom_smooth(aes(x=Age, y = pred), size = 1, color = \"#70AD47\") +\n  labs(x = \"Age (yrs)\", \n       y = \"Estimated probability of \\n Late stage BC diagnosis\")  + \n  theme_classic() +\n  theme(axis.title = element_text(size = 30), \n        axis.text = element_text(size = 25), \n        title = element_text(size = 30)) +\n  ylim(0, 0.6)"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-add-the-confidence-intervals-33",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#we-can-add-the-confidence-intervals-33",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "We can add the confidence intervals (3/3)",
+    "text": "We can add the confidence intervals (3/3)"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#poll-everywhere-question",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#poll-everywhere-question",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Poll Everywhere Question",
+    "text": "Poll Everywhere Question"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#visualization-of-observed-outcome-and-fitted-model",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#visualization-of-observed-outcome-and-fitted-model",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Visualization of observed outcome and fitted model",
+    "text": "Visualization of observed outcome and fitted model\n\n\n\n\n\\[\\text{logit}(\\widehat{\\pi}(Age)) = -0.989 + 0.057 \\cdot Age\\]\n\n\\[\\widehat{\\pi}(Age) = \\dfrac{ \\exp \\left[-0.989 + 0.057 \\cdot Age \\right]}{1+\\exp \\left[-0.989 + 0.057 \\cdot Age \\right]}\\]\n\n\n\n\n\n\n\nThese two visualizations will be helpful when we discuss interactions!"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz.html#visualization-of-odds-ratios",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz.html#visualization-of-odds-ratios",
+    "title": "Lesson 7: Prediction and Visualization in Simple Logistic Regression",
+    "section": "Visualization of odds ratios?",
+    "text": "Visualization of odds ratios?\n\nWe will discuss this more on Wednesday when we look at interpretations of ORs"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html#muddy-points-from-spring-2024",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html#muddy-points-from-spring-2024",
+    "title": "Muddy Points",
+    "section": "Muddy Points from Spring 2024",
+    "text": "Muddy Points from Spring 2024\nNone?? Wowza!"
+  },
+  {
+    "objectID": "lessons/10_Multiple_logistic_regression/10_Multiple_logistic_regression_key_info.html#key-dates",
+    "href": "lessons/10_Multiple_logistic_regression/10_Multiple_logistic_regression_key_info.html#key-dates",
+    "title": "Key Info and Announcements",
+    "section": "Key Dates",
+    "text": "Key Dates"
+  },
+  {
+    "objectID": "lessons/10_Multiple_logistic_regression/10_Multiple_logistic_regression_key_info.html#last-class",
+    "href": "lessons/10_Multiple_logistic_regression/10_Multiple_logistic_regression_key_info.html#last-class",
+    "title": "Key Info and Announcements",
+    "section": "Last class",
+    "text": "Last class"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz_key_info.html#key-dates",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz_key_info.html#key-dates",
+    "title": "Key Info and Announcements",
+    "section": "Key Dates",
+    "text": "Key Dates\n\nHomework 1 due 4/18\nQuiz 1 opens on 4/23\nLab 2 due 4/25"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz_key_info.html#last-class",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz_key_info.html#last-class",
+    "title": "Key Info and Announcements",
+    "section": "Last class",
+    "text": "Last class\n\nDiscussed how to interpret the estimated regression coefficients and the estimated odds ratios from our regression!\n\nDid this for a continuous variable, binary variable, and multi-level cateogorical variable\n\nNeed to finish up that lecture!"
+  },
+  {
+    "objectID": "lessons/11_Interactions/11_Interactions_key_info.html#key-dates",
+    "href": "lessons/11_Interactions/11_Interactions_key_info.html#key-dates",
+    "title": "Key Info and Announcements",
+    "section": "Key Dates",
+    "text": "Key Dates"
+  },
+  {
+    "objectID": "lessons/11_Interactions/11_Interactions_key_info.html#last-class",
+    "href": "lessons/11_Interactions/11_Interactions_key_info.html#last-class",
+    "title": "Key Info and Announcements",
+    "section": "Last class",
+    "text": "Last class"
+  },
+  {
+    "objectID": "lessons/11_Interactions/11_Interactions_muddy_points.html#muddy-points-from-spring-2024",
+    "href": "lessons/11_Interactions/11_Interactions_muddy_points.html#muddy-points-from-spring-2024",
+    "title": "Muddy Points",
+    "section": "Muddy Points from Spring 2024",
+    "text": "Muddy Points from Spring 2024"
+  },
+  {
+    "objectID": "lessons/10_Multiple_logistic_regression/10_Multiple_logistic_regression_muddy_points.html#muddy-points-from-spring-2024",
+    "href": "lessons/10_Multiple_logistic_regression/10_Multiple_logistic_regression_muddy_points.html#muddy-points-from-spring-2024",
+    "title": "Muddy Points",
+    "section": "Muddy Points from Spring 2024",
+    "text": "Muddy Points from Spring 2024"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz_key_info.html",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz_key_info.html",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Idk? We’re having our lab discussion today\nSPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nThere’s a flat rate on shipping… boo\n\nWe could do a class order and share the shipping cost??"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz_key_info.html#announcements",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz_key_info.html#announcements",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Idk? We’re having our lab discussion today\nSPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nThere’s a flat rate on shipping… boo\n\nWe could do a class order and share the shipping cost??"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#notes-from-me-and-the-tas",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#notes-from-me-and-the-tas",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Notes from me and the TAs",
+    "text": "Notes from me and the TAs\n\nUsing ANY_HARDSHIP or MULT_HARDSHIPS\n\nIf you look at the User Guide, this involves information from food security\nWe need to adapt the variable to exclude food security: use case_when() to construct it\n\nUsing “Survey Questions”\n\nBe very careful of this!\n\nActivity 2.9: List any categorical variables that have less than 100 observations in a group\n\nNot the number of observations for an entire variable, but check each level/group of the variable!\n\nDo not use multiple variables that capture the same information\n\nExample: PPINCIMP and FPL50_100\n\nDo NOT use variables that are measuring missing data unless you are interested in how missingness is related to the outcome\n\nExample: FAMSIZE_MISS, NUM_CHILD_HH_MISS\n\nThe TAs left comments in the rubric! Please look at them!"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#a-note-on-the-survey-questions",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#a-note-on-the-survey-questions",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "A note on the “Survey Questions”",
+    "text": "A note on the “Survey Questions”\n\nI said not to use the variables under this, but you can if you found one to be very interesting\nYou just need to be extra cautious using these because they are not as nicely packaged/processed\nAnd some of them go into other variables!!\n\nLike UNMETCARE_Y already includes the survey questions about health care\n\nSome of the variable have A LOT of missing data"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#get-into-groups-of-2-4",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#get-into-groups-of-2-4",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Get into groups of 2-4",
+    "text": "Get into groups of 2-4\n\nNo more than 4!\nIntroduce yourself if you do not know each other\nShare you html documents with each other (email, airdrop, etc.)\n\n\n\n\n−+\n06:00"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#introductions",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#introductions",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Introductions",
+    "text": "Introductions\n\nIntroduce yourself if you do not\n\n\n\n\n−+\n11:00"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#introduce-research-question",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#introduce-research-question",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Introduce Research Question",
+    "text": "Introduce Research Question\n\nShare your research question with each other!\n\nShould be using the same outcome + your main variable\n\nShare your other variables\nIs everyone using the appropriate variables?\nDid anyone see any potential issues with how many individuals are in each category of a variable?\n\n \n\nIf time, did anyone want to use ANY_HARDSHIP or MULT_HARDSHIPS? How would you construct these variables?\n\n\n\n\n−+\n15:00"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#double-check-code-and-saved-data",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#double-check-code-and-saved-data",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Double check code and saved data",
+    "text": "Double check code and saved data\n\nDid everyone in the group successfully save the dataset?\nCan you open it right now?\n\n\n\n\n−+\n05:00"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#compiled-introductions",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#compiled-introductions",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Compiled introductions",
+    "text": "Compiled introductions\n\nWhat major points did you include in your introduction?\nWould you change anything after discussing with your group?\n\n\n\n\n−+\n10:00"
   }
 ]

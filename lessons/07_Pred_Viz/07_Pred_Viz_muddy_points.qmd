@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 7: Prediction and Visualization in Simple Logistic Regression"
 date-modified: "today"
 format: 
   html:
@@ -13,3 +13,4 @@ editor_options:
 
 ## Muddy Points from Spring 2024
 
+None?? Wowza!

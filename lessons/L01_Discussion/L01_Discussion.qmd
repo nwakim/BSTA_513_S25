@@ -1,0 +1,114 @@
+---
+title: "Lab 1: Feedback and Discussion"
+author: "Nicky Wakim"
+title-slide-attributes:
+    data-background-color: "#C2352F"
+date: "04/16/2025"
+format: 
+  revealjs:
+    theme: "../simple_NW.scss"
+    chalkboard: true
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "Lab 1: Feedback and Discussion"
+    html-math-method: mathjax
+    highlight-style: ayu
+execute:
+  echo: true
+  freeze: auto  # re-render only when source changes
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(gt)
+library(janitor)
+library(rstatix)
+library(knitr)
+library(gtsummary)
+library(moderndive)
+library(broom) 
+library(here) 
+library(ggplot2)
+library(ggpubr)
+library(boot) # for inv.logit()
+library(lmtest)
+library(epiDisplay)
+
+```
+
+## Notes from me and the TAs
+
+- Using `ANY_HARDSHIP` or `MULT_HARDSHIPS`
+  - If you look at the User Guide, this involves information from food security
+  - We need to adapt the variable to exclude food security: use `case_when()` to construct it
+- Using "Survey Questions"
+  - Be very careful of this! 
+- Activity 2.9: List any categorical variables that have less than 100 observations in a group
+  - Not the number of observations for an entire variable, but check each level/group of the variable!
+- Do not use multiple variables that capture the same information
+  - Example: `PPINCIMP` and `FPL50_100`
+- Do NOT use variables that are measuring missing data unless you are interested in how missingness is related to the outcome
+  - Example: `FAMSIZE_MISS`, `NUM_CHILD_HH_MISS`
+- The TAs left comments in the rubric! Please look at them! 
+
+## A note on the "Survey Questions"
+
+- I said not to use the variables under this, but you can if you found one to be very interesting
+- You just need to be extra cautious using these because they are not as nicely packaged/processed
+- And some of them go into other variables!! 
+  - Like `UNMETCARE_Y` already includes the survey questions about health care
+- Some of the variable have A LOT of missing data
+
+## Get into groups of 2-4
+
+- No more than 4! 
+- Introduce yourself if you do not know each other
+- Share you html documents with each other (email, airdrop, etc.)
+
+```{r}
+#| echo: false
+countdown::countdown(6)
+```
+
+## Introduce Research Question
+
+- Share your research question with each other! 
+  - Should be using the same outcome + your main variable
+- Share your other variables
+- Is everyone using the appropriate variables?
+- Did anyone see any potential issues with how many individuals are in each category of a variable?
+
+ 
+
+- If time, did anyone want to use `ANY_HARDSHIP` or `MULT_HARDSHIPS`? How would you construct these variables?
+
+```{r}
+#| echo: false
+countdown::countdown(15)
+```
+
+## Double check code and saved data
+
+- Did everyone in the group successfully save the dataset?
+- Can you open it right now?
+
+```{r}
+#| echo: false
+countdown::countdown(5)
+```
+
+## Compiled introductions
+
+- What major points did you include in your introduction?
+- Would you change anything after discussing with your group?
+
+```{r}
+#| echo: false
+countdown::countdown(10)
+```

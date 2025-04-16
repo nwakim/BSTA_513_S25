@@ -3,7 +3,7 @@ title: "Lesson 7: Prediction and Visualization in Simple Logistic Regression"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "04/22/2024"
+date: "04/16/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -72,21 +72,18 @@ tidy(bc_reg, conf.int=T) %>% gt() %>% tab_options(table.font.size = 38) %>%
 
  
 
+::: columns
+::: column
 -   Fitted logistic regression model: $$\text{logit}(\widehat{\pi}(Age)) = `r round(summary(bc_reg)$coefficients[1,1], 3)` + `r round(summary(bc_reg)$coefficients[2,1], 3)` \cdot Age$$
-
-## Recall our example: Late stage breast cancer diagnosis 
-
--   Fitted logistic regression model: $$\text{logit}(\widehat{\pi}(Age)) = `r round(summary(bc_reg)$coefficients[1,1], 3)` + `r round(summary(bc_reg)$coefficients[2,1], 3)` \cdot Age$$
-
- 
- 
- 
-
--   Now we want to caclulate the predicted/estimated probability from the above fitted model
+:::
+::: column
+-   Now we want to calculate the predicted/estimated probability from the above fitted model
 
 -   We will need to calculate the predicted probability and its confidence interval
 
     -   Then we will visualize the fitted probability
+:::
+:::
 
 # Learning Objectives
 
@@ -102,11 +99,11 @@ tidy(bc_reg, conf.int=T) %>% gt() %>% tab_options(table.font.size = 38) %>%
 
 -   We may be interested in predicting probability of having a late stage breast cancer diagnosis for a specific age.
 -   The predicted probability is the estimated probability of having the event for given values of covariate(s)
--   In simple logistic regression, the fitted model is:$$\text{logit}(\widehat{\pi}(X)) = \hat{\beta}_0 +{\hat{\beta}}_1X $$
+-   In simple logistic regression, the fitted model is:$$\text{logit}(\widehat{\pi}(X)) = \widehat{\beta}_0 +{\widehat{\beta}}_1X $$
 
--   We can convert it to the predicted probability: $$\hat{\pi}\left(X\right)=\frac{\exp({\hat{\beta}}_0+{\hat{\beta}}_1X)}{1+\exp({\hat{\beta}}_0+{\hat{\beta}}_1X)}$$
+-   We can convert it to the predicted probability: $$\widehat{\pi}\left(X\right)=\frac{\exp({\widehat{\beta}}_0+{\widehat{\beta}}_1X)}{1+\exp({\widehat{\beta}}_0+{\widehat{\beta}}_1X)}$$
 
-    -   This is an inverse logit calculation
+    -   This is an **inverse logit** calculation
 
 -   We can calculate this using the the `predict()` function like in BSTA 512
 
@@ -188,7 +185,7 @@ $$\left(\dfrac{\exp\left[\text{logit}_{L}\right]}{1 + \exp\left[\text{logit}_{L}
 Predicting probability of late stage breast cancer diagnosis
 :::
 ::: ex-cont
-For someone 50 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
+For someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
 :::
 :::
 
@@ -198,8 +195,8 @@ For someone 50 years old, what is the predicted probability for late stage breas
 2. Check if we can use Normal approximation
 3. Calculate confidence interval
 
-    a.   Using logit scale then converting
-    b.   Using Normal approximation 
+    a.   Using logit scale then convert to probability scale
+    b.   Using Normal approximation directly on probability scale
     
 4. Interpret results
 
@@ -210,7 +207,7 @@ For someone 50 years old, what is the predicted probability for late stage breas
 Predicting probability of late stage breast cancer diagnosis
 :::
 ::: ex-cont
-For someone 50 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
+For someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
 :::
 :::
 
@@ -230,7 +227,7 @@ pred1
 Predicting probability of late stage breast cancer diagnosis
 :::
 ::: ex-cont
-For someone 50 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
+For someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
 :::
 :::
 
@@ -254,7 +251,7 @@ We can use the Normal approximation!
 Predicting probability of late stage breast cancer diagnosis
 :::
 ::: ex-cont
-For someone 50 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
+For someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
 :::
 :::
 
@@ -265,10 +262,24 @@ pred1 = predict(bc_reg, newdata = newdata, se.fit = T, type = "link")
 LL_CI1 = pred1$fit - qnorm(1-0.05/2) * pred1$se.fit
 UL_CI1 = pred1$fit + qnorm(1-0.05/2) * pred1$se.fit
 pred_link = c(Pred = pred1$fit, LL_CI1, UL_CI1)
-
-(exp(pred_link)/(1+exp(pred_link))) %>% round(., digits=3)
-inv.logit(pred_link) %>% round(., digits=3)
 ```
+
+::: columns
+::: column
+- Using definition of inverse logit
+```{r}
+(exp(pred_link)/(1+exp(pred_link))) %>% 
+  round(., digits=3)
+```
+:::
+::: column
+- Using inverse logit in `boot` library
+```{r}
+inv.logit(pred_link) %>% 
+  round(., digits=3)
+```
+:::
+:::
 
 ## Example: Late stage breast cancer diagnosis
 
@@ -277,7 +288,7 @@ inv.logit(pred_link) %>% round(., digits=3)
 Predicting probability of late stage breast cancer diagnosis
 :::
 ::: ex-cont
-For someone 50 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
+For someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
 :::
 :::
 
@@ -299,7 +310,7 @@ c(Pred = pred$fit, LL_CI, UL_CI) %>% round(digits=3)
 Predicting probability of late stage breast cancer diagnosis
 :::
 ::: ex-cont
-For someone 50 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
+For someone 60 years old, what is the predicted probability for late stage breast cancer diagnosis (with confidence intervals)?
 :::
 :::
 
@@ -309,27 +320,27 @@ For someone who is 60 years old, the predicted probability of late stage breast 
 
 ## Predicted/Estimated probability
 
--   Predicted probability is NOT our predicted outcome
+-   [Predicted *probability*]{style="color:#4472C4"} is **NOT** our [predicted *outcome*]{style="color:#D6295E"}
 
-    -   We cannot interpret it as the predicted $Y$ for individuals with certain covariate values
+    -   We **cannot interpret** it as the predicted $Y$ for individuals with certain covariate values
 
-    -   Example: our predicted probability does not tell us that one individual will or will not be diagnosed with late stage breast cancer
+    -   Example: our [predicted probability]{style="color:#4472C4"} does not tell us if one individual will or will not be diagnosed with late stage breast cancer
 
  
 
--   The predicted probability is the estimate of the mean (i.e., proportion) of individuals at a certain age who are diagnosed with late stage breast cancer
+-   The [predicted probability]{style="color:#4472C4"} is the estimate of the **mean** (i.e., proportion) of individuals at a certain age who are diagnosed with late stage breast cancer
 
--   We can use the predicted/estimated probability to predict the outcome
+-   We can use the [predicted/estimated probability]{style="color:#4472C4"} to **predict** the [outcome]{style="color:#D6295E"}
 
 ## Predicted outcome
 
--   Typically, the predicted probability is the **most important thing to use in a clinical setting**
+-   Typically, the [predicted probability]{style="color:#4472C4"} is the **most important thing to use in a clinical setting**
 
  
 
 -   If you ever need to **predict the outcome itself** (from logistic regression with binary outcome):
 
-    -   Remember that the predicted probability can be used in a Bernoulli (or Binomial with $n=1$) distribution to find the predicted outcome
+    -   Remember that the [predicted probability]{style="color:#4472C4"} can be used in a Bernoulli (or Binomial with $n=1$) distribution to find the [predicted *outcome*]{style="color:#D6295E"}
     
 -   If outcome is something like counts, then we would use a Poisson distribution
 
@@ -364,10 +375,10 @@ bc_aug = augment(bc_reg)
 
 ```{r}
 library(boot) # for inv.logit()
-prob_stage = ggplot(data = bc_aug, aes(x=Age_c, y = inv.logit(.fitted))) + 
+prob_stage = ggplot(data = bc_aug, aes(x=Age_c + mean(bc$Age), y = inv.logit(.fitted))) + 
   # geom_point(size = 4, color = "#70AD47", shape = 1) +
   geom_smooth(size = 4, color = "#70AD47") +
-  labs(x = "Age centered (yrs)", 
+  labs(x = "Age (yrs)", 
        y = "Estimated probability of \n Late stage BC diagnosis")  + 
   theme_classic() +
   theme(axis.title = element_text(size = 30), 
@@ -398,7 +409,7 @@ pred2 = predict(bc_reg, newdata = newdata2, se.fit = T, type = "link")
 LL_CI1 = pred2$fit - qnorm(1-0.05/2) * pred2$se.fit
 UL_CI1 = pred2$fit + qnorm(1-0.05/2) * pred2$se.fit
 
-with_CI = data.frame(Age_c = newdata2$Age_c, 
+with_CI = data.frame(Age = newdata2$Age_c + mean(bc$Age), # back to age 
                      pred = inv.logit(pred2$fit), 
                      LL = inv.logit(LL_CI1), 
                      UL = inv.logit(UL_CI1))
@@ -407,10 +418,10 @@ with_CI = data.frame(Age_c = newdata2$Age_c,
 ## We can add the confidence intervals (2/3)
 
 ```{r}
-prob_stage_CI = ggplot(data = with_CI, aes(x = Age_c)) +
+prob_stage_CI = ggplot(data = with_CI, aes(x = Age)) +
   geom_ribbon(aes(ymin = LL, ymax = UL), fill = "grey") +
-  geom_smooth(aes(x=Age_c, y = pred), size = 1, color = "#70AD47") +
-  labs(x = "Age centered (yrs)", 
+  geom_smooth(aes(x=Age, y = pred), size = 1, color = "#70AD47") +
+  labs(x = "Age (yrs)", 
        y = "Estimated probability of \n Late stage BC diagnosis")  + 
   theme_classic() +
   theme(axis.title = element_text(size = 30), 
@@ -427,9 +438,6 @@ prob_stage_CI = ggplot(data = with_CI, aes(x = Age_c)) +
 #| fig-height: 7
 prob_stage_CI
 ```
-
-## Poll Everywhere Question
-
 
 ## Visualization of observed outcome and fitted model{.smaller}
 
@@ -506,9 +514,16 @@ log_odds_stage = ggplot(data = bc_aug, aes(x=Age_c, y = .fitted)) +
 ggarrange(stage, log_odds_stage, prob_stage, nrow=1)
 ```
 
-## Visualization of odds ratios?
+::: columns
+::: {.column width="43%"}
 
-- We will discuss this more on Wednesday when we look at interpretations of ORs
+:::
+::: {.column width="57%"}
+::: hl3
+[These two visualizations will be helpful when we discuss interactions!]{style="font-size:1.5em;"}
+:::
+:::
+:::
 
 # Learning Objectives
 

@@ -1,0 +1,29 @@
+---
+title: "Key Info and Announcements"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Announcements
+
+- Idk? We're having our lab discussion today
+- SPH pop up shop is open through May 15
+  - Link: <https://www.promoplace.com/ohsu-psu-soph-company>
+  - There's a flat rate on shipping... boo
+    - We could do a class order and share the shipping cost??
+
+## Key Dates
+
+- Homework 1 due 4/18
+- Quiz 1 opens on 4/23
+- Lab 2 due 4/25
+
+## Last class
+
+- Discussed how to interpret the estimated regression coefficients and the estimated odds ratios from our regression!
+  - Did this for a continuous variable, binary variable, and multi-level cateogorical variable
+- Need to finish up that lecture!
