@@ -7159,5 +7159,47 @@
     "title": "Lab 1: Feedback and Discussion",
     "section": "Compiled introductions",
     "text": "Compiled introductions\n\nWhat major points did you include in your introduction?\nWould you change anything after discussing with your group?\n\n\n\n\n−+\n10:00"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "geom_ribbon() can be used to add any range of values. In this case, we used geom_ribbon() with our calculated confidence intervals, so it is showing the confidence intervals. It will not automatically do this.\n\n\n\n\n\n\nSlide 13?"
+  },
+  {
+    "objectID": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html#muddy-points-from-spring-2025",
+    "href": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html#muddy-points-from-spring-2025",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "geom_ribbon() can be used to add any range of values. In this case, we used geom_ribbon() with our calculated confidence intervals, so it is showing the confidence intervals. It will not automatically do this.\n\n\n\n\n\n\nSlide 13?"
+  },
+  {
+    "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html",
+    "href": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”"
+  },
+  {
+    "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html#announcements",
+    "href": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html#announcements",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion_muddy_points.html",
+    "href": "lessons/L01_Discussion/L01_Discussion_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "These variables may be integrated into other variables already. They have not been processed by the survey designers, so we need to be cautious and think extra critically if we use them!"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion_muddy_points.html#muddy-points-from-spring-2025",
+    "href": "lessons/L01_Discussion/L01_Discussion_muddy_points.html#muddy-points-from-spring-2025",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "These variables may be integrated into other variables already. They have not been processed by the survey designers, so we need to be cautious and think extra critically if we use them!"
   }
 ]

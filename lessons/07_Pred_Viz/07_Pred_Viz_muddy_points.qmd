@@ -11,6 +11,16 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### 1. `geom_ribbon()` to add bands: is that just to view the range of values and or confidence interval?
+
+`geom_ribbon()` can be used to add any range of values. In this case, we used `geom_ribbon()` with our calculated confidence intervals, so it is showing the confidence intervals. It will not automatically do this.
+
+### 2. I had trouble grasping what it means that the predicted probability is not the same as the predicted outcome? Is it because the outcome is calculated differently?
+
+### 3. Could you please describe why we need to create the new dataframe with the age variable? 
+
+Slide 13?
+
 ## Muddy Points from Spring 2024
 
 None?? Wowza!
