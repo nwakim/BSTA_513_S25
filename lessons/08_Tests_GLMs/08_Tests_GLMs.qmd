@@ -95,7 +95,7 @@ bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1,
 
 ## Revisit the likelihood function
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   [Likelihood function:]{style="color:#F6C342; font-weight: bold;"} expresses the probability of the observed data as a function of the unknown parameters
 
@@ -117,7 +117,7 @@ bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1,
 
 ![](./images/like_fn.png){fig-align="center"}
 :::
-:::
+:::::
 
 ## Introduction to three tests in GLM
 
@@ -146,7 +146,7 @@ bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1,
 
 ## Revisit previous model with late stage BC diagnosis and age
 
-::: columns
+::::: columns
 ::: {.column width="55%"}
 -   Simple logistic regression model: $$\text{logit}(\pi(Age)) = \beta_0 + \beta_1 \cdot Age$$
 :::
@@ -156,7 +156,7 @@ bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1,
 
 Don't forget: $\pi(Age) = P(Y=1 | Age)$
 :::
-:::
+:::::
 
 ```{r}
 bc_reg = glm(Late_stage_diag ~ Age_c, data = bc, family = binomial)
@@ -224,7 +224,7 @@ summary(bc_reg)
 
 ## Example: BC diagnosis and age {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
 
-::: example
+::::: example
 ::: ex-title
 Wald test for age coefficient
 :::
@@ -232,9 +232,9 @@ Wald test for age coefficient
 ::: ex-cont
 Interpret the coefficient for age in our model of late stage breast cancer diagnosis.
 :::
-:::
+:::::
 
-::: columns
+:::::::: columns
 ::: {.column width="60%"}
 **Needed steps:**
 
@@ -244,8 +244,8 @@ Interpret the coefficient for age in our model of late stage breast cancer diagn
 4.  Write a **conclusion** to the hypothesis test
 :::
 
-::: {.column width="40%"}
-::: proof1
+:::::: {.column width="40%"}
+::::: proof1
 ::: proof-title
 Note
 :::
@@ -253,13 +253,13 @@ Note
 ::: proof-cont
 I don't want us to get fixated on this interpretation. This is more to introduce the process, BUT it's MUCH better to interpret the coefficient in terms of OR (next class).
 :::
-:::
-:::
-:::
+:::::
+::::::
+::::::::
 
 ## Example: BC diagnosis and age {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
 
-::: example
+::::: example
 ::: ex-title
 Wald test for age coefficient
 :::
@@ -267,7 +267,7 @@ Wald test for age coefficient
 ::: ex-cont
 Interpret the coefficient for age in our model of late stage breast cancer diagnosis.
 :::
-:::
+:::::
 
 1.  Set the **level of significance** $\alpha$ $$\alpha=0.05$$
 2.  Specify the **null** ( $H_0$ ) and **alternative** ( $H_A$ ) **hypotheses**
@@ -279,7 +279,7 @@ H_1 &: \beta_{Age} \neq 0 \\
 
 ## Example: BC diagnosis and age {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
 
-::: example
+::::: example
 ::: ex-title
 Wald test for age coefficient
 :::
@@ -287,7 +287,7 @@ Wald test for age coefficient
 ::: ex-cont
 Interpret the coefficient for age in our model of late stage breast cancer diagnosis.
 :::
-:::
+:::::
 
 3.  Calculate the **confidence interval** and **determine if it overlaps with null**
 
@@ -300,7 +300,7 @@ tidy(bc_reg, conf.int=T) %>% gt() %>% tab_options(table.font.size = 35) %>%
 
 ## Example: BC diagnosis and age {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
 
-::: example
+::::: example
 ::: ex-title
 Wald test for age coefficient
 :::
@@ -308,9 +308,9 @@ Wald test for age coefficient
 ::: ex-cont
 Interpret the coefficient for age in our model of late stage breast cancer diagnosis.
 :::
-:::
+:::::
 
-::: columns
+:::::::: columns
 ::: {.column width="60%"}
 4.  Write a **conclusion** to the hypothesis test
 
@@ -319,8 +319,8 @@ For every one year increase in age, the log-odds of late stage breast cancer dia
 There is sufficient evidence that age an breast cancer diagnosis are associated.
 :::
 
-::: {.column width="40%"}
-::: proof1
+:::::: {.column width="40%"}
+::::: proof1
 ::: proof-title
 Note
 :::
@@ -328,9 +328,9 @@ Note
 ::: proof-cont
 I don't want us to get fixated on this interpretation. This is more to introduce the process, BUT it's MUCH better to interpret the coefficient in terms of OR (next class).
 :::
-:::
-:::
-:::
+:::::
+::::::
+::::::::
 
 ## Poll Everywhere Question 2
 
@@ -359,7 +359,6 @@ I don't want us to get fixated on this interpretation. This is more to introduce
 ![](./images/score.png){fig-align="center"}
 
 # Learning Objectives
-
 
 1.  Use the Wald test to test the significance of an estimated coefficient through confidence intervals.
 
@@ -518,7 +517,7 @@ G&=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}
 
 ## Example: BC diagnosis and age {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
-::: example
+::::: example
 ::: ex-title
 LRT
 :::
@@ -526,7 +525,7 @@ LRT
 ::: ex-cont
 Determine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?
 :::
-:::
+:::::
 
 **Needed steps:**
 
@@ -537,7 +536,7 @@ Determine if the model including age is more likely than model without age. Aka:
 
 ## Example: BC diagnosis and age {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
-::: example
+::::: example
 ::: ex-title
 LRT
 :::
@@ -545,7 +544,7 @@ LRT
 ::: ex-cont
 Determine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?
 :::
-:::
+:::::
 
 1.  Set the **level of significance** $\alpha$ $$\alpha=0.05$$
 2.  Specify the **null** ( $H_0$ ) and **alternative** ( $H_A$ ) **hypotheses**
@@ -557,7 +556,7 @@ H_1 &: \beta_{Age} \neq 0 \\
 
 ## Example: BC diagnosis and age {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
-::: example
+::::: example
 ::: ex-title
 LRT
 :::
@@ -565,7 +564,7 @@ LRT
 ::: ex-cont
 Determine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?
 :::
-:::
+:::::
 
 3.  Calculate the **test statistic** and **p-value**
 
@@ -578,7 +577,7 @@ lmtest::lrtest(bc_age, bc_int)
 
 ## Example: BC diagnosis and age {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
-::: example
+::::: example
 ::: ex-title
 LRT
 :::
@@ -586,14 +585,13 @@ LRT
 ::: ex-cont
 Determine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?
 :::
-:::
+:::::
 
 4.  Write a **conclusion** to the hypothesis test
 
 We reject the null hypothesis that the coefficient corresponding to age is 0 ($p-value << 0.05$). There is sufficient evidence that there is an association between age and late stage breast cancer diagnosis.
 
 # Learning Objectives
-
 
 1.  Use the Wald test to test the significance of an estimated coefficient through confidence intervals.
 
@@ -647,23 +645,23 @@ We reject the null hypothesis that the coefficient corresponding to age is 0 ($p
 
 ## Tests and what they're used for
 
-|                                                                                                  | Wald test | Score test | LRT |
-|-------------------------|----------------|----------------|----------------|
-| Used to test significance of single coefficient                                                  |           |            |     |
-| *Can be* used to report confidence interval for a single coefficient                             |           |            |     |
-| Confidence interval reported by R for a single coefficient (and most commonly used)              |           |            |     |
-| Use to test significance/contribution to outcome prediction of multi-level categorical covariate |           |            |     |
-| Used for comparing two models with different (but nested) covariates                             |           |            |     |
+|   | Wald test | Score test | LRT |
+|----|----|----|----|
+| Used to test significance of single coefficient |  |  |  |
+| *Can be* used to report confidence interval for a single coefficient |  |  |  |
+| Confidence interval reported by R for a single coefficient (and most commonly used) |  |  |  |
+| Use to test significance/contribution to outcome prediction of multi-level categorical covariate |  |  |  |
+| Used for comparing two models with different (but nested) covariates |  |  |  |
 
 ## Tests and what they're used for {visibility="hidden"}
 
-|                                                                                                  | Wald test                                                                | Score test                                                               | LRT                                                                      |
-|-------------------------|----------------|----------------|----------------|
-| Used to test significance of single coefficient                                                  | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   |
-| *Can be* used to report confidence interval for a single coefficient                             | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   |
-| Confidence interval reported by R for a single coefficient (and most commonly used)              | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} |
-| Use to test significance/contribution to outcome prediction of multi-level categorical covariate | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   |
-| Used for comparing two models with different (but nested) covariates                             | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"}   |
+|   | Wald test | Score test | LRT |
+|----|----|----|----|
+| Used to test significance of single coefficient | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} |
+| *Can be* used to report confidence interval for a single coefficient | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} |
+| Confidence interval reported by R for a single coefficient (and most commonly used) | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} |
+| Use to test significance/contribution to outcome prediction of multi-level categorical covariate | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} |
+| Used for comparing two models with different (but nested) covariates | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} |
 
 ## So how would the Wald test and LRT show up in research?
 

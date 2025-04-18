@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -173,10 +202,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="i-had-trouble-grasping-what-it-means-that-the-predicted-probability-is-not-the-same-as-the-predicted-outcome-is-it-because-the-outcome-is-calculated-differently" class="level3">
 <h3 class="anchored" data-anchor-id="i-had-trouble-grasping-what-it-means-that-the-predicted-probability-is-not-the-same-as-the-predicted-outcome-is-it-because-the-outcome-is-calculated-differently">2. I had trouble grasping what it means that the predicted probability is not the same as the predicted outcome? Is it because the outcome is calculated differently?</h3>
+<p>Our outcome, <span class="math inline">\(Y\)</span>, is a binary value. We can have <span class="math inline">\(Y=1\)</span> or <span class="math inline">\(Y=0\)</span>. The predicted probability is the estimated <span class="math inline">\(P(Y=1)\)</span>, the probability that <span class="math inline">\(Y\)</span> is 1. So the probability is related to the outcome, but it is not the outcome itself.</p>
 </section>
 <section id="could-you-please-describe-why-we-need-to-create-the-new-dataframe-with-the-age-variable" class="level3">
 <h3 class="anchored" data-anchor-id="could-you-please-describe-why-we-need-to-create-the-new-dataframe-with-the-age-variable">3. Could you please describe why we need to create the new dataframe with the age variable?</h3>
-<p>Slide 13?</p>
+<p>I think this is referring to slide 23? And I think the <code>newdata2</code> variable?</p>
+<p>I create a new dataset with the age so that I could create a vector of equally spaced ages. The original observations were not necessarily evenly distributed in the range of age values. By making a vector of ages, I can create a smooth line for the predicted probability across ages.</p>
 </section>
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">
