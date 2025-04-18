@@ -1,9 +1,9 @@
 ---
-title: "Lesson 6: Tests for GLMs using Likelihood function"
+title: "Lesson 8: Tests for GLMs using Likelihood function"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "04/17/2024"
+date: "04/21/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -12,7 +12,7 @@ format:
     show-slide-number: all
     width: 1955
     height: 1100
-    footer: "Lesson 6: Tests for GLMs using Likelihood function"
+    footer: "Lesson 8: Tests for GLMs using Likelihood function"
     html-math-method: mathjax
     highlight-style: ayu
 execute:
@@ -99,7 +99,7 @@ bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1,
 ::: {.column width="50%"}
 -   [Likelihood function:]{style="color:#F6C342; font-weight: bold;"} expresses the probability of the observed data as a function of the unknown parameters
 
-    -   Function that enumerates the likelihood (similar to probability) that we observe the data across the range of potential values of our coefficients
+    -   Function that enumerates the likelihood (similar to probability) that we observe the data **across the range of potential values of our coefficients**
 
 -   We often compare likelihoods to see what estimates are more likely given our data
 
@@ -159,8 +159,9 @@ Don't forget: $\pi(Age) = P(Y=1 | Age)$
 :::::
 
 ```{r}
-bc_reg = glm(Late_stage_diag ~ Age_c, data = bc, family = binomial)
-summary(bc_reg)
+bc_reg = bc %>% glm(formula = Late_stage_diag ~ Age_c, family = binomial)
+tidy(bc_reg, conf.int=T) %>% gt() %>% tab_options(table.font.size = 38) %>%
+  fmt_number(decimals = 3)
 ```
 
 # Learning Objectives
@@ -181,23 +182,27 @@ summary(bc_reg)
 
     -   But slightly different because it based in our likelihood function
 
--   Assumes test statistic W follows a standard normal distribution under the null hypothesis
+-   Assumes test statistic $W$ follows a standard normal distribution under the null hypothesis
 
--   Test statistic: $$W=\frac{{\hat{\beta}}_j}{se({\hat{\beta}}_j)}\sim N(0,1)$$
+-   Test statistic: $$W=\frac{{\widehat{\beta}}_j}{se({\widehat{\beta}}_j)}\sim N(0,1)$$
 
     -   where $\widehat{\beta}_j$ is a MLE of coefficient $j$
 
--   95% Wald confidence interval: $${\hat{\beta}}_1\pm1.96 \cdot SE_{{\hat{\beta}}_j}$$
+-   95% Wald confidence interval: $${\widehat{\beta}}_1\pm1.96 \cdot SE_{{\widehat{\beta}}_j}$$
 
 -   The Wald test is a routine output in R (`summary()` of `glm()` output)
 
-    -   Includes $SE_{{\hat{\beta}}_j}$ and can easily find confidence interval with `tidy()`
+    -   Includes $SE_{{\widehat{\beta}}_j}$ and can easily find confidence interval with `tidy()`
 
 ## Wald test (2/3) {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
+
+- Wald test measures the "difference" between $\beta_1=0$ and $\widehat{\beta}_1$ on the x-axis
 
 ![](./images/like_fn.png){fig-align="center"}
 
 ## Wald test (3/3) {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
+
+- Wald test measures the "difference" between $\beta_1=0$ and $\widehat{\beta}_1$ on the x-axis
 
 ![](./images/wald.png){fig-align="center"}
 
@@ -348,13 +353,25 @@ I don't want us to get fixated on this interpretation. This is more to introduce
 
 ## Score test {background-image="./images/title_yell.png" background-size="2500px 150px" background-position="top"}
 
--   Score test does not require the computation of MLE for $\beta_1$, while both likelihood test and Wald test does
+-   Score test **does not require the computation of MLE** for $\beta_1$, while both likelihood test and Wald test do
 
     -   Only need to know $\beta_1$ under the null
 
+ 
+
 -   Score test is based on the first and second derivatives of the log-likelihood under the null hypothesis: $$S=\frac{\sum_{i=1}^{n}{x_i(y_i-\bar{y})}}{\sqrt{\bar{y}(1-\bar{y})\sum_{i=1}^{n}\left(x_i-\bar{x}\right)^2}} \sim N(0,1)$$
 
+ 
+
+- Translates to the **slope of the tangent** line at $\beta_1=0$
+
+ 
+
+- In my experience, this is the test I've seen the least: won't show an example with it
+
 ## Score test {background-image="./images/title_yell.png" background-size="2500px 150px" background-position="top"}
+
+- Score test measures the "difference" between $\beta_1=0$ and $\widehat{\beta}_1$ by measuring slope of the tangent line at $\beta_1=0$
 
 ![](./images/score.png){fig-align="center"}
 
@@ -372,44 +389,34 @@ I don't want us to get fixated on this interpretation. This is more to introduce
 
 ## Likelihood ratio test (1/3) {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
--   Likelihood ratio test answers the question:
+-   Likelihood ratio test (LRT) answers the question:
 
     -   For a specific covariate, **which model tell us more about the outcome variable**: the model including the covariate or the model omitting the covariate?
     -   Aka: Which model is more likely given our data: model including the covariate or the model omitting the covariate?
 
  
 
--   Test a single coefficient by comparing different models
-
-    -   **Very similar to the F-test**
+-   **Very similar to the F-test**: test significance by comparing different, nested models
 
  
 
--   Important: LRT can be used conduct hypothesis tests for **multiple coefficients**
+-   Important: LRT can be used conduct hypothesis tests for a **single coefficient** or **multiple coefficients** 
 
     -   Just like F-test, we can test a single coefficient, continuous/binary covariate, multi-level covariate, or multiple covariates
 
 ## Likelihood ratio test (2/3) {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
--   To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate $$G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)$$
+-   To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the **deviance (D) with and without the covariate** $$G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)$$
 
  
 
 -   For a continuous or binary variable, this is equivalent to test: $H_0: \beta_j = 0$ vs. $H_1: \beta_j \neq 0$
 
--   Test statistic for LRT: $$G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]$$
-
-## Likelihood ratio test (2/3) {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
-
--   To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate $$G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)$$
-
- 
-
--   For a continuous or binary variable, this is equivalent to test: $H_0: \beta_j = 0$ vs. $H_1: \beta_j \neq 0$
-
--   Test statistic for LRT: $$G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]$$
+-   Test statistic for LRT: $$G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\widehat{\beta}}_0,{\widehat{\beta}}_1\right)}{l({\widehat{\beta}}_0)}\right]$$
 
 ![](./images/pause.png){.absolute bottom="7%" right="0%" width="300" height="300"}
+
+
 
 ## LRT: what is Deviance? {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
@@ -447,14 +454,15 @@ I don't want us to get fixated on this interpretation. This is more to introduce
 
  
 
--   We ARE comparing the Deviance of the model with x and the model without x
+-   We ARE comparing the Deviance of the model with $X$ and the model without $X$
 
     -   We just use the saturated model to calculate Deviance
     -   Both are considered fitted models with their own respective Deviance
 
  
 
--   So our LRT is: $$G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)$$
+-   So our LRT statistic is: $$G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)$$ 
+-   But deviance is calculated as: $$D=-2[L_{\text{fitted}} - L_{\text{saturated}}]$$
 
 ![](./images/tiny_pause.png){.absolute top="83%" right="0%" width="120" height="120"}
 
@@ -465,7 +473,7 @@ G&=D\left(\text{model without } x\right)-D\left(\text{model with }x\right) \\
 G&=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of saturated model}}\right]-\left(-2ln\left[\frac{\text{likelihood of model with } x}{\text{likelihood of saturated model}}\right]\right) \\
 G&=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of saturated model}}\times\frac{\text{likelihood of saturated model}}{\text{likelihood of model with } x}\right] \\
 G&=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of model with }}\right] \\
-G&=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]
+G&=2ln\left[\frac{l\left({\widehat{\beta}}_0,{\widehat{\beta}}_1\right)}{l({\widehat{\beta}}_0)}\right]
 \end{aligned}$$
 
 ![](./images/tiny_pause.png){.absolute top="83%" right="0%" width="120" height="120"}
@@ -474,13 +482,12 @@ G&=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}
 
 ## Likelihood ratio test (2/3) {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
--   To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate $$G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)$$
-
+-   To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the **deviance (D) with and without the covariate** $$G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)$$
  
 
 -   For a continuous or binary variable, this is equivalent to test: $H_0: \beta_j = 0$ vs. $H_1: \beta_j \neq 0$
 
--   Test statistic for LRT: $$G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]$$
+-   Test statistic for LRT: $$G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\widehat{\beta}}_0,{\widehat{\beta}}_1\right)}{l({\widehat{\beta}}_0)}\right]$$
 
 ![](./images/play.png){.absolute bottom="7%" right="0%" width="300" height="300"}
 
@@ -494,7 +501,13 @@ G&=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}
 
 -   If we are testing a single coefficient, like age, then $df=1$
 
+ 
+
+- We can use the `pchisq()` if you calculate $G$ first, but there's an R function to run an LRT 
+
 ## Likelihood ratio test {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
+
+- Likelihood ratio test measures the **difference of likelihoods** (y-axis) between $\beta_1=0$ and $\widehat{\beta}_1$
 
 ![](./images/lrt.png){fig-align="center"}
 
@@ -630,7 +643,7 @@ We reject the null hypothesis that the coefficient corresponding to age is 0 ($p
 
     -   [Score test]{style="background-color:#F9E7B8;"}
 
-        -   Does not need to estimate two models (LRT does)
+        -   Does not need to estimate two models (LRT does), but does not incorporate info from MLE
         -   I don’t really see people use this…
 
 ## Poll Everywhere Question 4
@@ -646,17 +659,7 @@ We reject the null hypothesis that the coefficient corresponding to age is 0 ($p
 ## Tests and what they're used for
 
 |   | Wald test | Score test | LRT |
-|----|----|----|----|
-| Used to test significance of single coefficient |  |  |  |
-| *Can be* used to report confidence interval for a single coefficient |  |  |  |
-| Confidence interval reported by R for a single coefficient (and most commonly used) |  |  |  |
-| Use to test significance/contribution to outcome prediction of multi-level categorical covariate |  |  |  |
-| Used for comparing two models with different (but nested) covariates |  |  |  |
-
-## Tests and what they're used for {visibility="hidden"}
-
-|   | Wald test | Score test | LRT |
-|----|----|----|----|
+|-----------------------|-----------------|-----------------|-----------------|
 | Used to test significance of single coefficient | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} |
 | *Can be* used to report confidence interval for a single coefficient | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} |
 | Confidence interval reported by R for a single coefficient (and most commonly used) | [{{< iconify ic round-check-box size=70px >}}]{style="color:#70AD47;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=70px >}}]{style="color:#C2352F;"} |

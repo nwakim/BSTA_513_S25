@@ -25,6 +25,10 @@ I think this is referring to slide 23? And I think the `newdata2` variable?
 
 I create a new dataset with the age so that I could create a vector of equally spaced ages. The original observations were not necessarily evenly distributed in the range of age values. By making a vector of ages, I can create a smooth line for the predicted probability across ages.
 
+### 4. When would use `type=link`? Or would be always use response for probability scale?
+
+We use `type=link` when we want the predicted log-odds (on the logit scale) and `type=response` when we want the probability scale. Sometimes we need to work in the logit-scale before converting to the probability scale. In those cases, we will want the predicted log-odds!
+
 ## Muddy Points from Spring 2024
 
 None?? Wowza!

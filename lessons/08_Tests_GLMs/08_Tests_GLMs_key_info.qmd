@@ -16,7 +16,41 @@ editor_options:
   - June 4
   - June 18
   - IYKYK = "if you known you know"
+- Re: SPH pop up shop is open through May 15
+  - Link: <https://www.promoplace.com/ohsu-psu-soph-company>
+  - There's a flat rate on shipping... boo
+    - We could do a class order and share the shipping cost??
+  - **If you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time.**
+
+### Quiz 1 Info
+
+- **Quiz 1** will open on Wednesday at 3pm. 
+- The quiz will be administered over Sakai. 
+- The quiz has a total of 14 questions, with 12 multiple choice and 2 free response questions. 
+- Concepts and interpretations from Lessons 2-5 will be tested. You will be expected to interpret information from a contingency table and R output, but you will not be expected to interpret coefficients from logistic regression. Some additional information is in the following instructions. 
+- If you go to the "Tests & Quizzes" there is a Test Run for you to get familiar with the Sakai formatting.
+- Quiz 1 instructions:
+  - I have written a 30-minute quiz, but there is no time limit on the quiz. You will have from
+  - Wednesday at 3pm to Sunday at 11pm to finish the quiz.
+  - The quiz is open book and open notes. You may use books other than the class textbook, you may use anything on our course webpage, and you may use reference websites (like Wikipedia, Googling expected value of specific distribution, etc.).
+  - No cheating will be tolerated. Cheating includes:
+  - Using ChatGPT
+  - Copy and pasting the question from Sakai to any search engine. 
+  - Using question and answer threads typically seen on sites like StackExchange, WikiHow, Quora, Reddit, StackOverflow, Chegg, etc.    
+  - Asking other students, sharing quiz work or sharing quiz results. 
+  - Each question is worth 3 points, including multiple choice and free response questions.
 
 ## Key Dates
 
-## Last class
+- Quiz 1 opens on 4/23
+- Lab 2 due 4/25
+- HW 2 due 5/2
+
+## Last week
+
+- Looked at interpretations and predicted values for our *simple* fitted logistic regression model 
+- Discussed how to interpret the estimated regression coefficients and the estimated odds ratios from our regression!
+  - Did this for a continuous variable, binary variable, and multi-level categorical variable
+- Calculated predicted probability for an individual/observation with a specific covariate value
+- Calculated predicted probabilities across all values for a covariate (visualization part)
+- Calculated the confidence intervals for all of these to get a sense of the significance of these estimated coefficients, odds ratios, and probabilities

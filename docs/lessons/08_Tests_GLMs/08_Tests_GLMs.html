@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Nicky Wakim">
-  <meta name="dcterms.date" content="2024-04-17">
-  <title>Categorical Data Analysis – Lesson 6: Tests for GLMs using Likelihood function</title>
+  <meta name="dcterms.date" content="2025-04-21">
+  <title>Categorical Data Analysis – Lesson 8: Tests for GLMs using Likelihood function</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -196,7 +196,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#C2352F" class="quarto-title-block center">
-  <h1 class="title">Lesson 6: Tests for GLMs using Likelihood function</h1>
+  <h1 class="title">Lesson 8: Tests for GLMs using Likelihood function</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -206,7 +206,7 @@ Nicky Wakim
 </div>
 </div>
 
-  <p class="date">2024-04-17</p>
+  <p class="date">2025-04-21</p>
 </section>
 <section id="ive-never-explicitly-said-this" class="slide level2">
 <h2>I’ve never explicitly said this…</h2>
@@ -269,7 +269,7 @@ Nicky Wakim
 <ul>
 <li><p><span style="color:#F6C342; font-weight: bold;">Likelihood function:</span> expresses the probability of the observed data as a function of the unknown parameters</p>
 <ul>
-<li>Function that enumerates the likelihood (similar to probability) that we observe the data across the range of potential values of our coefficients</li>
+<li>Function that enumerates the likelihood (similar to probability) that we observe the data <strong>across the range of potential values of our coefficients</strong></li>
 </ul></li>
 <li><p>We often compare likelihoods to see what estimates are more likely given our data</p></li>
 <li><p>Plot to right is a simplistic view of likelihood</p>
@@ -330,27 +330,495 @@ Nicky Wakim
 <p>Don’t forget: <span class="math inline">\(\pi(Age) = P(Y=1 | Age)\)</span></p>
 </div></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>bc_reg <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb1-2"><a></a><span class="fu">summary</span>(bc_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = Late_stage_diag ~ Age_c, family = binomial, data = bc)
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>bc_reg <span class="ot">=</span> bc <span class="sc">%&gt;%</span> <span class="fu">glm</span>(<span class="at">formula =</span> Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">family =</span> binomial)</span>
+<span id="cb1-2"><a></a><span class="fu">tidy</span>(bc_reg, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">38</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="gukrvwmzxi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gukrvwmzxi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-Coefficients:
-             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -0.989422   0.023205  -42.64   &lt;2e-16 ***
-Age_c        0.056965   0.003204   17.78   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#gukrvwmzxi thead, #gukrvwmzxi tbody, #gukrvwmzxi tfoot, #gukrvwmzxi tr, #gukrvwmzxi td, #gukrvwmzxi th {
+  border-style: none;
+}
 
-(Dispersion parameter for binomial family taken to be 1)
+#gukrvwmzxi p {
+  margin: 0;
+  padding: 0;
+}
 
-    Null deviance: 11861  on 9999  degrees of freedom
-Residual deviance: 11510  on 9998  degrees of freedom
-AIC: 11514
+#gukrvwmzxi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 38px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
 
-Number of Fisher Scoring iterations: 4</code></pre>
+#gukrvwmzxi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gukrvwmzxi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gukrvwmzxi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gukrvwmzxi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gukrvwmzxi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gukrvwmzxi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gukrvwmzxi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gukrvwmzxi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gukrvwmzxi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gukrvwmzxi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gukrvwmzxi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gukrvwmzxi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gukrvwmzxi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gukrvwmzxi .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gukrvwmzxi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gukrvwmzxi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gukrvwmzxi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gukrvwmzxi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gukrvwmzxi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gukrvwmzxi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gukrvwmzxi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gukrvwmzxi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gukrvwmzxi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gukrvwmzxi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gukrvwmzxi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gukrvwmzxi .gt_left {
+  text-align: left;
+}
+
+#gukrvwmzxi .gt_center {
+  text-align: center;
+}
+
+#gukrvwmzxi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gukrvwmzxi .gt_font_normal {
+  font-weight: normal;
+}
+
+#gukrvwmzxi .gt_font_bold {
+  font-weight: bold;
+}
+
+#gukrvwmzxi .gt_font_italic {
+  font-style: italic;
+}
+
+#gukrvwmzxi .gt_super {
+  font-size: 65%;
+}
+
+#gukrvwmzxi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gukrvwmzxi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gukrvwmzxi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gukrvwmzxi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gukrvwmzxi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gukrvwmzxi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gukrvwmzxi .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gukrvwmzxi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gukrvwmzxi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p.value</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.low</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">(Intercept)</td>
+<td class="gt_row gt_right" headers="estimate">−0.989</td>
+<td class="gt_row gt_right" headers="std.error">0.023</td>
+<td class="gt_row gt_right" headers="statistic">−42.637</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">−1.035</td>
+<td class="gt_row gt_right" headers="conf.high">−0.944</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">Age_c</td>
+<td class="gt_row gt_right" headers="estimate">0.057</td>
+<td class="gt_row gt_right" headers="std.error">0.003</td>
+<td class="gt_row gt_right" headers="statistic">17.780</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">0.051</td>
+<td class="gt_row gt_right" headers="conf.high">0.063</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 </section></section>
@@ -375,24 +843,30 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <ul>
 <li>But slightly different because it based in our likelihood function</li>
 </ul></li>
-<li><p>Assumes test statistic W follows a standard normal distribution under the null hypothesis</p></li>
-<li><p>Test statistic: <span class="math display">\[W=\frac{{\hat{\beta}}_j}{se({\hat{\beta}}_j)}\sim N(0,1)\]</span></p>
+<li><p>Assumes test statistic <span class="math inline">\(W\)</span> follows a standard normal distribution under the null hypothesis</p></li>
+<li><p>Test statistic: <span class="math display">\[W=\frac{{\widehat{\beta}}_j}{se({\widehat{\beta}}_j)}\sim N(0,1)\]</span></p>
 <ul>
 <li>where <span class="math inline">\(\widehat{\beta}_j\)</span> is a MLE of coefficient <span class="math inline">\(j\)</span></li>
 </ul></li>
-<li><p>95% Wald confidence interval: <span class="math display">\[{\hat{\beta}}_1\pm1.96 \cdot SE_{{\hat{\beta}}_j}\]</span></p></li>
+<li><p>95% Wald confidence interval: <span class="math display">\[{\widehat{\beta}}_1\pm1.96 \cdot SE_{{\widehat{\beta}}_j}\]</span></p></li>
 <li><p>The Wald test is a routine output in R (<code>summary()</code> of <code>glm()</code> output)</p>
 <ul>
-<li>Includes <span class="math inline">\(SE_{{\hat{\beta}}_j}\)</span> and can easily find confidence interval with <code>tidy()</code></li>
+<li>Includes <span class="math inline">\(SE_{{\widehat{\beta}}_j}\)</span> and can easily find confidence interval with <code>tidy()</code></li>
 </ul></li>
 </ul>
 </section>
 <section id="wald-test-23" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Wald test (2/3)</h2>
+<ul>
+<li>Wald test measures the “difference” between <span class="math inline">\(\beta_1=0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> on the x-axis</li>
+</ul>
 
 <img data-src="./images/like_fn.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="wald-test-33" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Wald test (3/3)</h2>
+<ul>
+<li>Wald test measures the “difference” between <span class="math inline">\(\beta_1=0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> on the x-axis</li>
+</ul>
 
 <img data-src="./images/wald.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="wald-test-procedure-with-confidence-intervals" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
@@ -481,28 +955,28 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
 <li>Calculate the <strong>confidence interval</strong> and <strong>determine if it overlaps with null</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(epiDisplay)</span>
-<span id="cb3-2"><a></a>bc_reg <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb3-3"><a></a><span class="fu">tidy</span>(bc_reg, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(epiDisplay)</span>
+<span id="cb2-2"><a></a>bc_reg <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb2-3"><a></a><span class="fu">tidy</span>(bc_reg, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="ocxfzqqszf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ocxfzqqszf table {
+<div id="jnktrsojre" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jnktrsojre table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ocxfzqqszf thead, #ocxfzqqszf tbody, #ocxfzqqszf tfoot, #ocxfzqqszf tr, #ocxfzqqszf td, #ocxfzqqszf th {
+#jnktrsojre thead, #jnktrsojre tbody, #jnktrsojre tfoot, #jnktrsojre tr, #jnktrsojre td, #jnktrsojre th {
   border-style: none;
 }
 
-#ocxfzqqszf p {
+#jnktrsojre p {
   margin: 0;
   padding: 0;
 }
 
-#ocxfzqqszf .gt_table {
+#jnktrsojre .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -528,12 +1002,12 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-left-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_caption {
+#jnktrsojre .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ocxfzqqszf .gt_title {
+#jnktrsojre .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -545,7 +1019,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-bottom-width: 0;
 }
 
-#ocxfzqqszf .gt_subtitle {
+#jnktrsojre .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -557,7 +1031,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-top-width: 0;
 }
 
-#ocxfzqqszf .gt_heading {
+#jnktrsojre .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -569,13 +1043,13 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-right-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_bottom_border {
+#jnktrsojre .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_col_headings {
+#jnktrsojre .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -590,7 +1064,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-right-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_col_heading {
+#jnktrsojre .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -610,7 +1084,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   overflow-x: hidden;
 }
 
-#ocxfzqqszf .gt_column_spanner_outer {
+#jnktrsojre .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -622,15 +1096,15 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   padding-right: 4px;
 }
 
-#ocxfzqqszf .gt_column_spanner_outer:first-child {
+#jnktrsojre .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ocxfzqqszf .gt_column_spanner_outer:last-child {
+#jnktrsojre .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ocxfzqqszf .gt_column_spanner {
+#jnktrsojre .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -642,11 +1116,11 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   width: 100%;
 }
 
-#ocxfzqqszf .gt_spanner_row {
+#jnktrsojre .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ocxfzqqszf .gt_group_heading {
+#jnktrsojre .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,7 +1146,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   text-align: left;
 }
 
-#ocxfzqqszf .gt_empty_group_heading {
+#jnktrsojre .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -687,15 +1161,15 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   vertical-align: middle;
 }
 
-#ocxfzqqszf .gt_from_md > :first-child {
+#jnktrsojre .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ocxfzqqszf .gt_from_md > :last-child {
+#jnktrsojre .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ocxfzqqszf .gt_row {
+#jnktrsojre .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -714,7 +1188,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   overflow-x: hidden;
 }
 
-#ocxfzqqszf .gt_stub {
+#jnktrsojre .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -727,7 +1201,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   padding-right: 5px;
 }
 
-#ocxfzqqszf .gt_stub_row_group {
+#jnktrsojre .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -741,15 +1215,15 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   vertical-align: top;
 }
 
-#ocxfzqqszf .gt_row_group_first td {
+#jnktrsojre .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ocxfzqqszf .gt_row_group_first th {
+#jnktrsojre .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ocxfzqqszf .gt_summary_row {
+#jnktrsojre .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -759,16 +1233,16 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   padding-right: 5px;
 }
 
-#ocxfzqqszf .gt_first_summary_row {
+#jnktrsojre .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_first_summary_row.thick {
+#jnktrsojre .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ocxfzqqszf .gt_last_summary_row {
+#jnktrsojre .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -778,7 +1252,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_grand_summary_row {
+#jnktrsojre .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -788,7 +1262,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   padding-right: 5px;
 }
 
-#ocxfzqqszf .gt_first_grand_summary_row {
+#jnktrsojre .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -798,7 +1272,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-top-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_last_grand_summary_row_top {
+#jnktrsojre .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -808,11 +1282,11 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_striped {
+#jnktrsojre .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ocxfzqqszf .gt_table_body {
+#jnktrsojre .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -821,7 +1295,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-bottom-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_footnotes {
+#jnktrsojre .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -835,7 +1309,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-right-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_footnote {
+#jnktrsojre .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -844,7 +1318,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   padding-right: 5px;
 }
 
-#ocxfzqqszf .gt_sourcenotes {
+#jnktrsojre .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -858,7 +1332,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   border-right-color: #D3D3D3;
 }
 
-#ocxfzqqszf .gt_sourcenote {
+#jnktrsojre .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -866,72 +1340,72 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
   padding-right: 5px;
 }
 
-#ocxfzqqszf .gt_left {
+#jnktrsojre .gt_left {
   text-align: left;
 }
 
-#ocxfzqqszf .gt_center {
+#jnktrsojre .gt_center {
   text-align: center;
 }
 
-#ocxfzqqszf .gt_right {
+#jnktrsojre .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ocxfzqqszf .gt_font_normal {
+#jnktrsojre .gt_font_normal {
   font-weight: normal;
 }
 
-#ocxfzqqszf .gt_font_bold {
+#jnktrsojre .gt_font_bold {
   font-weight: bold;
 }
 
-#ocxfzqqszf .gt_font_italic {
+#jnktrsojre .gt_font_italic {
   font-style: italic;
 }
 
-#ocxfzqqszf .gt_super {
+#jnktrsojre .gt_super {
   font-size: 65%;
 }
 
-#ocxfzqqszf .gt_footnote_marks {
+#jnktrsojre .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ocxfzqqszf .gt_asterisk {
+#jnktrsojre .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ocxfzqqszf .gt_indent_1 {
+#jnktrsojre .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ocxfzqqszf .gt_indent_2 {
+#jnktrsojre .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ocxfzqqszf .gt_indent_3 {
+#jnktrsojre .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ocxfzqqszf .gt_indent_4 {
+#jnktrsojre .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ocxfzqqszf .gt_indent_5 {
+#jnktrsojre .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ocxfzqqszf .katex-display {
+#jnktrsojre .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ocxfzqqszf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jnktrsojre div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1024,15 +1498,29 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
 <section id="score-test" class="slide level2" data-background-image="./images/title_yell.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Score test</h2>
 <ul>
-<li><p>Score test does not require the computation of MLE for <span class="math inline">\(\beta_1\)</span>, while both likelihood test and Wald test does</p>
+<li><p>Score test <strong>does not require the computation of MLE</strong> for <span class="math inline">\(\beta_1\)</span>, while both likelihood test and Wald test do</p>
 <ul>
 <li>Only need to know <span class="math inline">\(\beta_1\)</span> under the null</li>
 </ul></li>
-<li><p>Score test is based on the first and second derivatives of the log-likelihood under the null hypothesis: <span class="math display">\[S=\frac{\sum_{i=1}^{n}{x_i(y_i-\bar{y})}}{\sqrt{\bar{y}(1-\bar{y})\sum_{i=1}^{n}\left(x_i-\bar{x}\right)^2}} \sim N(0,1)\]</span></p></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Score test is based on the first and second derivatives of the log-likelihood under the null hypothesis: <span class="math display">\[S=\frac{\sum_{i=1}^{n}{x_i(y_i-\bar{y})}}{\sqrt{\bar{y}(1-\bar{y})\sum_{i=1}^{n}\left(x_i-\bar{x}\right)^2}} \sim N(0,1)\]</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Translates to the <strong>slope of the tangent</strong> line at <span class="math inline">\(\beta_1=0\)</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>In my experience, this is the test I’ve seen the least: won’t show an example with it</li>
 </ul>
 </section>
 <section id="score-test-1" class="slide level2" data-background-image="./images/title_yell.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Score test</h2>
+<ul>
+<li>Score test measures the “difference” between <span class="math inline">\(\beta_1=0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span> by measuring slope of the tangent line at <span class="math inline">\(\beta_1=0\)</span></li>
+</ul>
 
 <img data-src="./images/score.png" class="quarto-figure quarto-figure-center r-stretch"></section></section>
 <section>
@@ -1054,7 +1542,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
 <section id="likelihood-ratio-test-13" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Likelihood ratio test (1/3)</h2>
 <ul>
-<li><p>Likelihood ratio test answers the question:</p>
+<li><p>Likelihood ratio test (LRT) answers the question:</p>
 <ul>
 <li>For a specific covariate, <strong>which model tell us more about the outcome variable</strong>: the model including the covariate or the model omitting the covariate?</li>
 <li>Aka: Which model is more likely given our data: model including the covariate or the model omitting the covariate?</li>
@@ -1062,14 +1550,11 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li><p>Test a single coefficient by comparing different models</p>
-<ul>
-<li><strong>Very similar to the F-test</strong></li>
-</ul></li>
+<li><strong>Very similar to the F-test</strong>: test significance by comparing different, nested models</li>
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li><p>Important: LRT can be used conduct hypothesis tests for <strong>multiple coefficients</strong></p>
+<li><p>Important: LRT can be used conduct hypothesis tests for a <strong>single coefficient</strong> or <strong>multiple coefficients</strong></p>
 <ul>
 <li>Just like F-test, we can test a single coefficient, continuous/binary covariate, multi-level covariate, or multiple covariates</li>
 </ul></li>
@@ -1078,23 +1563,12 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
 <section id="likelihood-ratio-test-23" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Likelihood ratio test (2/3)</h2>
 <ul>
-<li>To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
+<li>To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the <strong>deviance (D) with and without the covariate</strong> <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
 </ul>
 <p>&nbsp;</p>
 <ul>
 <li><p>For a continuous or binary variable, this is equivalent to test: <span class="math inline">\(H_0: \beta_j = 0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \beta_j \neq 0\)</span></p></li>
-<li><p>Test statistic for LRT: <span class="math display">\[G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]\]</span></p></li>
-</ul>
-</section>
-<section id="likelihood-ratio-test-23-1" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
-<h2>Likelihood ratio test (2/3)</h2>
-<ul>
-<li>To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li><p>For a continuous or binary variable, this is equivalent to test: <span class="math inline">\(H_0: \beta_j = 0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \beta_j \neq 0\)</span></p></li>
-<li><p>Test statistic for LRT: <span class="math display">\[G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]\]</span></p></li>
+<li><p>Test statistic for LRT: <span class="math display">\[G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\widehat{\beta}}_0,{\widehat{\beta}}_1\right)}{l({\widehat{\beta}}_0)}\right]\]</span></p></li>
 </ul>
 <p><img data-src="./images/pause.png" class="absolute" style="bottom: 7%; right: 0%; width: 300px; height: 300px; "></p>
 </section>
@@ -1139,7 +1613,7 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li><p>We ARE comparing the Deviance of the model with x and the model without x</p>
+<li><p>We ARE comparing the Deviance of the model with <span class="math inline">\(X\)</span> and the model without <span class="math inline">\(X\)</span></p>
 <ul>
 <li>We just use the saturated model to calculate Deviance</li>
 <li>Both are considered fitted models with their own respective Deviance</li>
@@ -1147,7 +1621,8 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li>So our LRT is: <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
+<li>So our LRT statistic is: <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
+<li>But deviance is calculated as: <span class="math display">\[D=-2[L_{\text{fitted}} - L_{\text{saturated}}]\]</span></li>
 </ul>
 <p><img data-src="./images/tiny_pause.png" class="absolute" style="top: 83%; right: 0%; width: 120px; height: 120px; "></p>
 </section>
@@ -1158,22 +1633,19 @@ G&amp;=D\left(\text{model without } x\right)-D\left(\text{model with }x\right) \
 G&amp;=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of saturated model}}\right]-\left(-2ln\left[\frac{\text{likelihood of model with } x}{\text{likelihood of saturated model}}\right]\right) \\
 G&amp;=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of saturated model}}\times\frac{\text{likelihood of saturated model}}{\text{likelihood of model with } x}\right] \\
 G&amp;=-2ln\left[\frac{\text{likelihood of model without } x}{\text{likelihood of model with }}\right] \\
-G&amp;=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]
+G&amp;=2ln\left[\frac{l\left({\widehat{\beta}}_0,{\widehat{\beta}}_1\right)}{l({\widehat{\beta}}_0)}\right]
 \end{aligned}\]</span></p>
 <p><img data-src="./images/tiny_pause.png" class="absolute" style="top: 83%; right: 0%; width: 120px; height: 120px; "></p>
 </section>
 <section id="poll-everywhere-question-3" class="slide level2">
 <h2>Poll Everywhere Question 3</h2>
 </section>
-<section id="likelihood-ratio-test-23-2" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
+<section id="likelihood-ratio-test-23-1" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Likelihood ratio test (2/3)</h2>
 <ul>
-<li>To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span></li>
-</ul>
-<p>&nbsp;</p>
-<ul>
+<li><p>To assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the <strong>deviance (D) with and without the covariate</strong> <span class="math display">\[G=D\left(\text{model without } x\right)-D\left(\text{model with } x\right)\]</span> &nbsp;</p></li>
 <li><p>For a continuous or binary variable, this is equivalent to test: <span class="math inline">\(H_0: \beta_j = 0\)</span> vs.&nbsp;<span class="math inline">\(H_1: \beta_j \neq 0\)</span></p></li>
-<li><p>Test statistic for LRT: <span class="math display">\[G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\beta}}_0)}\right]\]</span></p></li>
+<li><p>Test statistic for LRT: <span class="math display">\[G=-2ln\left[\frac{\text{likelihood without } x}{\text{likelihood with } x}\right]=2ln\left[\frac{l\left({\widehat{\beta}}_0,{\widehat{\beta}}_1\right)}{l({\widehat{\beta}}_0)}\right]\]</span></p></li>
 </ul>
 <p><img data-src="./images/play.png" class="absolute" style="bottom: 7%; right: 0%; width: 300px; height: 300px; "></p>
 </section>
@@ -1189,9 +1661,16 @@ G&amp;=2ln\left[\frac{l\left({\hat{\beta}}_0,{\hat{\beta}}_1\right)}{l({\hat{\be
 <ul>
 <li>If we are testing a single coefficient, like age, then <span class="math inline">\(df=1\)</span></li>
 </ul>
+<p>&nbsp;</p>
+<ul>
+<li>We can use the <code>pchisq()</code> if you calculate <span class="math inline">\(G\)</span> first, but there’s an R function to run an LRT</li>
+</ul>
 </section>
 <section id="likelihood-ratio-test" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Likelihood ratio test</h2>
+<ul>
+<li>Likelihood ratio test measures the <strong>difference of likelihoods</strong> (y-axis) between <span class="math inline">\(\beta_1=0\)</span> and <span class="math inline">\(\widehat{\beta}_1\)</span></li>
+</ul>
 
 <img data-src="./images/lrt.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="lrt-procedure" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
@@ -1263,10 +1742,10 @@ H_1 &amp;: \beta_{Age} \neq 0 \\
 <li>Calculate the <strong>test statistic</strong> and <strong>p-value</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(lmtest)</span>
-<span id="cb4-2"><a></a>bc_age <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb4-3"><a></a>bc_int <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
-<span id="cb4-4"><a></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(bc_age, bc_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb3-2"><a></a>bc_age <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb3-3"><a></a>bc_int <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
+<span id="cb3-4"><a></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(bc_age, bc_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Likelihood ratio test
 
@@ -1336,7 +1815,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul></li>
 <li><p><span style="background-color:#F9E7B8;">Score test</span></p>
 <ul>
-<li>Does not need to estimate two models (LRT does)</li>
+<li>Does not need to estimate two models (LRT does), but does not incorporate info from MLE</li>
 <li>I don’t really see people use this…</li>
 </ul></li>
 </ul></li>
@@ -1361,10 +1840,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2>Tests and what they’re used for</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 31%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1377,38 +1856,37 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <tbody>
 <tr class="odd">
 <td>Used to test significance of single coefficient</td>
-<td></td>
-<td></td>
-<td></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
 </tr>
 <tr class="even">
 <td><em>Can be</em> used to report confidence interval for a single coefficient</td>
-<td></td>
-<td></td>
-<td></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
 </tr>
 <tr class="odd">
 <td>Confidence interval reported by R for a single coefficient (and most commonly used)</td>
-<td></td>
-<td></td>
-<td></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
 </tr>
 <tr class="even">
 <td>Use to test significance/contribution to outcome prediction of multi-level categorical covariate</td>
-<td></td>
-<td></td>
-<td></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
 </tr>
 <tr class="odd">
 <td>Used for comparing two models with different (but nested) covariates</td>
-<td></td>
-<td></td>
-<td></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#C2352F;"><iconify-icon inline="" icon="f7:xmark-square-fill" style="font-size: 70px;"></iconify-icon></span></td>
+<td><span style="color:#70AD47;"><iconify-icon inline="" icon="ic:round-check-box" style="font-size: 70px;"></iconify-icon></span></td>
 </tr>
 </tbody>
 </table>
 </section>
-
 <section id="so-how-would-the-wald-test-and-lrt-show-up-in-research" class="slide level2">
 <h2>So how would the Wald test and LRT show up in research?</h2>
 <ul>
@@ -1439,7 +1917,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Lesson 6: Tests for GLMs using Likelihood function</p>
+<p>Lesson 8: Tests for GLMs using Likelihood function</p>
 </div>
 </div></div>
 

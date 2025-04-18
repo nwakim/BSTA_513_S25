@@ -160,6 +160,7 @@ window.Quarto = {
   <li><a href="#geom_ribbon-to-add-bands-is-that-just-to-view-the-range-of-values-and-or-confidence-interval" id="toc-geom_ribbon-to-add-bands-is-that-just-to-view-the-range-of-values-and-or-confidence-interval" class="nav-link" data-scroll-target="#geom_ribbon-to-add-bands-is-that-just-to-view-the-range-of-values-and-or-confidence-interval">1. <code>geom_ribbon()</code> to add bands: is that just to view the range of values and or confidence interval?</a></li>
   <li><a href="#i-had-trouble-grasping-what-it-means-that-the-predicted-probability-is-not-the-same-as-the-predicted-outcome-is-it-because-the-outcome-is-calculated-differently" id="toc-i-had-trouble-grasping-what-it-means-that-the-predicted-probability-is-not-the-same-as-the-predicted-outcome-is-it-because-the-outcome-is-calculated-differently" class="nav-link" data-scroll-target="#i-had-trouble-grasping-what-it-means-that-the-predicted-probability-is-not-the-same-as-the-predicted-outcome-is-it-because-the-outcome-is-calculated-differently">2. I had trouble grasping what it means that the predicted probability is not the same as the predicted outcome? Is it because the outcome is calculated differently?</a></li>
   <li><a href="#could-you-please-describe-why-we-need-to-create-the-new-dataframe-with-the-age-variable" id="toc-could-you-please-describe-why-we-need-to-create-the-new-dataframe-with-the-age-variable" class="nav-link" data-scroll-target="#could-you-please-describe-why-we-need-to-create-the-new-dataframe-with-the-age-variable">3. Could you please describe why we need to create the new dataframe with the age variable?</a></li>
+  <li><a href="#when-would-use-typelink-or-would-be-always-use-response-for-probability-scale" id="toc-when-would-use-typelink-or-would-be-always-use-response-for-probability-scale" class="nav-link" data-scroll-target="#when-would-use-typelink-or-would-be-always-use-response-for-probability-scale">4. When would use <code>type=link</code>? Or would be always use response for probability scale?</a></li>
   </ul></li>
   <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
   </ul>
@@ -183,7 +184,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 17, 2025</p>
+      <p class="date-modified">April 18, 2025</p>
     </div>
   </div>
     
@@ -208,6 +209,10 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="could-you-please-describe-why-we-need-to-create-the-new-dataframe-with-the-age-variable">3. Could you please describe why we need to create the new dataframe with the age variable?</h3>
 <p>I think this is referring to slide 23? And I think the <code>newdata2</code> variable?</p>
 <p>I create a new dataset with the age so that I could create a vector of equally spaced ages. The original observations were not necessarily evenly distributed in the range of age values. By making a vector of ages, I can create a smooth line for the predicted probability across ages.</p>
+</section>
+<section id="when-would-use-typelink-or-would-be-always-use-response-for-probability-scale" class="level3">
+<h3 class="anchored" data-anchor-id="when-would-use-typelink-or-would-be-always-use-response-for-probability-scale">4. When would use <code>type=link</code>? Or would be always use response for probability scale?</h3>
+<p>We use <code>type=link</code> when we want the predicted log-odds (on the logit scale) and <code>type=response</code> when we want the probability scale. Sometimes we need to work in the logit-scale before converting to the probability scale. In those cases, we will want the predicted log-odds!</p>
 </section>
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">

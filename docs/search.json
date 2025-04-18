@@ -5994,287 +5994,287 @@
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#ive-never-explicitly-said-this",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#ive-never-explicitly-said-this",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "I’ve never explicitly said this…",
     "text": "I’ve never explicitly said this…\n\nBecause we are in a public health class, we are often analyzing data with sensitive outcomes\n\n \n\nIf you ever need a moment in class because of our topic, feel free to just step out or leave and privately view the lecture\n\n \n\nIf you need extra time on your assignments because you have an emotional response to lectures/homework/lab, just let me know! Extenuating circumstance!"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#connection-between-tests-in-linear-models-and-glms",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#connection-between-tests-in-linear-models-and-glms",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Connection between tests in linear models and GLMs",
     "text": "Connection between tests in linear models and GLMs\n\nIn linear regression, we used ordinary least squares (OLS) to find the best fit model, so we could use the following tests:\n\nt-test for single coefficients\nF-test for single coefficients or groups of coefficients\n\nThese tests hinge on the Mean Squared Error (MSE) which we minimized in OLS and the LINE assumptions\n\n \n\nIn GLMs, when we use maximum likelihood estimation (MLE), we cannot use t-tests or F-tests\n\nBecause we are now using likelihood to find our estimates (not OLS)\n\nBut we have parallel tests in MLE!!\n\nt-test ⟶ Wald test\nF-test ⟶ Likelihood ratio test"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#revisit-the-likelihood-function",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#revisit-the-likelihood-function",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Revisit the likelihood function",
     "text": "Revisit the likelihood function\n\n\n\nLikelihood function: expresses the probability of the observed data as a function of the unknown parameters\n\nFunction that enumerates the likelihood (similar to probability) that we observe the data across the range of potential values of our coefficients\n\nWe often compare likelihoods to see what estimates are more likely given our data\nPlot to right is a simplistic view of likelihood\n\nI have flattened the likelihood that would be a function of \\(\\beta_0\\) and \\(\\beta_1\\) into a 2D plot (instead of 3D: \\(\\beta_0\\) vs. \\(\\beta_1\\) vs. \\(L(\\beta_0, \\beta_1)\\))\n\nI use \\(L\\) to represent the log-likelihood and \\(l\\) to represent the likelihood"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#introduction-to-three-tests-in-glm",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#introduction-to-three-tests-in-glm",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Introduction to three tests in GLM",
     "text": "Introduction to three tests in GLM\n\nTo introduce these three tests, we will work on a single coefficient\n\nTo be clear: the Likelihood ratio test can be extended to more coefficients\n\nLet’s say we fit a GLM using MLE\n\nWe will continue to use logistic regression as our working example\n\n\n \n\nNow we want to run a hypothesis test for an individual coefficient \\(j\\):\n\n\\(H_0: \\beta_j = 0\\)\n\\(H_1: \\beta_j \\neq 0\\)\n\nThree potential tests that we use with a Likelihood function are:\n\nWald test\nScore test\nLikelihood ratio test (LRT)"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-1",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-1",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Poll Everywhere Question 1",
     "text": "Poll Everywhere Question 1"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#revisit-previous-model-with-late-stage-bc-diagnosis-and-age",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#revisit-previous-model-with-late-stage-bc-diagnosis-and-age",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Revisit previous model with late stage BC diagnosis and age",
-    "text": "Revisit previous model with late stage BC diagnosis and age\n\n\n\nSimple logistic regression model: \\[\\text{logit}(\\pi(Age)) = \\beta_0 + \\beta_1 \\cdot Age\\]\n\n\n \nDon’t forget: \\(\\pi(Age) = P(Y=1 | Age)\\)\n\n\nbc_reg = glm(Late_stage_diag ~ Age_c, data = bc, family = binomial)\nsummary(bc_reg)\n\n\nCall:\nglm(formula = Late_stage_diag ~ Age_c, family = binomial, data = bc)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -0.989422   0.023205  -42.64   &lt;2e-16 ***\nAge_c        0.056965   0.003204   17.78   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 11861  on 9999  degrees of freedom\nResidual deviance: 11510  on 9998  degrees of freedom\nAIC: 11514\n\nNumber of Fisher Scoring iterations: 4"
+    "text": "Revisit previous model with late stage BC diagnosis and age\n\n\n\nSimple logistic regression model: \\[\\text{logit}(\\pi(Age)) = \\beta_0 + \\beta_1 \\cdot Age\\]\n\n\n \nDon’t forget: \\(\\pi(Age) = P(Y=1 | Age)\\)\n\n\nbc_reg = bc %&gt;% glm(formula = Late_stage_diag ~ Age_c, family = binomial)\ntidy(bc_reg, conf.int=T) %&gt;% gt() %&gt;% tab_options(table.font.size = 38) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n−0.989\n0.023\n−42.637\n0.000\n−1.035\n−0.944\n\n\nAge_c\n0.057\n0.003\n17.780\n0.000\n0.051\n0.063"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#wald-test-13",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#wald-test-13",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Wald test (1/3)",
-    "text": "Wald test (1/3)\n\nVery similar to a t-test!\n\nBut slightly different because it based in our likelihood function\n\nAssumes test statistic W follows a standard normal distribution under the null hypothesis\nTest statistic: \\[W=\\frac{{\\hat{\\beta}}_j}{se({\\hat{\\beta}}_j)}\\sim N(0,1)\\]\n\nwhere \\(\\widehat{\\beta}_j\\) is a MLE of coefficient \\(j\\)\n\n95% Wald confidence interval: \\[{\\hat{\\beta}}_1\\pm1.96 \\cdot SE_{{\\hat{\\beta}}_j}\\]\nThe Wald test is a routine output in R (summary() of glm() output)\n\nIncludes \\(SE_{{\\hat{\\beta}}_j}\\) and can easily find confidence interval with tidy()"
+    "text": "Wald test (1/3)\n\nVery similar to a t-test!\n\nBut slightly different because it based in our likelihood function\n\nAssumes test statistic \\(W\\) follows a standard normal distribution under the null hypothesis\nTest statistic: \\[W=\\frac{{\\widehat{\\beta}}_j}{se({\\widehat{\\beta}}_j)}\\sim N(0,1)\\]\n\nwhere \\(\\widehat{\\beta}_j\\) is a MLE of coefficient \\(j\\)\n\n95% Wald confidence interval: \\[{\\widehat{\\beta}}_1\\pm1.96 \\cdot SE_{{\\widehat{\\beta}}_j}\\]\nThe Wald test is a routine output in R (summary() of glm() output)\n\nIncludes \\(SE_{{\\widehat{\\beta}}_j}\\) and can easily find confidence interval with tidy()"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#wald-test-23",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#wald-test-23",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Wald test (2/3)",
-    "text": "Wald test (2/3)"
+    "text": "Wald test (2/3)\n\nWald test measures the “difference” between \\(\\beta_1=0\\) and \\(\\widehat{\\beta}_1\\) on the x-axis"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#wald-test-33",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#wald-test-33",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Wald test (3/3)",
-    "text": "Wald test (3/3)"
+    "text": "Wald test (3/3)\n\nWald test measures the “difference” between \\(\\beta_1=0\\) and \\(\\widehat{\\beta}_1\\) on the x-axis"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#wald-test-procedure-with-confidence-intervals",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#wald-test-procedure-with-confidence-intervals",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Wald test procedure with confidence intervals",
     "text": "Wald test procedure with confidence intervals\n\nSet the level of significance \\(\\alpha\\)\nSpecify the null ( \\(H_0\\) ) and alternative ( \\(H_A\\) ) hypotheses\n\nIn symbols\nIn words\nAlternative: one- or two-sided?\n\nCalculate the confidence interval and determine if it overlaps with null\n\nOverlap with null (usually 0 for coefficient) = fail to reject null\nNo overlap with null (usually 0 for coefficient) = reject null\n\nWrite a conclusion to the hypothesis test\n\nWhat is the estimate and its confidence interval?\nDo we reject or fail to reject \\(H_0\\)?\nWrite a conclusion in the context of the problem"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Example: BC diagnosis and age",
     "text": "Example: BC diagnosis and age\n\n\nWald test for age coefficient\n\n\nInterpret the coefficient for age in our model of late stage breast cancer diagnosis.\n\n\n\n\nNeeded steps:\n\nSet the level of significance \\(\\alpha\\)\nSpecify the null ( \\(H_0\\) ) and alternative ( \\(H_A\\) ) hypotheses\nCalculate the confidence interval and determine if it overlaps with null\nWrite a conclusion to the hypothesis test\n\n\n\n\nNote\n\n\nI don’t want us to get fixated on this interpretation. This is more to introduce the process, BUT it’s MUCH better to interpret the coefficient in terms of OR (next class)."
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-1",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-1",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Example: BC diagnosis and age",
     "text": "Example: BC diagnosis and age\n\n\nWald test for age coefficient\n\n\nInterpret the coefficient for age in our model of late stage breast cancer diagnosis.\n\n\n\nSet the level of significance \\(\\alpha\\) \\[\\alpha=0.05\\]\nSpecify the null ( \\(H_0\\) ) and alternative ( \\(H_A\\) ) hypotheses\n\n\\[\\begin{aligned}\nH_0 &: \\beta_{Age} = 0 \\\\\nH_1 &: \\beta_{Age} \\neq 0 \\\\\n\\end{aligned}\\]"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-2",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-2",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Example: BC diagnosis and age",
     "text": "Example: BC diagnosis and age\n\n\nWald test for age coefficient\n\n\nInterpret the coefficient for age in our model of late stage breast cancer diagnosis.\n\n\n\nCalculate the confidence interval and determine if it overlaps with null\n\n\nlibrary(epiDisplay)\nbc_reg = glm(Late_stage_diag ~ Age_c, data = bc, family = binomial)\ntidy(bc_reg, conf.int=T) %&gt;% gt() %&gt;% tab_options(table.font.size = 35) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n−0.989\n0.023\n−42.637\n0.000\n−1.035\n−0.944\n\n\nAge_c\n0.057\n0.003\n17.780\n0.000\n0.051\n0.063"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-3",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-3",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Example: BC diagnosis and age",
     "text": "Example: BC diagnosis and age\n\n\nWald test for age coefficient\n\n\nInterpret the coefficient for age in our model of late stage breast cancer diagnosis.\n\n\n\n\n\nWrite a conclusion to the hypothesis test\n\nFor every one year increase in age, the log-odds of late stage breast cancer diagnosis increases 0.057 (95% CI: 0.051, 0.063).\nThere is sufficient evidence that age an breast cancer diagnosis are associated.\n\n\n\nNote\n\n\nI don’t want us to get fixated on this interpretation. This is more to introduce the process, BUT it’s MUCH better to interpret the coefficient in terms of OR (next class)."
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-2",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-2",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Poll Everywhere Question 2",
     "text": "Poll Everywhere Question 2"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#score-test",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#score-test",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Score test",
-    "text": "Score test\n\nScore test does not require the computation of MLE for \\(\\beta_1\\), while both likelihood test and Wald test does\n\nOnly need to know \\(\\beta_1\\) under the null\n\nScore test is based on the first and second derivatives of the log-likelihood under the null hypothesis: \\[S=\\frac{\\sum_{i=1}^{n}{x_i(y_i-\\bar{y})}}{\\sqrt{\\bar{y}(1-\\bar{y})\\sum_{i=1}^{n}\\left(x_i-\\bar{x}\\right)^2}} \\sim N(0,1)\\]"
+    "text": "Score test\n\nScore test does not require the computation of MLE for \\(\\beta_1\\), while both likelihood test and Wald test do\n\nOnly need to know \\(\\beta_1\\) under the null\n\n\n \n\nScore test is based on the first and second derivatives of the log-likelihood under the null hypothesis: \\[S=\\frac{\\sum_{i=1}^{n}{x_i(y_i-\\bar{y})}}{\\sqrt{\\bar{y}(1-\\bar{y})\\sum_{i=1}^{n}\\left(x_i-\\bar{x}\\right)^2}} \\sim N(0,1)\\]\n\n \n\nTranslates to the slope of the tangent line at \\(\\beta_1=0\\)\n\n \n\nIn my experience, this is the test I’ve seen the least: won’t show an example with it"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#score-test-1",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#score-test-1",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Score test",
-    "text": "Score test"
+    "text": "Score test\n\nScore test measures the “difference” between \\(\\beta_1=0\\) and \\(\\widehat{\\beta}_1\\) by measuring slope of the tangent line at \\(\\beta_1=0\\)"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-13",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-13",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Likelihood ratio test (1/3)",
-    "text": "Likelihood ratio test (1/3)\n\nLikelihood ratio test answers the question:\n\nFor a specific covariate, which model tell us more about the outcome variable: the model including the covariate or the model omitting the covariate?\nAka: Which model is more likely given our data: model including the covariate or the model omitting the covariate?\n\n\n \n\nTest a single coefficient by comparing different models\n\nVery similar to the F-test\n\n\n \n\nImportant: LRT can be used conduct hypothesis tests for multiple coefficients\n\nJust like F-test, we can test a single coefficient, continuous/binary covariate, multi-level covariate, or multiple covariates"
+    "text": "Likelihood ratio test (1/3)\n\nLikelihood ratio test (LRT) answers the question:\n\nFor a specific covariate, which model tell us more about the outcome variable: the model including the covariate or the model omitting the covariate?\nAka: Which model is more likely given our data: model including the covariate or the model omitting the covariate?\n\n\n \n\nVery similar to the F-test: test significance by comparing different, nested models\n\n \n\nImportant: LRT can be used conduct hypothesis tests for a single coefficient or multiple coefficients\n\nJust like F-test, we can test a single coefficient, continuous/binary covariate, multi-level covariate, or multiple covariates"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-23",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-23",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Likelihood ratio test (2/3)",
-    "text": "Likelihood ratio test (2/3)\n\nTo assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate \\[G=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with } x\\right)\\]\n\n \n\nFor a continuous or binary variable, this is equivalent to test: \\(H_0: \\beta_j = 0\\) vs. \\(H_1: \\beta_j \\neq 0\\)\nTest statistic for LRT: \\[G=-2ln\\left[\\frac{\\text{likelihood without } x}{\\text{likelihood with } x}\\right]=2ln\\left[\\frac{l\\left({\\hat{\\beta}}_0,{\\hat{\\beta}}_1\\right)}{l({\\hat{\\beta}}_0)}\\right]\\]"
+    "text": "Likelihood ratio test (2/3)\n\nTo assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate \\[G=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with } x\\right)\\]\n\n \n\nFor a continuous or binary variable, this is equivalent to test: \\(H_0: \\beta_j = 0\\) vs. \\(H_1: \\beta_j \\neq 0\\)\nTest statistic for LRT: \\[G=-2ln\\left[\\frac{\\text{likelihood without } x}{\\text{likelihood with } x}\\right]=2ln\\left[\\frac{l\\left({\\widehat{\\beta}}_0,{\\widehat{\\beta}}_1\\right)}{l({\\widehat{\\beta}}_0)}\\right]\\]"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-23-1",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-23-1",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Likelihood ratio test (2/3)",
-    "text": "Likelihood ratio test (2/3)\n\nTo assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate \\[G=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with } x\\right)\\]\n\n \n\nFor a continuous or binary variable, this is equivalent to test: \\(H_0: \\beta_j = 0\\) vs. \\(H_1: \\beta_j \\neq 0\\)\nTest statistic for LRT: \\[G=-2ln\\left[\\frac{\\text{likelihood without } x}{\\text{likelihood with } x}\\right]=2ln\\left[\\frac{l\\left({\\hat{\\beta}}_0,{\\hat{\\beta}}_1\\right)}{l({\\hat{\\beta}}_0)}\\right]\\]"
+    "text": "Likelihood ratio test (2/3)\n\nTo assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate \\[G=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with } x\\right)\\]  \nFor a continuous or binary variable, this is equivalent to test: \\(H_0: \\beta_j = 0\\) vs. \\(H_1: \\beta_j \\neq 0\\)\nTest statistic for LRT: \\[G=-2ln\\left[\\frac{\\text{likelihood without } x}{\\text{likelihood with } x}\\right]=2ln\\left[\\frac{l\\left({\\widehat{\\beta}}_0,{\\widehat{\\beta}}_1\\right)}{l({\\widehat{\\beta}}_0)}\\right]\\]"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#lrt-what-is-deviance",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#lrt-what-is-deviance",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "LRT: what is Deviance?",
     "text": "LRT: what is Deviance?\n\nDeviance: quantifies the difference in likelihoods between a fitted and saturated model\n\nFitted model:\n\nYour proposed fitted model\n\nSaturated model:\n\nA model that contains as many parameters as there are data points = perfect fit\n\nBasically every individual has their own covariate\n\nPerfect fit = maximum possible likelihood\n\n\n\n \n\nAll fitted models will have likelihood less than saturated model"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#lrt-what-is-deviance-1",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#lrt-what-is-deviance-1",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "LRT: what is Deviance?",
     "text": "LRT: what is Deviance?\n\nThe deviance is mathematically defined as: \\[D=-2[L_{\\text{fitted}}-L_{\\text{saturated}}]\\]\nAn alternative way to write it is: \\[D=-2ln\\left[\\frac{\\text{likelihood of the fitted model}}{\\text{likelihood of the saturated model}}\\right]\\]\nUsing ‘-2’ is to make the deviance follow a chi-square distribution"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#deviance-to-likelihood-ratio-test",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#deviance-to-likelihood-ratio-test",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Deviance to Likelihood Ratio Test",
-    "text": "Deviance to Likelihood Ratio Test\n\nIn the LRT, we are NOT comparing the likelihood of saturated model to the fitted model\n\n \n\nWe ARE comparing the Deviance of the model with x and the model without x\n\nWe just use the saturated model to calculate Deviance\nBoth are considered fitted models with their own respective Deviance\n\n\n \n\nSo our LRT is: \\[G=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with } x\\right)\\]"
+    "text": "Deviance to Likelihood Ratio Test\n\nIn the LRT, we are NOT comparing the likelihood of saturated model to the fitted model\n\n \n\nWe ARE comparing the Deviance of the model with \\(X\\) and the model without \\(X\\)\n\nWe just use the saturated model to calculate Deviance\nBoth are considered fitted models with their own respective Deviance\n\n\n \n\nSo our LRT statistic is: \\[G=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with } x\\right)\\]\nBut deviance is calculated as: \\[D=-2[L_{\\text{fitted}} - L_{\\text{saturated}}]\\]"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#for-reference",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#for-reference",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "For reference",
-    "text": "For reference\n\\[ \\begin{aligned}\nG&=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with }x\\right) \\\\\nG&=-2ln\\left[\\frac{\\text{likelihood of model without } x}{\\text{likelihood of saturated model}}\\right]-\\left(-2ln\\left[\\frac{\\text{likelihood of model with } x}{\\text{likelihood of saturated model}}\\right]\\right) \\\\\nG&=-2ln\\left[\\frac{\\text{likelihood of model without } x}{\\text{likelihood of saturated model}}\\times\\frac{\\text{likelihood of saturated model}}{\\text{likelihood of model with } x}\\right] \\\\\nG&=-2ln\\left[\\frac{\\text{likelihood of model without } x}{\\text{likelihood of model with }}\\right] \\\\\nG&=2ln\\left[\\frac{l\\left({\\hat{\\beta}}_0,{\\hat{\\beta}}_1\\right)}{l({\\hat{\\beta}}_0)}\\right]\n\\end{aligned}\\]"
+    "text": "For reference\n\\[ \\begin{aligned}\nG&=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with }x\\right) \\\\\nG&=-2ln\\left[\\frac{\\text{likelihood of model without } x}{\\text{likelihood of saturated model}}\\right]-\\left(-2ln\\left[\\frac{\\text{likelihood of model with } x}{\\text{likelihood of saturated model}}\\right]\\right) \\\\\nG&=-2ln\\left[\\frac{\\text{likelihood of model without } x}{\\text{likelihood of saturated model}}\\times\\frac{\\text{likelihood of saturated model}}{\\text{likelihood of model with } x}\\right] \\\\\nG&=-2ln\\left[\\frac{\\text{likelihood of model without } x}{\\text{likelihood of model with }}\\right] \\\\\nG&=2ln\\left[\\frac{l\\left({\\widehat{\\beta}}_0,{\\widehat{\\beta}}_1\\right)}{l({\\widehat{\\beta}}_0)}\\right]\n\\end{aligned}\\]"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-3",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-3",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Poll Everywhere Question 3",
     "text": "Poll Everywhere Question 3"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-23-2",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-23-2",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Likelihood ratio test (2/3)",
-    "text": "Likelihood ratio test (2/3)\n\nTo assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate \\[G=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with } x\\right)\\]\n\n \n\nFor a continuous or binary variable, this is equivalent to test: \\(H_0: \\beta_j = 0\\) vs. \\(H_1: \\beta_j \\neq 0\\)\nTest statistic for LRT: \\[G=-2ln\\left[\\frac{\\text{likelihood without } x}{\\text{likelihood with } x}\\right]=2ln\\left[\\frac{l\\left({\\hat{\\beta}}_0,{\\hat{\\beta}}_1\\right)}{l({\\hat{\\beta}}_0)}\\right]\\]"
+    "text": "Likelihood ratio test (2/3)\n\nTo assess the significance of a continuous/binary covariate’s coefficient in the simple logistic regression, we compare the deviance (D) with and without the covariate \\[G=D\\left(\\text{model without } x\\right)-D\\left(\\text{model with } x\\right)\\]\n\n \n\nFor a continuous or binary variable, this is equivalent to test: \\(H_0: \\beta_j = 0\\) vs. \\(H_1: \\beta_j \\neq 0\\)\nTest statistic for LRT: \\[G=-2ln\\left[\\frac{\\text{likelihood without } x}{\\text{likelihood with } x}\\right]=2ln\\left[\\frac{l\\left({\\widehat{\\beta}}_0,{\\widehat{\\beta}}_1\\right)}{l({\\widehat{\\beta}}_0)}\\right]\\]"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-33",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test-33",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Likelihood ratio test (3/3)",
-    "text": "Likelihood ratio test (3/3)\n\nUnder the null hypothesis, with adequate sample size, LRT statistic follows a chi-square distribution: \\[G \\sim \\chi^2(df)\\]\n\n\\(df = (\\# \\text{coefficients in larger model}) − (\\# \\text{coefficients in smaller model})\\)\n\n\n \n\nIf we are testing a single coefficient, like age, then \\(df=1\\)"
+    "text": "Likelihood ratio test (3/3)\n\nUnder the null hypothesis, with adequate sample size, LRT statistic follows a chi-square distribution: \\[G \\sim \\chi^2(df)\\]\n\n\\(df = (\\# \\text{coefficients in larger model}) − (\\# \\text{coefficients in smaller model})\\)\n\n\n \n\nIf we are testing a single coefficient, like age, then \\(df=1\\)\n\n \n\nWe can use the pchisq() if you calculate \\(G\\) first, but there’s an R function to run an LRT"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#likelihood-ratio-test",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Likelihood ratio test",
-    "text": "Likelihood ratio test"
+    "text": "Likelihood ratio test\n\nLikelihood ratio test measures the difference of likelihoods (y-axis) between \\(\\beta_1=0\\) and \\(\\widehat{\\beta}_1\\)"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#lrt-procedure",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#lrt-procedure",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "LRT procedure",
     "text": "LRT procedure\n\nSet the level of significance \\(\\alpha\\)\nSpecify the null ( \\(H_0\\) ) and alternative ( \\(H_A\\) ) hypotheses\n\nIn symbols\nIn words\nAlternative: one- or two-sided?\n\nCalculate the test statistic and p-value\nWrite a conclusion to the hypothesis test\n\nDo we reject or fail to reject \\(H_0\\)?\nWrite a conclusion in the context of the problem"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-4",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-4",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Example: BC diagnosis and age",
     "text": "Example: BC diagnosis and age\n\n\nLRT\n\n\nDetermine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?\n\n\nNeeded steps:\n\nSet the level of significance \\(\\alpha\\)\nSpecify the null ( \\(H_0\\) ) and alternative ( \\(H_A\\) ) hypotheses\nCalculate the test statistic and p-value\nWrite a conclusion to the hypothesis test"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-5",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-5",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Example: BC diagnosis and age",
     "text": "Example: BC diagnosis and age\n\n\nLRT\n\n\nDetermine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?\n\n\n\nSet the level of significance \\(\\alpha\\) \\[\\alpha=0.05\\]\nSpecify the null ( \\(H_0\\) ) and alternative ( \\(H_A\\) ) hypotheses\n\n\\[\\begin{aligned}\nH_0 &: \\beta_{Age} = 0 \\\\\nH_1 &: \\beta_{Age} \\neq 0 \\\\\n\\end{aligned}\\]"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-6",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-6",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Example: BC diagnosis and age",
     "text": "Example: BC diagnosis and age\n\n\nLRT\n\n\nDetermine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?\n\n\n\nCalculate the test statistic and p-value\n\n\nlibrary(lmtest)\nbc_age = glm(Late_stage_diag ~ Age_c, data = bc, family = binomial)\nbc_int = glm(Late_stage_diag ~ 1, data = bc, family = binomial)\nlmtest::lrtest(bc_age, bc_int)\n\nLikelihood ratio test\n\nModel 1: Late_stage_diag ~ Age_c\nModel 2: Late_stage_diag ~ 1\n  #Df  LogLik Df  Chisq Pr(&gt;Chisq)    \n1   2 -5754.8                         \n2   1 -5930.5 -1 351.27  &lt; 2.2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-7",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#example-bc-diagnosis-and-age-7",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Example: BC diagnosis and age",
     "text": "Example: BC diagnosis and age\n\n\nLRT\n\n\nDetermine if the model including age is more likely than model without age. Aka: Is age associated with late stage breast cancer diagnosis?\n\n\n\nWrite a conclusion to the hypothesis test\n\nWe reject the null hypothesis that the coefficient corresponding to age is 0 (\\(p-value &lt;&lt; 0.05\\)). There is sufficient evidence that there is an association between age and late stage breast cancer diagnosis."
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#all-three-tests-together",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#all-three-tests-together",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "All three tests together",
     "text": "All three tests together\n\nUCLA FAQ on Tests"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#which-test-to-use",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#which-test-to-use",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Which test to use?",
-    "text": "Which test to use?\n\nAll three tests are asymptotically equivalent\n\nAs sample approaches infinity\n\nFor testing significance of single covariate coefficient:\n\nLRT\n\nWald and score are only approximations of LRT\nFor smaller samples, LRT better\n\nWald test is very convenient\n\nAutomatically performed in R\nDoes not need to estimate two models (LRT does)\nGood for constructing confidence intervals of coefficients and odds ratios\n\nScore test\n\nDoes not need to estimate two models (LRT does)\nI don’t really see people use this…"
+    "text": "Which test to use?\n\nAll three tests are asymptotically equivalent\n\nAs sample approaches infinity\n\nFor testing significance of single covariate coefficient:\n\nLRT\n\nWald and score are only approximations of LRT\nFor smaller samples, LRT better\n\nWald test is very convenient\n\nAutomatically performed in R\nDoes not need to estimate two models (LRT does)\nGood for constructing confidence intervals of coefficients and odds ratios\n\nScore test\n\nDoes not need to estimate two models (LRT does), but does not incorporate info from MLE\nI don’t really see people use this…"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-4",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-4",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Poll Everywhere Question 4",
     "text": "Poll Everywhere Question 4"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-5",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-5",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Poll Everywhere Question 5",
     "text": "Poll Everywhere Question 5"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-6",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-6",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Poll Everywhere Question 6",
     "text": "Poll Everywhere Question 6"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-7",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-7",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Poll Everywhere Question 7",
     "text": "Poll Everywhere Question 7"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-8",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#poll-everywhere-question-8",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Poll Everywhere Question 8",
     "text": "Poll Everywhere Question 8"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#tests-and-what-theyre-used-for",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#tests-and-what-theyre-used-for",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "Tests and what they’re used for",
     "text": "Tests and what they’re used for\n\n\n\n\n\n\n\n\n\n\nWald test\nScore test\nLRT\n\n\n\n\nUsed to test significance of single coefficient\n\n\n\n\n\nCan be used to report confidence interval for a single coefficient\n\n\n\n\n\nConfidence interval reported by R for a single coefficient (and most commonly used)\n\n\n\n\n\nUse to test significance/contribution to outcome prediction of multi-level categorical covariate\n\n\n\n\n\nUsed for comparing two models with different (but nested) covariates"
   },
@@ -6288,7 +6288,7 @@
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#so-how-would-the-wald-test-and-lrt-show-up-in-research",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs.html#so-how-would-the-wald-test-and-lrt-show-up-in-research",
-    "title": "Lesson 6: Tests for GLMs using Likelihood function",
+    "title": "Lesson 8: Tests for GLMs using Likelihood function",
     "section": "So how would the Wald test and LRT show up in research?",
     "text": "So how would the Wald test and LRT show up in research?\n\nWald test\n\nOften used when reporting estimates\nGenerally presented using a forest plot or table of ORs or RRs\n\nThen we highlight the specific variable of interest in text\nWill include the OR/RR estimate (not the coefficient like we saw today) with the 95% CI and proper interpretation of result\n\n\n\n \n\nLRT\n\nOften when performing model selection and comparing two models\n\nReporting model selection Cross Validated post\n\nOften does not show up explicitly in our reports, but is essential to get to our final model!!"
   },
@@ -6717,7 +6717,7 @@
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html#key-dates",
     "title": "Key Info and Announcements",
     "section": "Key Dates",
-    "text": "Key Dates"
+    "text": "Key Dates\n\nQuiz 1 opens on 4/23\nLab 2 due 4/25\nHW 2 due 5/2"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html#last-class",
@@ -7165,28 +7165,28 @@
     "href": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html",
     "title": "Muddy Points",
     "section": "",
-    "text": "geom_ribbon() can be used to add any range of values. In this case, we used geom_ribbon() with our calculated confidence intervals, so it is showing the confidence intervals. It will not automatically do this.\n\n\n\nOur outcome, \\(Y\\), is a binary value. We can have \\(Y=1\\) or \\(Y=0\\). The predicted probability is the estimated \\(P(Y=1)\\), the probability that \\(Y\\) is 1. So the probability is related to the outcome, but it is not the outcome itself.\n\n\n\nI think this is referring to slide 23? And I think the newdata2 variable?\nI create a new dataset with the age so that I could create a vector of equally spaced ages. The original observations were not necessarily evenly distributed in the range of age values. By making a vector of ages, I can create a smooth line for the predicted probability across ages."
+    "text": "geom_ribbon() can be used to add any range of values. In this case, we used geom_ribbon() with our calculated confidence intervals, so it is showing the confidence intervals. It will not automatically do this.\n\n\n\nOur outcome, \\(Y\\), is a binary value. We can have \\(Y=1\\) or \\(Y=0\\). The predicted probability is the estimated \\(P(Y=1)\\), the probability that \\(Y\\) is 1. So the probability is related to the outcome, but it is not the outcome itself.\n\n\n\nI think this is referring to slide 23? And I think the newdata2 variable?\nI create a new dataset with the age so that I could create a vector of equally spaced ages. The original observations were not necessarily evenly distributed in the range of age values. By making a vector of ages, I can create a smooth line for the predicted probability across ages.\n\n\n\nWe use type=link when we want the predicted log-odds (on the logit scale) and type=response when we want the probability scale. Sometimes we need to work in the logit-scale before converting to the probability scale. In those cases, we will want the predicted log-odds!"
   },
   {
     "objectID": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html#muddy-points-from-spring-2025",
     "href": "lessons/07_Pred_Viz/07_Pred_Viz_muddy_points.html#muddy-points-from-spring-2025",
     "title": "Muddy Points",
     "section": "",
-    "text": "geom_ribbon() can be used to add any range of values. In this case, we used geom_ribbon() with our calculated confidence intervals, so it is showing the confidence intervals. It will not automatically do this.\n\n\n\nOur outcome, \\(Y\\), is a binary value. We can have \\(Y=1\\) or \\(Y=0\\). The predicted probability is the estimated \\(P(Y=1)\\), the probability that \\(Y\\) is 1. So the probability is related to the outcome, but it is not the outcome itself.\n\n\n\nI think this is referring to slide 23? And I think the newdata2 variable?\nI create a new dataset with the age so that I could create a vector of equally spaced ages. The original observations were not necessarily evenly distributed in the range of age values. By making a vector of ages, I can create a smooth line for the predicted probability across ages."
+    "text": "geom_ribbon() can be used to add any range of values. In this case, we used geom_ribbon() with our calculated confidence intervals, so it is showing the confidence intervals. It will not automatically do this.\n\n\n\nOur outcome, \\(Y\\), is a binary value. We can have \\(Y=1\\) or \\(Y=0\\). The predicted probability is the estimated \\(P(Y=1)\\), the probability that \\(Y\\) is 1. So the probability is related to the outcome, but it is not the outcome itself.\n\n\n\nI think this is referring to slide 23? And I think the newdata2 variable?\nI create a new dataset with the age so that I could create a vector of equally spaced ages. The original observations were not necessarily evenly distributed in the range of age values. By making a vector of ages, I can create a smooth line for the predicted probability across ages.\n\n\n\nWe use type=link when we want the predicted log-odds (on the logit scale) and type=response when we want the probability scale. Sometimes we need to work in the logit-scale before converting to the probability scale. In those cases, we will want the predicted log-odds!"
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”"
+    "text": "Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nThere’s a flat rate on shipping… boo\n\nWe could do a class order and share the shipping cost??\n\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time.\n\n\n\n\n\nQuiz 1 will open on Wednesday at 3pm.\nThe quiz will be administered over Sakai.\nThe quiz has a total of 14 questions, with 12 multiple choice and 2 free response questions.\nConcepts and interpretations from Lessons 2-5 will be tested. You will be expected to interpret information from a contingency table and R output, but you will not be expected to interpret coefficients from logistic regression. Some additional information is in the following instructions.\nIf you go to the “Tests & Quizzes” there is a Test Run for you to get familiar with the Sakai formatting.\nQuiz 1 instructions:\n\nI have written a 30-minute quiz, but there is no time limit on the quiz. You will have from\nWednesday at 3pm to Sunday at 11pm to finish the quiz.\nThe quiz is open book and open notes. You may use books other than the class textbook, you may use anything on our course webpage, and you may use reference websites (like Wikipedia, Googling expected value of specific distribution, etc.).\nNo cheating will be tolerated. Cheating includes:\nUsing ChatGPT\nCopy and pasting the question from Sakai to any search engine.\nUsing question and answer threads typically seen on sites like StackExchange, WikiHow, Quora, Reddit, StackOverflow, Chegg, etc.\n\nAsking other students, sharing quiz work or sharing quiz results.\nEach question is worth 3 points, including multiple choice and free response questions."
   },
   {
     "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html#announcements",
     "href": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html#announcements",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”"
+    "text": "Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nThere’s a flat rate on shipping… boo\n\nWe could do a class order and share the shipping cost??\n\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time.\n\n\n\n\n\nQuiz 1 will open on Wednesday at 3pm.\nThe quiz will be administered over Sakai.\nThe quiz has a total of 14 questions, with 12 multiple choice and 2 free response questions.\nConcepts and interpretations from Lessons 2-5 will be tested. You will be expected to interpret information from a contingency table and R output, but you will not be expected to interpret coefficients from logistic regression. Some additional information is in the following instructions.\nIf you go to the “Tests & Quizzes” there is a Test Run for you to get familiar with the Sakai formatting.\nQuiz 1 instructions:\n\nI have written a 30-minute quiz, but there is no time limit on the quiz. You will have from\nWednesday at 3pm to Sunday at 11pm to finish the quiz.\nThe quiz is open book and open notes. You may use books other than the class textbook, you may use anything on our course webpage, and you may use reference websites (like Wikipedia, Googling expected value of specific distribution, etc.).\nNo cheating will be tolerated. Cheating includes:\nUsing ChatGPT\nCopy and pasting the question from Sakai to any search engine.\nUsing question and answer threads typically seen on sites like StackExchange, WikiHow, Quora, Reddit, StackOverflow, Chegg, etc.\n\nAsking other students, sharing quiz work or sharing quiz results.\nEach question is worth 3 points, including multiple choice and free response questions."
   },
   {
     "objectID": "lessons/L01_Discussion/L01_Discussion_muddy_points.html",
@@ -7236,5 +7236,12 @@
     "title": "Homework 2",
     "section": "Questions Part 2",
     "text": "Questions Part 2\nThe following questions are intended to give you practice in connecting concepts that will help you make decisions in real world applications.\n\nQuestion 3\nUsing a similar table to the one in Lesson 8, go back through the parts in this homework and determine which test can be run .\n\n\n\n\n\n\n\n\n\n\nWald test\nScore test\nLRT\n\n\n\n\nQuestion 1, Part d: testing intercept\n\n\n\n\n\nQuestion 1, Part e: testing coefficient(s) for age\n\n\n\n\n\nQuestion 2, Part e/f: testing coefficient(s)for CPR\n\n\n\n\n\nQuestion 2, Part h/i: testing coefficient(s)for LOC"
+  },
+  {
+    "objectID": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html#last-week",
+    "href": "lessons/08_Tests_GLMs/08_Tests_GLMs_key_info.html#last-week",
+    "title": "Key Info and Announcements",
+    "section": "Last week",
+    "text": "Last week\n\nLooked at interpretations and predicted values for our simple fitted logistic regression model\nDiscussed how to interpret the estimated regression coefficients and the estimated odds ratios from our regression!\n\nDid this for a continuous variable, binary variable, and multi-level categorical variable\n\nCalculated predicted probability for an individual/observation with a specific covariate value\nCalculated predicted probabilities across all values for a covariate (visualization part)\nCalculated the confidence intervals for all of these to get a sense of the significance of these estimated coefficients, odds ratios, and probabilities"
   }
 ]
