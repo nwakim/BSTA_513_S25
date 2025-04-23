@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 9: Multiple Logistic Regression"
 date-modified: "today"
 format: 
   html:
@@ -12,4 +12,19 @@ editor_options:
 ## Muddy Points from Spring 2025
 
 ## Muddy Points from Spring 2024
+
+### 1. Why use logistic instead of linear regression?
+
+From waaay back in our slides from Lesson 5! We violate several of the assumptions for linear regression when our outcome has only two options. One of the most important reasons is that we cannot map our predictors (that can be continuous of categorical) onto a binary outcome. We need to transform our binary outcome so it is on a continuous and unbounded scale (logit does that!)
+
+### 2. Where can we find more resources for making forest plots?
+
+You can either use the code I gave in Lesson 9 or use the reference links from Lab 4 in Linear Models.
+
+Feel free to google around or use AI to help you construct this in R. This is one of those plots that has several different approaches. 
+
+### 3. And how do we make a likelihood probability table instead of a plot?
+
+I'm not sure what this means. Please post on Slack so we can clarify! We have discussed plotting predicted probability in Lesson 7.
+
 

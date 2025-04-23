@@ -46,7 +46,18 @@ library(epiDisplay)
 load(here("data", "bc_diagnosis.Rda"))
 mean_age = mean(bc$Age)
 bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1, 
-                   Age_c = Age - mean(Age))
+                   Age_c = Age - mean(Age), 
+                   Race_Ethnicity = factor(Race_Ethnicity, 
+                                           levels = c("NH White",
+                                                      "Hispanic-Latino", 
+                                                      "NH American Indian/Alaskan Native", 
+                                                      "NH Asian/Pacific Islander", 
+                                                      "NH Black" ), 
+                                           labels = c("NH White",
+                                                      "Hispanic-Latinx", 
+                                                      "NH American Indian/Alaskan Native", 
+                                                      "NH Asian/Pacific Islander", 
+                                                      "NH Black" )))
 ```
 
 # Learning Objectives
@@ -171,6 +182,7 @@ $\mathbf{X}$ represents the vector of all the $X$'s. This is how we represent ou
 
     -   Unless one (or more) of those independent variables is a multi-level categorical variable, then we need more than $k+1$ coefficients
 
+## Poll Everywhere Question 1
 
 ## Breast Cancer Example: Population Model
 
@@ -199,14 +211,14 @@ $$ \begin{aligned}
 
 -   6 total coefficients ($\beta_0$ to $\beta_5$)
 
-## Fitting Multiple Logistic Regression Model {.smaller}
+## Fitting Multiple Logistic Regression Model: `summary()` {.smaller}
 
 ```{r}
 multi_bc = glm(Late_stage_diag ~ Race_Ethnicity + Age_c, data = bc, family = binomial)
 summary(multi_bc)
 ```
 
-## Fitting Multiple Logistic Regression Model {.smaller}
+## Fitting Multiple Logistic Regression Model: `tidy()` {.smaller}
 
 ```{r}
 multi_bc = glm(Late_stage_diag ~ Race_Ethnicity + Age_c, data = bc, family = binomial)
@@ -252,7 +264,7 @@ $$ \begin{aligned}
 
 ## Testing Significance of the Coefficients
 
--   Refer to Lesson 6 for more information on each test!!
+-   Refer to [Lesson 8](https://nwakim.github.io/BSTA_513_S25/lessons/08_Tests_GLMs/08_Tests_GLMs.html#/title-slide) for more information on each test!!
 
  
 
@@ -260,7 +272,7 @@ $$ \begin{aligned}
 
     -   [Wald test]{style="background-color:#D5E2F1;"}
     
-        -   Can be used to test a single coefficient
+        -   Most common to test a single coefficient
         
     -   [~~Score test~~]{style="background-color:#F9E7B8;"}
     -   [Likelihood ratio test (LRT)]{style="background-color:#CADFB8;"}
@@ -290,50 +302,32 @@ $$ \begin{aligned}
        
 -   When I say "test a variable" I mean "determine if the model with the variable is more likely than the model without that variable"
 
-    -   We can use the Wald test to do this is some scenarios (single, continuous covariate)
+    -   We can use the Wald test to do this is some scenarios (i.e. single, continuous covariate)
     -   BUT I advise you practice using the LRT whenever comparing models (aka testing variables)
 
 ## All three tests together
 
 ![](./images/three_tests.png){fig-align="center"}
 
-## From Lesson 6: Wald test{background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
+## Poll Everywhere Question 2
+
+
+
+## From Lesson 8: Wald test{background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
 
 -   Assumes test statistic W follows a standard normal distribution under the null hypothesis
 
--   Test statistic: $$W=\frac{{\hat{\beta}}_j}{SE_{\hat{\beta}_j}}\sim N(0,1)$$
+-   Test statistic: $$W=\frac{{\widehat{\beta}}_j}{SE_{\widehat{\beta}_j}}\sim N(0,1)$$
 
     -   where $\widehat{\beta}_j$ is a MLE of coefficient $j$
 
--   95% Wald confidence interval: $${\hat{\beta}}_1\pm1.96 \cdot SE_{{\hat{\beta}}_j}$$
+-   95% Wald confidence interval: $${\widehat{\beta}}_1\pm1.96 \cdot SE_{{\widehat{\beta}}_j}$$
 
 -   The Wald test is a routine output in R (`summary()` of `glm()` output)
 
-    -   Includes $SE_{{\hat{\beta}}_j}$ and can easily find confidence interval with `tidy()`
+    -   Includes $SE_{{\widehat{\beta}}_j}$ and can easily find confidence interval with `tidy()`
     
 -   **Important note:** Wald test is best for confidence intervals of our coefficient estimates or estimated odds ratios. 
-
-    
-## Wald test procedure with confidence intervals {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
-
-1.  Set the [**level of significance**]{style="color:#5B9BD5"} $\alpha$
-
-2.  Specify the [**null**]{style="color:#5B9BD5"} ( $H_0$ ) and [**alternative**]{style="color:#5B9BD5"} ( $H_A$ ) [**hypotheses**]{style="color:#5B9BD5"}
-
-    -   In symbols
-    -   In words
-    -   Alternative: one- or two-sided?
-
-3.  Calculate the [**confidence interval**]{style="color:#5B9BD5"} and [**determine if it overlaps with null**]{style="color:#5B9BD5"}
-
-    -   Overlap with null (usually 0 for coefficient) = fail to reject null
-    -   No overlap with null (usually 0 for coefficient) = reject null
-
-4.  Write a [**conclusion**]{style="color:#5B9BD5"} to the hypothesis test
-
-    -   What is the estimate and its confidence interval?
-    -   Do we reject or fail to reject $H_0$?
-    -   Write a conclusion in the context of the problem
     
 ## Wald test in our example {background-image="./images/title_blue.png" background-size="2500px 150px" background-position="top"}
 
@@ -451,17 +445,25 @@ Given race and ethnicity is already in the model, is the regression model with a
 ```{r}
 #| eval: false
 tbl_regression(multi_bc, 
-               exponentiate = TRUE) %>%
+               label = list(Race_Ethnicity ~ "Race/ethnicity",
+                            Age_c ~ "Age (1 year increase)"),
+               exponentiate = TRUE) %>% 
   as_gt() %>% 
-  tab_options(table.font.size = 30)
+  tab_options(table.font.size = 30) %>%
+  tab_source_note(md("*NH stands for \"Non-Hispanic\"*"))
 ```
 :::
 
 ::: {.column width="45%"}
 ```{r}
 #| echo: false
-tbl_regression(multi_bc, exponentiate = TRUE) %>%
-  as_gt() %>% tab_options(table.font.size = 30)
+tbl_regression(multi_bc, 
+               label = list(Race_Ethnicity ~ "Race/ethnicity",
+                            Age_c ~ "Age (1 year increase)"),
+               exponentiate = TRUE) %>% 
+  as_gt() %>% 
+  tab_options(table.font.size = 30) %>%
+  tab_source_note(md("*NH stands for \"Non-Hispanic\"*"))
 ```
 :::
 :::
@@ -480,8 +482,6 @@ Given race and ethnicity is already in the model, is the regression model with a
 4.  Write a **conclusion** to the hypothesis test
 
 Given race and ethnicity is already in the model, the regression model with age is more likely than the model without age (p-val < 0.001).
-
-# Break here?
 
 ## Likelihood ratio test (1/3) {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
@@ -524,22 +524,7 @@ Given race and ethnicity is already in the model, the regression model with age 
     -   $H_0$: $\beta_1=\beta_{2}=\ldots=\beta_{k}=0$
     -   $H_1$: at least one of the above $\beta$’s is not equal to 0
 
-## LRT procedure {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
-
-1.  Set the [**level of significance**]{style="color:#70AD47"} $\alpha$
-
-2.  Specify the [**null**]{style="color:#70AD47"} ( $H_0$ ) and [**alternative**]{style="color:#70AD47"} ( $H_A$ ) [**hypotheses**]{style="color:#70AD47"}
-
-    -   In symbols
-    -   In words
-    -   Alternative: one- or two-sided?
-
-3.  Calculate the [**test statistic**]{style="color:#70AD47"} and [**p-value**]{style="color:#70AD47"}
-
-4.  Write a [**conclusion**]{style="color:#70AD47"} to the hypothesis test
-
-    -   Do we reject or fail to reject $H_0$?
-    -   Write a conclusion in the context of the problem
+## Poll Everywhere Question 3
 
 ## Likelihood ratio test (3/3) {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
 
@@ -655,6 +640,9 @@ Given race and ethnicity is already in the model, is the regression model with a
 4.  Write a **conclusion** to the hypothesis test
 
 Given race and ethnicity is already in the model, the regression model with age is more likely than the model without age (p-val < $2.2\cdot10^{-16}$).
+
+## Poll Everywhere Question 4
+
 
 ## Example 2: Single, >2 categorical variable: Race and Ethnicity
 
@@ -850,7 +838,7 @@ The regression model with race and ethnicity and age is more likely than the mod
 +0.06 \cdot \text{Age}_c 
 \end{aligned}$$
 
--   We can convert it to the predicted probability: $$\hat{\pi}(\mathbf{X})=\dfrac{\exp \left( \widehat{\beta}_0 + \widehat{\beta}_1 \cdot I \left( R/E = \text{``H/L"} \right) + ... + \widehat{\beta}_5 \cdot \text{Age}_c \right)}  {1+\exp \left(\widehat{\beta}_0 + \widehat{\beta}_1 \cdot I \left( R/E = \text{``H/L"} \right) + ... + \widehat{\beta}_5 \cdot \text{Age}_c \right)}$$
+-   We can convert it to the predicted probability: $$\widehat{\pi}(\mathbf{X})=\dfrac{\exp \left( \widehat{\beta}_0 + \widehat{\beta}_1 \cdot I \left( R/E = \text{``H/L"} \right) + ... + \widehat{\beta}_5 \cdot \text{Age}_c \right)}  {1+\exp \left(\widehat{\beta}_0 + \widehat{\beta}_1 \cdot I \left( R/E = \text{``H/L"} \right) + ... + \widehat{\beta}_5 \cdot \text{Age}_c \right)}$$
 
     -   This is an inverse logit calculation
 
@@ -962,6 +950,10 @@ For someone who is 60 years old and Non-Hispanic Asian/Pacific Islander, what is
 
 For someone who is 60 years old and Non-Hispanic Asian/Pacific Islander, the predicted probability of late stage breast cancer diagnosis is 0.269 (95% CI: 0.238, 0.299).
 
+## Poll Everywhere Question 5
+
+
+
 # Learning Objectives
 
 1.  Construct and fit a multiple logistic regression model
@@ -978,28 +970,16 @@ For someone who is 60 years old and Non-Hispanic Asian/Pacific Islander, the pre
 
 ## How to present odds ratios: Table
 
--   `tbl_regression()` in the `gtsummary` package is helpful for presenting the odds ratios in a clean way
-
-```{r}
-library(gtsummary)
-tbl_regression(multi_bc, exponentiate = TRUE) %>% 
-  as_gt() %>% # allows us to use tab_options()
-  tab_options(table.font.size = 38)
-```
-
-## How to present odds ratios: Table - EVEN BETTER!
-
 ```{r}
 library(gtsummary)
 tbl_regression(multi_bc, 
                label = list(Race_Ethnicity ~ "Race/ethnicity",
                             Age_c ~ "Age (1 year increase)"),
                exponentiate = TRUE) %>% 
-  as_gt() %>% # allows us to use tab_options()
-  tab_options(table.font.size = 38)
+  as_gt() %>% 
+  tab_options(table.font.size = 38) %>%
+  tab_source_note(md("*NH stands for \"Non-Hispanic\"*"))
 ```
-
-How would you fix the race/ethnicity category names?
 
 ## How to present odds ratios: Forest Plot Setup
 
@@ -1022,13 +1002,11 @@ MLR_tidy = MLR_tidy %>%
                                "Age_c" ~ ""), 
          label = case_match(label, 
                             "NH White" ~ "Non-Hispanic White", 
-                            "Hispanic-Latino" ~ "Hispanic-Latinx", 
+                            "Hispanic-Latinx" ~ "Hispanic-Latinx", 
                             "NH American Indian/Alaskan Native" ~ "Non-Hispanic American \n Indian/Alaskan Native", 
                             "NH Asian/Pacific Islander" ~ "Non-Hispanic \n Asian/Pacific Islander",
                             "NH Black" ~ "Non-Hispanic Black", 
                                "Age_c" ~ "Age (yrs)"))
-  # %>%
-  #                       fct_relevel("Age (yrs)", "Non-Hispanic \n Asian/Pacific Islander", "Non-Hispanic American \n Indian/Alaskan Native", "Non-Hispanic White", "Hispanic-Latinx", "Non-Hispanic Black"))
 ```
 
 ## How to present odds ratios: Forest Plot
@@ -1056,7 +1034,6 @@ plot_MLR = ggplot(data=MLR_tidy,
         strip.text = element_text(size = 25), 
         strip.placement = "outside", 
         strip.background = element_blank())
-# plot_MLR
 ```
 
 ## How to present odds ratios: Forest Plot
@@ -1070,7 +1047,7 @@ plot_MLR = ggplot(data=MLR_tidy,
 plot_MLR 
 ```
 
-## Adding odds ratios
+## Adding written estimates for odds ratios
 
 ```{r}
 MLR_tidy = MLR_tidy %>% 
@@ -1147,13 +1124,16 @@ plot_grid(plot_MLR, OR_labs, ncol=2, align = "h", rel_widths = c(4, 1))
     -   point out that these are adjusted estimates
     -   provide a list of other variables in the model
 
-## Example: Race and Ethnicity and Age model fit (FIXED)
+## Example: Race and Ethnicity and Age model fit
 
 ::: columns
 ::: {.column width="40%"}
 ```{r}
 #| echo: false
-tbl_regression(multi_bc, exponentiate = TRUE) %>% 
+tbl_regression(multi_bc, 
+               label = list(Race_Ethnicity ~ "Race/ethnicity",
+                            Age_c ~ "Age (1 year increase)"),
+               exponentiate = TRUE) %>% 
   as_gt() %>% # allows us to use tab_options()
   tab_options(table.font.size = 30)
 ```

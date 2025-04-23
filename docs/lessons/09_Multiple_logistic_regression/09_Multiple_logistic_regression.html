@@ -341,6 +341,9 @@ Nicky Wakim
 </ul></li>
 </ul>
 </section>
+<section id="poll-everywhere-question-1" class="slide level2">
+<h2>Poll Everywhere Question 1</h2>
+</section>
 <section id="breast-cancer-example-population-model" class="slide level2">
 <h2>Breast Cancer Example: Population Model</h2>
 <ul>
@@ -368,8 +371,8 @@ Nicky Wakim
 <li>6 total coefficients (<span class="math inline">\(\beta_0\)</span> to <span class="math inline">\(\beta_5\)</span>)</li>
 </ul>
 </section>
-<section id="fitting-multiple-logistic-regression-model" class="slide level2 smaller">
-<h2>Fitting Multiple Logistic Regression Model</h2>
+<section id="fitting-multiple-logistic-regression-model-summary" class="slide level2 smaller">
+<h2>Fitting Multiple Logistic Regression Model: <code>summary()</code></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
 <span id="cb1-2"><a></a><span class="fu">summary</span>(multi_bc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -382,14 +385,14 @@ glm(formula = Late_stage_diag ~ Race_Ethnicity + Age_c, family = binomial,
 Coefficients:
                                                  Estimate Std. Error z value
 (Intercept)                                     -1.038389   0.027292 -38.048
-Race_EthnicityHispanic-Latino                   -0.015424   0.083653  -0.184
+Race_EthnicityHispanic-Latinx                   -0.015424   0.083653  -0.184
 Race_EthnicityNH American Indian/Alaskan Native -0.085704   0.484110  -0.177
 Race_EthnicityNH Asian/Pacific Islander          0.133965   0.083797   1.599
 Race_EthnicityNH Black                           0.357692   0.071789   4.983
 Age_c                                            0.057151   0.003209  17.811
                                                 Pr(&gt;|z|)    
 (Intercept)                                      &lt; 2e-16 ***
-Race_EthnicityHispanic-Latino                      0.854    
+Race_EthnicityHispanic-Latinx                      0.854    
 Race_EthnicityNH American Indian/Alaskan Native    0.859    
 Race_EthnicityNH Asian/Pacific Islander            0.110    
 Race_EthnicityNH Black                          6.27e-07 ***
@@ -407,30 +410,30 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 </section>
-<section id="fitting-multiple-logistic-regression-model-1" class="slide level2 smaller">
-<h2>Fitting Multiple Logistic Regression Model</h2>
+<section id="fitting-multiple-logistic-regression-model-tidy" class="slide level2 smaller">
+<h2>Fitting Multiple Logistic Regression Model: <code>tidy()</code></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>multi_bc <span class="ot">=</span> <span class="fu">glm</span>(Late_stage_diag <span class="sc">~</span> Race_Ethnicity <span class="sc">+</span> Age_c, <span class="at">data =</span> bc, <span class="at">family =</span> binomial)</span>
 <span id="cb3-2"><a></a><span class="fu">tidy</span>(multi_bc, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">38</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="qgzfeuxrai" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qgzfeuxrai table {
+<div id="bjzkxblkgu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bjzkxblkgu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qgzfeuxrai thead, #qgzfeuxrai tbody, #qgzfeuxrai tfoot, #qgzfeuxrai tr, #qgzfeuxrai td, #qgzfeuxrai th {
+#bjzkxblkgu thead, #bjzkxblkgu tbody, #bjzkxblkgu tfoot, #bjzkxblkgu tr, #bjzkxblkgu td, #bjzkxblkgu th {
   border-style: none;
 }
 
-#qgzfeuxrai p {
+#bjzkxblkgu p {
   margin: 0;
   padding: 0;
 }
 
-#qgzfeuxrai .gt_table {
+#bjzkxblkgu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -456,12 +459,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_caption {
+#bjzkxblkgu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qgzfeuxrai .gt_title {
+#bjzkxblkgu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -473,7 +476,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#qgzfeuxrai .gt_subtitle {
+#bjzkxblkgu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -485,7 +488,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#qgzfeuxrai .gt_heading {
+#bjzkxblkgu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -497,13 +500,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_bottom_border {
+#bjzkxblkgu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_col_headings {
+#bjzkxblkgu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -518,7 +521,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_col_heading {
+#bjzkxblkgu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -538,7 +541,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#qgzfeuxrai .gt_column_spanner_outer {
+#bjzkxblkgu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -550,15 +553,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#qgzfeuxrai .gt_column_spanner_outer:first-child {
+#bjzkxblkgu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qgzfeuxrai .gt_column_spanner_outer:last-child {
+#bjzkxblkgu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qgzfeuxrai .gt_column_spanner {
+#bjzkxblkgu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -570,11 +573,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#qgzfeuxrai .gt_spanner_row {
+#bjzkxblkgu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qgzfeuxrai .gt_group_heading {
+#bjzkxblkgu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -600,7 +603,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#qgzfeuxrai .gt_empty_group_heading {
+#bjzkxblkgu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -615,15 +618,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#qgzfeuxrai .gt_from_md > :first-child {
+#bjzkxblkgu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qgzfeuxrai .gt_from_md > :last-child {
+#bjzkxblkgu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qgzfeuxrai .gt_row {
+#bjzkxblkgu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -642,7 +645,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#qgzfeuxrai .gt_stub {
+#bjzkxblkgu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -655,7 +658,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qgzfeuxrai .gt_stub_row_group {
+#bjzkxblkgu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -669,15 +672,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#qgzfeuxrai .gt_row_group_first td {
+#bjzkxblkgu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qgzfeuxrai .gt_row_group_first th {
+#bjzkxblkgu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qgzfeuxrai .gt_summary_row {
+#bjzkxblkgu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -687,16 +690,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qgzfeuxrai .gt_first_summary_row {
+#bjzkxblkgu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_first_summary_row.thick {
+#bjzkxblkgu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qgzfeuxrai .gt_last_summary_row {
+#bjzkxblkgu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -706,7 +709,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_grand_summary_row {
+#bjzkxblkgu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -716,7 +719,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qgzfeuxrai .gt_first_grand_summary_row {
+#bjzkxblkgu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -726,7 +729,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_last_grand_summary_row_top {
+#bjzkxblkgu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -736,11 +739,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_striped {
+#bjzkxblkgu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qgzfeuxrai .gt_table_body {
+#bjzkxblkgu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -749,7 +752,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_footnotes {
+#bjzkxblkgu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -763,7 +766,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_footnote {
+#bjzkxblkgu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -772,7 +775,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qgzfeuxrai .gt_sourcenotes {
+#bjzkxblkgu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -786,7 +789,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qgzfeuxrai .gt_sourcenote {
+#bjzkxblkgu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -794,72 +797,72 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qgzfeuxrai .gt_left {
+#bjzkxblkgu .gt_left {
   text-align: left;
 }
 
-#qgzfeuxrai .gt_center {
+#bjzkxblkgu .gt_center {
   text-align: center;
 }
 
-#qgzfeuxrai .gt_right {
+#bjzkxblkgu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qgzfeuxrai .gt_font_normal {
+#bjzkxblkgu .gt_font_normal {
   font-weight: normal;
 }
 
-#qgzfeuxrai .gt_font_bold {
+#bjzkxblkgu .gt_font_bold {
   font-weight: bold;
 }
 
-#qgzfeuxrai .gt_font_italic {
+#bjzkxblkgu .gt_font_italic {
   font-style: italic;
 }
 
-#qgzfeuxrai .gt_super {
+#bjzkxblkgu .gt_super {
   font-size: 65%;
 }
 
-#qgzfeuxrai .gt_footnote_marks {
+#bjzkxblkgu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qgzfeuxrai .gt_asterisk {
+#bjzkxblkgu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qgzfeuxrai .gt_indent_1 {
+#bjzkxblkgu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qgzfeuxrai .gt_indent_2 {
+#bjzkxblkgu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qgzfeuxrai .gt_indent_3 {
+#bjzkxblkgu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qgzfeuxrai .gt_indent_4 {
+#bjzkxblkgu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qgzfeuxrai .gt_indent_5 {
+#bjzkxblkgu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qgzfeuxrai .katex-display {
+#bjzkxblkgu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qgzfeuxrai div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bjzkxblkgu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -887,7 +890,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <td class="gt_row gt_right" headers="conf.high">−0.985</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="term">Race_EthnicityHispanic-Latino</td>
+<td class="gt_row gt_left" headers="term">Race_EthnicityHispanic-Latinx</td>
 <td class="gt_row gt_right" headers="estimate">−0.015</td>
 <td class="gt_row gt_right" headers="std.error">0.084</td>
 <td class="gt_row gt_right" headers="statistic">−0.184</td>
@@ -982,7 +985,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <section id="testing-significance-of-the-coefficients" class="slide level2">
 <h2>Testing Significance of the Coefficients</h2>
 <ul>
-<li>Refer to Lesson 6 for more information on each test!!</li>
+<li>Refer to <a href="https://nwakim.github.io/BSTA_513_S25/lessons/08_Tests_GLMs/08_Tests_GLMs.html#/title-slide">Lesson 8</a> for more information on each test!!</li>
 </ul>
 <p>&nbsp;</p>
 <ul>
@@ -990,7 +993,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <ul>
 <li><p><span style="background-color:#D5E2F1;">Wald test</span></p>
 <ul>
-<li>Can be used to test a single coefficient</li>
+<li>Most common to test a single coefficient</li>
 </ul></li>
 <li><p><span style="background-color:#F9E7B8;"><del>Score test</del></span></p></li>
 <li><p><span style="background-color:#CADFB8;">Likelihood ratio test (LRT)</span></p>
@@ -1025,7 +1028,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>&nbsp;</p></li>
 <li><p>When I say “test a variable” I mean “determine if the model with the variable is more likely than the model without that variable”</p>
 <ul>
-<li>We can use the Wald test to do this is some scenarios (single, continuous covariate)</li>
+<li>We can use the Wald test to do this is some scenarios (i.e.&nbsp;single, continuous covariate)</li>
 <li>BUT I advise you practice using the LRT whenever comparing models (aka testing variables)</li>
 </ul></li>
 </ul>
@@ -1034,44 +1037,24 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>All three tests together</h2>
 
 <img data-src="./images/three_tests.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="from-lesson-6-wald-test" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
-<h2>From Lesson 6: Wald test</h2>
+<section id="poll-everywhere-question-2" class="slide level2">
+<h2>Poll Everywhere Question 2</h2>
+</section>
+<section id="from-lesson-8-wald-test" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
+<h2>From Lesson 8: Wald test</h2>
 <ul>
 <li><p>Assumes test statistic W follows a standard normal distribution under the null hypothesis</p></li>
-<li><p>Test statistic: <span class="math display">\[W=\frac{{\hat{\beta}}_j}{SE_{\hat{\beta}_j}}\sim N(0,1)\]</span></p>
+<li><p>Test statistic: <span class="math display">\[W=\frac{{\widehat{\beta}}_j}{SE_{\widehat{\beta}_j}}\sim N(0,1)\]</span></p>
 <ul>
 <li>where <span class="math inline">\(\widehat{\beta}_j\)</span> is a MLE of coefficient <span class="math inline">\(j\)</span></li>
 </ul></li>
-<li><p>95% Wald confidence interval: <span class="math display">\[{\hat{\beta}}_1\pm1.96 \cdot SE_{{\hat{\beta}}_j}\]</span></p></li>
+<li><p>95% Wald confidence interval: <span class="math display">\[{\widehat{\beta}}_1\pm1.96 \cdot SE_{{\widehat{\beta}}_j}\]</span></p></li>
 <li><p>The Wald test is a routine output in R (<code>summary()</code> of <code>glm()</code> output)</p>
 <ul>
-<li>Includes <span class="math inline">\(SE_{{\hat{\beta}}_j}\)</span> and can easily find confidence interval with <code>tidy()</code></li>
+<li>Includes <span class="math inline">\(SE_{{\widehat{\beta}}_j}\)</span> and can easily find confidence interval with <code>tidy()</code></li>
 </ul></li>
 <li><p><strong>Important note:</strong> Wald test is best for confidence intervals of our coefficient estimates or estimated odds ratios.</p></li>
 </ul>
-</section>
-<section id="wald-test-procedure-with-confidence-intervals" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
-<h2>Wald test procedure with confidence intervals</h2>
-<ol type="1">
-<li><p>Set the <span style="color:#5B9BD5"><strong>level of significance</strong></span> <span class="math inline">\(\alpha\)</span></p></li>
-<li><p>Specify the <span style="color:#5B9BD5"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#5B9BD5"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#5B9BD5"><strong>hypotheses</strong></span></p>
-<ul>
-<li>In symbols</li>
-<li>In words</li>
-<li>Alternative: one- or two-sided?</li>
-</ul></li>
-<li><p>Calculate the <span style="color:#5B9BD5"><strong>confidence interval</strong></span> and <span style="color:#5B9BD5"><strong>determine if it overlaps with null</strong></span></p>
-<ul>
-<li>Overlap with null (usually 0 for coefficient) = fail to reject null</li>
-<li>No overlap with null (usually 0 for coefficient) = reject null</li>
-</ul></li>
-<li><p>Write a <span style="color:#5B9BD5"><strong>conclusion</strong></span> to the hypothesis test</p>
-<ul>
-<li>What is the estimate and its confidence interval?</li>
-<li>Do we reject or fail to reject <span class="math inline">\(H_0\)</span>?</li>
-<li>Write a conclusion in the context of the problem</li>
-</ul></li>
-</ol>
 </section>
 <section id="wald-test-in-our-example" class="slide level2" data-background-image="./images/title_blue.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Wald test in our example</h2>
@@ -1165,23 +1148,23 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="rzennfrvxt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rzennfrvxt table {
+<div id="ezhleucbjo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ezhleucbjo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rzennfrvxt thead, #rzennfrvxt tbody, #rzennfrvxt tfoot, #rzennfrvxt tr, #rzennfrvxt td, #rzennfrvxt th {
+#ezhleucbjo thead, #ezhleucbjo tbody, #ezhleucbjo tfoot, #ezhleucbjo tr, #ezhleucbjo td, #ezhleucbjo th {
   border-style: none;
 }
 
-#rzennfrvxt p {
+#ezhleucbjo p {
   margin: 0;
   padding: 0;
 }
 
-#rzennfrvxt .gt_table {
+#ezhleucbjo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1207,12 +1190,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_caption {
+#ezhleucbjo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rzennfrvxt .gt_title {
+#ezhleucbjo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1224,7 +1207,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#rzennfrvxt .gt_subtitle {
+#ezhleucbjo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1236,7 +1219,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#rzennfrvxt .gt_heading {
+#ezhleucbjo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1248,13 +1231,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_bottom_border {
+#ezhleucbjo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_col_headings {
+#ezhleucbjo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1269,7 +1252,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_col_heading {
+#ezhleucbjo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1289,7 +1272,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#rzennfrvxt .gt_column_spanner_outer {
+#ezhleucbjo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1301,15 +1284,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#rzennfrvxt .gt_column_spanner_outer:first-child {
+#ezhleucbjo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rzennfrvxt .gt_column_spanner_outer:last-child {
+#ezhleucbjo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rzennfrvxt .gt_column_spanner {
+#ezhleucbjo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1321,11 +1304,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#rzennfrvxt .gt_spanner_row {
+#ezhleucbjo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rzennfrvxt .gt_group_heading {
+#ezhleucbjo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1351,7 +1334,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#rzennfrvxt .gt_empty_group_heading {
+#ezhleucbjo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1366,15 +1349,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#rzennfrvxt .gt_from_md > :first-child {
+#ezhleucbjo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rzennfrvxt .gt_from_md > :last-child {
+#ezhleucbjo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rzennfrvxt .gt_row {
+#ezhleucbjo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1393,7 +1376,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#rzennfrvxt .gt_stub {
+#ezhleucbjo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1406,7 +1389,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rzennfrvxt .gt_stub_row_group {
+#ezhleucbjo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1420,15 +1403,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#rzennfrvxt .gt_row_group_first td {
+#ezhleucbjo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rzennfrvxt .gt_row_group_first th {
+#ezhleucbjo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rzennfrvxt .gt_summary_row {
+#ezhleucbjo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1438,16 +1421,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rzennfrvxt .gt_first_summary_row {
+#ezhleucbjo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_first_summary_row.thick {
+#ezhleucbjo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rzennfrvxt .gt_last_summary_row {
+#ezhleucbjo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1457,7 +1440,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_grand_summary_row {
+#ezhleucbjo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1467,7 +1450,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rzennfrvxt .gt_first_grand_summary_row {
+#ezhleucbjo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1477,7 +1460,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_last_grand_summary_row_top {
+#ezhleucbjo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1487,11 +1470,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_striped {
+#ezhleucbjo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rzennfrvxt .gt_table_body {
+#ezhleucbjo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1500,7 +1483,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_footnotes {
+#ezhleucbjo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1514,7 +1497,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_footnote {
+#ezhleucbjo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1523,7 +1506,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rzennfrvxt .gt_sourcenotes {
+#ezhleucbjo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1537,7 +1520,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rzennfrvxt .gt_sourcenote {
+#ezhleucbjo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1545,72 +1528,72 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rzennfrvxt .gt_left {
+#ezhleucbjo .gt_left {
   text-align: left;
 }
 
-#rzennfrvxt .gt_center {
+#ezhleucbjo .gt_center {
   text-align: center;
 }
 
-#rzennfrvxt .gt_right {
+#ezhleucbjo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rzennfrvxt .gt_font_normal {
+#ezhleucbjo .gt_font_normal {
   font-weight: normal;
 }
 
-#rzennfrvxt .gt_font_bold {
+#ezhleucbjo .gt_font_bold {
   font-weight: bold;
 }
 
-#rzennfrvxt .gt_font_italic {
+#ezhleucbjo .gt_font_italic {
   font-style: italic;
 }
 
-#rzennfrvxt .gt_super {
+#ezhleucbjo .gt_super {
   font-size: 65%;
 }
 
-#rzennfrvxt .gt_footnote_marks {
+#ezhleucbjo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rzennfrvxt .gt_asterisk {
+#ezhleucbjo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rzennfrvxt .gt_indent_1 {
+#ezhleucbjo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rzennfrvxt .gt_indent_2 {
+#ezhleucbjo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rzennfrvxt .gt_indent_3 {
+#ezhleucbjo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rzennfrvxt .gt_indent_4 {
+#ezhleucbjo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rzennfrvxt .gt_indent_5 {
+#ezhleucbjo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rzennfrvxt .katex-display {
+#ezhleucbjo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rzennfrvxt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ezhleucbjo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1638,7 +1621,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <td class="gt_row gt_right" headers="conf.high">−0.99</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="term">Race_EthnicityHispanic-Latino</td>
+<td class="gt_row gt_left" headers="term">Race_EthnicityHispanic-Latinx</td>
 <td class="gt_row gt_right" headers="estimate">−0.02</td>
 <td class="gt_row gt_right" headers="std.error">0.08</td>
 <td class="gt_row gt_right" headers="statistic">−0.18</td>
@@ -1710,30 +1693,33 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <div class="column" style="width:55%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">tbl_regression</span>(multi_bc, </span>
-<span id="cb5-2"><a></a>               <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-4"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a></a>               <span class="at">label =</span> <span class="fu">list</span>(Race_Ethnicity <span class="sc">~</span> <span class="st">"Race/ethnicity"</span>,</span>
+<span id="cb5-3"><a></a>                            Age_c <span class="sc">~</span> <span class="st">"Age (1 year increase)"</span>),</span>
+<span id="cb5-4"><a></a>               <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"*NH stands for </span><span class="sc">\"</span><span class="st">Non-Hispanic</span><span class="sc">\"</span><span class="st">*"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:45%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="mrsfaroied" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mrsfaroied table {
+<div id="tawhvhzyjz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tawhvhzyjz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mrsfaroied thead, #mrsfaroied tbody, #mrsfaroied tfoot, #mrsfaroied tr, #mrsfaroied td, #mrsfaroied th {
+#tawhvhzyjz thead, #tawhvhzyjz tbody, #tawhvhzyjz tfoot, #tawhvhzyjz tr, #tawhvhzyjz td, #tawhvhzyjz th {
   border-style: none;
 }
 
-#mrsfaroied p {
+#tawhvhzyjz p {
   margin: 0;
   padding: 0;
 }
 
-#mrsfaroied .gt_table {
+#tawhvhzyjz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1759,12 +1745,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_caption {
+#tawhvhzyjz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mrsfaroied .gt_title {
+#tawhvhzyjz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1776,7 +1762,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#mrsfaroied .gt_subtitle {
+#tawhvhzyjz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1788,7 +1774,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#mrsfaroied .gt_heading {
+#tawhvhzyjz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1800,13 +1786,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_bottom_border {
+#tawhvhzyjz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_col_headings {
+#tawhvhzyjz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1821,7 +1807,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_col_heading {
+#tawhvhzyjz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1841,7 +1827,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#mrsfaroied .gt_column_spanner_outer {
+#tawhvhzyjz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1853,15 +1839,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#mrsfaroied .gt_column_spanner_outer:first-child {
+#tawhvhzyjz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mrsfaroied .gt_column_spanner_outer:last-child {
+#tawhvhzyjz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mrsfaroied .gt_column_spanner {
+#tawhvhzyjz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1873,11 +1859,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#mrsfaroied .gt_spanner_row {
+#tawhvhzyjz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mrsfaroied .gt_group_heading {
+#tawhvhzyjz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1903,7 +1889,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#mrsfaroied .gt_empty_group_heading {
+#tawhvhzyjz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1918,15 +1904,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#mrsfaroied .gt_from_md > :first-child {
+#tawhvhzyjz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mrsfaroied .gt_from_md > :last-child {
+#tawhvhzyjz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mrsfaroied .gt_row {
+#tawhvhzyjz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1945,7 +1931,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#mrsfaroied .gt_stub {
+#tawhvhzyjz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1958,7 +1944,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#mrsfaroied .gt_stub_row_group {
+#tawhvhzyjz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1972,15 +1958,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#mrsfaroied .gt_row_group_first td {
+#tawhvhzyjz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mrsfaroied .gt_row_group_first th {
+#tawhvhzyjz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mrsfaroied .gt_summary_row {
+#tawhvhzyjz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1990,16 +1976,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#mrsfaroied .gt_first_summary_row {
+#tawhvhzyjz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_first_summary_row.thick {
+#tawhvhzyjz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mrsfaroied .gt_last_summary_row {
+#tawhvhzyjz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2009,7 +1995,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_grand_summary_row {
+#tawhvhzyjz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2019,7 +2005,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#mrsfaroied .gt_first_grand_summary_row {
+#tawhvhzyjz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2029,7 +2015,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_last_grand_summary_row_top {
+#tawhvhzyjz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2039,11 +2025,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_striped {
+#tawhvhzyjz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mrsfaroied .gt_table_body {
+#tawhvhzyjz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2052,7 +2038,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_footnotes {
+#tawhvhzyjz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2066,7 +2052,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_footnote {
+#tawhvhzyjz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2075,7 +2061,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#mrsfaroied .gt_sourcenotes {
+#tawhvhzyjz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2089,7 +2075,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mrsfaroied .gt_sourcenote {
+#tawhvhzyjz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2097,146 +2083,125 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#mrsfaroied .gt_left {
+#tawhvhzyjz .gt_left {
   text-align: left;
 }
 
-#mrsfaroied .gt_center {
+#tawhvhzyjz .gt_center {
   text-align: center;
 }
 
-#mrsfaroied .gt_right {
+#tawhvhzyjz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mrsfaroied .gt_font_normal {
+#tawhvhzyjz .gt_font_normal {
   font-weight: normal;
 }
 
-#mrsfaroied .gt_font_bold {
+#tawhvhzyjz .gt_font_bold {
   font-weight: bold;
 }
 
-#mrsfaroied .gt_font_italic {
+#tawhvhzyjz .gt_font_italic {
   font-style: italic;
 }
 
-#mrsfaroied .gt_super {
+#tawhvhzyjz .gt_super {
   font-size: 65%;
 }
 
-#mrsfaroied .gt_footnote_marks {
+#tawhvhzyjz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mrsfaroied .gt_asterisk {
+#tawhvhzyjz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mrsfaroied .gt_indent_1 {
+#tawhvhzyjz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mrsfaroied .gt_indent_2 {
+#tawhvhzyjz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mrsfaroied .gt_indent_3 {
+#tawhvhzyjz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mrsfaroied .gt_indent_4 {
+#tawhvhzyjz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mrsfaroied .gt_indent_5 {
+#tawhvhzyjz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mrsfaroied .katex-display {
+#tawhvhzyjz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mrsfaroied div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tawhvhzyjz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="gt_col_headings header">
-<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>OR</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">Race_Ethnicity</td>
-<td class="gt_row gt_center" headers="estimate"><br>
-</td>
-<td class="gt_row gt_center" headers="conf.low"><br>
-</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH White</td>
-<td class="gt_row gt_center" headers="estimate">—</td>
-<td class="gt_row gt_center" headers="conf.low">—</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic-Latino</td>
-<td class="gt_row gt_center" headers="estimate">0.98</td>
-<td class="gt_row gt_center" headers="conf.low">0.83, 1.16</td>
-<td class="gt_row gt_center" headers="p.value">0.9</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH American Indian/Alaskan Native</td>
-<td class="gt_row gt_center" headers="estimate">0.92</td>
-<td class="gt_row gt_center" headers="conf.low">0.33, 2.25</td>
-<td class="gt_row gt_center" headers="p.value">0.9</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH Asian/Pacific Islander</td>
-<td class="gt_row gt_center" headers="estimate">1.14</td>
-<td class="gt_row gt_center" headers="conf.low">0.97, 1.35</td>
-<td class="gt_row gt_center" headers="p.value">0.11</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH Black</td>
-<td class="gt_row gt_center" headers="estimate">1.43</td>
-<td class="gt_row gt_center" headers="conf.low">1.24, 1.65</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">Age_c</td>
-<td class="gt_row gt_center" headers="estimate">1.06</td>
-<td class="gt_row gt_center" headers="conf.low">1.05, 1.07</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
-</tr>
-</tbody><tfoot class="gt_footnotes">
-<tr class="odd">
-<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> OR = Odds Ratio, CI = Confidence Interval</td>
-</tr>
-</tfoot>
-
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span data-qmd-base64="PHN0cm9uZz5DaGFyYWN0ZXJpc3RpYzwvc3Ryb25nPg=="><span class="gt_from_md"><strong>Characteristic</strong></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span data-qmd-base64="PHN0cm9uZz5PUjwvc3Ryb25nPg=="><span class="gt_from_md"><strong>OR</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span data-qmd-base64="PHN0cm9uZz45NSUgQ0k8L3N0cm9uZz4="><span class="gt_from_md"><strong>95% CI</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span data-qmd-base64="PHN0cm9uZz5wLXZhbHVlPC9zdHJvbmc+"><span class="gt_from_md"><strong>p-value</strong></span></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Race/ethnicity</td>
+<td headers="estimate" class="gt_row gt_center"><br></td>
+<td headers="conf.low" class="gt_row gt_center"><br></td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NH White</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic-Latinx</td>
+<td headers="estimate" class="gt_row gt_center">0.98</td>
+<td headers="conf.low" class="gt_row gt_center">0.83, 1.16</td>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NH American Indian/Alaskan Native</td>
+<td headers="estimate" class="gt_row gt_center">0.92</td>
+<td headers="conf.low" class="gt_row gt_center">0.33, 2.25</td>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NH Asian/Pacific Islander</td>
+<td headers="estimate" class="gt_row gt_center">1.14</td>
+<td headers="conf.low" class="gt_row gt_center">0.97, 1.35</td>
+<td headers="p.value" class="gt_row gt_center">0.11</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NH Black</td>
+<td headers="estimate" class="gt_row gt_center">1.43</td>
+<td headers="conf.low" class="gt_row gt_center">1.24, 1.65</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Age (1 year increase)</td>
+<td headers="estimate" class="gt_row gt_center">1.06</td>
+<td headers="conf.low" class="gt_row gt_center">1.05, 1.07</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4"><span data-qmd-base64="PGVtPk5IIHN0YW5kcyBmb3Ig4oCcTm9uLUhpc3Bhbmlj4oCdPC9lbT4="><span class="gt_from_md"><em>NH stands for “Non-Hispanic”</em></span></span></td>
+    </tr>
+  </tfoot>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="T1IgPSBPZGRzIFJhdGlvLCBDSSA9IENvbmZpZGVuY2UgSW50ZXJ2YWw="><span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></span></td>
+    </tr>
+  </tfoot>
 </table>
-
 </div>
 </div>
 </div>
@@ -2256,11 +2221,6 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Write a <strong>conclusion</strong> to the hypothesis test</li>
 </ol>
 <p>Given race and ethnicity is already in the model, the regression model with age is more likely than the model without age (p-val &lt; 0.001).</p>
-</section></section>
-<section>
-<section id="break-here" class="title-slide slide level1 center">
-<h1>Break here?</h1>
-
 </section>
 <section id="likelihood-ratio-test-13" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Likelihood ratio test (1/3)</h2>
@@ -2312,23 +2272,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="lrt-procedure" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
-<h2>LRT procedure</h2>
-<ol type="1">
-<li><p>Set the <span style="color:#70AD47"><strong>level of significance</strong></span> <span class="math inline">\(\alpha\)</span></p></li>
-<li><p>Specify the <span style="color:#70AD47"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#70AD47"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#70AD47"><strong>hypotheses</strong></span></p>
-<ul>
-<li>In symbols</li>
-<li>In words</li>
-<li>Alternative: one- or two-sided?</li>
-</ul></li>
-<li><p>Calculate the <span style="color:#70AD47"><strong>test statistic</strong></span> and <span style="color:#70AD47"><strong>p-value</strong></span></p></li>
-<li><p>Write a <span style="color:#70AD47"><strong>conclusion</strong></span> to the hypothesis test</p>
-<ul>
-<li>Do we reject or fail to reject <span class="math inline">\(H_0\)</span>?</li>
-<li>Write a conclusion in the context of the problem</li>
-</ul></li>
-</ol>
+<section id="poll-everywhere-question-3" class="slide level2">
+<h2>Poll Everywhere Question 3</h2>
 </section>
 <section id="likelihood-ratio-test-33" class="slide level2" data-background-image="./images/title_green.png" data-background-size="2500px 150px" data-background-position="top">
 <h2>Likelihood ratio test (3/3)</h2>
@@ -2457,6 +2402,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>Write a <strong>conclusion</strong> to the hypothesis test</li>
 </ol>
 <p>Given race and ethnicity is already in the model, the regression model with age is more likely than the model without age (p-val &lt; <span class="math inline">\(2.2\cdot10^{-16}\)</span>).</p>
+</section>
+<section id="poll-everywhere-question-4" class="slide level2">
+<h2>Poll Everywhere Question 4</h2>
 </section>
 <section id="example-2-single-2-categorical-variable-race-and-ethnicity" class="slide level2">
 <h2>Example 2: Single, &gt;2 categorical variable: Race and Ethnicity</h2>
@@ -2684,7 +2632,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 +0.36 \cdot I \left( R/E = \text{``NH B"} \right)
 +0.06 \cdot \text{Age}_c
 \end{aligned}\]</span></p></li>
-<li><p>We can convert it to the predicted probability: <span class="math display">\[\hat{\pi}(\mathbf{X})=\dfrac{\exp \left( \widehat{\beta}_0 + \widehat{\beta}_1 \cdot I \left( R/E = \text{``H/L"} \right) + ... + \widehat{\beta}_5 \cdot \text{Age}_c \right)}  {1+\exp \left(\widehat{\beta}_0 + \widehat{\beta}_1 \cdot I \left( R/E = \text{``H/L"} \right) + ... + \widehat{\beta}_5 \cdot \text{Age}_c \right)}\]</span></p>
+<li><p>We can convert it to the predicted probability: <span class="math display">\[\widehat{\pi}(\mathbf{X})=\dfrac{\exp \left( \widehat{\beta}_0 + \widehat{\beta}_1 \cdot I \left( R/E = \text{``H/L"} \right) + ... + \widehat{\beta}_5 \cdot \text{Age}_c \right)}  {1+\exp \left(\widehat{\beta}_0 + \widehat{\beta}_1 \cdot I \left( R/E = \text{``H/L"} \right) + ... + \widehat{\beta}_5 \cdot \text{Age}_c \right)}\]</span></p>
 <ul>
 <li>This is an inverse logit calculation</li>
 </ul></li>
@@ -2816,6 +2764,9 @@ $residual.scale
 <li>Interpret results</li>
 </ol>
 <p>For someone who is 60 years old and Non-Hispanic Asian/Pacific Islander, the predicted probability of late stage breast cancer diagnosis is 0.269 (95% CI: 0.238, 0.299).</p>
+</section>
+<section id="poll-everywhere-question-5" class="slide level2">
+<h2>Poll Everywhere Question 5</h2>
 </section></section>
 <section>
 <section id="learning-objectives-4" class="title-slide slide level1 center">
@@ -2836,32 +2787,33 @@ $residual.scale
 </section>
 <section id="how-to-present-odds-ratios-table" class="slide level2">
 <h2>How to present odds ratios: Table</h2>
-<ul>
-<li><code>tbl_regression()</code> in the <code>gtsummary</code> package is helpful for presenting the odds ratios in a clean way</li>
-</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb20-2"><a></a><span class="fu">tbl_regression</span>(multi_bc, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> <span class="co"># allows us to use tab_options()</span></span>
-<span id="cb20-4"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">38</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-2"><a></a><span class="fu">tbl_regression</span>(multi_bc, </span>
+<span id="cb20-3"><a></a>               <span class="at">label =</span> <span class="fu">list</span>(Race_Ethnicity <span class="sc">~</span> <span class="st">"Race/ethnicity"</span>,</span>
+<span id="cb20-4"><a></a>                            Age_c <span class="sc">~</span> <span class="st">"Age (1 year increase)"</span>),</span>
+<span id="cb20-5"><a></a>               <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-6"><a></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb20-7"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">38</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"*NH stands for </span><span class="sc">\"</span><span class="st">Non-Hispanic</span><span class="sc">\"</span><span class="st">*"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="updtxtcukw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#updtxtcukw table {
+<div id="lekmsjjajg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lekmsjjajg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#updtxtcukw thead, #updtxtcukw tbody, #updtxtcukw tfoot, #updtxtcukw tr, #updtxtcukw td, #updtxtcukw th {
+#lekmsjjajg thead, #lekmsjjajg tbody, #lekmsjjajg tfoot, #lekmsjjajg tr, #lekmsjjajg td, #lekmsjjajg th {
   border-style: none;
 }
 
-#updtxtcukw p {
+#lekmsjjajg p {
   margin: 0;
   padding: 0;
 }
 
-#updtxtcukw .gt_table {
+#lekmsjjajg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2887,12 +2839,12 @@ $residual.scale
   border-left-color: #D3D3D3;
 }
 
-#updtxtcukw .gt_caption {
+#lekmsjjajg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#updtxtcukw .gt_title {
+#lekmsjjajg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2904,7 +2856,7 @@ $residual.scale
   border-bottom-width: 0;
 }
 
-#updtxtcukw .gt_subtitle {
+#lekmsjjajg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2916,7 +2868,7 @@ $residual.scale
   border-top-width: 0;
 }
 
-#updtxtcukw .gt_heading {
+#lekmsjjajg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2928,13 +2880,13 @@ $residual.scale
   border-right-color: #D3D3D3;
 }
 
-#updtxtcukw .gt_bottom_border {
+#lekmsjjajg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#updtxtcukw .gt_col_headings {
+#lekmsjjajg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2949,7 +2901,7 @@ $residual.scale
   border-right-color: #D3D3D3;
 }
 
-#updtxtcukw .gt_col_heading {
+#lekmsjjajg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2969,7 +2921,7 @@ $residual.scale
   overflow-x: hidden;
 }
 
-#updtxtcukw .gt_column_spanner_outer {
+#lekmsjjajg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2981,15 +2933,15 @@ $residual.scale
   padding-right: 4px;
 }
 
-#updtxtcukw .gt_column_spanner_outer:first-child {
+#lekmsjjajg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#updtxtcukw .gt_column_spanner_outer:last-child {
+#lekmsjjajg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#updtxtcukw .gt_column_spanner {
+#lekmsjjajg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3001,11 +2953,11 @@ $residual.scale
   width: 100%;
 }
 
-#updtxtcukw .gt_spanner_row {
+#lekmsjjajg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#updtxtcukw .gt_group_heading {
+#lekmsjjajg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3031,7 +2983,7 @@ $residual.scale
   text-align: left;
 }
 
-#updtxtcukw .gt_empty_group_heading {
+#lekmsjjajg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3046,15 +2998,15 @@ $residual.scale
   vertical-align: middle;
 }
 
-#updtxtcukw .gt_from_md > :first-child {
+#lekmsjjajg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#updtxtcukw .gt_from_md > :last-child {
+#lekmsjjajg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#updtxtcukw .gt_row {
+#lekmsjjajg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3073,7 +3025,7 @@ $residual.scale
   overflow-x: hidden;
 }
 
-#updtxtcukw .gt_stub {
+#lekmsjjajg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3086,542 +3038,7 @@ $residual.scale
   padding-right: 5px;
 }
 
-#updtxtcukw .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#updtxtcukw .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#updtxtcukw .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#updtxtcukw .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#updtxtcukw .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#updtxtcukw .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#updtxtcukw .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#updtxtcukw .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#updtxtcukw .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#updtxtcukw .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#updtxtcukw .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#updtxtcukw .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#updtxtcukw .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#updtxtcukw .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#updtxtcukw .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#updtxtcukw .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#updtxtcukw .gt_left {
-  text-align: left;
-}
-
-#updtxtcukw .gt_center {
-  text-align: center;
-}
-
-#updtxtcukw .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#updtxtcukw .gt_font_normal {
-  font-weight: normal;
-}
-
-#updtxtcukw .gt_font_bold {
-  font-weight: bold;
-}
-
-#updtxtcukw .gt_font_italic {
-  font-style: italic;
-}
-
-#updtxtcukw .gt_super {
-  font-size: 65%;
-}
-
-#updtxtcukw .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#updtxtcukw .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#updtxtcukw .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#updtxtcukw .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#updtxtcukw .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#updtxtcukw .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#updtxtcukw .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#updtxtcukw .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#updtxtcukw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="gt_col_headings header">
-<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>OR</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">Race_Ethnicity</td>
-<td class="gt_row gt_center" headers="estimate"><br>
-</td>
-<td class="gt_row gt_center" headers="conf.low"><br>
-</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH White</td>
-<td class="gt_row gt_center" headers="estimate">—</td>
-<td class="gt_row gt_center" headers="conf.low">—</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic-Latino</td>
-<td class="gt_row gt_center" headers="estimate">0.98</td>
-<td class="gt_row gt_center" headers="conf.low">0.83, 1.16</td>
-<td class="gt_row gt_center" headers="p.value">0.9</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH American Indian/Alaskan Native</td>
-<td class="gt_row gt_center" headers="estimate">0.92</td>
-<td class="gt_row gt_center" headers="conf.low">0.33, 2.25</td>
-<td class="gt_row gt_center" headers="p.value">0.9</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH Asian/Pacific Islander</td>
-<td class="gt_row gt_center" headers="estimate">1.14</td>
-<td class="gt_row gt_center" headers="conf.low">0.97, 1.35</td>
-<td class="gt_row gt_center" headers="p.value">0.11</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH Black</td>
-<td class="gt_row gt_center" headers="estimate">1.43</td>
-<td class="gt_row gt_center" headers="conf.low">1.24, 1.65</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">Age_c</td>
-<td class="gt_row gt_center" headers="estimate">1.06</td>
-<td class="gt_row gt_center" headers="conf.low">1.05, 1.07</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
-</tr>
-</tbody><tfoot class="gt_footnotes">
-<tr class="odd">
-<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> OR = Odds Ratio, CI = Confidence Interval</td>
-</tr>
-</tfoot>
-
-</table>
-
-</div>
-</div>
-</div>
-</section>
-<section id="how-to-present-odds-ratios-table---even-better" class="slide level2">
-<h2>How to present odds ratios: Table - EVEN BETTER!</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb21-2"><a></a><span class="fu">tbl_regression</span>(multi_bc, </span>
-<span id="cb21-3"><a></a>               <span class="at">label =</span> <span class="fu">list</span>(Race_Ethnicity <span class="sc">~</span> <span class="st">"Race/ethnicity"</span>,</span>
-<span id="cb21-4"><a></a>                            Age_c <span class="sc">~</span> <span class="st">"Age (1 year increase)"</span>),</span>
-<span id="cb21-5"><a></a>               <span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb21-6"><a></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> <span class="co"># allows us to use tab_options()</span></span>
-<span id="cb21-7"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">38</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div id="vbqtznipdd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vbqtznipdd table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#vbqtznipdd thead, #vbqtznipdd tbody, #vbqtznipdd tfoot, #vbqtznipdd tr, #vbqtznipdd td, #vbqtznipdd th {
-  border-style: none;
-}
-
-#vbqtznipdd p {
-  margin: 0;
-  padding: 0;
-}
-
-#vbqtznipdd .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 38px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#vbqtznipdd .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#vbqtznipdd .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#vbqtznipdd .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#vbqtznipdd .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#vbqtznipdd .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#vbqtznipdd .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#vbqtznipdd .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#vbqtznipdd .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#vbqtznipdd .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#vbqtznipdd .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#vbqtznipdd .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#vbqtznipdd .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#vbqtznipdd .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#vbqtznipdd .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#vbqtznipdd .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#vbqtznipdd .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#vbqtznipdd .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#vbqtznipdd .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#vbqtznipdd .gt_stub_row_group {
+#lekmsjjajg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3635,15 +3052,15 @@ $residual.scale
   vertical-align: top;
 }
 
-#vbqtznipdd .gt_row_group_first td {
+#lekmsjjajg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vbqtznipdd .gt_row_group_first th {
+#lekmsjjajg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vbqtznipdd .gt_summary_row {
+#lekmsjjajg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3653,16 +3070,16 @@ $residual.scale
   padding-right: 5px;
 }
 
-#vbqtznipdd .gt_first_summary_row {
+#lekmsjjajg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vbqtznipdd .gt_first_summary_row.thick {
+#lekmsjjajg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vbqtznipdd .gt_last_summary_row {
+#lekmsjjajg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3672,7 +3089,7 @@ $residual.scale
   border-bottom-color: #D3D3D3;
 }
 
-#vbqtznipdd .gt_grand_summary_row {
+#lekmsjjajg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3682,7 +3099,7 @@ $residual.scale
   padding-right: 5px;
 }
 
-#vbqtznipdd .gt_first_grand_summary_row {
+#lekmsjjajg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3692,7 +3109,7 @@ $residual.scale
   border-top-color: #D3D3D3;
 }
 
-#vbqtznipdd .gt_last_grand_summary_row_top {
+#lekmsjjajg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3702,11 +3119,11 @@ $residual.scale
   border-bottom-color: #D3D3D3;
 }
 
-#vbqtznipdd .gt_striped {
+#lekmsjjajg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vbqtznipdd .gt_table_body {
+#lekmsjjajg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3715,7 +3132,7 @@ $residual.scale
   border-bottom-color: #D3D3D3;
 }
 
-#vbqtznipdd .gt_footnotes {
+#lekmsjjajg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3729,7 +3146,7 @@ $residual.scale
   border-right-color: #D3D3D3;
 }
 
-#vbqtznipdd .gt_footnote {
+#lekmsjjajg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3738,7 +3155,7 @@ $residual.scale
   padding-right: 5px;
 }
 
-#vbqtznipdd .gt_sourcenotes {
+#lekmsjjajg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3752,7 +3169,7 @@ $residual.scale
   border-right-color: #D3D3D3;
 }
 
-#vbqtznipdd .gt_sourcenote {
+#lekmsjjajg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3760,161 +3177,139 @@ $residual.scale
   padding-right: 5px;
 }
 
-#vbqtznipdd .gt_left {
+#lekmsjjajg .gt_left {
   text-align: left;
 }
 
-#vbqtznipdd .gt_center {
+#lekmsjjajg .gt_center {
   text-align: center;
 }
 
-#vbqtznipdd .gt_right {
+#lekmsjjajg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vbqtznipdd .gt_font_normal {
+#lekmsjjajg .gt_font_normal {
   font-weight: normal;
 }
 
-#vbqtznipdd .gt_font_bold {
+#lekmsjjajg .gt_font_bold {
   font-weight: bold;
 }
 
-#vbqtznipdd .gt_font_italic {
+#lekmsjjajg .gt_font_italic {
   font-style: italic;
 }
 
-#vbqtznipdd .gt_super {
+#lekmsjjajg .gt_super {
   font-size: 65%;
 }
 
-#vbqtznipdd .gt_footnote_marks {
+#lekmsjjajg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vbqtznipdd .gt_asterisk {
+#lekmsjjajg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vbqtznipdd .gt_indent_1 {
+#lekmsjjajg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vbqtznipdd .gt_indent_2 {
+#lekmsjjajg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vbqtznipdd .gt_indent_3 {
+#lekmsjjajg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vbqtznipdd .gt_indent_4 {
+#lekmsjjajg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vbqtznipdd .gt_indent_5 {
+#lekmsjjajg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vbqtznipdd .katex-display {
+#lekmsjjajg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vbqtznipdd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lekmsjjajg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="gt_col_headings header">
-<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>OR</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">Race/ethnicity</td>
-<td class="gt_row gt_center" headers="estimate"><br>
-</td>
-<td class="gt_row gt_center" headers="conf.low"><br>
-</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH White</td>
-<td class="gt_row gt_center" headers="estimate">—</td>
-<td class="gt_row gt_center" headers="conf.low">—</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic-Latino</td>
-<td class="gt_row gt_center" headers="estimate">0.98</td>
-<td class="gt_row gt_center" headers="conf.low">0.83, 1.16</td>
-<td class="gt_row gt_center" headers="p.value">0.9</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH American Indian/Alaskan Native</td>
-<td class="gt_row gt_center" headers="estimate">0.92</td>
-<td class="gt_row gt_center" headers="conf.low">0.33, 2.25</td>
-<td class="gt_row gt_center" headers="p.value">0.9</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH Asian/Pacific Islander</td>
-<td class="gt_row gt_center" headers="estimate">1.14</td>
-<td class="gt_row gt_center" headers="conf.low">0.97, 1.35</td>
-<td class="gt_row gt_center" headers="p.value">0.11</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;NH Black</td>
-<td class="gt_row gt_center" headers="estimate">1.43</td>
-<td class="gt_row gt_center" headers="conf.low">1.24, 1.65</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">Age (1 year increase)</td>
-<td class="gt_row gt_center" headers="estimate">1.06</td>
-<td class="gt_row gt_center" headers="conf.low">1.05, 1.07</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
-</tr>
-</tbody><tfoot class="gt_footnotes">
-<tr class="odd">
-<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> OR = Odds Ratio, CI = Confidence Interval</td>
-</tr>
-</tfoot>
-
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span data-qmd-base64="PHN0cm9uZz5DaGFyYWN0ZXJpc3RpYzwvc3Ryb25nPg=="><span class="gt_from_md"><strong>Characteristic</strong></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span data-qmd-base64="PHN0cm9uZz5PUjwvc3Ryb25nPg=="><span class="gt_from_md"><strong>OR</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span data-qmd-base64="PHN0cm9uZz45NSUgQ0k8L3N0cm9uZz4="><span class="gt_from_md"><strong>95% CI</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span data-qmd-base64="PHN0cm9uZz5wLXZhbHVlPC9zdHJvbmc+"><span class="gt_from_md"><strong>p-value</strong></span></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Race/ethnicity</td>
+<td headers="estimate" class="gt_row gt_center"><br></td>
+<td headers="conf.low" class="gt_row gt_center"><br></td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NH White</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic-Latinx</td>
+<td headers="estimate" class="gt_row gt_center">0.98</td>
+<td headers="conf.low" class="gt_row gt_center">0.83, 1.16</td>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NH American Indian/Alaskan Native</td>
+<td headers="estimate" class="gt_row gt_center">0.92</td>
+<td headers="conf.low" class="gt_row gt_center">0.33, 2.25</td>
+<td headers="p.value" class="gt_row gt_center">0.9</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NH Asian/Pacific Islander</td>
+<td headers="estimate" class="gt_row gt_center">1.14</td>
+<td headers="conf.low" class="gt_row gt_center">0.97, 1.35</td>
+<td headers="p.value" class="gt_row gt_center">0.11</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;NH Black</td>
+<td headers="estimate" class="gt_row gt_center">1.43</td>
+<td headers="conf.low" class="gt_row gt_center">1.24, 1.65</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Age (1 year increase)</td>
+<td headers="estimate" class="gt_row gt_center">1.06</td>
+<td headers="conf.low" class="gt_row gt_center">1.05, 1.07</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4"><span data-qmd-base64="PGVtPk5IIHN0YW5kcyBmb3Ig4oCcTm9uLUhpc3Bhbmlj4oCdPC9lbT4="><span class="gt_from_md"><em>NH stands for “Non-Hispanic”</em></span></span></td>
+    </tr>
+  </tfoot>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="T1IgPSBPZGRzIFJhdGlvLCBDSSA9IENvbmZpZGVuY2UgSW50ZXJ2YWw="><span class="gt_from_md">OR = Odds Ratio, CI = Confidence Interval</span></span></td>
+    </tr>
+  </tfoot>
 </table>
-
 </div>
 </div>
 </div>
-<p>How would you fix the race/ethnicity category names?</p>
 </section>
 <section id="how-to-present-odds-ratios-forest-plot-setup" class="slide level2">
 <h2>How to present odds ratios: Forest Plot Setup</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">library</span>(broom.helpers)</span>
-<span id="cb22-2"><a></a>MLR_tidy <span class="ot">=</span> <span class="fu">tidy_and_attach</span>(multi_bc, <span class="at">conf.int=</span>T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a></a>  <span class="fu">tidy_remove_intercept</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a></a>  <span class="fu">tidy_add_reference_rows</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a></a>  <span class="fu">tidy_add_estimate_to_reference_rows</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb22-6"><a></a>  <span class="fu">tidy_add_term_labels</span>()</span>
-<span id="cb22-7"><a></a><span class="fu">glimpse</span>(MLR_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">library</span>(broom.helpers)</span>
+<span id="cb21-2"><a></a>MLR_tidy <span class="ot">=</span> <span class="fu">tidy_and_attach</span>(multi_bc, <span class="at">conf.int=</span>T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a></a>  <span class="fu">tidy_remove_intercept</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a></a>  <span class="fu">tidy_add_reference_rows</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a></a>  <span class="fu">tidy_add_estimate_to_reference_rows</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a></a>  <span class="fu">tidy_add_term_labels</span>()</span>
+<span id="cb21-7"><a></a><span class="fu">glimpse</span>(MLR_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 6
 Columns: 16
@@ -3927,7 +3322,7 @@ $ var_nlevels    &lt;int&gt; 5, 5, 5, 5, 5, NA
 $ contrasts      &lt;chr&gt; "contr.treatment", "contr.treatment", "contr.treatment"…
 $ contrasts_type &lt;chr&gt; "treatment", "treatment", "treatment", "treatment", "tr…
 $ reference_row  &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, NA
-$ label          &lt;chr&gt; "NH White", "Hispanic-Latino", "NH American Indian/Alas…
+$ label          &lt;chr&gt; "NH White", "Hispanic-Latinx", "NH American Indian/Alas…
 $ estimate       &lt;dbl&gt; 1.0000000, 0.9846940, 0.9178662, 1.1433526, 1.4300256, …
 $ std.error      &lt;dbl&gt; NA, 0.083653090, 0.484110085, 0.083796726, 0.071788616,…
 $ statistic      &lt;dbl&gt; NA, -0.1843845, -0.1770333, 1.5986877, 4.9825778, 17.81…
@@ -3940,84 +3335,81 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
 <section id="how-to-present-odds-ratios-forest-plot-setup-1" class="slide level2 smaller">
 <h2>How to present odds ratios: Forest Plot Setup</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a></a>  <span class="fu">mutate</span>(<span class="at">var_label =</span> <span class="fu">case_match</span>(var_label, </span>
-<span id="cb24-3"><a></a>                               <span class="st">"Race_Ethnicity"</span> <span class="sc">~</span> <span class="st">"Race and ethnicity"</span>, </span>
-<span id="cb24-4"><a></a>                               <span class="st">"Age_c"</span> <span class="sc">~</span> <span class="st">""</span>), </span>
-<span id="cb24-5"><a></a>         <span class="at">label =</span> <span class="fu">case_match</span>(label, </span>
-<span id="cb24-6"><a></a>                            <span class="st">"NH White"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic White"</span>, </span>
-<span id="cb24-7"><a></a>                            <span class="st">"Hispanic-Latino"</span> <span class="sc">~</span> <span class="st">"Hispanic-Latinx"</span>, </span>
-<span id="cb24-8"><a></a>                            <span class="st">"NH American Indian/Alaskan Native"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic American </span><span class="sc">\n</span><span class="st"> Indian/Alaskan Native"</span>, </span>
-<span id="cb24-9"><a></a>                            <span class="st">"NH Asian/Pacific Islander"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic </span><span class="sc">\n</span><span class="st"> Asian/Pacific Islander"</span>,</span>
-<span id="cb24-10"><a></a>                            <span class="st">"NH Black"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic Black"</span>, </span>
-<span id="cb24-11"><a></a>                               <span class="st">"Age_c"</span> <span class="sc">~</span> <span class="st">"Age (yrs)"</span>))</span>
-<span id="cb24-12"><a></a>  <span class="co"># %&gt;%</span></span>
-<span id="cb24-13"><a></a>  <span class="co">#                       fct_relevel("Age (yrs)", "Non-Hispanic \n Asian/Pacific Islander", "Non-Hispanic American \n Indian/Alaskan Native", "Non-Hispanic White", "Hispanic-Latinx", "Non-Hispanic Black"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a></a>  <span class="fu">mutate</span>(<span class="at">var_label =</span> <span class="fu">case_match</span>(var_label, </span>
+<span id="cb23-3"><a></a>                               <span class="st">"Race_Ethnicity"</span> <span class="sc">~</span> <span class="st">"Race and ethnicity"</span>, </span>
+<span id="cb23-4"><a></a>                               <span class="st">"Age_c"</span> <span class="sc">~</span> <span class="st">""</span>), </span>
+<span id="cb23-5"><a></a>         <span class="at">label =</span> <span class="fu">case_match</span>(label, </span>
+<span id="cb23-6"><a></a>                            <span class="st">"NH White"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic White"</span>, </span>
+<span id="cb23-7"><a></a>                            <span class="st">"Hispanic-Latinx"</span> <span class="sc">~</span> <span class="st">"Hispanic-Latinx"</span>, </span>
+<span id="cb23-8"><a></a>                            <span class="st">"NH American Indian/Alaskan Native"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic American </span><span class="sc">\n</span><span class="st"> Indian/Alaskan Native"</span>, </span>
+<span id="cb23-9"><a></a>                            <span class="st">"NH Asian/Pacific Islander"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic </span><span class="sc">\n</span><span class="st"> Asian/Pacific Islander"</span>,</span>
+<span id="cb23-10"><a></a>                            <span class="st">"NH Black"</span> <span class="sc">~</span> <span class="st">"Non-Hispanic Black"</span>, </span>
+<span id="cb23-11"><a></a>                               <span class="st">"Age_c"</span> <span class="sc">~</span> <span class="st">"Age (yrs)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="how-to-present-odds-ratios-forest-plot" class="slide level2">
 <h2>How to present odds ratios: Forest Plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">fct_reorder</span>(label, term))</span>
-<span id="cb25-2"><a></a></span>
-<span id="cb25-3"><a></a>plot_MLR <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>MLR_tidy, </span>
-<span id="cb25-4"><a></a>       <span class="fu">aes</span>(<span class="at">y=</span>label, <span class="at">x=</span>estimate, <span class="at">xmin=</span>conf.low, <span class="at">xmax=</span>conf.high)) <span class="sc">+</span> </span>
-<span id="cb25-5"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="fu">geom_errorbarh</span>(<span class="at">height=</span>.<span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb25-6"><a></a>  </span>
-<span id="cb25-7"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">'#C2352F'</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">alpha=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb25-8"><a></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb25-9"><a></a>  </span>
-<span id="cb25-10"><a></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
-<span id="cb25-11"><a></a>             <span class="at">space=</span><span class="st">'free_y'</span>, <span class="at">switch =</span> <span class="st">"y"</span>) <span class="sc">+</span> </span>
-<span id="cb25-12"><a></a>  </span>
-<span id="cb25-13"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"OR (95% CI)"</span>, </span>
-<span id="cb25-14"><a></a>       <span class="at">title =</span> <span class="st">"Odds ratios of Late Stage Breast Cancer Diagnosis"</span>) <span class="sc">+</span></span>
-<span id="cb25-15"><a></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
-<span id="cb25-16"><a></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
-<span id="cb25-17"><a></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
-<span id="cb25-18"><a></a>        <span class="at">axis.title.y=</span><span class="fu">element_blank</span>(), </span>
-<span id="cb25-19"><a></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
-<span id="cb25-20"><a></a>        <span class="at">strip.placement =</span> <span class="st">"outside"</span>, </span>
-<span id="cb25-21"><a></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb25-22"><a></a><span class="co"># plot_MLR</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">fct_reorder</span>(label, term))</span>
+<span id="cb24-2"><a></a></span>
+<span id="cb24-3"><a></a>plot_MLR <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>MLR_tidy, </span>
+<span id="cb24-4"><a></a>       <span class="fu">aes</span>(<span class="at">y=</span>label, <span class="at">x=</span>estimate, <span class="at">xmin=</span>conf.low, <span class="at">xmax=</span>conf.high)) <span class="sc">+</span> </span>
+<span id="cb24-5"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="fu">geom_errorbarh</span>(<span class="at">height=</span>.<span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb24-6"><a></a>  </span>
+<span id="cb24-7"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">1</span>, <span class="at">color=</span><span class="st">'#C2352F'</span>, <span class="at">linetype=</span><span class="st">'dashed'</span>, <span class="at">alpha=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-8"><a></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb24-9"><a></a>  </span>
+<span id="cb24-10"><a></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
+<span id="cb24-11"><a></a>             <span class="at">space=</span><span class="st">'free_y'</span>, <span class="at">switch =</span> <span class="st">"y"</span>) <span class="sc">+</span> </span>
+<span id="cb24-12"><a></a>  </span>
+<span id="cb24-13"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"OR (95% CI)"</span>, </span>
+<span id="cb24-14"><a></a>       <span class="at">title =</span> <span class="st">"Odds ratios of Late Stage Breast Cancer Diagnosis"</span>) <span class="sc">+</span></span>
+<span id="cb24-15"><a></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb24-16"><a></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb24-17"><a></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb24-18"><a></a>        <span class="at">axis.title.y=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb24-19"><a></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">25</span>), </span>
+<span id="cb24-20"><a></a>        <span class="at">strip.placement =</span> <span class="st">"outside"</span>, </span>
+<span id="cb24-21"><a></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="how-to-present-odds-ratios-forest-plot-1" class="slide level2">
 <h2>How to present odds ratios: Forest Plot</h2>
 
-<img data-src="09_Multiple_logistic_regression_files/figure-revealjs/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1440"></section>
-<section id="adding-odds-ratios" class="slide level2">
-<h2>Adding odds ratios</h2>
+<img data-src="09_Multiple_logistic_regression_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1440"></section>
+<section id="adding-written-estimates-for-odds-ratios" class="slide level2">
+<h2>Adding written estimates for odds ratios</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a></a>  <span class="fu">mutate</span>(<span class="at">estimate_r =</span> <span class="fu">round</span>(estimate, <span class="dv">2</span>), </span>
-<span id="cb26-3"><a></a>         <span class="at">conf.low_r =</span> <span class="fu">round</span>(conf.low, <span class="dv">2</span>), </span>
-<span id="cb26-4"><a></a>         <span class="at">conf.high_r =</span> <span class="fu">round</span>(conf.high, <span class="dv">2</span>), </span>
-<span id="cb26-5"><a></a>         <span class="at">OR_char =</span> <span class="fu">paste0</span>(estimate_r, <span class="st">" ("</span>, conf.low_r, <span class="st">", "</span>, conf.high_r, <span class="st">")"</span>), </span>
-<span id="cb26-6"><a></a>         <span class="at">OR_char =</span> <span class="fu">ifelse</span>(reference_row <span class="sc">==</span> F <span class="sc">|</span> <span class="fu">is.na</span>(reference_row), OR_char, <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>MLR_tidy <span class="ot">=</span> MLR_tidy <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a></a>  <span class="fu">mutate</span>(<span class="at">estimate_r =</span> <span class="fu">round</span>(estimate, <span class="dv">2</span>), </span>
+<span id="cb25-3"><a></a>         <span class="at">conf.low_r =</span> <span class="fu">round</span>(conf.low, <span class="dv">2</span>), </span>
+<span id="cb25-4"><a></a>         <span class="at">conf.high_r =</span> <span class="fu">round</span>(conf.high, <span class="dv">2</span>), </span>
+<span id="cb25-5"><a></a>         <span class="at">OR_char =</span> <span class="fu">paste0</span>(estimate_r, <span class="st">" ("</span>, conf.low_r, <span class="st">", "</span>, conf.high_r, <span class="st">")"</span>), </span>
+<span id="cb25-6"><a></a>         <span class="at">OR_char =</span> <span class="fu">ifelse</span>(reference_row <span class="sc">==</span> F <span class="sc">|</span> <span class="fu">is.na</span>(reference_row), OR_char, <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>&nbsp;</p>
 <ul>
 <li>“Plot” of the text for odds ratios estimates</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>OR_labs <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>MLR_tidy, <span class="fu">aes</span>(<span class="at">y=</span>label)) <span class="sc">+</span></span>
-<span id="cb27-2"><a></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">label =</span> OR_char), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size=</span><span class="dv">8</span>) <span class="sc">+</span>   </span>
-<span id="cb27-3"><a></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb27-4"><a></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
-<span id="cb27-5"><a></a>             <span class="at">space=</span><span class="st">'free_y'</span>) <span class="sc">+</span></span>
-<span id="cb27-6"><a></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
-<span id="cb27-7"><a></a>    <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>OR_labs <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>MLR_tidy, <span class="fu">aes</span>(<span class="at">y=</span>label)) <span class="sc">+</span></span>
+<span id="cb26-2"><a></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">label =</span> OR_char), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size=</span><span class="dv">8</span>) <span class="sc">+</span>   </span>
+<span id="cb26-3"><a></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
+<span id="cb26-5"><a></a>             <span class="at">space=</span><span class="st">'free_y'</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb26-7"><a></a>    <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="combine-them" class="slide level2">
 <h2>Combine them!!</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb28-2"><a></a><span class="fu">plot_grid</span>(plot_MLR, OR_labs, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">align =</span> <span class="st">"h"</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb27-2"><a></a><span class="fu">plot_grid</span>(plot_MLR, OR_labs, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">align =</span> <span class="st">"h"</span>, <span class="at">rel_widths =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="09_Multiple_logistic_regression_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1440"></section></section>
+<img data-src="09_Multiple_logistic_regression_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1440"></section></section>
 <section>
 <section id="learning-objectives-5" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
@@ -4065,29 +3457,29 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
 </ul></li>
 </ul>
 </section>
-<section id="example-race-and-ethnicity-and-age-model-fit-fixed" class="slide level2">
-<h2>Example: Race and Ethnicity and Age model fit (FIXED)</h2>
+<section id="example-race-and-ethnicity-and-age-model-fit" class="slide level2">
+<h2>Example: Race and Ethnicity and Age model fit</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="yjxgfebzwr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yjxgfebzwr table {
+<div id="wqdbmdlevr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wqdbmdlevr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yjxgfebzwr thead, #yjxgfebzwr tbody, #yjxgfebzwr tfoot, #yjxgfebzwr tr, #yjxgfebzwr td, #yjxgfebzwr th {
+#wqdbmdlevr thead, #wqdbmdlevr tbody, #wqdbmdlevr tfoot, #wqdbmdlevr tr, #wqdbmdlevr td, #wqdbmdlevr th {
   border-style: none;
 }
 
-#yjxgfebzwr p {
+#wqdbmdlevr p {
   margin: 0;
   padding: 0;
 }
 
-#yjxgfebzwr .gt_table {
+#wqdbmdlevr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4113,12 +3505,12 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-left-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_caption {
+#wqdbmdlevr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yjxgfebzwr .gt_title {
+#wqdbmdlevr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4130,7 +3522,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-bottom-width: 0;
 }
 
-#yjxgfebzwr .gt_subtitle {
+#wqdbmdlevr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4142,7 +3534,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-top-width: 0;
 }
 
-#yjxgfebzwr .gt_heading {
+#wqdbmdlevr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4154,13 +3546,13 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-right-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_bottom_border {
+#wqdbmdlevr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_col_headings {
+#wqdbmdlevr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4175,7 +3567,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-right-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_col_heading {
+#wqdbmdlevr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4195,7 +3587,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   overflow-x: hidden;
 }
 
-#yjxgfebzwr .gt_column_spanner_outer {
+#wqdbmdlevr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4207,15 +3599,15 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   padding-right: 4px;
 }
 
-#yjxgfebzwr .gt_column_spanner_outer:first-child {
+#wqdbmdlevr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yjxgfebzwr .gt_column_spanner_outer:last-child {
+#wqdbmdlevr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yjxgfebzwr .gt_column_spanner {
+#wqdbmdlevr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4227,11 +3619,11 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   width: 100%;
 }
 
-#yjxgfebzwr .gt_spanner_row {
+#wqdbmdlevr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yjxgfebzwr .gt_group_heading {
+#wqdbmdlevr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4257,7 +3649,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   text-align: left;
 }
 
-#yjxgfebzwr .gt_empty_group_heading {
+#wqdbmdlevr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4272,15 +3664,15 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   vertical-align: middle;
 }
 
-#yjxgfebzwr .gt_from_md > :first-child {
+#wqdbmdlevr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yjxgfebzwr .gt_from_md > :last-child {
+#wqdbmdlevr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yjxgfebzwr .gt_row {
+#wqdbmdlevr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4299,7 +3691,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   overflow-x: hidden;
 }
 
-#yjxgfebzwr .gt_stub {
+#wqdbmdlevr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4312,7 +3704,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   padding-right: 5px;
 }
 
-#yjxgfebzwr .gt_stub_row_group {
+#wqdbmdlevr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4326,15 +3718,15 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   vertical-align: top;
 }
 
-#yjxgfebzwr .gt_row_group_first td {
+#wqdbmdlevr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yjxgfebzwr .gt_row_group_first th {
+#wqdbmdlevr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yjxgfebzwr .gt_summary_row {
+#wqdbmdlevr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4344,16 +3736,16 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   padding-right: 5px;
 }
 
-#yjxgfebzwr .gt_first_summary_row {
+#wqdbmdlevr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_first_summary_row.thick {
+#wqdbmdlevr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yjxgfebzwr .gt_last_summary_row {
+#wqdbmdlevr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4363,7 +3755,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-bottom-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_grand_summary_row {
+#wqdbmdlevr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4373,7 +3765,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   padding-right: 5px;
 }
 
-#yjxgfebzwr .gt_first_grand_summary_row {
+#wqdbmdlevr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4383,7 +3775,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-top-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_last_grand_summary_row_top {
+#wqdbmdlevr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4393,11 +3785,11 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-bottom-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_striped {
+#wqdbmdlevr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yjxgfebzwr .gt_table_body {
+#wqdbmdlevr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4406,7 +3798,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-bottom-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_footnotes {
+#wqdbmdlevr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4420,7 +3812,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-right-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_footnote {
+#wqdbmdlevr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4429,7 +3821,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   padding-right: 5px;
 }
 
-#yjxgfebzwr .gt_sourcenotes {
+#wqdbmdlevr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4443,7 +3835,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   border-right-color: #D3D3D3;
 }
 
-#yjxgfebzwr .gt_sourcenote {
+#wqdbmdlevr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4451,72 +3843,72 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
   padding-right: 5px;
 }
 
-#yjxgfebzwr .gt_left {
+#wqdbmdlevr .gt_left {
   text-align: left;
 }
 
-#yjxgfebzwr .gt_center {
+#wqdbmdlevr .gt_center {
   text-align: center;
 }
 
-#yjxgfebzwr .gt_right {
+#wqdbmdlevr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yjxgfebzwr .gt_font_normal {
+#wqdbmdlevr .gt_font_normal {
   font-weight: normal;
 }
 
-#yjxgfebzwr .gt_font_bold {
+#wqdbmdlevr .gt_font_bold {
   font-weight: bold;
 }
 
-#yjxgfebzwr .gt_font_italic {
+#wqdbmdlevr .gt_font_italic {
   font-style: italic;
 }
 
-#yjxgfebzwr .gt_super {
+#wqdbmdlevr .gt_super {
   font-size: 65%;
 }
 
-#yjxgfebzwr .gt_footnote_marks {
+#wqdbmdlevr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yjxgfebzwr .gt_asterisk {
+#wqdbmdlevr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yjxgfebzwr .gt_indent_1 {
+#wqdbmdlevr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yjxgfebzwr .gt_indent_2 {
+#wqdbmdlevr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yjxgfebzwr .gt_indent_3 {
+#wqdbmdlevr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yjxgfebzwr .gt_indent_4 {
+#wqdbmdlevr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yjxgfebzwr .gt_indent_5 {
+#wqdbmdlevr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yjxgfebzwr .katex-display {
+#wqdbmdlevr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yjxgfebzwr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wqdbmdlevr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4538,7 +3930,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">Race_Ethnicity</td>
+<td class="gt_row gt_left" headers="label">Race/ethnicity</td>
 <td class="gt_row gt_center" headers="estimate"><br>
 </td>
 <td class="gt_row gt_center" headers="conf.low"><br>
@@ -4554,7 +3946,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
 </td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic-Latino</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic-Latinx</td>
 <td class="gt_row gt_center" headers="estimate">0.98</td>
 <td class="gt_row gt_center" headers="conf.low">0.83, 1.16</td>
 <td class="gt_row gt_center" headers="p.value">0.9</td>
@@ -4578,7 +3970,7 @@ $ conf.high      &lt;dbl&gt; NA, 1.158411, 2.254643, 1.345732, 1.645053, 1.06553
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">Age_c</td>
+<td class="gt_row gt_left" headers="label">Age (1 year increase)</td>
 <td class="gt_row gt_center" headers="estimate">1.06</td>
 <td class="gt_row gt_center" headers="conf.low">1.05, 1.07</td>
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>

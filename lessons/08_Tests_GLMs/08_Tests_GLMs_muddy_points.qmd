@@ -13,11 +13,11 @@ editor_options:
 
 ## Muddy Points from Spring 2024
 
-### 6. By the end of class (Lesson 6) my understanding is that the saturated model likelihood is the same between the two models being compared, right?
+### 1. By the end of class (Lesson 6) my understanding is that the saturated model likelihood is the same between the two models being compared, right?
 
 Yep!!
 
-### 7. The differences between each test and when to use them.
+### 2. The differences between each test and when to use them.
 
 In terms of what each test is measuring:
 

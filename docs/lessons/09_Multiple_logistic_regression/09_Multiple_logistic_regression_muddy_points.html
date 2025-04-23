@@ -127,7 +127,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a></li>
-  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
+  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a>
+  <ul class="collapse">
+  <li><a href="#why-use-logistic-instead-of-linear-regression" id="toc-why-use-logistic-instead-of-linear-regression" class="nav-link" data-scroll-target="#why-use-logistic-instead-of-linear-regression">1. Why use logistic instead of linear regression?</a></li>
+  <li><a href="#where-can-we-find-more-resources-for-making-forest-plots" id="toc-where-can-we-find-more-resources-for-making-forest-plots" class="nav-link" data-scroll-target="#where-can-we-find-more-resources-for-making-forest-plots">2. Where can we find more resources for making forest plots?</a></li>
+  <li><a href="#and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot" id="toc-and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot" class="nav-link" data-scroll-target="#and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot">3. And how do we make a likelihood probability table instead of a plot?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -137,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Lesson 1: Welcome</p>
+<p class="subtitle lead">Lesson 9: Multiple Logistic Regression</p>
 </div>
 
 
@@ -149,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 22, 2025</p>
+      <p class="date-modified">April 23, 2025</p>
     </div>
   </div>
     
@@ -165,8 +170,21 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2024">Muddy Points from Spring 2024</h2>
+<section id="why-use-logistic-instead-of-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="why-use-logistic-instead-of-linear-regression">1. Why use logistic instead of linear regression?</h3>
+<p>From waaay back in our slides from Lesson 5! We violate several of the assumptions for linear regression when our outcome has only two options. One of the most important reasons is that we cannot map our predictors (that can be continuous of categorical) onto a binary outcome. We need to transform our binary outcome so it is on a continuous and unbounded scale (logit does that!)</p>
+</section>
+<section id="where-can-we-find-more-resources-for-making-forest-plots" class="level3">
+<h3 class="anchored" data-anchor-id="where-can-we-find-more-resources-for-making-forest-plots">2. Where can we find more resources for making forest plots?</h3>
+<p>You can either use the code I gave in Lesson 9 or use the reference links from Lab 4 in Linear Models.</p>
+<p>Feel free to google around or use AI to help you construct this in R. This is one of those plots that has several different approaches.</p>
+</section>
+<section id="and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot" class="level3">
+<h3 class="anchored" data-anchor-id="and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot">3. And how do we make a likelihood probability table instead of a plot?</h3>
+<p>I’m not sure what this means. Please post on Slack so we can clarify! We have discussed plotting predicted probability in Lesson 7.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
