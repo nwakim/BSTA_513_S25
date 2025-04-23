@@ -8,7 +8,7 @@ format:
 ---
 
 | Homework | Assignment | Assignment due (\@11pm) | Answers | Solutions (`.qmd`) | Solutions (`.html`)\* |
-|------------|------------|------------|------------|------------|------------|
+|----|----|----|----|----|----|
 | 1 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_01.qmd)]{style="color:#f8f5f0;"} | 4/18 | [[{{< iconify ph key-fill size=29px >}}](/homework/HW_01_ans.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify icon-park-twotone file-code size=29px >}}](https://ohsuitg-my.sharepoint.com/:u:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/S25_BSTA_513/Student_files/HW_solns/HW1/HW1_solns_BSTA_513.qmd?csf=1&web=1&e=u1jZ8Q)]{style="color:#f8f5f0;"} | [[{{< iconify mingcute web-fill size=29px >}}](https://ohsuitg-my.sharepoint.com/:u:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/S25_BSTA_513/Student_files/HW_solns/HW1/HW1_solns_BSTA_513.html?csf=1&web=1&e=gOOFpp)]{style="color:#f8f5f0;"} |
 | 2 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_02.qmd)]{style="color:#f8f5f0;"} | 5/2 | [[{{< iconify ph key-fill size=29px >}}](/homework/HW_02_ans.qmd)]{style="color:#f8f5f0;"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify mingcute web-fill size=29px >}}]{style="color:#f8f5f0;"} |
 | 3 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_03.qmd)]{style="color:#f8f5f0;"} | 5/16 | [{{< iconify ph key-fill size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify mingcute web-fill size=29px >}}]{style="color:#f8f5f0;"} |
@@ -24,5 +24,5 @@ format:
 ## Rubrics
 
 |   | 1 point | 0 points |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Completion | 75% of the question parts are thoroughly worked out and have an answer. "Question parts" means the sub-questions labeled "Part \_" | Less than 75% of question parts are thoroughly worked out. Attempts do not count as thoroughly worked out. |

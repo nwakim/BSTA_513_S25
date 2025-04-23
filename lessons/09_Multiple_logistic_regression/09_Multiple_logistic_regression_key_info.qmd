@@ -1,0 +1,50 @@
+---
+title: "Key Info and Announcements"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Announcements
+
+- HW 1 feedback will be given out on Friday
+- Homework 1 notes
+  - Question 4b: 
+  - Question 8b: `na.fail` vs. `na.omit`
+  - Question 8d: in general the same = similar
+- Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:
+  - May 7
+  - May 21 
+  - June 4
+  - June 18
+  - IYKYK = "if you known you know"
+- Re: SPH pop up shop is open through May 15
+  - Link: <https://www.promoplace.com/ohsu-psu-soph-company>
+  - If you want to be on a group order, email me with screenshot(s) of what you want with every option selected. **By Monday May 5th class time.**
+
+## Key Dates
+
+- Quiz 1 opens on 4/23
+- Lab 2 due 4/25
+- HW 2 due 5/2
+
+## Last class
+
+- Tests for GLMs when we use maximum likelihood estimation
+  - When model fit is based in likelihood function
+- Wald test is good for a single coefficient
+  - Often what we use to report confidence intervals for coefficient estimates
+- LRT is good for comparing models 
+  - Can compare model with to model without a specific variable 
+  - Can compare model with to model without a specific variablessss
+  
+|   | Wald test | Score test | LRT |
+|-----------------------|-----------------|-----------------|-----------------|
+| Used to test significance of single coefficient | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} |
+| *Can be* used to report confidence interval for a single coefficient | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} |
+| Confidence interval reported by R for a single coefficient (and most commonly used) | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} | [{{< iconify f7 xmark-square-fill size=40px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=40px >}}]{style="color:#C2352F;"} |
+| Use to test significance/contribution to outcome prediction of multi-level categorical covariate | [{{< iconify f7 xmark-square-fill size=40px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=40px >}}]{style="color:#C2352F;"} | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} |
+| Used for comparing two models with different (but nested) covariates | [{{< iconify f7 xmark-square-fill size=40px >}}]{style="color:#C2352F;"} | [{{< iconify f7 xmark-square-fill size=40px >}}]{style="color:#C2352F;"} | [{{< iconify ic round-check-box size=40px >}}]{style="color:#70AD47;"} |

@@ -209,7 +209,7 @@ load(here("data", "bc_diagnosis.Rda"))
     -   $P\left(Y=1|X\right)=\pi\left(X\right)$
     -   $P\left(Y=0|X\right)=1-\pi(X)$
 
--   Because the [expected value is a weighted average](https://nwakim.github.io/F24_EPI_525/lessons/05_RVs_Binomial/05_RVs_Binomial.html#/expectation-of-random-variables), we can say: $$\begin{aligned} E(Y|X) & = P(Y=1|X) \cdot 1 + P(Y=1|X) \cdot 0 \\ & = P(Y=1|X) \cdot 1 \\ & = P(Y=1|X) \\ & = \pi(X) \end{aligned}$$
+-   Because the [expected value is a weighted average](https://nwakim.github.io/F24_EPI_525/lessons/05_RVs_Binomial/05_RVs_Binomial.html#/expectation-of-random-variables), we can say: $$\begin{aligned} E(Y|X) & = P(Y=1|X) \cdot 1 + P(Y=0|X) \cdot 0 \\ & = P(Y=1|X) \cdot 1 \\ & = P(Y=1|X) \\ & = \pi(X) \end{aligned}$$
 
     -   For categorical outcomes, $\pi(X)$ (or $\pi$ for shorthand), is more widely used than $E(Y|X)$
 
