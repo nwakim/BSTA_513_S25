@@ -10,11 +10,16 @@ editor_options:
 
 ## Announcements
 
-- HW 1 feedback will be given out on Friday
+- HW 1 grades and feedback will be returned by Friday
 - Homework 1 notes
   - Question 4b: 
   - Question 8b: `na.fail` vs. `na.omit`
-  - Question 8d: in general the same = similar
+    - We are under the "factory fresh" settings
+    - `na.fail` will stop our code and show an error, so I don't think we run into that
+    - `na.omit` automatically performs a complete case analysis
+  - Question 8d: the same = similar
+    - The output is similar with the same structure
+    - They will be slightly different at the bottom because glm and lm use different measures of model fit
 - Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:
   - May 7
   - May 21 
@@ -29,6 +34,7 @@ editor_options:
 
 - Quiz 1 opens on 4/23
 - Lab 2 due 4/25
+- Lab 2 discussion on 4/30!!
 - HW 2 due 5/2
 
 ## Last class

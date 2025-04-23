@@ -7249,7 +7249,7 @@
     "href": "lessons/09_Multiple_logistic_regression/09_Multiple_logistic_regression_key_info.html#key-dates",
     "title": "Key Info and Announcements",
     "section": "Key Dates",
-    "text": "Key Dates\n\nQuiz 1 opens on 4/23\nLab 2 due 4/25\nHW 2 due 5/2"
+    "text": "Key Dates\n\nQuiz 1 opens on 4/23\nLab 2 due 4/25\nLab 2 discussion on 4/30!!\nHW 2 due 5/2"
   },
   {
     "objectID": "lessons/09_Multiple_logistic_regression/09_Multiple_logistic_regression_key_info.html#last-class",
@@ -7634,14 +7634,14 @@
     "href": "lessons/09_Multiple_logistic_regression/09_Multiple_logistic_regression_key_info.html",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "HW 1 feedback will be given out on Friday\nHomework 1 notes\n\nQuestion 4b:\nQuestion 8b: na.fail vs. na.omit\nQuestion 8d: in general the same = similar\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time."
+    "text": "HW 1 grades and feedback will be returned by Friday\nHomework 1 notes\n\nQuestion 4b:\nQuestion 8b: na.fail vs. na.omit\n\nWe are under the “factory fresh” settings\nna.fail will stop our code and show an error, so I don’t think we run into that\nna.omit automatically performs a complete case analysis\n\nQuestion 8d: the same = similar\n\nThe output is similar with the same structure\nThey will be slightly different at the bottom because glm and lm use different measures of model fit\n\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time."
   },
   {
     "objectID": "lessons/09_Multiple_logistic_regression/09_Multiple_logistic_regression_key_info.html#announcements",
     "href": "lessons/09_Multiple_logistic_regression/09_Multiple_logistic_regression_key_info.html#announcements",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "HW 1 feedback will be given out on Friday\nHomework 1 notes\n\nQuestion 4b:\nQuestion 8b: na.fail vs. na.omit\nQuestion 8d: in general the same = similar\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time."
+    "text": "HW 1 grades and feedback will be returned by Friday\nHomework 1 notes\n\nQuestion 4b:\nQuestion 8b: na.fail vs. na.omit\n\nWe are under the “factory fresh” settings\nna.fail will stop our code and show an error, so I don’t think we run into that\nna.omit automatically performs a complete case analysis\n\nQuestion 8d: the same = similar\n\nThe output is similar with the same structure\nThey will be slightly different at the bottom because glm and lm use different measures of model fit\n\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time."
   },
   {
     "objectID": "lessons/09_Multiple_logistic_regression/09_Multiple_logistic_regression_muddy_points.html#muddy-points-from-spring-2024",
