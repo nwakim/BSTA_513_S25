@@ -1,0 +1,35 @@
+---
+title: "Key Info and Announcements"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Announcements
+
+- Time tomorrow to grade Quiz 1
+- Don't forget the search function on our site!!
+
+### Recurring 
+
+- Adri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:
+  - May 7
+  - May 21 
+  - June 4
+  - June 18
+  - IYKYK = "if you known you know"
+- Re: SPH pop up shop is open through May 15
+  - Link: <https://www.promoplace.com/ohsu-psu-soph-company>
+  - If you want to be on a group order, email me with screenshot(s) of what you want with every option selected. **By Monday May 5th class time.**
+
+## Key Dates
+
+- Lab 2 discussion on 4/30!!
+- HW 2 due 5/2
+- Lab 3 due 5/9
+  - Will post tomorrow!!
+
+## Last class

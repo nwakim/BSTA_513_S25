@@ -1,9 +1,9 @@
 ---
-title: "Lesson 11: Interactions"
+title: "Lesson 10: Interactions"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "05/08/2024"
+date: "04/28/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -12,7 +12,7 @@ format:
     show-slide-number: all
     width: 1955
     height: 1100
-    footer: "Lesson 11: Interactions"
+    footer: "Lesson 10: Interactions"
     html-math-method: mathjax
     highlight-style: ayu
 execute:
@@ -74,7 +74,13 @@ bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1,
 
 3.    Calculate and interpret fitted interactions, including plotting the log-odds, predicted probability, and odds ratios. 
 
-## Revisit from 512: What is a confounder?
+## Reference on slides
+
+- I think these slides from Northwestern do a really good job differentiating between confounders, mediators, and effect modifiers
+
+- <https://www.feinberg.northwestern.edu/sites/bcc/docs/2016lectures/impactofotherfactors.pdf>
+
+## Revisit from 512/612: What is a confounder?
 
 -   A confounding variable, or **confounder**, is a factor/variable that wholly or partially accounts for the observed effect of the risk factor on the outcome
 
@@ -82,6 +88,10 @@ bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1,
 
     -   Related to the outcome Y, but not a consequence of Y
     -   Related to the explanatory variable X, but not a consequence of X
+
+- In study that does not meet causal assumptions (retrospective, observational, case-control)...
+  - We need to adjust for **potential** confounders
+  - We have no way of proving if a variable is a true confounder
 
 ::: columns
 ::: {.column width="10%"}
@@ -92,23 +102,45 @@ bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1,
 :::
 :::
 
+## Why do we include a covariate in the model?
+
+- We want our model adjusted for other variables that may alter our estimated relationship between our risk factor/explanatory variable and the outcome
+
+ 
+
+- Cases to include variables in the model:
+  - Variable is a potential confounder
+  - Variable is not balanced in our explanatory variable
+    - Example: mean age is very different in treatment and control group
+  - Variable is related to the outcome
+
+ 
+
+- *Hint hint:* This is why we did all those plots in Lab 2
+  - To get a sense what might be important to include in the model
+
 ## Including a confounder in the model
 
 -   In the following model we have two variables, $X_1$ and $X_2$
 
-$$Y= \beta_0 + \beta_1X_{1}+ \beta_2X_{2} + \epsilon$$
+$$\text{logit}\big(\pi(\bf{X}) \big)= \beta_0 + \beta_1X_{1}+ \beta_2X_{2}$$
 
--   And we assume that every level of the confounder, there is parallel slopes
+-   And we assume that every level of the potential confounder, there is parallel 
+slopes
+
+ 
 
 -   Note: to interpret $\beta_1$, we did not specify any value of $X_2$; only specified that it be held constant
 
     -   Implicit assumption: effect of $X_1$ is equal across all values of $X_2$
 
+ 
+
 -   The above model assumes that $X_{1}$ and $X_{2}$ do not *interact* (with respect to their effect on $Y$)
 
-    -   epidemiology: no "effect modification"
+    -   Epidemiology: no "effect modification"
 
-    -   meaning the effect of $X_{1}$ is the same regardless of the values of $X_{2}$
+    -   Meaning the effect of $X_{1}$ is the same regardless of the values of $X_{2}$
 
 ## What is an effect modifier?
 
@@ -117,6 +149,8 @@ $$Y= \beta_0 + \beta_1X_{1}+ \beta_2X_{2} + \epsilon$$
 -   An additional variable in the model
 
     -   Outside of the main relationship between $Y$ and $X_1$ that we are studying
+
+ 
 
 -   An effect modifier will change the effect of $X_1$ on $Y$ depending on its value
 
@@ -140,6 +174,7 @@ $$Y= \beta_0 + \beta_1X_{1}+ \beta_2X_{2} + \epsilon$$
 -   [**Confounders:**]{style="color:#70AD47"} The adjusted odds ratio for one variable adjusting for confounders can be quite different from unadjusted odds ratio
 
     -   Adjusting for them is called *controlling for confounding.*
+    - Hard to statistically distinguish between confounders and mediators
 
  
 
@@ -169,8 +204,8 @@ Please refer to [Lesson 11 from BSTA 512/612](https://nwakim.github.io/W2024_BST
 
 -   Interactions!!
 
--   We can incorporate interactions into our model through product terms: $$Y  =  \beta_0 + \beta_1X_{1}+ \beta_2X_{2} +
-    \beta_3X_{1}X_{2} + \epsilon$$
+-   We can incorporate interactions into our model through product terms: $$\text{logit}\big(\pi(\bf{X}) \big)= \beta_0 + \beta_1X_{1}+ \beta_2X_{2} +
+    \beta_3X_{1}X_{2}$$
 
 -   Terminology:
 
@@ -232,7 +267,9 @@ No interaction and three potential effects of interaction between two covariates
 
 ::: columns
 ::: {.column width="25%"}
--   Figure plots the logits (log-odds) under three different models showing the presence and absence of interaction. 
+-   Figure plots the logits (log-odds) under two different models:
+    - Model 1: No interaction between sex and age
+    - Model 2: Interaction between sex and age
 
  
 
@@ -288,11 +325,11 @@ No interaction and three potential effects of interaction between two covariates
 
  
 
--   We may not want to include the interaction term unless it is statistically significant and/or clinically meaningful
+-   We may not want to include the interaction term unless it is **statistically significant and/or clinically meaningful**
 
  
 
--   Likelihood ratio test (or Wald test) may be used to test the significance of coefficients for variables of the interaction term
+-   Likelihood ratio test (or Wald test sometimes) may be used to test the significance of an interaction term
 
 :::
 ::: {.column width="50%"}
@@ -998,7 +1035,25 @@ $$\widehat{OR}\left[\left(PF=1,\ Age=a\right),\left(PF=0,\ Age=a\right)\right]=e
 -   If we let $a = 70$, i.e., compute OR for age = 70, then
 $${\widehat{OR}}_{a=70}=\exp(1.002-0.057\cdot(70-69))\ =2.57$$
 
-## Calculate odds ratios across values
+## Calculate odds ratios across values (`estimable()`)
+
+- We could use `estimable()` to calculate this linear combination of coefficients ([see BSTA 512 Lesson](https://nwakim.github.io/BSTA_512_W25/lessons/12_Interactions_02/12_Interactions_02.html#/we-can-use-r-and-estimable-to-find-the-estimate-and-ci))
+
+```{r}
+library(gmodels)
+glow_m3 %>% estimable(
+               cbind("(Intercept)"                = 0,   # beta0
+                     "priorfracYes"               = 1,   # beta1
+                     "age_c"                      = 0,   # beta2
+                     "priorfracYes:age_c"         = (55:90)-69), 
+                   conf.int = 0.95) %>% 
+  exp(.) %>%
+  head(5)
+```
+
+
+
+## Calculate odds ratios across values (`predict()`)
 
 ```{r}
 prior_age = expand_grid(priorfrac = c("No", "Yes"), age_c = (55:90)-69)
@@ -1033,7 +1088,7 @@ ggplot(pred_glow2) +
 
 ::: columns
 ::: column
-For individuals 69 years old, the estimated odds of a new fracture for individuals with prior fracture is 2.72 times the estimated odds of a new fracture for individuals with no prior fracture (95% CI: 1.70, 4.35). As seen in @fig-plots-1, the odds ratio of a new fracture when comparing prior fracture status decreases with age, indicating that the effect of prior fractures on new fractures decreases as individuals get older. In @fig-plots-2, it is evident that for both prior fracture statuses, the predict probability of a new fracture increases as age increases. However, the predicted probability of new fracture for those without a prior fracture increases at a higher rate than that of individuals with a prior fracture. Thus, the predicted probabilities of a new fracture converge at age [insert age here]. 
+For individuals 69 years old, the estimated odds of a new fracture for individuals *with prior fracture* is 2.72 times the estimated odds of a new fracture for individuals *with no prior fracture* (95% CI: 1.70, 4.35). As seen in @fig-plots-1, the estimated odds ratio of a new fracture when comparing prior fracture status decreases with age, indicating that the effect of prior fractures on new fractures decreases as individuals get older. In @fig-plots-2, it is evident that for both prior fracture statuses, the predicted probability of a new fracture increases as age increases. However, the predicted probability of new fracture for those without a prior fracture increases at a higher rate than that of individuals with a prior fracture. Thus, the predicted probabilities of a new fracture converge at age [insert age here]. 
 :::
 ::: column
 ```{r}

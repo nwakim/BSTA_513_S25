@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-05-06">
+<meta name="description" content="Confounders and Interactions">
 
-<title>Project Central – Categorical Data Analysis</title>
+<title>Week 6 – Categorical Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,23 +25,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-62d5ecfa613c5c5644cabfb02a2f4c65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-62d5ecfa613c5c5644cabfb02a2f4c65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -78,10 +109,10 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/Bsta513.png" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/Bsta513.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Categorical Data Analysis</span>
     </a>
   </div>
@@ -92,23 +123,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./schedule.html"> 
+    <a class="nav-link" href="../../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./syllabus.html"> 
+    <a class="nav-link" href="../../syllabus.html"> 
 <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./instructors.html"> 
+    <a class="nav-link" href="../../instructors.html"> 
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./homeworks.html"> 
+    <a class="nav-link" href="../../homeworks.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./project.html" aria-current="page"> 
+    <a class="nav-link" href="../../project.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
 </ul>
@@ -127,25 +158,49 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#labs" id="toc-labs" class="nav-link active" data-scroll-target="#labs">Labs</a></li>
-  <li><a href="#report" id="toc-report" class="nav-link" data-scroll-target="#report">Report</a></li>
-  <li><a href="#information-and-resources-on-food-insecurity" id="toc-information-and-resources-on-food-insecurity" class="nav-link" data-scroll-target="#information-and-resources-on-food-insecurity">Information and Resources on Food Insecurity</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#on-the-horizon" id="toc-on-the-horizon" class="nav-link" data-scroll-target="#on-the-horizon">On the Horizon</a></li>
+  <li><a href="#class-exit-tickets" id="toc-class-exit-tickets" class="nav-link" data-scroll-target="#class-exit-tickets">Class Exit Tickets</a></li>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link" data-scroll-target="#announcements">Announcements</a>
+  <ul class="collapse">
+  <li><a href="#monday-56" id="toc-monday-56" class="nav-link" data-scroll-target="#monday-56">Monday 5/6</a></li>
+  <li><a href="#wednesday-58" id="toc-wednesday-58" class="nav-link" data-scroll-target="#wednesday-58">Wednesday 5/8</a></li>
+  </ul></li>
+  <li><a href="#muddiest-points" id="toc-muddiest-points" class="nav-link" data-scroll-target="#muddiest-points">Muddiest Points</a>
+  <ul class="collapse">
+  <li><a href="#why-use-logistic-instead-of-linear-regression" id="toc-why-use-logistic-instead-of-linear-regression" class="nav-link" data-scroll-target="#why-use-logistic-instead-of-linear-regression">1. Why use logistic instead of linear regression?</a></li>
+  <li><a href="#where-can-we-find-more-resources-for-making-forest-plots" id="toc-where-can-we-find-more-resources-for-making-forest-plots" class="nav-link" data-scroll-target="#where-can-we-find-more-resources-for-making-forest-plots">2. Where can we find more resources for making forest plots?</a></li>
+  <li><a href="#and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot" id="toc-and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot" class="nav-link" data-scroll-target="#and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot">3. And how do we make a likelihood probability table instead of a plot?</a></li>
+  <li><a href="#i-am-confused-on-why-we-would-do-the-odds-ratio-of-prior-fracture-vs-no-prior-fracture-in-lesson-11." id="toc-i-am-confused-on-why-we-would-do-the-odds-ratio-of-prior-fracture-vs-no-prior-fracture-in-lesson-11." class="nav-link" data-scroll-target="#i-am-confused-on-why-we-would-do-the-odds-ratio-of-prior-fracture-vs-no-prior-fracture-in-lesson-11.">4. I am confused on why we would do the odds ratio of prior fracture vs no prior fracture (in Lesson 11).</a></li>
+  <li><a href="#im-still-confused-about-the-difference-between-model-3-and-the-estimated-odd-ratio-table-on-slide-39-and-what-each-is-telling-us." id="toc-im-still-confused-about-the-difference-between-model-3-and-the-estimated-odd-ratio-table-on-slide-39-and-what-each-is-telling-us." class="nav-link" data-scroll-target="#im-still-confused-about-the-difference-between-model-3-and-the-estimated-odd-ratio-table-on-slide-39-and-what-each-is-telling-us.">5. I’m still confused about the difference between Model 3 and the estimated odd ratio table on slide 39 and what each is telling us.</a></li>
+  </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="project.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project Central</h1>
+<h1 class="title">Week 6</h1>
 </div>
 
+<div>
+  <div class="description">
+    Confounders and Interactions
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 6, 2024</p>
+    </div>
+  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
@@ -167,98 +222,140 @@ ul.task-list li input[type="checkbox"] {
   font-size: 40px;
   color: #C2352F;
   background-color: #fff;
-  padding: 0px;
+  padding: 10px;
+}
+
+.description{
+  font-size: 20px;
+  color: #fff;
+  background-color: #C2352F;
+  padding: 10px;
 }
 </style>
 </div>
-<section id="labs" class="level2">
-<h2 class="anchored" data-anchor-id="labs">Labs</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Room Locations for the week
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On Monday, 5/6, we will be in RPV Room A (1217)</p>
+</div>
+</div>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Lab</th>
-<th>Rubric</th>
-<th>Due Date</th>
-<th>Discussion Date</th>
-<th>Topics</th>
+<th>Lesson</th>
+<th>Topic</th>
+<th style="text-align: center;">Slides</th>
+<th style="text-align: center;">Annotated Slides</th>
+<th style="text-align: center;">Recording</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./project/Lab_01_instructions.html">Lab 1</a></td>
-<td><span style="color:#f8f5f0;"><a href="./project/Lab_01_rubric.html"><iconify-icon inline="" icon="material-symbols:rubric-rounded" style="font-size: 30px;"></iconify-icon></a></span></td>
-<td>4/11</td>
-<td>4/16</td>
-<td>Exploring the question and data</td>
+<td>10</td>
+<td>Multiple Logistic Regression</td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="../../lectures/10_Multiple_logistic_regression/10_Multiple_logistic_regression.qmd"><iconify-icon inline="" icon="ri:slideshow-fill" style="font-size: 30px;"></iconify-icon></a></span></td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="../../lectures/10_Multiple_logistic_regression/10_Multiple_logistic_regression_notes.pdf"><iconify-icon inline="" icon="pepicons-pop:pen-circle-filled" style="font-size: 29px;"></iconify-icon></a></span></td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="https://echo360.org/media/bde13efd-786f-445e-99c8-1e78cadf5981/public"><iconify-icon inline="" icon="mdi:video" style="font-size: 34px;"></iconify-icon></a></span></td>
 </tr>
 <tr class="even">
-<td><a href="./project/Lab_02_instructions.html">Lab 2</a></td>
-<td><span style="color:#f8f5f0;"><a href="./project/Lab_02_rubric.html"><iconify-icon inline="" icon="material-symbols:rubric-rounded" style="font-size: 30px;"></iconify-icon></a></span></td>
-<td>4/25</td>
-<td>4/30</td>
-<td>EDA continued + Simple logistic regression</td>
-</tr>
-<tr class="odd">
-<td><a href="./project/Lab_03_instructions.html">Lab 3</a></td>
-<td></td>
-<td>5/9</td>
-<td>5/12</td>
-<td>Temporary multiple logistic regression + practice interpreting ORs</td>
-</tr>
-<tr class="even">
-<td><a href="./project/Lab_04_instructions.html">Lab 4</a></td>
-<td></td>
-<td>5/23</td>
-<td>5/28</td>
-<td>Building and interpreting final model</td>
+<td>11</td>
+<td>Interactions</td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="../../lectures/11_Interactions/11_Interactions.qmd"><iconify-icon inline="" icon="ri:slideshow-fill" style="font-size: 30px;"></iconify-icon></a></span></td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="../../lectures/11_Interactions/11_Interactions_notes.pdf"><iconify-icon inline="" icon="pepicons-pop:pen-circle-filled" style="font-size: 29px;"></iconify-icon></a></span></td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="https://echo360.org/media/262f895d-25ac-4dc2-a3b9-cb467d2750c6/public"><iconify-icon inline="" icon="mdi:video" style="font-size: 34px;"></iconify-icon></a></span></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="on-the-horizon" class="level2">
+<h2 class="anchored" data-anchor-id="on-the-horizon">On the Horizon</h2>
 <ul>
-<li><a href="./project/Lab_discussion_make-up.html">Lab make-up assignment</a> if you missed a discussion day</li>
-<li>2 points will be deducted from labs that are late (without an approved extension)</li>
+<li><p>Homework 3 due 5/9 at 11pm</p></li>
+<li><p>Mid-quarter feedback due 5/9 at 11pm</p></li>
 </ul>
 </section>
-<section id="report" class="level2">
-<h2 class="anchored" data-anchor-id="report">Report</h2>
-<p><a href="./project/Project_poster_instructions.html">Poster Instructions</a></p>
-<p>Due 6/9/2025 <span class="citation" data-cites="11pm">@11pm</span></p>
+<section id="class-exit-tickets" class="level2">
+<h2 class="anchored" data-anchor-id="class-exit-tickets">Class Exit Tickets</h2>
+<p><span style="color:#f8f5f0;"><a href="https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUOTFZQU00TUVQSVJZQjI4SEJRVTI2OVlXSi4u"><iconify-icon inline="" icon="healthicons:health-worker-form-negative" style="font-size: 30px;"></iconify-icon></a></span> Monday (5/6)</p>
+<p><span style="color:#f8f5f0;"><a href="https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUM1AyRjhDRzBNVEQ3WDYxVjhOTFRLMDhZMi4u"><iconify-icon inline="" icon="healthicons:health-worker-form-negative" style="font-size: 30px;"></iconify-icon></a></span> Wednesday (5/8)</p>
 </section>
-<section id="information-and-resources-on-food-insecurity" class="level2">
-<h2 class="anchored" data-anchor-id="information-and-resources-on-food-insecurity">Information and Resources on Food Insecurity</h2>
-<p>This project will discuss food insecurity and unmet basic needs. If you have experienced or are experiencing food insecurity, and this project impacts your mental health or ability to work, please let me know. We can work on an alternative analysis with a different dataset.</p>
-<p>If you are currently experiencing food insecurity or not meeting your basic needs, here are some resources for Oregon residents:</p>
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<section id="monday-56" class="level3">
+<h3 class="anchored" data-anchor-id="monday-56">Monday 5/6</h3>
 <ul>
-<li><p><a href="https://one.oregon.gov/">Oregon One elegibility page</a></p>
+<li><p>Nicky’s office hours move to 3-4pm on Wednesdays</p>
 <ul>
-<li>You can apply for benefits including medical, food, cash, or child care assistance</li>
-<li>This is one way to apply to multiple benefits</li>
+<li>I will stay after class and open Webex</li>
 </ul></li>
-<li><p><a href="https://www.oregon.gov/oha/hsd/ohp/pages/splash.aspx">Oregon Health Plan</a></p></li>
-<li><p>The Oregon Food Bank has a <a href="https://foodfinder.oregonfoodbank.org/">food finder</a></p></li>
+<li><p>Notes on Homework 2</p>
+<ul>
+<li><p>Contingency tables</p>
+<ul>
+<li><p><code>Rev=”b”</code></p>
+<ul>
+<li><p>Know the appropriate rev option</p></li>
+<li><p><code>riskratio()</code> and <code>oddsratio()</code> reads first row as reference and first column as reference.</p></li>
+</ul></li>
+<li><p>Question 3 part h</p>
+<ul>
+<li><p>Both a and b are correct</p></li>
+<li><p>Most ppl only marked one or the other</p></li>
+</ul></li>
+</ul></li>
+<li><p>Ways to change outcome into factor or appropriate form for <code>glm()</code></p>
+<ul>
+<li><p><code>icu$STA &lt;- ifelse(icu$STA=="Died",1,0)</code></p></li>
+<li><p>OR: <code>icu = icu %&gt;% mutate(STA = as.factor(STA) %\&gt;% relevel(ref = “Lived”))</code></p></li>
+</ul></li>
+<li><p>Question 4, part d</p>
+<ul>
+<li><p>Test for intercept wrong</p></li>
+<li><p>Used coefficient for age</p></li>
+</ul></li>
+</ul></li>
 </ul>
-<p>In addition to these statewide resources, as students, there are other resources available to you:</p>
+</section>
+<section id="wednesday-58" class="level3">
+<h3 class="anchored" data-anchor-id="wednesday-58">Wednesday 5/8</h3>
 <ul>
-<li><p><a href="https://www.ohsu.edu/education/food-assistance-and-basic-needs">Food Assistance and Basic Needs for OHSU students</a></p>
-<ul>
-<li><p>Includes information on <a href="https://www.oregon.gov/odhs/food/pages/snap.aspx">SNAP program</a></p></li>
-<li><p>Includes information on free groceries available to students at the Food Resource Center</p>
-<ul>
-<li>You can even order it online and pick it up!</li>
-</ul></li>
-</ul></li>
-<li><p>You can email basicneeds@ohsu.edu for help getting assistance or connecting you to the following services:</p>
-<ul>
-<li>Manage your finances</li>
-<li>Access emergency funds</li>
-<li>Find legal services</li>
-<li>Apply for SNAP</li>
-<li>Find child care</li>
-<li>Find housing</li>
-</ul></li>
+<li>Lab 3 is up!</li>
 </ul>
+</section>
+</section>
+<section id="muddiest-points" class="level2">
+<h2 class="anchored" data-anchor-id="muddiest-points">Muddiest Points</h2>
+<section id="why-use-logistic-instead-of-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="why-use-logistic-instead-of-linear-regression">1. Why use logistic instead of linear regression?</h3>
+<p>From waaay back in our slides from Lesson 5! We violate several of the assumptions for linear regression when our outcome has only two options. One of the most important reasons is that we cannot map our predictors (that can be continuous of categorical) onto a binary outcome. We need to transform our binary outcome so it is on a continuous and unbounded scale (logit does that!)</p>
+</section>
+<section id="where-can-we-find-more-resources-for-making-forest-plots" class="level3">
+<h3 class="anchored" data-anchor-id="where-can-we-find-more-resources-for-making-forest-plots">2. Where can we find more resources for making forest plots?</h3>
+<p>You can either use the code I gave in Lesson 10 or use the reference links from Lab 4 in Linear Models.</p>
+</section>
+<section id="and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot" class="level3">
+<h3 class="anchored" data-anchor-id="and-how-do-we-make-a-likelihood-probability-table-instead-of-a-plot">3. And how do we make a likelihood probability table instead of a plot?</h3>
+<p>I’m not sure what this means. Please post on Slack so we can clarify! We have discussed plotting predicted probability in Lesson 7.</p>
+</section>
+<section id="i-am-confused-on-why-we-would-do-the-odds-ratio-of-prior-fracture-vs-no-prior-fracture-in-lesson-11." class="level3">
+<h3 class="anchored" data-anchor-id="i-am-confused-on-why-we-would-do-the-odds-ratio-of-prior-fracture-vs-no-prior-fracture-in-lesson-11.">4. I am confused on why we would do the odds ratio of prior fracture vs no prior fracture (in Lesson 11).</h3>
+<p>The odds ratio is mostly used to compare the two cases using one value. We want to compare the odds of a new fracture. We want to see how those odds of a new fracture change when we have a prior fracture or when we do not have a prior fracture. We can calculate the odds ratio for prior fracture to do that. When we only have main effects in our model, this is easier to calculate. We only have one odds ratio. However, when we have an interaction between prior fracture and age, we need a way to demonstrate how the odds ratio for prior fracture changes with age.</p>
+</section>
+<section id="im-still-confused-about-the-difference-between-model-3-and-the-estimated-odd-ratio-table-on-slide-39-and-what-each-is-telling-us." class="level3">
+<h3 class="anchored" data-anchor-id="im-still-confused-about-the-difference-between-model-3-and-the-estimated-odd-ratio-table-on-slide-39-and-what-each-is-telling-us.">5. I’m still confused about the difference between Model 3 and the estimated odd ratio table on slide 39 and what each is telling us.</h3>
+<p>Ah, yes! I’ll clarify a little more in the slide. The first table includes the coefficient estimates (<span class="math inline">\(\widehat\beta_1\)</span>,<span class="math inline">\(\widehat\beta_2\)</span>, <span class="math inline">\(\widehat\beta_3\)</span>), and the second table includes the odds ratios (<span class="math inline">\(\exp(\widehat\beta_1)\)</span>,<span class="math inline">\(\exp(\widehat\beta_2)\)</span>, <span class="math inline">\(\exp(\widehat\beta_3)\)</span>)</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
