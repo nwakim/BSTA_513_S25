@@ -126,7 +126,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a></li>
+  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a>
+  <ul class="collapse">
+  <li><a href="#log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance" id="toc-log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance" class="nav-link" data-scroll-target="#log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance">1. log-odds vs predicted probability vs odds ratio of interactions: when to use, significance…</a></li>
+  <li><a href="#so-it-is-ok-to-adjust-for-mediators" id="toc-so-it-is-ok-to-adjust-for-mediators" class="nav-link" data-scroll-target="#so-it-is-ok-to-adjust-for-mediators">2. So, it is ok to adjust for mediators?</a></li>
+  <li><a href="#i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models" id="toc-i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models" class="nav-link" data-scroll-target="#i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models">3. I got lost with the example of the interaction slide. The order in which you test out the models</a></li>
+  <li><a href="#honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack" id="toc-honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack" class="nav-link" data-scroll-target="#honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack">4. Honestly the entire second half of the class I was trying not to have a panic attack :)</a></li>
+  <li><a href="#odds-ratios-in-the-presence-of-interactions-slides" id="toc-odds-ratios-in-the-presence-of-interactions-slides" class="nav-link" data-scroll-target="#odds-ratios-in-the-presence-of-interactions-slides">5. Odds ratios in the presence of interactions slides</a></li>
+  <li><a href="#there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." id="toc-there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." class="nav-link" data-scroll-target="#there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier.">There are a couple of muddy points: Slide “Understand the interaction (3/3)” I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.</a></li>
+  <li><a href="#could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder" id="toc-could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder" class="nav-link" data-scroll-target="#could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder">Could you walk through a bit more thoroughly how you determined that the Walt test was correct to use on the slide “Example: GLOW Study: Age an effect modifier or confounder?”</a></li>
+  </ul></li>
   <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
   </ul>
 </nav>
@@ -137,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Lesson 1: Welcome</p>
+<p class="subtitle lead">Lesson 10: Interactions</p>
 </div>
 
 
@@ -149,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 28, 2025</p>
+      <p class="date-modified">April 29, 2025</p>
     </div>
   </div>
     
@@ -162,9 +171,34 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="muddy-points-from-spring-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2025">Muddy Points from Spring 2025</h2>
+<section id="log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance" class="level3">
+<h3 class="anchored" data-anchor-id="log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance">1. log-odds vs predicted probability vs odds ratio of interactions: when to use, significance…</h3>
+</section>
+<section id="so-it-is-ok-to-adjust-for-mediators" class="level3">
+<h3 class="anchored" data-anchor-id="so-it-is-ok-to-adjust-for-mediators">2. So, it is ok to adjust for mediators?</h3>
+</section>
+<section id="i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models" class="level3">
+<h3 class="anchored" data-anchor-id="i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models">3. I got lost with the example of the interaction slide. The order in which you test out the models</h3>
+</section>
+<section id="honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack" class="level3">
+<h3 class="anchored" data-anchor-id="honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack">4. Honestly the entire second half of the class I was trying not to have a panic attack :)</h3>
+</section>
+<section id="odds-ratios-in-the-presence-of-interactions-slides" class="level3">
+<h3 class="anchored" data-anchor-id="odds-ratios-in-the-presence-of-interactions-slides">5. Odds ratios in the presence of interactions slides</h3>
+<section id="still-not-totally-sure-why-we-need-to-interpret-certain-coefficients-at-a-single-age" class="level4">
+<h4 class="anchored" data-anchor-id="still-not-totally-sure-why-we-need-to-interpret-certain-coefficients-at-a-single-age">Still not totally sure why we need to interpret certain coefficients at a single age</h4>
+</section>
+</section>
+<section id="there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." class="level3">
+<h3 class="anchored" data-anchor-id="there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier.">There are a couple of muddy points: Slide “Understand the interaction (3/3)” I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.</h3>
+</section>
+<section id="could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder" class="level3">
+<h3 class="anchored" data-anchor-id="could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder">Could you walk through a bit more thoroughly how you determined that the Walt test was correct to use on the slide “Example: GLOW Study: Age an effect modifier or confounder?”</h3>
+</section>
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2024">Muddy Points from Spring 2024</h2>
+<p>I think I overlooked these last year :(</p>
 
 
 </section>

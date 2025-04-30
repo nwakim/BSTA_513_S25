@@ -11,6 +11,12 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### 1. Was the reference for race just a random selection (in the example where we were looking at 60 year olds)?
+
+### 2. I didn't quite understand the explanation about Fisher Scoring iterations.
+
+#### The issues with the summary function I missed what the issue was.
+
 ## Muddy Points from Spring 2024
 
 ### 1. Why use logistic instead of linear regression?

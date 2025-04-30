@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 10: Interactions"
 date-modified: "today"
 format: 
   html:
@@ -11,5 +11,23 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### 1. log-odds vs predicted probability vs odds ratio of interactions: when to use, significance...
+
+### 2. 	So, it is ok to adjust for mediators?
+
+### 3. I got lost with the example of the interaction slide. The order in which you test out the models
+
+### 4. Honestly the entire second half of the class I was trying not to have a panic attack :)
+
+### 5. Odds ratios in the presence of interactions slides
+
+#### Still not totally sure why we need to interpret certain coefficients at a single age
+
+### There are a couple of muddy points: Slide "Understand the interaction (3/3)" I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.
+
+### Could you walk through a bit more thoroughly how you determined that the Walt test was correct to use on the slide "Example: GLOW Study: Age an effect modifier or confounder?"
+
 ## Muddy Points from Spring 2024
+
+I think I overlooked these last year :(
 
