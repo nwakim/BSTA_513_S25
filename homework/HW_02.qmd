@@ -37,7 +37,7 @@ This homework is ready to go! (Nicky 4/17/25)
 
 ## Purpose
 
-This homework is designed to help you practice the following important skills and knowledge that we covered in Lessons 6-10:
+This homework is designed to help you practice the following important skills and knowledge that we covered in Lessons 6-9:
 
 -   Test a covariate for significance using the Wald test and LRT
 -   Fit and interpret simple and multivariable logistic regression models
@@ -59,8 +59,6 @@ This homework is designed to help you practice the following important skills an
 -   For each question, make sure to include all code and resulting output in the html file to support your answers
 
 -   Show the work of your calculations using R code within a code chunk. Make sure that both your code and output are visible in the rendered html file. This is the default setting.
-
--   Write all answers in complete sentences as if communicating the results to a collaborator.
 
 ::: callout-tip
 It is a good idea to try rendering your document from time to time as you go along! Note that rendering automatically saves your qmd file and rendering frequently helps you catch your errors more quickly.

@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -130,11 +159,12 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance" id="toc-log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance" class="nav-link" data-scroll-target="#log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance">1. log-odds vs predicted probability vs odds ratio of interactions: when to use, significance…</a></li>
   <li><a href="#so-it-is-ok-to-adjust-for-mediators" id="toc-so-it-is-ok-to-adjust-for-mediators" class="nav-link" data-scroll-target="#so-it-is-ok-to-adjust-for-mediators">2. So, it is ok to adjust for mediators?</a></li>
-  <li><a href="#i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models" id="toc-i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models" class="nav-link" data-scroll-target="#i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models">3. I got lost with the example of the interaction slide. The order in which you test out the models</a></li>
-  <li><a href="#honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack" id="toc-honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack" class="nav-link" data-scroll-target="#honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack">4. Honestly the entire second half of the class I was trying not to have a panic attack :)</a></li>
-  <li><a href="#odds-ratios-in-the-presence-of-interactions-slides" id="toc-odds-ratios-in-the-presence-of-interactions-slides" class="nav-link" data-scroll-target="#odds-ratios-in-the-presence-of-interactions-slides">5. Odds ratios in the presence of interactions slides</a></li>
-  <li><a href="#there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." id="toc-there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." class="nav-link" data-scroll-target="#there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier.">There are a couple of muddy points: Slide “Understand the interaction (3/3)” I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.</a></li>
-  <li><a href="#could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder" id="toc-could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder" class="nav-link" data-scroll-target="#could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder">Could you walk through a bit more thoroughly how you determined that the Walt test was correct to use on the slide “Example: GLOW Study: Age an effect modifier or confounder?”</a></li>
+  <li><a href="#i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models." id="toc-i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models." class="nav-link" data-scroll-target="#i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models.">3. I got lost with the example of the interaction slide. The order in which you test out the models.</a></li>
+  <li><a href="#odds-ratios-in-the-presence-of-interactions-slides" id="toc-odds-ratios-in-the-presence-of-interactions-slides" class="nav-link" data-scroll-target="#odds-ratios-in-the-presence-of-interactions-slides">4. Odds ratios in the presence of interactions slides</a></li>
+  <li><a href="#slide-understand-the-interaction-33-slide-17-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." id="toc-slide-understand-the-interaction-33-slide-17-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." class="nav-link" data-scroll-target="#slide-understand-the-interaction-33-slide-17-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier.">5. Slide “Understand the interaction (3/3)” (slide 17) I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.</a></li>
+  <li><a href="#could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-wald-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder-slide-3334" id="toc-could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-wald-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder-slide-3334" class="nav-link" data-scroll-target="#could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-wald-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder-slide-3334">6. Could you walk through a bit more thoroughly how you determined that the Wald test was correct to use on the slide “Example: GLOW Study: Age an effect modifier or confounder?” (slide 33,34)</a></li>
+  <li><a href="#the-purpose-of-centering-age-is-this-always-done-to-find-the-point-estimate-at-the-specific-effect-modifying-value" id="toc-the-purpose-of-centering-age-is-this-always-done-to-find-the-point-estimate-at-the-specific-effect-modifying-value" class="nav-link" data-scroll-target="#the-purpose-of-centering-age-is-this-always-done-to-find-the-point-estimate-at-the-specific-effect-modifying-value">7. The purpose of centering age: is this always done to find the point estimate at the specific effect-modifying value?</a></li>
+  <li><a href="#why-do-we-perform-glm-for-three-different-models-what-does-the-output-of-model-2-and-3-tell-us-does-it-tell-us-if-a-certain-variable-is-a-confounder-or-effect-modifier" id="toc-why-do-we-perform-glm-for-three-different-models-what-does-the-output-of-model-2-and-3-tell-us-does-it-tell-us-if-a-certain-variable-is-a-confounder-or-effect-modifier" class="nav-link" data-scroll-target="#why-do-we-perform-glm-for-three-different-models-what-does-the-output-of-model-2-and-3-tell-us-does-it-tell-us-if-a-certain-variable-is-a-confounder-or-effect-modifier">8. Why do we perform glm() for three different models? What does the output of Model 2 and 3 tell us? Does it tell us if a certain variable is a confounder or effect modifier?</a></li>
   </ul></li>
   <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
   </ul>
@@ -158,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 29, 2025</p>
+      <p class="date-modified">May 2, 2025</p>
     </div>
   </div>
     
@@ -173,27 +203,52 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2025">Muddy Points from Spring 2025</h2>
 <section id="log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance" class="level3">
 <h3 class="anchored" data-anchor-id="log-odds-vs-predicted-probability-vs-odds-ratio-of-interactions-when-to-use-significance">1. log-odds vs predicted probability vs odds ratio of interactions: when to use, significance…</h3>
+<p>I would almost never present log-odds in my work. log-odds are the best way to represent the linear component of our model and allow us to translate our predictors to our binary outcome. However, it is not really interpretable. This is why we transform log-odds to odds ratios or predicted probabilities.</p>
+<p>Predicted probabilities are easier to interpret and help us understand the risk for any given person. Odds ratios are more helpful for understanding associations and relationships. It’s hard to understand the relationship between prior fracture and future fracture if I only give you the predicted probabilities of each. If we take the odds ratio, I’ll have a better understanding of how prior fracture affects future fracture.</p>
+<p>For significance, it all relates to the value and the transformation we needed to get there. When we look at coefficients in a model that uses the logit function, then we are testing the coefficients against 0. When we take a transformation, like we do to get odds ratios, then we test against the transformed value of 0. To go from logit to odds ratios, we take the exponent (<span class="math inline">\(e^\beta\)</span>). If we test the coefficients against 0, then we need to test the odds ratios against <span class="math inline">\(e^0\)</span>. We know <span class="math inline">\(e^0=1\)</span>, so we must test our odds ratios against 1.</p>
 </section>
 <section id="so-it-is-ok-to-adjust-for-mediators" class="level3">
 <h3 class="anchored" data-anchor-id="so-it-is-ok-to-adjust-for-mediators">2. So, it is ok to adjust for mediators?</h3>
+<p>On <a href="https://www.feinberg.northwestern.edu/sites/bcc/docs/2016lectures/impactofotherfactors.pdf">slide 31 of the slides from Northwestern</a>, there is a pretty good answer to this. Basically, you can adjust for mediators. BUT the <em>meaning</em> of adjusting for a mediator is different than a confounder. This is the exact quote from the slides on adjusting for mediators: “Before adjustment, we have the total effect of the potential risk factor on the outcome. After adjustment, we have the remaining effect of the risk factor after the partial effect of that mediator is considered.”</p>
 </section>
-<section id="i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models" class="level3">
-<h3 class="anchored" data-anchor-id="i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models">3. I got lost with the example of the interaction slide. The order in which you test out the models</h3>
-</section>
-<section id="honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack" class="level3">
-<h3 class="anchored" data-anchor-id="honestly-the-entire-second-half-of-the-class-i-was-trying-not-to-have-a-panic-attack">4. Honestly the entire second half of the class I was trying not to have a panic attack :)</h3>
+<section id="i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models." class="level3">
+<h3 class="anchored" data-anchor-id="i-got-lost-with-the-example-of-the-interaction-slide.-the-order-in-which-you-test-out-the-models.">3. I got lost with the example of the interaction slide. The order in which you test out the models.</h3>
+<p>I hope I addressed this better on 4/30!</p>
 </section>
 <section id="odds-ratios-in-the-presence-of-interactions-slides" class="level3">
-<h3 class="anchored" data-anchor-id="odds-ratios-in-the-presence-of-interactions-slides">5. Odds ratios in the presence of interactions slides</h3>
-<section id="still-not-totally-sure-why-we-need-to-interpret-certain-coefficients-at-a-single-age" class="level4">
-<h4 class="anchored" data-anchor-id="still-not-totally-sure-why-we-need-to-interpret-certain-coefficients-at-a-single-age">Still not totally sure why we need to interpret certain coefficients at a single age</h4>
+<h3 class="anchored" data-anchor-id="odds-ratios-in-the-presence-of-interactions-slides">4. Odds ratios in the presence of interactions slides</h3>
+<p>I hope I addressed this better on 4/30!</p>
 </section>
+<section id="slide-understand-the-interaction-33-slide-17-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." class="level3">
+<h3 class="anchored" data-anchor-id="slide-understand-the-interaction-33-slide-17-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier.">5. Slide “Understand the interaction (3/3)” (slide 17) I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.</h3>
+<p>In this case, we are plotting the log-odds of CHD (y-axis) across ages (x-axis). We want to see if there is an interaction between age and sex OR if age is a confounder of sex.</p>
+<p><strong>Let’s look at the potential model for the interaction: </strong></p>
+<p><span class="math display">\[logit(\pi(\text{age, sex})) = \beta_0 + \beta_1 I(\text{sex}=\text{``Male"}) + \beta_2 \text{age} + \beta_3 I(\text{sex}=\text{``Male"}) \cdot \text{age}\]</span></p>
+<p>From there, we can produce the two lines, l3 and l1, for males and females respectively.</p>
+<p>l3: is the case where <span class="math inline">\(I(\text{sex}=\text{``Male"}) = 1\)</span>, resulting in the line:</p>
+<p><span class="math display">\[logit(\pi(\text{age, male})) = \big(\beta_0 + \beta_1 \big) + \big(\beta_2 + \beta_3 \big) \text{age}\]</span></p>
+<p>l1: is the case where <span class="math inline">\(I(\text{sex}=\text{``Male"}) = 0\)</span>, resulting in the line:</p>
+<p><span class="math display">\[logit(\pi(\text{age, female})) = \beta_0 + \beta_2 \text{age}\]</span></p>
+<p>Notice that the slopes and intercept of l3 and l1 are different! l1 will always represent the line for females. If we have the interaction, then l3 represents the line for males.</p>
+<p><strong>Let’s look at the potential model for a confounder: </strong></p>
+<p>If we model age as a confounder of sex, then our resulting model has two fitted lines (l1 and l2) that are parallel.</p>
+<p>l2: is the case where <span class="math inline">\(I(\text{sex}=\text{``Male"}) = 1\)</span>, resulting in the line:</p>
+<p><span class="math display">\[logit(\pi(\text{age, male})) = \beta_0 + \beta_1 + \beta_2 \text{age}\]</span></p>
+<p>l1: is the case where <span class="math inline">\(I(\text{sex}=\text{``Male"}) = 0\)</span>, resulting in the line:</p>
+<p><span class="math display">\[logit(\pi(\text{age, female})) = \beta_0 + \beta_2 \text{age}\]</span></p>
+<p>They only differ by their intercept. (Note that the intercept in l2 and l3 are the same.)</p>
 </section>
-<section id="there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier." class="level3">
-<h3 class="anchored" data-anchor-id="there-are-a-couple-of-muddy-points-slide-understand-the-interaction-33-i-am-fuzzy-on-how-l2-and-l3-slopes-are-related-to-l1.-i-think-they-are-differing-slopes-to-map-the-log-odds-based-off-it-being-an-confounder-or-an-effect-modifier.">There are a couple of muddy points: Slide “Understand the interaction (3/3)” I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.</h3>
+<section id="could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-wald-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder-slide-3334" class="level3">
+<h3 class="anchored" data-anchor-id="could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-wald-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder-slide-3334">6. Could you walk through a bit more thoroughly how you determined that the Wald test was correct to use on the slide “Example: GLOW Study: Age an effect modifier or confounder?” (slide 33,34)</h3>
+<p>Yes! In this specific case, we are testing the interaction for a binary variable with a continuous variable. To represent the interaction, we only need one coefficient. Thus, testing if that coefficient is 0 or not (aka Wald test) will sufficiently test whether the model should include the interaction or not. If the coefficient is significantly different than 0, then we should keep the interaction in the model. If there is insufficient evidence that the coefficient is not 0 (aka we don’t disprove that is 0), then we say we should model without the interaction.</p>
 </section>
-<section id="could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder" class="level3">
-<h3 class="anchored" data-anchor-id="could-you-walk-through-a-bit-more-thoroughly-how-you-determined-that-the-walt-test-was-correct-to-use-on-the-slide-example-glow-study-age-an-effect-modifier-or-confounder">Could you walk through a bit more thoroughly how you determined that the Walt test was correct to use on the slide “Example: GLOW Study: Age an effect modifier or confounder?”</h3>
+<section id="the-purpose-of-centering-age-is-this-always-done-to-find-the-point-estimate-at-the-specific-effect-modifying-value" class="level3">
+<h3 class="anchored" data-anchor-id="the-purpose-of-centering-age-is-this-always-done-to-find-the-point-estimate-at-the-specific-effect-modifying-value">7. The purpose of centering age: is this always done to find the point estimate at the specific effect-modifying value?</h3>
+<p>The purpose of centering is the same as Linear Models! <a href="https://nwakim.github.io/BSTA_512_W25/lessons/11_Interactions_01/11_Interactions_01.html?q=centering#/pause-centering-continuous-variables-when-including-interactions">Here are the slides from last quarter.</a></p>
+</section>
+<section id="why-do-we-perform-glm-for-three-different-models-what-does-the-output-of-model-2-and-3-tell-us-does-it-tell-us-if-a-certain-variable-is-a-confounder-or-effect-modifier" class="level3">
+<h3 class="anchored" data-anchor-id="why-do-we-perform-glm-for-three-different-models-what-does-the-output-of-model-2-and-3-tell-us-does-it-tell-us-if-a-certain-variable-is-a-confounder-or-effect-modifier">8. Why do we perform glm() for three different models? What does the output of Model 2 and 3 tell us? Does it tell us if a certain variable is a confounder or effect modifier?</h3>
+<p>When we perform a likelihood ratio test, we need to compare and run all the models involved. I showed a <strong>quick</strong> test of the interaction by looking at the significance of the coefficient for the interaction (using the Walk test). However, when our interaction involved more coefficients, we need to use the likelihood ratio test to test the interaction. We would need to fit a model with and without the interaction, then run those both through the test.</p>
 </section>
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">

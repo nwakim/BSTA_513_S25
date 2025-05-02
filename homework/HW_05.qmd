@@ -64,59 +64,6 @@ It is a good idea to try rendering your document from time to time as you go alo
 
 # Questions
 
-## Question 1
-This question stems from an example from an [online textbook](https://bookdown.org/rwnahhas/RMPH/) by Dr. Ramzi W. Nahhas. The dataset for this problem includes a subset of individuals from the 2019 National Survey on Drug Use and Health (NSDUH). Overall, our study aims included investigating potential risk factors for lifetime heroin use. Lifetime heroin use is a binary outcome, which we regress on age at first use of alcohol (alc_agefirst), age with 6 categories (demog_age_cat6), and sex assigned at birth (demog_sex).
-```{r echo=TRUE}
-load(here("data", "nsduh2019_adult_sub_rmph.RData"))
-nsduh = nsduh_adult_sub %>% 
-  dplyr::select(her_lifetime, alc_agefirst, demog_age_cat6, demog_sex) %>% 
-  drop_na()
-```
 
-### Part a 
-Using the `nsduh` dataset from the above chunk of code, please run a regression model and present the model summary using lifetime heroin use as our outcome, and age at first use of alcohol, categorical age, and sex assigned at birth as covariates in our model. No need to write out your model, you just need to write the R code to run it. 
-
-
-### Part b
-Are we encountering a numerical problem with our regression? If yes, please name the numerical issue. What first clued you into that issue? Provide conclusive evidence of this numerical issue (with a contingency table), and explain which variable(s) are causing this problem. 
-
-
-### Part c
-What would you do to "fix" this numerical issue? Please apply your "fix" and rerun the regression
-
-
-## Question 2
-
-This question is taken from the Hosmer and Lemeshow textbook. The ICU study data set consists of a sample of 200 subjects who were part of a much larger study on survival of patients following admission to an adult intensive care unit (ICU). The dataset should be available within Course Materials. The major goal of this study was to develop a logistic regression model to predict the probability of survival to hospital discharge of these patients. In this question, the primary outcome variable is vital status at hospital discharge, STA. Clinicians associated with the study felt that a key determinant of survival was the patient’s age at admission, AGE. We will be building to a multivariable logistic regression model while adjusting for cancer part of the present problem (CAN), CPR prior to ICU admission (CPR), infection probable at ICU admission (INF), and level of consciousness at ICU admission (LOC).
-
-We will use the model from Homework 4 Question 1a for this question: 
-$$\text{logit}(\pi(\textbf{X}))=\beta_0 + \beta_1 \cdot AGE + \beta_2 \cdot CAN + \beta_3 \cdot CPR + \\ \beta_4 \cdot INF$$
-
-```{r message=FALSE, warning=FALSE}
-icu = read_csv(here("data", "icu.csv"))
-icu1 = icu %>% mutate(STA = as.factor(STA) %>% relevel(ref = "Lived"))
-icu2 = icu1 %>% mutate(CAN = as.factor(CAN) %>% relevel(ref = "No"), 
-                     CPR = as.factor(CPR) %>% relevel(ref = "No"), 
-                     INF = as.factor(INF) %>% relevel(ref = "No"), 
-                     LOC = as.factor(LOC) %>% 
-                       relevel(ref = "No Coma or Deep Stupor"))
-```
-
-### Part a
-
-Assess the fit of the above model. You may use Hosmer-Lemeshow test, or Pearson Residual as appropriate. Discuss your choice and interpret.
-
-### Part b
-
-Assess the your models ability to discriminate vital status (STA) using AUC. 
-
-### Part c
-Let's say a colleague found a different preliminary final model than yours. Using the below model that your colleague found, compare your model to theirs using AIC and BIC.
-
-```{r message=FALSE, warning=FALSE}
-coll_model = glm(STA ~ SYS + AGE + CPR + INF + AGE*CPR, 
-                 data = icu2, family = "binomial")
-coll_model
-```
 
 

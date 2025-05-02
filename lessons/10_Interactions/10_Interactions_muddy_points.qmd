@@ -13,19 +13,69 @@ editor_options:
 
 ### 1. log-odds vs predicted probability vs odds ratio of interactions: when to use, significance...
 
-### 2. 	So, it is ok to adjust for mediators?
+I would almost never present log-odds in my work. log-odds are the best way to represent the linear component of our model and allow us to translate our predictors to our binary outcome. However, it is not really interpretable. This is why we transform log-odds to odds ratios or predicted probabilities. 
 
-### 3. I got lost with the example of the interaction slide. The order in which you test out the models
+Predicted probabilities are easier to interpret and help us understand the risk for any given person. Odds ratios are more helpful for understanding associations and relationships. It's hard to understand the relationship between prior fracture and future fracture if I only give you the predicted probabilities of each. If we take the odds ratio, I'll have a better understanding of how prior fracture affects future fracture. 
 
-### 4. Honestly the entire second half of the class I was trying not to have a panic attack :)
+For significance, it all relates to the value and the transformation we needed to get there. When we look at coefficients in a model that uses the logit function, then we are testing the coefficients against 0. When we take a transformation, like we do to get odds ratios, then we test against the transformed value of 0. To go from logit to odds ratios, we take the exponent ($e^\beta$). If we test the coefficients against 0, then we need to test the odds ratios against $e^0$. We know $e^0=1$, so we must test our odds ratios against 1. 
 
-### 5. Odds ratios in the presence of interactions slides
+### 2. So, it is ok to adjust for mediators?
 
-#### Still not totally sure why we need to interpret certain coefficients at a single age
+On [slide 31 of the slides from Northwestern](https://www.feinberg.northwestern.edu/sites/bcc/docs/2016lectures/impactofotherfactors.pdf), there is a pretty good answer to this. Basically, you can adjust for mediators. BUT the *meaning* of adjusting for a mediator is different than a confounder. This is the exact quote from the slides on adjusting for mediators: "Before adjustment, we have the total effect of the potential risk factor on the outcome. After adjustment, we have the remaining effect of the risk factor after the partial effect of that mediator is considered." 
 
-### There are a couple of muddy points: Slide "Understand the interaction (3/3)" I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.
+### 3. I got lost with the example of the interaction slide. The order in which you test out the models.
 
-### Could you walk through a bit more thoroughly how you determined that the Walt test was correct to use on the slide "Example: GLOW Study: Age an effect modifier or confounder?"
+I hope I addressed this better on 4/30!
+
+### 4. Odds ratios in the presence of interactions slides
+
+I hope I addressed this better on 4/30!
+
+### 5. Slide "Understand the interaction (3/3)" (slide 17) I am fuzzy on how l2 and l3 slopes are related to l1. I think they are differing slopes to map the log-odds based off it being an confounder or an effect modifier.
+
+In this case, we are plotting the log-odds of CHD (y-axis) across ages (x-axis). We want to see if there is an interaction between age and sex OR if age is a confounder of sex. 
+
+**Let's look at the potential model for the interaction: **
+
+$$logit(\pi(\text{age, sex})) = \beta_0 + \beta_1 I(\text{sex}=\text{``Male"}) + \beta_2 \text{age} + \beta_3 I(\text{sex}=\text{``Male"}) \cdot \text{age}$$
+
+From there, we can produce the two lines, l3 and l1, for males and females respectively. 
+
+l3: is the case where $I(\text{sex}=\text{``Male"}) = 1$, resulting in the line:
+
+$$logit(\pi(\text{age, male})) = \big(\beta_0 + \beta_1 \big) + \big(\beta_2 + \beta_3 \big) \text{age}$$
+
+l1: is the case where $I(\text{sex}=\text{``Male"}) = 0$, resulting in the line:
+
+$$logit(\pi(\text{age, female})) = \beta_0 + \beta_2 \text{age}$$
+
+Notice that the slopes and intercept of l3 and l1 are different! l1 will always represent the line for females. If we have the interaction, then l3 represents the line for males. 
+
+**Let's look at the potential model for a confounder: **
+
+If we model age as a confounder of sex, then our resulting model has two fitted lines (l1 and l2) that are parallel. 
+
+l2: is the case where $I(\text{sex}=\text{``Male"}) = 1$, resulting in the line:
+
+$$logit(\pi(\text{age, male})) = \beta_0 + \beta_1 + \beta_2 \text{age}$$
+
+l1: is the case where $I(\text{sex}=\text{``Male"}) = 0$, resulting in the line:
+
+$$logit(\pi(\text{age, female})) = \beta_0 + \beta_2 \text{age}$$
+
+They only differ by their intercept. (Note that the intercept in l2 and l3 are the same.) 
+
+### 6. Could you walk through a bit more thoroughly how you determined that the Wald test was correct to use on the slide "Example: GLOW Study: Age an effect modifier or confounder?" (slide 33,34)
+
+Yes! In this specific case, we are testing the interaction for a binary variable with a continuous variable. To represent the interaction, we only need one coefficient. Thus, testing if that coefficient is 0 or not (aka Wald test) will sufficiently test whether the model should include the interaction or not. If the coefficient is significantly different than 0, then we should keep the interaction in the model. If there is insufficient evidence that the coefficient is not 0 (aka we don't disprove that is 0), then we say we should model without the interaction. 
+
+### 7. The purpose of centering age: is this always done to find the point estimate at the specific effect-modifying value?
+
+The purpose of centering is the same as Linear Models! [Here are the slides from last quarter.](https://nwakim.github.io/BSTA_512_W25/lessons/11_Interactions_01/11_Interactions_01.html?q=centering#/pause-centering-continuous-variables-when-including-interactions)
+
+### 8. Why do we perform glm() for three different models? What does the output of Model 2 and 3 tell us? Does it tell us if a certain variable is a confounder or effect modifier?
+
+When we perform a likelihood ratio test, we need to compare and run all the models involved. I showed a **quick** test of the interaction by looking at the significance of the coefficient for the interaction (using the Walk test). However, when our interaction involved more coefficients, we need to use the likelihood ratio test to test the interaction. We would need to fit a model with and without the interaction, then run those both through the test. 
 
 ## Muddy Points from Spring 2024
 
