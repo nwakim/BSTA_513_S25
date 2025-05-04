@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 11: Numerical Problems"
 date-modified: "today"
 format: 
   html:
@@ -12,4 +12,6 @@ editor_options:
 ## Muddy Points from Spring 2025
 
 ## Muddy Points from Spring 2024
+
+
 

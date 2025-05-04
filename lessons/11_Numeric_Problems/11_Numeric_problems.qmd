@@ -337,10 +337,13 @@ tbl_regression(ex1_two_glm, exponentiate=T) %>% as_gt() %>%
 
 ## 4. Treat predictor as continuous
 
--   When we treat a predictor as continuous, we need to make sure we have **linearty between continuous predictor and log-odds**
+-   When we treat a predictor as continuous, we need to make sure we have **linearity between continuous predictor and log-odds**
 -   Cannot test this before fitting the logistic regression with the continuous predictor
 
     -   Try taking the logit of a probability of 1... it's infinity!
+
+- Test linearity by fitting logistic regression with the continuous predictor, then visually examining if predicted probabilities from that model match with approximate sample proportions
+  - Checking: Did linear assumption completely warp the original trend?
 
 ```{r}
 ex1_cont = ex1 %>% mutate(x = as.numeric(x))
@@ -349,7 +352,36 @@ tbl_regression(ex1_cont_glm, exponentiate=T) %>% as_gt() %>%
   tab_options(table.font.size = 38)
 ```
 
-## 4. Treat predictor as continuous: check linearity assumption
+## 4. Treat predictor as continuous: check linearity assumption (1/2)
+
+- You may think we need to look at the fitted log-odds to check linearity
+  - BUT fitted log-odds were constrained to the linearity assumption, so it will automatically be linear!
+
+```{r}
+newdata = data.frame(x = c(1, 2, 3)) 
+pred = predict(ex1_cont_glm, newdata, se.fit=T, type = "link")
+LL_CI1 = pred$fit - qnorm(1-0.05/2) * pred$se.fit
+UL_CI1 = pred$fit + qnorm(1-0.05/2) * pred$se.fit
+
+pred_link = data.frame(x = newdata, Pred = pred$fit, LL_CI1, UL_CI1) 
+```
+
+
+```{r}
+#| out-width: 100%
+#| fig-width: 4
+#| fig-height: 2.5
+#| code-fold: true
+#| code-summary: Plotting fitted log-odds
+
+ggplot() + 
+      labs(y = "Log-odds of Outcome") +
+      scale_fill_manual(values=c("#D6295E", "#ED7D31")) +
+      geom_point(data = pred_link, aes(x = x, y=Pred), size=3) +
+      geom_errorbar(data = pred_link, aes(x = x, y=Pred, ymin = LL_CI1, ymax = UL_CI1), width = 0.25)
+```
+
+## 4. Treat predictor as continuous: check linearity assumption (2/2)
 
 ```{r}
 newdata = data.frame(x = c(1, 2, 3)) 
@@ -369,19 +401,21 @@ pred_prob = as.data.frame(pred_link) %>% mutate(x = c("One", "Two", "Three"))
 #| fig-width: 4
 #| fig-height: 2.5
 #| code-fold: true
-#| code-summary: Plotting fitted log-odds
+#| code-summary: Plotting sample and predicted probabilities
 
 ggplot() + 
-      #geom_bar(data = ex1, aes(x = x, fill = outcome), stat = "count", position = "fill") +
-      labs(y = "Log-odds of Outcome") +
+      geom_bar(data = ex1, aes(x = x, fill = outcome), stat = "count", position = "fill") +
+      labs(y = "Proportion of Outcome") +
       scale_fill_manual(values=c("#D6295E", "#ED7D31")) +
       geom_point(data = pred_prob, aes(x = x, y=Pred), size=3) +
-      geom_errorbar(data = pred_prob, aes(x = x, y=Pred, ymin = LL_CI1, ymax = UL_CI1), width = 0.25) +
-    scale_x_discrete(limits=c("One","Two","Three"))
+      geom_errorbar(data = pred_prob, aes(x = x, y=Pred, ymin = LL_CI1, ymax = UL_CI1), width = 0.25)
+
 ```
 :::
 ::: column
  
+
+- Do the predicted probabilities (from the model with continuous `x`) align with the sample proportions?
 
 ::: box2
 This looks pretty good. We've mostly captured the trend of the outcome proportion!

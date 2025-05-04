@@ -98,7 +98,7 @@ Use the Likelihood Ratio test to test whether or not the coefficient for age ($\
 
 #### Part f
 
-Write a sentence interpreting the estimated odds ratio for the coefficient in Part e. Please include the 95% confidence interval.
+Write a sentence interpreting the estimated odds ratio for age (the coefficient in Part e). Please include the 95% confidence interval.
 
 ### Question 2
 
@@ -126,11 +126,11 @@ Write down the equation for the logistic regression model of STA on CPR.
 
 #### Part f
 
-Using the `glm()` function, obtain the maximum likelihood estimates of the coefficient parameters of the logistic regression model in Part f. Using these estimates, write down fitted logistic regression model.
+Using the `glm()` function, obtain the maximum likelihood estimates of the coefficient parameters of the logistic regression model in Part e. Using these estimates, write down fitted logistic regression model.
 
 #### Part g
 
-Write a sentence interpreting the odds ratio for the coefficients in Part g's model. Please include the 95% confidence interval.
+Write a sentence interpreting the odds ratio for the CPR in Part f's model. Please include the 95% confidence interval.
 
 #### Part h
 
