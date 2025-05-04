@@ -1,9 +1,9 @@
 ---
-title: "Lesson 13: Numerical Problems"
+title: "Lesson 11: Numerical Problems"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "05/15/2024"
+date: "05/5/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -12,7 +12,7 @@ format:
     show-slide-number: all
     width: 1955
     height: 1100
-    footer: "Lesson 13: Numerical Problems"
+    footer: "Lesson 11: Numerical Problems"
     html-math-method: mathjax
     highlight-style: ayu
 execute:
@@ -128,7 +128,7 @@ ex1 = as.data.frame(rbind(cbind(outcome = rep(1, 39), x = c(rep("One", 7), rep("
          x = factor(x, levels = c("One", "Two", "Three")))
 ```
 
-## Zero cell count: example (1/3)
+## Zero cell count: example (1/2)
 
 ::: columns
 ::: {.column width="73%"}
@@ -155,53 +155,14 @@ ex1_m = glm(outcome ~ x, data = ex1,
 
 :::
 
-## Zero cell count: example (2/3)
+## Zero cell count: example (2/2)
 
 ::: columns
 ::: {.column width="73%"}
 - Example of logistic regression with **one** covariate:
 ```{r}
 ex1_m = glm(outcome ~ x, data = ex1, 
-              family = binomial())
-```
-:::
-
-::: {.column width="10%"}
-![](images/zero_cell_ex_small.png){.absolute top=35 right=5 width="530"}
-:::
-:::
-::: columns
-::: {.column width="50%"}
-```{r}
-#| code-fold: true
-#| code-summary: Coefficient estimates
-tidy(ex1_m, conf.int=T) %>% gt() %>% 
-  tab_options(table.font.size = 32) %>%
-  fmt_number(decimals = 2)
-```
-
-:::
-
-::: {.column width="50%"}
-```{r}
-#| code-fold: true
-#| code-summary: Odds ratio
-tbl_regression(ex1_m, exponentiate=T) %>%
-  as_gt() %>% # allows us to use tab_options()
-  tab_options(table.font.size = 38)
-```
-:::
-
-:::
-
-## Zero cell count: example (3/3)
-
-::: columns
-::: {.column width="73%"}
-- Example of logistic regression with **one** covariate:
-```{r}
-ex1_m = glm(outcome ~ x, data = ex1, 
-              family = binomial())
+              family = binomial)
 ```
 :::
 
@@ -241,60 +202,69 @@ tbl_regression(ex1_m, exponentiate=T) %>%
 
 ## Ways to address zero cell
 
--   Add one-half to each of the cell counts
+::: columns
 
-    -   Technically works, but not the best option
-    -   Rarely useful with a more complex analysis: may work for simple logistic regression
-    -   Nicky would say worst option because manipulating the data that does not work on individual level
+::: column
+::: fact
 
--   Collapse the categories to remove the 0 cells
+::: fact-title
+1. Add one-half to each of the cell counts
+:::
 
-    -   We could collapse groups 2 and 3 together if it makes clinical sense
-    -   Good idea if this makes clinical sense OR there is no difference between groups
+::: fact-cont
+-   Technically works, but not the best option
+-   Rarely useful with a more complex analysis: may work for simple logistic regression
+-   Nicky would say worst option because manipulating the data that does not work on individual level
+:::
 
--   Remove the category with 0 cells
+:::
+:::
 
-    -   This would mean we reduce the total sample size as well
-    -   Not a good idea: we would remove people from our dataset. Why would we do that?
+::: column
+::: definition
+::: def-title
+2. Collapse the categories to remove the 0 cells
 
--   If the variable is in ordinal scale, treat it as continuous
+:::
 
-    -   Good idea if you have seen evidence that there is a linear trend on log-odds scale
+::: def-cont
+-   We could collapse groups 2 and 3 together if it makes clinical sense
+-   Good idea if this makes clinical sense OR there is no difference between groups
+:::
+:::
+:::
 
-## Decide on how to address zero cell (1/2)
-
--   Look at the proportions across the predictor, X: 
-```{r}
-#| fig-width: 4
-#| fig-height: 2.5
-#| eval: false
-
-ggplot(data = ex1, aes(x = x, fill = outcome)) + 
-      geom_bar(stat = "count", position = "fill") +
-      labs(y = "Proportion of Outcome")
-```
+:::
 
 ::: columns
 ::: column
-```{r}
-#| out-width: 100%
-#| fig-width: 4
-#| fig-height: 2.5
-#| echo: false
-
-ggplot(data = ex1, aes(x = x, fill = outcome)) + 
-      geom_bar(stat = "count", position = "fill") +
-      labs(y = "Proportion of Outcome") +
-      scale_fill_manual(values=c("#D6295E", "#ED7D31"))
-```
+::: proposition
+::: prop-title
+3. Remove the category with 0 cells
 :::
+
+::: prop-cont
+-   This would mean we reduce the total sample size as well
+-   Not a good idea: we would remove people from our dataset. Why would we do that?
+:::
+:::
+:::
+
 ::: column
- 
+::: proof1
+::: proof-title
+4. If the variable is ordinal, treat it as continuous
+:::
 
+::: proof-cont
+-   Good idea if you have seen evidence that there is a linear trend on log-odds scale
 :::
 :::
+:::
 
-## Decide on how to address zero cell (2/2)
+:::
+
+## Decide on how to address zero cell
 
 -   Look at the proportions across the predictor, X: 
 ```{r}
@@ -332,7 +302,7 @@ ggplot(data = ex1, aes(x = x, fill = outcome)) +
 :::
 :::
 
-## Collapse the categories of predictor
+## 2. Collapse the categories of predictor
 
 Combine groups 2 and 3:
 ```{r}
@@ -349,7 +319,7 @@ tbl_regression(ex1_23_glm, exponentiate=T) %>% as_gt() %>%
 
     -   Looks different than the estimated OR in the above table
 
-## Remove the category with 0 cells
+## 3. Remove the category with 0 cells
 
 Remove group 3 from the data:
 ```{r}
@@ -365,7 +335,7 @@ tbl_regression(ex1_two_glm, exponentiate=T) %>% as_gt() %>%
 -   **And really bad when we have other predictors!!**
 
 
-## Treat predictor as continuous
+## 4. Treat predictor as continuous
 
 -   When we treat a predictor as continuous, we need to make sure we have **linearty between continuous predictor and log-odds**
 -   Cannot test this before fitting the logistic regression with the continuous predictor
@@ -379,7 +349,7 @@ tbl_regression(ex1_cont_glm, exponentiate=T) %>% as_gt() %>%
   tab_options(table.font.size = 38)
 ```
 
-## Treat predictor as continuous: check linearity assumption
+## 4. Treat predictor as continuous: check linearity assumption
 
 ```{r}
 newdata = data.frame(x = c(1, 2, 3)) 
@@ -399,14 +369,15 @@ pred_prob = as.data.frame(pred_link) %>% mutate(x = c("One", "Two", "Three"))
 #| fig-width: 4
 #| fig-height: 2.5
 #| code-fold: true
-#| code-summary: Plotting sample and predicted probabilities
+#| code-summary: Plotting fitted log-odds
 
 ggplot() + 
-      geom_bar(data = ex1, aes(x = x, fill = outcome), stat = "count", position = "fill") +
-      labs(y = "Proportion of Outcome") +
+      #geom_bar(data = ex1, aes(x = x, fill = outcome), stat = "count", position = "fill") +
+      labs(y = "Log-odds of Outcome") +
       scale_fill_manual(values=c("#D6295E", "#ED7D31")) +
       geom_point(data = pred_prob, aes(x = x, y=Pred), size=3) +
-      geom_errorbar(data = pred_prob, aes(x = x, y=Pred, ymin = LL_CI1, ymax = UL_CI1), width = 0.25)
+      geom_errorbar(data = pred_prob, aes(x = x, y=Pred, ymin = LL_CI1, ymax = UL_CI1), width = 0.25) +
+    scale_x_discrete(limits=c("One","Two","Three"))
 ```
 :::
 ::: column
@@ -486,7 +457,7 @@ My suggestion is to try possible solutions in this order
 
 ## Poll Everywhere Question 2
 
-## Complete Separation: example (1/3)
+## Complete Separation: example (1/2)
 
 ::: columns
 ::: {.column width="65%"}
@@ -524,31 +495,10 @@ m1 = glm(outcome ~ x1 + x2, data = ex3, family=binomial)
 
 -   Outcomes of 0 and 1 are completely separated by `x2`
     
-    -   If `x2 > 4` then outcome is 1
-    -   If `x2 < 4` then outcome is 0
+    -   If `x1 > 4` then outcome is 1
+    -   If `x1 < 4` then outcome is 0
 
-## Complete Separation: example (2/3)
-
-::: columns
-::: {.column width="60%"}
-
- 
-
-Coefficient estimates:
-```{r}
-tidy(m1, conf.int=T) %>% gt() %>% 
-  tab_options(table.font.size = 35) %>%
-  fmt_number(decimals = 2)
-```
-:::
-
-::: {.column width="40%"}
-
-:::
-
-:::
-
-## Complete Separation: example (3/3)
+## Complete Separation: example (2/2)
 
 ::: columns
 ::: {.column width="60%"}
@@ -769,7 +719,7 @@ summary(m1_f) # Cannot use tidy on this :(
 
 -   Calculate the coefficient of determination, $R^2$
 
-    -   Proportion of the variation in $x_1$ that is predicted from $x_2$, $x_3$,... $$VIF = \dfrac{1}{1=R^2}$$
+    -   Proportion of the variation in $x_1$ that is predicted from $x_2$, $x_3$,... $$VIF = \dfrac{1}{1-R^2}$$
 
 -   Each covariate has its own VIF computed
 
