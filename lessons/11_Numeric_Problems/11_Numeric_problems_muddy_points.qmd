@@ -1,0 +1,43 @@
+---
+title: "Muddy Points"
+subtitle: "Lesson 11: Numerical Problems"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Muddy Points from Spring 2025
+
+### 1. Is the Firth logistic regression comparable to LRT? Like Wald and LRT give slightly different values for the coefficients, does firth also?
+
+Firth logistic regression is more the method for fitting the regression, while Wald and LRT are meant for testing hypotheses from a fitted model. The Firth logistic regression uses a penalized likelihood to find our MLEs, so I see what you're getting at! We can still use the LRT for the Firth logistic regression, but instead of comparing two models' likelihood, we will compare two models' penalized likelihood. 
+
+This question motivated me to look up the method  `logistf()` uses to calculate the confidence intervals. It uses the penalized likelihood ratio test to construct the confidence intervals, not the Wald test!
+
+### 2. What if you have a single binary covariate like in our labs Food insecure (has 58 missing values which even using glm () does not remove and caused issues rendering in lab 3). Since it is binary either yes or no, 1 or 0 from the contingency table from lab 2 is does not appear that there is any overlap between the columns/rows example 1,0 (not food insecure & food insecure there is 0 cell counts. Which makes sense as there should not be any overlap someone who says that they are not food insecure can not answer yes they are food insecure. How would we deal with this? Would the best way be to handle this missing data using FRITH Regression?
+
+Okay, there's a few things to unpack here! First, we are using food insecurity as our outcome. I just want to make sure we use the same language. Food insecurity would **not** be considered a covariate in this case. 
+
+Second, I think you kinda came to the conclusion on your own! WE do not want to look at a contingency table of food insecurity with itself because there is inherently complete separation and 0 counts. This is because we do not want to use the outcome to predict the outcome, and we would only capture the one variable's information. The best way to deal with this is to keep food insecurity as the outcome **only**. 
+
+Let me know if I'm misunderstanding your question. It sounds like you got a little turned around with food insecurity serving as an outcome and predictor in the model. 
+
+### 3. I am still muddy on the fourth method for dealing with zero cells. If the variable is ordinal, treat it as continuous. I just want more clarification with this; would PPAGE potentially fall into this category?
+
+`PPAGE` is already a numeric variable, so it is already treated as continuous! The zero cell issue only comes up if we have a categorical predictor. 
+
+However, if you see that `PPAGE` is not linear with the log-odds for food insecurity, then you may want to consider treating it as a categorical variable. Remember our [lesson that included categorizing continuous variables](https://nwakim.github.io/BSTA_512_W25/lessons/14_Purposeful_selection/14_Purposeful_selection.html?q=categorize#/step-4-assess-scale-for-continuous-variables-2) in Linear Models?
+
+### 4. Why we would have low or zero observations -- I think these results are hard for me to understand
+
+We could see low or zero observations if a specific category is not as likely in the population. For example, in the project, a family size of 8+ had very few counts. This is just because a family of that size is less likely. 
+
+Additionally, our sample may not be large enough to capture events that happen at lower probabilities. If rolling a 3 on a die only happened every 1,000 rolls, then we would likely need 1,000 rolls to observe a 3. If we only roll the die 500 times, we may not have a 3 observed. 
+
+## Muddy Points from Spring 2024
+
+
+
