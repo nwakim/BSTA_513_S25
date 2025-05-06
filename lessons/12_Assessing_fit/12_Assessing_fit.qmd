@@ -3,7 +3,7 @@ title: "Lesson 12: Assessing Model Fit"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "05/13/2024"
+date: "05/7/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -69,7 +69,7 @@ glow = glow500 %>% mutate(age_c = age - mean_age)
 }
 ```
 
-## Last Class: GLOW Study with interactions
+## Two classes ago: GLOW Study with interactions
 
 -   **Outcome variable:** any fracture in the first year of follow up (FRACTURE: 0 or 1)
 
@@ -77,15 +77,16 @@ glow = glow500 %>% mutate(age_c = age - mean_age)
 
 -   **Potential confounder or effect modifier:** age (AGE, a continuous variable)
 
--   Fitted model with interactions: $$\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) & = \widehat\beta_0 &+ &\widehat\beta_1\cdot I(\text{PF}) & + &\widehat\beta_2\cdot Age& + &\widehat\beta_3 \cdot I(\text{PF}) \cdot Age \\  
-    \text{logit}\left(\widehat\pi(\mathbf{X})\right) & = -1.376 &+ &1.002\cdot I(\text{PF})& + &0.063\cdot Age& -&0.057 \cdot I(\text{PF}) \cdot Age
+-   Fitted model with interactions: $$\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) & = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age \\  
+    \text{logit}\left(\widehat\pi(\mathbf{X})\right) & = -1.376 + 1.002  \cdot I(\text{PF}=\text{``Yes"}) + 0.063  \cdot Age - 0.057  \cdot I(\text{PF}=\text{``Yes"}) \cdot Age
     \end{aligned}$$
     
  
 
+- Let's say we are considering this model for our **final model**
 -   Today: determine the overall fit of this model
 
-## Last Class: Reporting results of GLOW Study with interactions
+## Two classes ago: Reporting results of GLOW Study with interactions
 
 -   Remember our main covariate is prior fracture, so we want to focuse on how age changes the relationship between prior fracture and a new fracture!
 
@@ -123,7 +124,7 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 :::
 :::
 
-## Overview (1/2)
+## Assessing model fit: overview
 
 -   Once a potential final model has been determined, we need to assess the fit of the model
 
@@ -141,42 +142,47 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 
     -   Comparison: fitted/estimated outcome vs. observed outcome
 
-## Some good measurements for our final model(s)
-
--   Pearson residual statistic
-
- 
-
--   Hosmer-Lemeshaw goodness-of-fit statistic
-
- 
-
--   AUC-ROC (area under the curve of the receiver operating characteristic)
-
- 
-
--   AIC/BIC
-
- 
-
-## Overview (2/2)
+## Some measurements for our final model(s)
 
 -   To assess the fit of the model, it is good to have a mixture of measurements
 
- 
+::: columns
+::: column
 
--   We want to **measure the absolute fit**: not comparing to any models, but determining if the model fits the data well
+::: proposition
+::: prop-title
+If we want to **measure the absolute fit**: not comparing to any models, but determining if the model fits the data well
+:::
 
-    -   Pearson residual statistic
-    -   Hosmer-Lemeshaw goodness-of-fit statistic
-    -   AUC-ROC (kind of, often do not use a hypothesis test but you can!)
+::: prop-cont
+-   Pearson residual statistic
+    - Not the best measurement
+    - Does not work if continuous variables in model
+-   Hosmer-Lemeshow goodness-of-fit statistic
+    - Need to adjust when sample size is large
+-   AUC-ROC (area under the curve of the receiver operating characteristic)
 
- 
+:::
 
--   We want **comparable measures of fit**: if we have candidate models that are not nested
+:::
 
-    -   AUC-ROC
-    -   AIC/BIC
+:::
+
+::: column
+
+::: definition
+::: def-title
+If we want **comparable measures of fit**: if we want to compare candidate models that are not nested
+:::
+
+::: def-cont
+-   AUC-ROC
+-   AIC/BIC
+:::
+:::
+
+:::
+::: 
 
 ## Poll Everywhere Question 1
 
@@ -184,17 +190,19 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 
 -   The model fits the data well if
 
-    -   Summary measures of the distance between the predicted/estimated/fitted and observed Y are small
+    - [Summary measurements of model fit]{style="color:#5B9BD5; font-weight: bold;"} tell us good fit
+        -   Aka: Summary measures of the distance between the predicted/estimated/fitted and observed Y are small
 
         -   Today's lecture!!
 
-    -   The contribution of each pair (predicted and observed) to these summary measures is unsystematic and is small relative to the error structure of the model
+    - No major issues in [model diagnostics]{style="color:#70AD47; font-weight: bold;"}, observations fit into model and our assumptions
+        -   The contribution of each pair (predicted and observed) to these summary measures is unsystematic and is small relative to the error structure of the model
 
         -   Model Diagnostics that will be covered in another lecture!
 
  
 
--   Need both components
+-   **Need to examine both components**
 
     -   It is possible to see a “good” summary measure of the distance between predicted and observed Y with some substantial deviation from fit for a few subjects
 
@@ -206,7 +214,7 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 
 -   What do we need to calculate them?
 
-    -   Need to define what the fitted outcome is
+    -   Need to calculate the fitted outcome
 
     -   Need to calculate how close the fitted outcome is to the observed outcome
 
@@ -214,16 +222,16 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 
  
 
--   Two tests of goodness-of-fit
+-   Two **tests** of goodness-of-fit
 
     -   Pearson residual statistic
-    -   Hosmer-Lemeshaw goodness-of-fit statistic
+    -   Hosmer-Lemeshow goodness-of-fit statistic
 
 ## Comparing *fitted outcome* to observed outcome
 
 -   In logistic regression model, we estimate $\pi(\mathbf{X}) = P(Y=1|\mathbf{X})$
 
-    -   Predicted value, $\widehat\pi(\mathbf{X})$, is between 0 and 1 for each subject
+    -   Predicted probability, $\widehat\pi(\mathbf{X})$, is between 0 and 1 for each subject
 
 -   However, we always observe $Y=1$ or $Y=0$
 
@@ -306,7 +314,7 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 
 -   I do not see this as the main way to determine goodness of fit... for a binary outcome!
 
-    -   Often because of the bigger issues with it...
+    -   Often because of the bigger issues with it... (next slide)
 
 ## Issues with Pearson Residuals
 
@@ -421,7 +429,7 @@ Note to Nicky: do NOT make conclusion yet! In the poll everywhere!
 
 ## GLOW Study: Hosmer-Lemeshow test
 
--   Conclusion: The p-value is 0.5608, so we fail to reject the null hypothesis that the model fits the data well. Thus, the preliminary final model for the GLOW dataset fits the data well
+-   Conclusion: The p-value is 0.5608, so we *fail to reject* the null hypothesis that the model fits the data well. Thus, for the GLOW study data, the model with an interaction between age and prior fracture fits the data well
 
  
 
@@ -431,9 +439,9 @@ Note to Nicky: do NOT make conclusion yet! In the poll everywhere!
 
 -   R may give results for the HL test even if it is not appropriate to use it!
 
-    -   If number of covariate patterns ≤ 6, do not use HL test
+    -   **If number of covariate patterns ≤ 6, do not use HL test**
 
-## Big Data Issue in Goodness-of-fit Test
+## Large sample size issue in H-L test
 
 -   When the sample size is really big (\> 1000), it is much more likely to find the H-L reject the model fit (even when the expected vs. observed in each decile categories looks pretty similar)
 
@@ -449,7 +457,7 @@ Note to Nicky: do NOT make conclusion yet! In the poll everywhere!
 
 -   For n \> 25000, other methods, such as partitioning data into a developmental data set (with smaller n) and a validation set
 
-## Final Notes on Goodness-of-fit Test
+## Final Notes on Pearson and HL tests
 
 -   They should not be used for variable selection
 
@@ -607,7 +615,7 @@ ggroc(rocobj, colour = 'steelblue',
 
 -   Randomly pick one individual from fractured group and one from non-fractured outcome group
 
-    -   Based on their age, height, prior fracture, and all other covariates, we will correctly predict which is from fractured group
+    -   Based on their age and prior fracture, we will correctly predict which is from fractured group
 
  
 
@@ -659,7 +667,7 @@ ggroc(rocobj, colour = 'steelblue',
 | Measure of fit                       | Equation                                                | R code            |
 |-----------------------|-------------------------------|------------------|
 | Akaike information criterion (AIC)   | $AIC = -2 \cdot \text{log-likelihood} + 2q$             | `AIC(model_name)` |
-| Bayesian information criterion (BIC) | $AIC = -2 \cdot \text{log-likelihood} + q\text{log}(n)$ | `BIC(model_name)` |
+| Bayesian information criterion (BIC) | $BIC = -2 \cdot \text{log-likelihood} + q\text{log}(n)$ | `BIC(model_name)` |
 
  
 
@@ -667,7 +675,7 @@ ggroc(rocobj, colour = 'steelblue',
 
 -   Both AIC and BIC can only be used to compare models fitting the same data set
 
--   In comparing two models, the model with smaller AIC and/or BIC is preferred
+-   In comparing two models, the model with **smaller AIC and/or BIC is preferred**
 
     -   When the difference in AIC between two models exceeds 3, the difference is viewed as “meaningful”
 
@@ -679,6 +687,27 @@ ggroc(rocobj, colour = 'steelblue',
 ```{r}
 AIC(glow_m3)
 BIC(glow_m3)
+```
+
+## Example of a table for model fit statistics
+
+```{r}
+#| echo: true
+model1 = glow %>% glm(formula = fracture ~ age_c + height, family = binomial)
+model2 = glow %>% glm(formula = fracture ~ priorfrac + armassist + smoke, family = binomial)
+model3 = glow %>% glm(formula = fracture ~ priorfrac + age_c + priorfrac*age_c, family = binomial)
+predicted1 = predict(model1, glow, type="response")
+predicted2 = predict(model2, glow, type="response")
+predicted3 = predict(model3, glow, type="response")
+
+fit_stats = data.frame(Model = c("Model 1: age + height", "Model 2: prior fracture + arm assist + smoking status", "Model 3: interaction with prior fraction + age"), 
+                       AUC_ROC = c(round(auc(glow$fracture, predicted1),4), round(auc(glow$fracture, predicted2),4), round(auc(glow$fracture, predicted3),4)), 
+                       AIC = c(AIC(model1), AIC(model2), AIC(model3)), 
+                       BIC = c(BIC(model1), BIC(model2), BIC(model3)))
+
+colnames(fit_stats) = c("Model", "AUC-ROC", "AIC", "BIC")
+
+fit_stats %>% gt() %>% tab_options(table.font.size = 40) %>% fmt_number(decimals = 3)
 ```
 
 # Learning Objectives
@@ -727,5 +756,10 @@ Special notes:
         -   AUC-ROC: 0.6819
         -   AIC: 531.27
         -   BIC: 548.13
+
+## Reference slide
+
+- We went over model fit statistics a little in BSTA 512/612 in [Lesson 13](https://nwakim.github.io/BSTA_512_W25/lessons/13_Model_selection/13_Model_selection.html?q=aic#/learning-objectives-3)
+  - Included AIC and BIC
 
 

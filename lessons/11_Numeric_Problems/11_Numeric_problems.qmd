@@ -607,7 +607,7 @@ tidy(m1, conf.int=T) %>% gt() %>%
 
 ![](images/firth.png){.absolute bottom=5 right=0 width="150"}
 
-## Complete Separation: Firth logistic regression
+## Firth logistic regression
 
 ```{r}
 library(logistf)

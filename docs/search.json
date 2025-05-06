@@ -2272,14 +2272,14 @@
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#some-good-measurements-for-our-final-models",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "Some good measurements for our final model(s)",
-    "text": "Some good measurements for our final model(s)\n\nPearson residual statistic\n\n \n\nHosmer-Lemeshaw goodness-of-fit statistic\n\n \n\nAUC-ROC (area under the curve of the receiver operating characteristic)\n\n \n\nAIC/BIC"
+    "text": "Some good measurements for our final model(s)\n\nPearson residual statistic\n\n \n\nHosmer-Lemeshow goodness-of-fit statistic\n\n \n\nAUC-ROC (area under the curve of the receiver operating characteristic)\n\n \n\nAIC/BIC"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#overview-22",
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#overview-22",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "Overview (2/2)",
-    "text": "Overview (2/2)\n\nTo assess the fit of the model, it is good to have a mixture of measurements\n\n \n\nWe want to measure the absolute fit: not comparing to any models, but determining if the model fits the data well\n\nPearson residual statistic\nHosmer-Lemeshaw goodness-of-fit statistic\nAUC-ROC (kind of, often do not use a hypothesis test but you can!)\n\n\n \n\nWe want comparable measures of fit: if we have candidate models that are not nested\n\nAUC-ROC\nAIC/BIC"
+    "text": "Overview (2/2)\n\nTo assess the fit of the model, it is good to have a mixture of measurements\n\n \n\nWe want to measure the absolute fit: not comparing to any models, but determining if the model fits the data well\n\nPearson residual statistic\nHosmer-Lemeshow goodness-of-fit statistic\nAUC-ROC (kind of, often do not use a hypothesis test but you can!)\n\n\n \n\nWe want comparable measures of fit: if we have candidate models that are not nested\n\nAUC-ROC\nAIC/BIC"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#poll-everywhere-question-1",
@@ -2293,21 +2293,21 @@
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#components-to-assess-model-fit",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "Components to Assess Model Fit",
-    "text": "Components to Assess Model Fit\n\nThe model fits the data well if\n\nSummary measures of the distance between the predicted/estimated/fitted and observed Y are small\n\nToday’s lecture!!\n\nThe contribution of each pair (predicted and observed) to these summary measures is unsystematic and is small relative to the error structure of the model\n\nModel Diagnostics that will be covered in another lecture!\n\n\n\n \n\nNeed both components\n\nIt is possible to see a “good” summary measure of the distance between predicted and observed Y with some substantial deviation from fit for a few subjects"
+    "text": "Components to Assess Model Fit\n\nThe model fits the data well if\n\nSummary measurements of model fit tell us good fit\n\nAka: Summary measures of the distance between the predicted/estimated/fitted and observed Y are small\nToday’s lecture!!\n\nNo major issues in model diagnostics, observations fit into model and our assumptions\n\nThe contribution of each pair (predicted and observed) to these summary measures is unsystematic and is small relative to the error structure of the model\nModel Diagnostics that will be covered in another lecture!\n\n\n\n \n\nNeed to examine both components\n\nIt is possible to see a “good” summary measure of the distance between predicted and observed Y with some substantial deviation from fit for a few subjects"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#summary-measures-of-goodness-of-fit",
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#summary-measures-of-goodness-of-fit",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "Summary Measures of Goodness of Fit",
-    "text": "Summary Measures of Goodness of Fit\n\nAka overall measure of fit\n\n \n\nWhat do we need to calculate them?\n\nNeed to define what the fitted outcome is\nNeed to calculate how close the fitted outcome is to the observed outcome\nSummarize across all observations (or individuals’ data)\n\n\n \n\nTwo tests of goodness-of-fit\n\nPearson residual statistic\nHosmer-Lemeshaw goodness-of-fit statistic"
+    "text": "Summary Measures of Goodness of Fit\n\nAka overall measure of fit\n\n \n\nWhat do we need to calculate them?\n\nNeed to calculate the fitted outcome\nNeed to calculate how close the fitted outcome is to the observed outcome\nSummarize across all observations (or individuals’ data)\n\n\n \n\nTwo tests of goodness-of-fit\n\nPearson residual statistic\nHosmer-Lemeshow goodness-of-fit statistic"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#comparing-fitted-outcome-to-observed-outcome",
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#comparing-fitted-outcome-to-observed-outcome",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "Comparing fitted outcome to observed outcome",
-    "text": "Comparing fitted outcome to observed outcome\n\nIn logistic regression model, we estimate \\(\\pi(\\mathbf{X}) = P(Y=1|\\mathbf{X})\\)\n\nPredicted value, \\(\\widehat\\pi(\\mathbf{X})\\), is between 0 and 1 for each subject\n\nHowever, we always observe \\(Y=1\\) or \\(Y=0\\)\n\nNot an observed \\(\\pi(\\mathbf{X})\\)\n\n\n \n\nWe can deterimine the fitted outcome by sampling Y’s from a Bernoulli distribution with the fitted probability\n\n\\(\\widehat{Y} \\sim \\text{Bernoulli}(\\widehat\\pi(\\mathbf{X}))\\)\n\nIf there are groups of individuals that share the same covariate observations, then we can use the same \\(\\widehat\\pi(\\mathbf{X})\\)\n\n\\(\\sum_j \\widehat{Y} \\sim \\text{Binomial}(\\sum_j, \\widehat\\pi(\\mathbf{X}))\\)\n\n\n \n\nInstead of comparing the expected vs. observed at individual level, we can compare them at “group” level"
+    "text": "Comparing fitted outcome to observed outcome\n\nIn logistic regression model, we estimate \\(\\pi(\\mathbf{X}) = P(Y=1|\\mathbf{X})\\)\n\nPredicted probability, \\(\\widehat\\pi(\\mathbf{X})\\), is between 0 and 1 for each subject\n\nHowever, we always observe \\(Y=1\\) or \\(Y=0\\)\n\nNot an observed \\(\\pi(\\mathbf{X})\\)\n\n\n \n\nWe can deterimine the fitted outcome by sampling Y’s from a Bernoulli distribution with the fitted probability\n\n\\(\\widehat{Y} \\sim \\text{Bernoulli}(\\widehat\\pi(\\mathbf{X}))\\)\n\nIf there are groups of individuals that share the same covariate observations, then we can use the same \\(\\widehat\\pi(\\mathbf{X})\\)\n\n\\(\\sum_j \\widehat{Y} \\sim \\text{Binomial}(\\sum_j, \\widehat\\pi(\\mathbf{X}))\\)\n\n\n \n\nInstead of comparing the expected vs. observed at individual level, we can compare them at “group” level"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#number-of-covariate-patterns",
@@ -2335,7 +2335,7 @@
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#not-going-to-bother-going-through-an-example",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "Not going to bother going through an example",
-    "text": "Not going to bother going through an example\n\nWe can calculate this by hand and test against a chi-squared distribution\n\n \n\nNo set R code to do this\n\n \n\nI do not see this as the main way to determine goodness of fit… for a binary outcome!\n\nOften because of the bigger issues with it…"
+    "text": "Not going to bother going through an example\n\nWe can calculate this by hand and test against a chi-squared distribution\n\n \n\nNo set R code to do this\n\n \n\nI do not see this as the main way to determine goodness of fit… for a binary outcome!\n\nOften because of the bigger issues with it… (next slide)"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#issues-with-pearson-residuals",
@@ -2398,7 +2398,7 @@
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#glow-study-hosmer-lemeshow-test-1",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "GLOW Study: Hosmer-Lemeshow test",
-    "text": "GLOW Study: Hosmer-Lemeshow test\n\nConclusion: The p-value is 0.5608, so we fail to reject the null hypothesis that the model fits the data well. Thus, the preliminary final model for the GLOW dataset fits the data well\n\n \n\nDon’t forget that we still need to check individual observations (Model Diagnostics!)\n\n \n\nR may give results for the HL test even if it is not appropriate to use it!\n\nIf number of covariate patterns ≤ 6, do not use HL test"
+    "text": "GLOW Study: Hosmer-Lemeshow test\n\nConclusion: The p-value is 0.5608, so we fail to reject the null hypothesis that the model fits the data well. Thus, for the GLOW study data, the model with an interaction between age and prior fracture fits the data well\n\n \n\nDon’t forget that we still need to check individual observations (Model Diagnostics!)\n\n \n\nR may give results for the HL test even if it is not appropriate to use it!\n\nIf number of covariate patterns ≤ 6, do not use HL test"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#big-data-issue-in-goodness-of-fit-test",
@@ -2454,7 +2454,7 @@
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#another-way-to-think-about-auc",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "Another way to think about AUC",
-    "text": "Another way to think about AUC\n\nGLOW Study: Consider the situation in which the fracture status of each individual is known\n\n \n\nRandomly pick one individual from fractured group and one from non-fractured outcome group\n\nBased on their age, height, prior fracture, and all other covariates, we will correctly predict which is from fractured group\n\n\n \n\nThe AUC is the percentage of randomly drawn pairs for which we predict the pair correctly\n\n \n\nTherefore, AUC represents the ability of our covariates to discriminate between individuals with the outcome (fracture) and those without the outcome"
+    "text": "Another way to think about AUC\n\nGLOW Study: Consider the situation in which the fracture status of each individual is known\n\n \n\nRandomly pick one individual from fractured group and one from non-fractured outcome group\n\nBased on their age and prior fracture, we will correctly predict which is from fractured group\n\n\n \n\nThe AUC is the percentage of randomly drawn pairs for which we predict the pair correctly\n\n \n\nTherefore, AUC represents the ability of our covariates to discriminate between individuals with the outcome (fracture) and those without the outcome"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#aic-and-bic",
@@ -2475,7 +2475,7 @@
     "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#aic-and-bic-1",
     "title": "Lesson 12: Assessing Model Fit",
     "section": "AIC and BIC",
-    "text": "AIC and BIC\n\nBoth AIC and BIC penalize a model for having many parameters\n\n \n\n\n\n\n\n\n\n\nMeasure of fit\nEquation\nR code\n\n\n\n\nAkaike information criterion (AIC)\n\\(AIC = -2 \\cdot \\text{log-likelihood} + 2q\\)\nAIC(model_name)\n\n\nBayesian information criterion (BIC)\n\\(AIC = -2 \\cdot \\text{log-likelihood} + q\\text{log}(n)\\)\nBIC(model_name)\n\n\n\n \n\nWhere q is the number of parameters in the model and n is the sample size\nBoth AIC and BIC can only be used to compare models fitting the same data set\nIn comparing two models, the model with smaller AIC and/or BIC is preferred\n\nWhen the difference in AIC between two models exceeds 3, the difference is viewed as “meaningful”"
+    "text": "AIC and BIC\n\nBoth AIC and BIC penalize a model for having many parameters\n\n \n\n\n\n\n\n\n\n\nMeasure of fit\nEquation\nR code\n\n\n\n\nAkaike information criterion (AIC)\n\\(AIC = -2 \\cdot \\text{log-likelihood} + 2q\\)\nAIC(model_name)\n\n\nBayesian information criterion (BIC)\n\\(BIC = -2 \\cdot \\text{log-likelihood} + q\\text{log}(n)\\)\nBIC(model_name)\n\n\n\n \n\nWhere q is the number of parameters in the model and n is the sample size\nBoth AIC and BIC can only be used to compare models fitting the same data set\nIn comparing two models, the model with smaller AIC and/or BIC is preferred\n\nWhen the difference in AIC between two models exceeds 3, the difference is viewed as “meaningful”"
   },
   {
     "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#aic-and-bic-in-r",
@@ -8796,14 +8796,14 @@
     "href": "lessons/11_Numeric_Problems/11_Numeric_problems_key_info.html",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "Quiz 1 feedback posted\nNext week will be virtual\nQuiz 2 next week\nThe Academic Success Center is hiring peer tutors for AY ’25-’26!\n\nSubject areas of interest include\n\nPharmacy\nBiostatistics\nNCLEX prep\nMath (dosage calculations, etc.)\nDentistry (esp. dental anatomy)\n\n\nTutoring is a great way to solidify your own content knowledge, get teaching-adjacent experience for your resume, and give back to the student community. Apply in OHSU Jobs or email Morgan Gross (grossmo@ohsu.edu), ASC Tutoring Program Coordinator, for more info!\n\n\n\n\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time."
+    "text": "Quiz 1 feedback posted\nQuiz 2 next week\nThe Academic Success Center is hiring peer tutors for AY ’25-’26!\n\nSubject areas of interest include\n\nPharmacy\nBiostatistics\nNCLEX prep\nMath (dosage calculations, etc.)\nDentistry (esp. dental anatomy)\n\n\nTutoring is a great way to solidify your own content knowledge, get teaching-adjacent experience for your resume, and give back to the student community. Apply in OHSU Jobs or email Morgan Gross (grossmo@ohsu.edu), ASC Tutoring Program Coordinator, for more info!\n\n\n\n\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time."
   },
   {
     "objectID": "lessons/11_Numeric_Problems/11_Numeric_problems_key_info.html#announcements",
     "href": "lessons/11_Numeric_Problems/11_Numeric_problems_key_info.html#announcements",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "Quiz 1 feedback posted\nNext week will be virtual\nQuiz 2 next week\nThe Academic Success Center is hiring peer tutors for AY ’25-’26!\n\nSubject areas of interest include\n\nPharmacy\nBiostatistics\nNCLEX prep\nMath (dosage calculations, etc.)\nDentistry (esp. dental anatomy)\n\n\nTutoring is a great way to solidify your own content knowledge, get teaching-adjacent experience for your resume, and give back to the student community. Apply in OHSU Jobs or email Morgan Gross (grossmo@ohsu.edu), ASC Tutoring Program Coordinator, for more info!\n\n\n\n\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time."
+    "text": "Quiz 1 feedback posted\nQuiz 2 next week\nThe Academic Success Center is hiring peer tutors for AY ’25-’26!\n\nSubject areas of interest include\n\nPharmacy\nBiostatistics\nNCLEX prep\nMath (dosage calculations, etc.)\nDentistry (esp. dental anatomy)\n\n\nTutoring is a great way to solidify your own content knowledge, get teaching-adjacent experience for your resume, and give back to the student community. Apply in OHSU Jobs or email Morgan Gross (grossmo@ohsu.edu), ASC Tutoring Program Coordinator, for more info!\n\n\n\n\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 7\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”\n\nRe: SPH pop up shop is open through May 15\n\nLink: https://www.promoplace.com/ohsu-psu-soph-company\nIf you want to be on a group order, email me with screenshot(s) of what you want with every option selected. By Monday May 5th class time."
   },
   {
     "objectID": "lessons/11_Numeric_Problems/11_Numeric_problems.html#treat-predictor-as-continuous-then-check-linearity-assumption",
@@ -8909,5 +8909,103 @@
     "title": "Lab 4",
     "section": "2 Lab activities",
     "text": "2 Lab activities\n\n\n\n\n\n\nNote\n\n\n\nI have left it up to you to load the needed packages for this lab.\n\n\n\n2.1 Restate research question\nIn this study, we will investigate the association between food insecurity and ________.\n\n\n2.2 Build your model\n\n\n2.3 Assess your model fit\n\n\n2.4 Perform model diagnostics"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit_key_info.html",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit_key_info.html",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "HW 2\n\nFor the model with LOC, make sure you are creating the indicator for LOC categories! \\[\\text{logit} \\left(\\pi(LOC)\\right)=\\beta_0 + \\beta_1 \\times I(LOC =\\text{``Deep Stupor\"}) + \\beta_2 \\times I(LOC =\\text{``Coma\"})\\]\n\nNicky will be out of office from 5/8-5/12\n\nWill not be responding to emails\n\nR conference in Portland!! on 6/20-6/21 https://cascadiarconf.com/\n\n$30 + fee for in-person: includes workshops!\n$10 + fee for virtual (only on 6/21)\nIf you want to attend but money is an issue, please talk to me!\n\nThere are resources at SPH that we can apply for\n\n\nMore events at SPH through the Student Success Center \n\n\n\n\nThe Academic Success Center is hiring peer tutors for AY ’25-’26!\n\nSubject areas of interest include\n\nPharmacy\nBiostatistics\nNCLEX prep\nMath (dosage calculations, etc.)\nDentistry (esp. dental anatomy)\n\n\nTutoring is a great way to solidify your own content knowledge, get teaching-adjacent experience for your resume, and give back to the student community. Apply in OHSU Jobs or email Morgan Gross (grossmo@ohsu.edu), ASC Tutoring Program Coordinator, for more info!\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit_key_info.html#announcements",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit_key_info.html#announcements",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "HW 2\n\nFor the model with LOC, make sure you are creating the indicator for LOC categories! \\[\\text{logit} \\left(\\pi(LOC)\\right)=\\beta_0 + \\beta_1 \\times I(LOC =\\text{``Deep Stupor\"}) + \\beta_2 \\times I(LOC =\\text{``Coma\"})\\]\n\nNicky will be out of office from 5/8-5/12\n\nWill not be responding to emails\n\nR conference in Portland!! on 6/20-6/21 https://cascadiarconf.com/\n\n$30 + fee for in-person: includes workshops!\n$10 + fee for virtual (only on 6/21)\nIf you want to attend but money is an issue, please talk to me!\n\nThere are resources at SPH that we can apply for\n\n\nMore events at SPH through the Student Success Center \n\n\n\n\nThe Academic Success Center is hiring peer tutors for AY ’25-’26!\n\nSubject areas of interest include\n\nPharmacy\nBiostatistics\nNCLEX prep\nMath (dosage calculations, etc.)\nDentistry (esp. dental anatomy)\n\n\nTutoring is a great way to solidify your own content knowledge, get teaching-adjacent experience for your resume, and give back to the student community. Apply in OHSU Jobs or email Morgan Gross (grossmo@ohsu.edu), ASC Tutoring Program Coordinator, for more info!\n\nAdri Jones and Student Success Center will be hosting more Community & Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:\n\nMay 21\nJune 4\nJune 18\nIYKYK = “if you known you know”"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit_key_info.html#key-dates",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit_key_info.html#key-dates",
+    "title": "Key Info and Announcements",
+    "section": "Key Dates",
+    "text": "Key Dates\n\nLab 3 due 5/9\nQuiz 2 open on 5/14\nHomework 3 due 5/16"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit_key_info.html#last-class",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit_key_info.html#last-class",
+    "title": "Key Info and Announcements",
+    "section": "Last class",
+    "text": "Last class\n\nWe went over Numeric problems: zero cell count, complete separation, and multicollinearity\nSome of the ways to address these will be helpful in your labs!!"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit_muddy_points.html#muddy-points-from-spring-2024",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit_muddy_points.html#muddy-points-from-spring-2024",
+    "title": "Muddy Points",
+    "section": "Muddy Points from Spring 2024",
+    "text": "Muddy Points from Spring 2024"
+  },
+  {
+    "objectID": "lessons/11_Numeric_Problems/11_Numeric_problems.html#firth-logistic-regression",
+    "href": "lessons/11_Numeric_Problems/11_Numeric_problems.html#firth-logistic-regression",
+    "title": "Lesson 11: Numerical Problems",
+    "section": "Firth logistic regression",
+    "text": "Firth logistic regression\n\nlibrary(logistf)\nm1_f = logistf(outcome ~ x1 + x2, data = ex3, family=binomial)\nsummary(m1_f) # Cannot use tidy on this :(\n\nlogistf(formula = outcome ~ x1 + x2, data = ex3, family = binomial)\n\nModel fitted by Penalized ML\nCoefficients:\n                  coef  se(coef)   lower 0.95 upper 0.95     Chisq          p\n(Intercept) -2.9748898 1.7244237 -15.47721665 -0.1208883 4.2179522 0.03999841\nx1           0.4908484 0.2745754   0.05268216  2.1275832 5.0225056 0.02501994\nx2           0.4313732 0.4988396  -0.65793078  4.4758930 0.7807099 0.37692411\n            method\n(Intercept)      2\nx1               2\nx2               2\n\nMethod: 1-Wald, 2-Profile penalized log-likelihood, 3-None\n\nLikelihood ratio test=5.505687 on 2 df, p=0.06374636, n=8\nWald test = 3.624899 on 2 df, p = 0.1632538"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#two-classes-ago-glow-study-with-interactions",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#two-classes-ago-glow-study-with-interactions",
+    "title": "Lesson 12: Assessing Model Fit",
+    "section": "Two classes ago: GLOW Study with interactions",
+    "text": "Two classes ago: GLOW Study with interactions\n\nOutcome variable: any fracture in the first year of follow up (FRACTURE: 0 or 1)\nRisk factor/variable of interest: history of prior fracture (PRIORFRAC: 0 or 1)\nPotential confounder or effect modifier: age (AGE, a continuous variable)\nFitted model with interactions: \\[\\begin{aligned} \\text{logit}\\left(\\widehat\\pi(\\mathbf{X})\\right) & = \\widehat\\beta_0 + \\widehat\\beta_1  \\cdot I(\\text{PF}= \\text{``Yes\"}) + \\widehat\\beta_2  \\cdot Age + \\widehat\\beta_3  \\cdot I(\\text{PF} = \\text{``Yes\"}) \\cdot Age \\\\  \n\\text{logit}\\left(\\widehat\\pi(\\mathbf{X})\\right) & = -1.376 + 1.002  \\cdot I(\\text{PF}=\\text{``Yes\"}) + 0.063  \\cdot Age - 0.057  \\cdot I(\\text{PF}=\\text{``Yes\"}) \\cdot Age\n\\end{aligned}\\]\n\n \n\nLet’s say we are considering this model for our final model\nToday: determine the overall fit of this model"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#two-classes-ago-reporting-results-of-glow-study-with-interactions",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#two-classes-ago-reporting-results-of-glow-study-with-interactions",
+    "title": "Lesson 12: Assessing Model Fit",
+    "section": "Two classes ago: Reporting results of GLOW Study with interactions",
+    "text": "Two classes ago: Reporting results of GLOW Study with interactions\n\nRemember our main covariate is prior fracture, so we want to focuse on how age changes the relationship between prior fracture and a new fracture!\n\n\n\nFor individuals 69 years old, the estimated odds of a new fracture for individuals with prior fracture is 2.72 times the estimated odds of a new fracture for individuals with no prior fracture (95% CI: 1.70, 4.35). As seen in Figure 1 (a), the odds ratio of a new fracture when comparing prior fracture status decreases with age, indicating that the effect of prior fractures on new fractures decreases as individuals get older. In Figure 1 (b), it is evident that for both prior fracture statuses, the predict probability of a new fracture increases as age increases. However, the predicted probability of new fracture for those without a prior fracture increases at a higher rate than that of individuals with a prior fracture. Thus, the predicted probabilities of a new fracture converge at age [insert age here].\n\n\n\n\n\n\n\n\n\n\n\n\n(a) Odds ratio of fracture outcome comparing prior fracture to no prior fracture\n\n\n\n\n\n\n\n\n\n\n\n(b) Predicted probability of fracture\n\n\n\n\n\n\n\nFigure 1: Plots of odds ratio and predicted probability from fitted interaction model"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#some-measurements-for-our-final-models",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#some-measurements-for-our-final-models",
+    "title": "Lesson 12: Assessing Model Fit",
+    "section": "Some measurements for our final model(s)",
+    "text": "Some measurements for our final model(s)\n\nTo assess the fit of the model, it is good to have a mixture of measurements\n\n\n\n\n\nIf we want to measure the absolute fit: not comparing to any models, but determining if the model fits the data well\n\n\n\nPearson residual statistic\n\nNot the best measurement\nDoes not work if continuous variables in model\n\nHosmer-Lemeshow goodness-of-fit statistic\n\nNeed to adjust when sample size is large\n\nAUC-ROC (area under the curve of the receiver operating characteristic)\n\n\n\n\n\n\nIf we want comparable measures of fit: if we want to compare candidate models that are not nested\n\n\n\nAUC-ROC\nAIC/BIC"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#large-sample-size-issue-in-h-l-test",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#large-sample-size-issue-in-h-l-test",
+    "title": "Lesson 12: Assessing Model Fit",
+    "section": "Large sample size issue in H-L test",
+    "text": "Large sample size issue in H-L test\n\nWhen the sample size is really big (&gt; 1000), it is much more likely to find the H-L reject the model fit (even when the expected vs. observed in each decile categories looks pretty similar)\n\n \n\nThis is due to “too much” power in hypothesis testing.\n\nPaul et al. (2012) for samples sizes from 1000 to 25,000, the number of groups g should be equal to \\[g=\\max{\\left(10,\\min{\\left\\{\\frac{n_1}{2},\\ \\frac{n-n_1}{2},\\ 2+8\\left(\\frac{n}{1000}\\right)^2\\right\\}}\\right)}\\]\n\n\n \n\nFor example, if one has a sample with \\(n=10, 000\\) (sample size) and \\(n_1=1,000\\) (number of events) then \\(g=500\\) groups are suggested\nFor n &gt; 25000, other methods, such as partitioning data into a developmental data set (with smaller n) and a validation set"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#assessing-model-fit-overview",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#assessing-model-fit-overview",
+    "title": "Lesson 12: Assessing Model Fit",
+    "section": "Assessing model fit: overview",
+    "text": "Assessing model fit: overview\n\nOnce a potential final model has been determined, we need to assess the fit of the model\n\n \n\nVariable selection is no longer our focus at this stage\n\nWe want to find answer to whether the model fits the data adequately\n\n\n \n\nAssessing the Goodness of Fit or Assessing model fit\n\nAssess how well our fitted logistic regression model predicts/estimates the observed outcomes\nComparison: fitted/estimated outcome vs. observed outcome"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#final-notes-on-pearson-and-hl-tests",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#final-notes-on-pearson-and-hl-tests",
+    "title": "Lesson 12: Assessing Model Fit",
+    "section": "Final Notes on Pearson and HL tests",
+    "text": "Final Notes on Pearson and HL tests\n\nThey should not be used for variable selection\n\nThe likelihood ratio tests for significance of coefficients are much more powerful and appropriate (when nested)\n\n\n \n\nThey are not for model comparison\n\nOne should not use the p-value from goodness of fit tests of different models to decide which model is better than the other\nSomething like AUC-ROC, AIC, or BIC can be used"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#reference-slide",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#reference-slide",
+    "title": "Lesson 12: Assessing Model Fit",
+    "section": "Reference slide",
+    "text": "Reference slide\n\nWe went over model fit statistics a little in BSTA 512/612 in Lesson 13\n\nIncluded AIC and BIC"
+  },
+  {
+    "objectID": "lessons/12_Assessing_fit/12_Assessing_fit.html#example-of-a-table-for-model-fit-statistics",
+    "href": "lessons/12_Assessing_fit/12_Assessing_fit.html#example-of-a-table-for-model-fit-statistics",
+    "title": "Lesson 12: Assessing Model Fit",
+    "section": "Example of a table for model fit statistics",
+    "text": "Example of a table for model fit statistics\n\nmodel1 = glow %&gt;% glm(formula = fracture ~ age_c + height, family = binomial)\nmodel2 = glow %&gt;% glm(formula = fracture ~ priorfrac + armassist + smoke, family = binomial)\nmodel3 = glow %&gt;% glm(formula = fracture ~ priorfrac + age_c + priorfrac*age_c, family = binomial)\npredicted1 = predict(model1, glow, type=\"response\")\npredicted2 = predict(model2, glow, type=\"response\")\npredicted3 = predict(model3, glow, type=\"response\")\n\nfit_stats = data.frame(Model = c(\"Model 1: age + height\", \"Model 2: prior fracture + arm assist + smoking status\", \"Model 3: interaction with prior fraction + age\"), \n                       AUC_ROC = c(round(auc(glow$fracture, predicted1),4), round(auc(glow$fracture, predicted2),4), round(auc(glow$fracture, predicted3),4)), \n                       AIC = c(AIC(model1), AIC(model2), AIC(model3)), \n                       BIC = c(BIC(model1), BIC(model2), BIC(model3)))\n\ncolnames(fit_stats) = c(\"Model\", \"AUC-ROC\", \"AIC\", \"BIC\")\n\nfit_stats %&gt;% gt() %&gt;% tab_options(table.font.size = 40) %&gt;% fmt_number(decimals = 3)\n\n\n\n\n\n\n\nModel\nAUC-ROC\nAIC\nBIC\n\n\n\n\nModel 1: age + height\n0.642\n542.036\n554.680\n\n\nModel 2: prior fracture + arm assist + smoking status\n0.648\n540.409\n557.267\n\n\nModel 3: interaction with prior fraction + age\n0.682\n531.272\n548.130"
   }
 ]

@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Nicky Wakim">
-  <meta name="dcterms.date" content="2024-05-13">
+  <meta name="dcterms.date" content="2025-05-07">
   <title>Categorical Data Analysis – Lesson 12: Assessing Model Fit</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -205,7 +205,7 @@ Nicky Wakim
 </div>
 </div>
 
-  <p class="date">2024-05-13</p>
+  <p class="date">2025-05-07</p>
 </section>
 <section>
 <section id="learning-objectives" class="title-slide slide level1 center">
@@ -224,23 +224,24 @@ Nicky Wakim
 </style>
 </div>
 </section>
-<section id="last-class-glow-study-with-interactions" class="slide level2">
-<h2>Last Class: GLOW Study with interactions</h2>
+<section id="two-classes-ago-glow-study-with-interactions" class="slide level2">
+<h2>Two classes ago: GLOW Study with interactions</h2>
 <ul>
 <li><p><strong>Outcome variable:</strong> any fracture in the first year of follow up (FRACTURE: 0 or 1)</p></li>
 <li><p><strong>Risk factor/variable of interest:</strong> history of prior fracture (PRIORFRAC: 0 or 1)</p></li>
 <li><p><strong>Potential confounder or effect modifier:</strong> age (AGE, a continuous variable)</p></li>
-<li><p>Fitted model with interactions: <span class="math display">\[\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = \widehat\beta_0 &amp;+ &amp;\widehat\beta_1\cdot I(\text{PF}) &amp; + &amp;\widehat\beta_2\cdot Age&amp; + &amp;\widehat\beta_3 \cdot I(\text{PF}) \cdot Age \\  
-\text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = -1.376 &amp;+ &amp;1.002\cdot I(\text{PF})&amp; + &amp;0.063\cdot Age&amp; -&amp;0.057 \cdot I(\text{PF}) \cdot Age
+<li><p>Fitted model with interactions: <span class="math display">\[\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age \\  
+\text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = -1.376 + 1.002  \cdot I(\text{PF}=\text{``Yes"}) + 0.063  \cdot Age - 0.057  \cdot I(\text{PF}=\text{``Yes"}) \cdot Age
 \end{aligned}\]</span></p></li>
 </ul>
 <p>&nbsp;</p>
 <ul>
+<li>Let’s say we are considering this model for our <strong>final model</strong></li>
 <li>Today: determine the overall fit of this model</li>
 </ul>
 </section>
-<section id="last-class-reporting-results-of-glow-study-with-interactions" class="slide level2">
-<h2>Last Class: Reporting results of GLOW Study with interactions</h2>
+<section id="two-classes-ago-reporting-results-of-glow-study-with-interactions" class="slide level2">
+<h2>Two classes ago: Reporting results of GLOW Study with interactions</h2>
 <ul>
 <li>Remember our main covariate is prior fracture, so we want to focuse on how age changes the relationship between prior fracture and a new fracture!</li>
 </ul>
@@ -285,8 +286,8 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 </div>
 </div></div>
 </section>
-<section id="overview-12" class="slide level2">
-<h2>Overview (1/2)</h2>
+<section id="assessing-model-fit-overview" class="slide level2">
+<h2>Assessing model fit: overview</h2>
 <ul>
 <li>Once a potential final model has been determined, we need to assess the fit of the model</li>
 </ul>
@@ -306,47 +307,45 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 </ul></li>
 </ul>
 </section>
-<section id="some-good-measurements-for-our-final-models" class="slide level2">
-<h2>Some good measurements for our final model(s)</h2>
-<ul>
-<li>Pearson residual statistic</li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li>Hosmer-Lemeshaw goodness-of-fit statistic</li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li>AUC-ROC (area under the curve of the receiver operating characteristic)</li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li>AIC/BIC</li>
-</ul>
-<p>&nbsp;</p>
-</section>
-<section id="overview-22" class="slide level2">
-<h2>Overview (2/2)</h2>
+<section id="some-measurements-for-our-final-models" class="slide level2">
+<h2>Some measurements for our final model(s)</h2>
 <ul>
 <li>To assess the fit of the model, it is good to have a mixture of measurements</li>
 </ul>
-<p>&nbsp;</p>
+<div class="columns">
+<div class="column">
+<div class="proposition">
+<div class="prop-title">
+<p>If we want to <strong>measure the absolute fit</strong>: not comparing to any models, but determining if the model fits the data well</p>
+</div>
+<div class="prop-cont">
 <ul>
-<li><p>We want to <strong>measure the absolute fit</strong>: not comparing to any models, but determining if the model fits the data well</p>
+<li>Pearson residual statistic
 <ul>
-<li>Pearson residual statistic</li>
-<li>Hosmer-Lemeshaw goodness-of-fit statistic</li>
-<li>AUC-ROC (kind of, often do not use a hypothesis test but you can!)</li>
+<li>Not the best measurement</li>
+<li>Does not work if continuous variables in model</li>
 </ul></li>
-</ul>
-<p>&nbsp;</p>
+<li>Hosmer-Lemeshow goodness-of-fit statistic
 <ul>
-<li><p>We want <strong>comparable measures of fit</strong>: if we have candidate models that are not nested</p>
+<li>Need to adjust when sample size is large</li>
+</ul></li>
+<li>AUC-ROC (area under the curve of the receiver operating characteristic)</li>
+</ul>
+</div>
+</div>
+</div><div class="column">
+<div class="definition">
+<div class="def-title">
+<p>If we want <strong>comparable measures of fit</strong>: if we want to compare candidate models that are not nested</p>
+</div>
+<div class="def-cont">
 <ul>
 <li>AUC-ROC</li>
 <li>AIC/BIC</li>
-</ul></li>
 </ul>
+</div>
+</div>
+</div></div>
 </section>
 <section id="poll-everywhere-question-1" class="slide level2">
 <h2>Poll Everywhere Question 1</h2>
@@ -356,19 +355,21 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 <ul>
 <li><p>The model fits the data well if</p>
 <ul>
-<li><p>Summary measures of the distance between the predicted/estimated/fitted and observed Y are small</p>
+<li><span style="color:#5B9BD5; font-weight: bold;">Summary measurements of model fit</span> tell us good fit
 <ul>
-<li>Today’s lecture!!</li>
+<li><p>Aka: Summary measures of the distance between the predicted/estimated/fitted and observed Y are small</p></li>
+<li><p>Today’s lecture!!</p></li>
 </ul></li>
-<li><p>The contribution of each pair (predicted and observed) to these summary measures is unsystematic and is small relative to the error structure of the model</p>
+<li>No major issues in <span style="color:#70AD47; font-weight: bold;">model diagnostics</span>, observations fit into model and our assumptions
 <ul>
-<li>Model Diagnostics that will be covered in another lecture!</li>
+<li><p>The contribution of each pair (predicted and observed) to these summary measures is unsystematic and is small relative to the error structure of the model</p></li>
+<li><p>Model Diagnostics that will be covered in another lecture!</p></li>
 </ul></li>
 </ul></li>
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li><p>Need both components</p>
+<li><p><strong>Need to examine both components</strong></p>
 <ul>
 <li>It is possible to see a “good” summary measure of the distance between predicted and observed Y with some substantial deviation from fit for a few subjects</li>
 </ul></li>
@@ -383,17 +384,17 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 <ul>
 <li><p>What do we need to calculate them?</p>
 <ul>
-<li><p>Need to define what the fitted outcome is</p></li>
+<li><p>Need to calculate the fitted outcome</p></li>
 <li><p>Need to calculate how close the fitted outcome is to the observed outcome</p></li>
 <li><p>Summarize across all observations (or individuals’ data)</p></li>
 </ul></li>
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li><p>Two tests of goodness-of-fit</p>
+<li><p>Two <strong>tests</strong> of goodness-of-fit</p>
 <ul>
 <li>Pearson residual statistic</li>
-<li>Hosmer-Lemeshaw goodness-of-fit statistic</li>
+<li>Hosmer-Lemeshow goodness-of-fit statistic</li>
 </ul></li>
 </ul>
 </section>
@@ -402,7 +403,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 <ul>
 <li><p>In logistic regression model, we estimate <span class="math inline">\(\pi(\mathbf{X}) = P(Y=1|\mathbf{X})\)</span></p>
 <ul>
-<li>Predicted value, <span class="math inline">\(\widehat\pi(\mathbf{X})\)</span>, is between 0 and 1 for each subject</li>
+<li>Predicted probability, <span class="math inline">\(\widehat\pi(\mathbf{X})\)</span>, is between 0 and 1 for each subject</li>
 </ul></li>
 <li><p>However, we always observe <span class="math inline">\(Y=1\)</span> or <span class="math inline">\(Y=0\)</span></p>
 <ul>
@@ -494,7 +495,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 <ul>
 <li><p>I do not see this as the main way to determine goodness of fit… for a binary outcome!</p>
 <ul>
-<li>Often because of the bigger issues with it…</li>
+<li>Often because of the bigger issues with it… (next slide)</li>
 </ul></li>
 </ul>
 </section>
@@ -640,7 +641,7 @@ X-squared = 6.778, df = 8, p-value = 0.5608</code></pre>
 <section id="glow-study-hosmer-lemeshow-test-1" class="slide level2">
 <h2>GLOW Study: Hosmer-Lemeshow test</h2>
 <ul>
-<li>Conclusion: The p-value is 0.5608, so we fail to reject the null hypothesis that the model fits the data well. Thus, the preliminary final model for the GLOW dataset fits the data well</li>
+<li>Conclusion: The p-value is 0.5608, so we <em>fail to reject</em> the null hypothesis that the model fits the data well. Thus, for the GLOW study data, the model with an interaction between age and prior fracture fits the data well</li>
 </ul>
 <p>&nbsp;</p>
 <ul>
@@ -650,12 +651,12 @@ X-squared = 6.778, df = 8, p-value = 0.5608</code></pre>
 <ul>
 <li><p>R may give results for the HL test even if it is not appropriate to use it!</p>
 <ul>
-<li>If number of covariate patterns ≤ 6, do not use HL test</li>
+<li><strong>If number of covariate patterns ≤ 6, do not use HL test</strong></li>
 </ul></li>
 </ul>
 </section>
-<section id="big-data-issue-in-goodness-of-fit-test" class="slide level2">
-<h2>Big Data Issue in Goodness-of-fit Test</h2>
+<section id="large-sample-size-issue-in-h-l-test" class="slide level2">
+<h2>Large sample size issue in H-L test</h2>
 <ul>
 <li>When the sample size is really big (&gt; 1000), it is much more likely to find the H-L reject the model fit (even when the expected vs.&nbsp;observed in each decile categories looks pretty similar)</li>
 </ul>
@@ -672,8 +673,8 @@ X-squared = 6.778, df = 8, p-value = 0.5608</code></pre>
 <li><p>For n &gt; 25000, other methods, such as partitioning data into a developmental data set (with smaller n) and a validation set</p></li>
 </ul>
 </section>
-<section id="final-notes-on-goodness-of-fit-test" class="slide level2">
-<h2>Final Notes on Goodness-of-fit Test</h2>
+<section id="final-notes-on-pearson-and-hl-tests" class="slide level2">
+<h2>Final Notes on Pearson and HL tests</h2>
 <ul>
 <li><p>They should not be used for variable selection</p>
 <ul>
@@ -830,7 +831,7 @@ X-squared = 6.778, df = 8, p-value = 0.5608</code></pre>
 <ul>
 <li><p>Randomly pick one individual from fractured group and one from non-fractured outcome group</p>
 <ul>
-<li>Based on their age, height, prior fracture, and all other covariates, we will correctly predict which is from fractured group</li>
+<li>Based on their age and prior fracture, we will correctly predict which is from fractured group</li>
 </ul></li>
 </ul>
 <p>&nbsp;</p>
@@ -908,7 +909,7 @@ X-squared = 6.778, df = 8, p-value = 0.5608</code></pre>
 </tr>
 <tr class="even">
 <td>Bayesian information criterion (BIC)</td>
-<td><span class="math inline">\(AIC = -2 \cdot \text{log-likelihood} + q\text{log}(n)\)</span></td>
+<td><span class="math inline">\(BIC = -2 \cdot \text{log-likelihood} + q\text{log}(n)\)</span></td>
 <td><code>BIC(model_name)</code></td>
 </tr>
 </tbody>
@@ -917,7 +918,7 @@ X-squared = 6.778, df = 8, p-value = 0.5608</code></pre>
 <ul>
 <li><p>Where q is the number of parameters in the model and n is the sample size</p></li>
 <li><p>Both AIC and BIC can only be used to compare models fitting the same data set</p></li>
-<li><p>In comparing two models, the model with smaller AIC and/or BIC is preferred</p>
+<li><p>In comparing two models, the model with <strong>smaller AIC and/or BIC is preferred</strong></p>
 <ul>
 <li>When the difference in AIC between two models exceeds 3, the difference is viewed as “meaningful”</li>
 </ul></li>
@@ -937,6 +938,510 @@ X-squared = 6.778, df = 8, p-value = 0.5608</code></pre>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">BIC</span>(glow_m3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 548.13</code></pre>
+</div>
+</div>
+</section>
+<section id="example-of-a-table-for-model-fit-statistics" class="slide level2">
+<h2>Example of a table for model fit statistics</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>model1 <span class="ot">=</span> glow <span class="sc">%&gt;%</span> <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> age_c <span class="sc">+</span> height, <span class="at">family =</span> binomial)</span>
+<span id="cb8-2"><a></a>model2 <span class="ot">=</span> glow <span class="sc">%&gt;%</span> <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> armassist <span class="sc">+</span> smoke, <span class="at">family =</span> binomial)</span>
+<span id="cb8-3"><a></a>model3 <span class="ot">=</span> glow <span class="sc">%&gt;%</span> <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> priorfrac<span class="sc">*</span>age_c, <span class="at">family =</span> binomial)</span>
+<span id="cb8-4"><a></a>predicted1 <span class="ot">=</span> <span class="fu">predict</span>(model1, glow, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb8-5"><a></a>predicted2 <span class="ot">=</span> <span class="fu">predict</span>(model2, glow, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb8-6"><a></a>predicted3 <span class="ot">=</span> <span class="fu">predict</span>(model3, glow, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb8-7"><a></a></span>
+<span id="cb8-8"><a></a>fit_stats <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Model 1: age + height"</span>, <span class="st">"Model 2: prior fracture + arm assist + smoking status"</span>, <span class="st">"Model 3: interaction with prior fraction + age"</span>), </span>
+<span id="cb8-9"><a></a>                       <span class="at">AUC_ROC =</span> <span class="fu">c</span>(<span class="fu">round</span>(<span class="fu">auc</span>(glow<span class="sc">$</span>fracture, predicted1),<span class="dv">4</span>), <span class="fu">round</span>(<span class="fu">auc</span>(glow<span class="sc">$</span>fracture, predicted2),<span class="dv">4</span>), <span class="fu">round</span>(<span class="fu">auc</span>(glow<span class="sc">$</span>fracture, predicted3),<span class="dv">4</span>)), </span>
+<span id="cb8-10"><a></a>                       <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">AIC</span>(model1), <span class="fu">AIC</span>(model2), <span class="fu">AIC</span>(model3)), </span>
+<span id="cb8-11"><a></a>                       <span class="at">BIC =</span> <span class="fu">c</span>(<span class="fu">BIC</span>(model1), <span class="fu">BIC</span>(model2), <span class="fu">BIC</span>(model3)))</span>
+<span id="cb8-12"><a></a></span>
+<span id="cb8-13"><a></a><span class="fu">colnames</span>(fit_stats) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Model"</span>, <span class="st">"AUC-ROC"</span>, <span class="st">"AIC"</span>, <span class="st">"BIC"</span>)</span>
+<span id="cb8-14"><a></a></span>
+<span id="cb8-15"><a></a>fit_stats <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="dyuunrmtxg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dyuunrmtxg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dyuunrmtxg thead, #dyuunrmtxg tbody, #dyuunrmtxg tfoot, #dyuunrmtxg tr, #dyuunrmtxg td, #dyuunrmtxg th {
+  border-style: none;
+}
+
+#dyuunrmtxg p {
+  margin: 0;
+  padding: 0;
+}
+
+#dyuunrmtxg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 40px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dyuunrmtxg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dyuunrmtxg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dyuunrmtxg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dyuunrmtxg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dyuunrmtxg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dyuunrmtxg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dyuunrmtxg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dyuunrmtxg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dyuunrmtxg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dyuunrmtxg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dyuunrmtxg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dyuunrmtxg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dyuunrmtxg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dyuunrmtxg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dyuunrmtxg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dyuunrmtxg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dyuunrmtxg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dyuunrmtxg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dyuunrmtxg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dyuunrmtxg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dyuunrmtxg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dyuunrmtxg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dyuunrmtxg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dyuunrmtxg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dyuunrmtxg .gt_left {
+  text-align: left;
+}
+
+#dyuunrmtxg .gt_center {
+  text-align: center;
+}
+
+#dyuunrmtxg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dyuunrmtxg .gt_font_normal {
+  font-weight: normal;
+}
+
+#dyuunrmtxg .gt_font_bold {
+  font-weight: bold;
+}
+
+#dyuunrmtxg .gt_font_italic {
+  font-style: italic;
+}
+
+#dyuunrmtxg .gt_super {
+  font-size: 65%;
+}
+
+#dyuunrmtxg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dyuunrmtxg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dyuunrmtxg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dyuunrmtxg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dyuunrmtxg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dyuunrmtxg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dyuunrmtxg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#dyuunrmtxg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dyuunrmtxg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model</th>
+<th id="AUC-ROC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AUC-ROC</th>
+<th id="AIC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AIC</th>
+<th id="BIC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">BIC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Model 1: age + height</td>
+<td class="gt_row gt_right" headers="AUC-ROC">0.642</td>
+<td class="gt_row gt_right" headers="AIC">542.036</td>
+<td class="gt_row gt_right" headers="BIC">554.680</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Model">Model 2: prior fracture + arm assist + smoking status</td>
+<td class="gt_row gt_right" headers="AUC-ROC">0.648</td>
+<td class="gt_row gt_right" headers="AIC">540.409</td>
+<td class="gt_row gt_right" headers="BIC">557.267</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Model 3: interaction with prior fraction + age</td>
+<td class="gt_row gt_right" headers="AUC-ROC">0.682</td>
+<td class="gt_row gt_right" headers="AIC">531.272</td>
+<td class="gt_row gt_right" headers="BIC">548.130</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 </section></section>
@@ -1026,6 +1531,15 @@ X-squared = 6.778, df = 8, p-value = 0.5608</code></pre>
 <li>AIC: 531.27</li>
 <li>BIC: 548.13</li>
 </ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="reference-slide" class="slide level2">
+<h2>Reference slide</h2>
+<ul>
+<li>We went over model fit statistics a little in BSTA 512/612 in <a href="https://nwakim.github.io/BSTA_512_W25/lessons/13_Model_selection/13_Model_selection.html?q=aic#/learning-objectives-3">Lesson 13</a>
+<ul>
+<li>Included AIC and BIC</li>
 </ul></li>
 </ul>
 
