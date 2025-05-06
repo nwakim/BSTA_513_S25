@@ -2,7 +2,6 @@
 title: "Lab 4"
 author: "Your name here!!!"
 subtitle: "BSTA 513/613"
-description: "Due: May 30, 2024 at 11pm"
 date-modified: "today"
 categories: [""]
 format: 
@@ -18,10 +17,6 @@ editor_options:
 execute:
   freeze: auto  # re-render only when source changes
 ---
-
-::: callout-note
-This is the required work for Lab 3. I am working on guided instructions on incorporating the *optional* missing data section of the Lab.
-:::
 
 ```{r}
 #| message: false
@@ -43,10 +38,6 @@ This is your **editing** file. **Please do not remove anything from this editing
 ### Purpose
 
 The purpose of this lab is to fit a multiple logistic regression model and practice how we would interpret our results for this study.
-
-### Grading
-
-**This lab is graded out of 12 points.** The TAs will go through and grade your lab. They will make sure each section is complete and will follow the rubric below. I have instructed them that completion and clear effort is all that is needed to receive 100%. Nicky will go through the labs to give you feedback.
 
 
 ## Lab activities

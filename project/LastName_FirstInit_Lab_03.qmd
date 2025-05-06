@@ -18,10 +18,6 @@ execute:
   freeze: auto  # re-render only when source changes
 ---
 
-::: callout-note
-This is the required work for Lab 3. I am working on guided instructions on incorporating the *optional* missing data section of the Lab.
-:::
-
 ```{r}
 #| message: false
 #| echo: false

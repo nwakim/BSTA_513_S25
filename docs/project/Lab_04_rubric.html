@@ -150,11 +150,11 @@ ul.task-list li input[type="checkbox"] {
 <em>Each row is scored from 0–3 points based on the criteria.</em></p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 25%">
+<col style="width: 20%">
+<col style="width: 20%">
 <col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -168,38 +168,31 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><strong>Restate research question</strong></td>
-<td>Research question is clearly and correctly restated using the specified format</td>
-<td>Research question is mostly clear, but minor issues with clarity or format</td>
+<td>Research question is clearly and correctly restated using the provided format</td>
+<td>Research question is mostly clear but contains minor wording or format issues</td>
 <td>Research question is vague or partially incomplete</td>
-<td>Research question is missing or not understandable</td>
+<td>Research question is missing or unclear</td>
 </tr>
 <tr class="even">
-<td><strong>Fit a multiple logistic regression model</strong></td>
-<td>Correctly fits a main effects model with 5 covariates; code runs without error</td>
-<td>Fits model with minor issues (e.g., &lt;5 covariates, unclear variable selection)</td>
-<td>Attempts model but contains major coding or logic errors</td>
-<td>No model fit attempted</td>
+<td><strong>Build your model (6 points)</strong></td>
+<td>6 points: Clearly builds model using either LASSO or purposeful selection with appropriate justification and code</td>
+<td>4 points: Model is mostly correct but lacks clarity, explanation, or includes minor coding issues</td>
+<td>2 points: Model is attempted but has major conceptual or coding errors</td>
+<td>0 points: No model built or model is not interpretable</td>
 </tr>
 <tr class="odd">
-<td><strong>Present the odds ratio in a table</strong></td>
-<td>Uses <code>tbl_regression()</code> correctly; table is well-formatted and clearly labeled</td>
-<td>Table is mostly correct but has minor issues with formatting or labels</td>
-<td>Table is incomplete or improperly formatted</td>
-<td>No odds ratio table presented</td>
+<td><strong>Assess your model fit</strong></td>
+<td>Includes both Hosmer-Lemeshow test and ROC-AUC, interprets results correctly</td>
+<td>Includes tests but interpretation is shallow or contains minor errors</td>
+<td>Includes only one test or results without interpretation</td>
+<td>No model fit assessment performed</td>
 </tr>
 <tr class="even">
-<td><strong>Present the odds ratio in a forest plot</strong></td>
-<td>Forest plot is correctly constructed, includes all model terms, and highlights the main covariate clearly</td>
-<td>Plot is mostly correct but has formatting issues or unclear labeling</td>
-<td>Forest plot included but missing key elements or incorrect</td>
-<td>No forest plot included</td>
-</tr>
-<tr class="odd">
-<td><strong>Interpret the odds ratio for your main covariate</strong></td>
-<td>Clear, correct interpretation of the main covariate’s odds ratio with 95% CI and list of adjusted covariates</td>
-<td>Interpretation is mostly correct but lacks clarity or key details</td>
-<td>Attempted interpretation but contains errors in meaning or missing CI/adjustment info</td>
-<td>No interpretation provided</td>
+<td><strong>Perform model diagnostics</strong></td>
+<td>Conducts all required diagnostics (residuals, coefficients, leverage), investigates influential points clearly</td>
+<td>Conducts most diagnostics, but with minimal interpretation or analysis</td>
+<td>Performs incomplete or incorrect diagnostics</td>
+<td>No diagnostics performed</td>
 </tr>
 </tbody>
 </table>

@@ -2,7 +2,6 @@
 title: "Lab 4 Instructions"
 author: "Nicky Wakim"
 subtitle: "BSTA 513/613"
-description: "Due: May 30, 2024 at 11pm"
 date-modified: "today"
 categories: [""]
 format: 
@@ -21,7 +20,7 @@ execute:
 ---
 
 ::: callout-caution
-Nicky needs to edit
+Ready to go! (5/6/25)
 :::
 
 ::: callout-note
@@ -50,20 +49,6 @@ The above link will take you to your **editing** file. **Please do not remove an
 
 The purpose of this lab is to fit a multiple logistic regression model and practice how we would interpret our results for this study.
 
-### Grading
-
-**This lab is graded out of 12 points.** The TAs will go through and grade your lab. They will make sure each section is complete and will follow the rubric below. I have instructed them that completion and clear effort is all that is needed to receive 100%. Nicky will go through the labs to give you feedback.
-
-#### Rubric
-
-|             | 4 points                                                                                                                                                                                                        | 3 points                                                                                                                                                                                       | 2 points                                                                                                                                                                                                   | 1 point                                                                                                                                                                                  | 0 points                                                                                                               |
-|------------|------------|------------|------------|------------|------------|
-| Formatting  | Lab submitted on Sakai with `.html` file. Answers are written in complete sentences with no major grammatical nor spelling errors. With little editing, the answer can be incorporated into the project report. | Lab submitted on Sakai with `.html` file. Answers are written in complete sentences with grammatical or spelling errors. With editing, the answer can be incorporated into the project report. | Lab submitted on Sakai with `.html` file. Answers are written in complete sentences with major grammatical or spelling errors. With major editing, the answer can be incorporated into the project report. | Lab submitted on Sakai with `.html` file. Answers are bulletted or do not use complete sentences.                                                                                        | Lab *not* submitted on Sakai with `.html` file.                                                                        |
-| Code/Work   | All tasks are directly followed or answered. This includes all the needed code, in code chunks, with the requested output.                                                                                      | All tasks are directly followed or answered. This includes all the needed code, in code chunks, with the requested output. In a few tasks, the code syntax or output is not quite right.       | Most tasks are directly followed or answered. This includes all the needed code, in code chunks, with the requested output.                                                                                | Some tasks are directly followed or answered.This includes all the needed code, in code chunks, with the requested output. In a few tasks, the code syntax or output is not quite right. | More than a quarter of the tasks are not completed properly.                                                           |
-| Reasoning\* | Answers demonstrate understanding of research context and investigation of the data. Answers are thoughtful and can be easily integrated into the final report.                                                 | Answers demonstrate understanding of research context and investigation of the data. Answers are thoughtful, but lack the clarity needed to easily integrate into the final report.            | Answers demonstrate some understanding of research context and investigation of the data. Answers are fairly thoughtful, but lack connection to the research.                                              | Answers demonstrate some understanding of research context and investigation of the data. Answers seem rushed and with minimal thought.                                                  | Answers lack understanding of research context and investigation of the data. Answers seem rushed and without thought. |
-
-\*Applies to questions with reasoning
-
 ## Lab activities
 
 ::: callout-note
@@ -82,11 +67,11 @@ In this study, we will investigate the association between food insecurity and _
 
 ### Build your model
 
-This lab is very open-ended. You will need to build a model for your outcome. We discussed prediction modeling in Lesson 15. (We covered everything you will need in class even though we did not finish my slides.) We discussed association modeling in BSTA 512/612.
+This lab is very open-ended. You will need to build a model for your outcome. You can focus on (1) prediction modeling and LASSO regression or (2) association modeling and purposeful model selection. We discussed prediction modeling in Lesson 14. We discussed association modeling in [BSTA 512/612](https://nwakim.github.io/BSTA_512_W25/schedule.html), also Lesson 14.
 
-**You may either use LASSO regression OR Purposeful model selection to build a model.** I highly suggest picking the model selection strategy based on your desired learning objective. LASSO will help stretch your R coding and machine learning skills. Purposeful model selection will allow you to cement certain concepts that we learned within 512/612 and 513/613. 
+**You may either use LASSO regression *OR* Purposeful model selection to build a model.** I highly suggest picking the model selection strategy based on your desired learning objective. LASSO will help stretch your R coding and machine learning skills. Purposeful model selection will allow you to cement many concepts that we learned within 512/612 and 513/613. 
 
-I will not be taking you through step-by-step. Please follow my work from Lesson 15 in 513/613 or from [Lab 4](https://nwakim.github.io/W2024_BSTA_512/labs/Lab_04_instructions.html) in 512/612.
+I will not be taking you through step-by-step. Please follow my work from Lesson 14 in 513/613 or from [Lab 4](https://nwakim.github.io/BSTA_512_W25/labs/Lab_04_instructions.html) in 512/612.
 
 ### Assess your model fit
 
