@@ -1,5 +1,5 @@
 ---
-title: "Lab 3 Rubric"
+title: "Lab 4 Rubric"
 format: 
   html:
     page-layout: full

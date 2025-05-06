@@ -8885,7 +8885,7 @@
   {
     "objectID": "project/Lab_04_rubric.html",
     "href": "project/Lab_04_rubric.html",
-    "title": "Lab 3 Rubric",
+    "title": "Lab 4 Rubric",
     "section": "",
     "text": "Total: 15 points\nEach row is scored from 0–3 points based on the criteria.\n\n\n\n\n\n\n\n\n\n\nLab activity\n3 points\n2 points\n1 point\n0 points\n\n\n\n\nRestate research question\nResearch question is clearly and correctly restated using the provided format\nResearch question is mostly clear but contains minor wording or format issues\nResearch question is vague or partially incomplete\nResearch question is missing or unclear\n\n\nBuild your model (6 points)\n6 points: Clearly builds model using either LASSO or purposeful selection with appropriate justification and code\n4 points: Model is mostly correct but lacks clarity, explanation, or includes minor coding issues\n2 points: Model is attempted but has major conceptual or coding errors\n0 points: No model built or model is not interpretable\n\n\nAssess your model fit\nIncludes both Hosmer-Lemeshow test and ROC-AUC, interprets results correctly\nIncludes tests but interpretation is shallow or contains minor errors\nIncludes only one test or results without interpretation\nNo model fit assessment performed\n\n\nPerform model diagnostics\nConducts all required diagnostics (residuals, coefficients, leverage), investigates influential points clearly\nConducts most diagnostics, but with minimal interpretation or analysis\nPerforms incomplete or incorrect diagnostics\nNo diagnostics performed"
   },
