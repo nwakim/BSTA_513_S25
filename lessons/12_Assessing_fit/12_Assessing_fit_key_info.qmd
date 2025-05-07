@@ -10,6 +10,8 @@ editor_options:
 
 ## Announcements
 
+- Monday (5/12) is another required in-person attendance day!! 
+  - Email me if you have extenuating circumstances
 - HW 2
   - For the model with LOC, make sure you are creating the indicator for LOC categories! $$\text{logit} \left(\pi(LOC)\right)=\beta_0 + \beta_1 \times I(LOC =\text{``Deep Stupor"}) + \beta_2 \times I(LOC =\text{``Coma"})$$
 - Nicky will be out of office from 5/8-5/12
@@ -46,6 +48,7 @@ editor_options:
 
 - Lab 3 due 5/9
 - Quiz 2 open on 5/14
+  - Will cover Lessons 6-9
 - Homework 3 due 5/16
 
 ## Last class

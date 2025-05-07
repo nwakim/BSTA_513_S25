@@ -1,9 +1,9 @@
 ---
-title: "Lesson 14: Model Diagnostics"
+title: "Lesson 13: Model Diagnostics"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "05/20/2024"
+date: "05/12/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -12,7 +12,7 @@ format:
     show-slide-number: all
     width: 1955
     height: 1100
-    footer: "Lesson 14: Model Diagnostics"
+    footer: "Lesson 13: Model Diagnostics"
     html-math-method: mathjax
     highlight-style: ayu
 execute:
@@ -42,7 +42,7 @@ theme_set(theme_minimal())
 mean_age = mean(glow500$age) %>% round()
 glow1 = glow500 %>% mutate(age_c = age - mean_age)
 load(here("lessons", "12_Assessing_fit/data", "glow_results.Rda"))
-source(here("lessons", "14_Model_diagnostics", "Logistic_Dx_Functions.R"))
+source(here("lessons", "13_Model_diagnostics", "Logistic_Dx_Functions.R"))
 ```
 
 
@@ -82,16 +82,52 @@ source(here("lessons", "14_Model_diagnostics", "Logistic_Dx_Functions.R"))
 
     -   Assess pre and post model fit
     -   Numerical problems often depend on the final model (which variables and interactions are included)
-    
+
+ 
+
 -   Different numerical problems to look out for
 
     -   Zero cell count
     -   Complete separation
     -   Multicollinearity
-    
-## Today
 
--   We now use model diagnostics to identify any observations that the model does not fit well
+-   **Today:** We now use model diagnostics to identify any **observations** that the model does not fit well
+
+    
+## Assumptions: Linear Regression vs. Logistic Regression
+
+::: columns
+::: column
+::: axiom
+::: axiom-title
+Linear Regression Assumptions
+:::
+::: axiom-cont
+- Linearity of relationship between **$Y$** and covariates
+- Independence of observations
+- Normality of $Y$ given $X$ (residuals)
+- Equality of variance of residuals (homoscedasticity)
+:::
+:::
+:::
+::: column
+
+::: proof1
+::: proof-title
+Logistic Regression Assumptions
+:::
+::: proof-cont
+- Linearity of relationship between **logit of outcome** and covariates
+- Independence of observations
+- Distribution of $Y$ given $X$ follows the prescribed one (binomial in our case)
+:::
+:::
+
+:::
+:::
+
+- Back in [Lesson 5: Simple Logistic Regression](https://nwakim.github.io/BSTA_513_S25/lessons/05_Simple_logistic_reg/05_Simple_logistic_reg.html#/title-slide), we walk through linear regression assumptions that do not hold for logistic regression
+- Because our assumptions for logistic regression are a little different than liner regression, we **need different diagnostic tools** to assess observations that may be outliers or influential points
 
 # Learning Objectives
 
@@ -116,7 +152,7 @@ source(here("lessons", "14_Model_diagnostics", "Logistic_Dx_Functions.R"))
    
 -   When we have **continuous covariates**, the number of covariate patterns will be close to the **number of individuals in the dataset**
 
-## From overall measure to diagnostics
+## From overall fit measure to diagnostic measures
 
 -   Now we need to investigate diagnostics looking at individual data or covariate pattern data
 
@@ -124,13 +160,16 @@ source(here("lessons", "14_Model_diagnostics", "Logistic_Dx_Functions.R"))
 
  
 
--   The key quantities from logistic regression diagnostics are the components of “residual sum-of-squares”
 
-    -   The same idea as in the linear regression
+-   Assessed for **each covariate pattern** $j$ or each individual observation
 
-    -   Assessed for **each covariate pattern** $j$, by computing standardized Pearson residuals and Deviance residuals
-    
-        -   Standardization using $h_j$, the leverage values
+ 
+
+- **Main diagnostic measurements we will look at: **
+  - Standardized Pearson residuals, $\Delta X^2_j$ or $r^2_{sj}$
+  - Standardized Deviance residuals, $\Delta D_j$
+  - Leverage, $h_j$
+  - Change in coefficients, DFBETA or $\Delta \widehat{\beta}_j$
 
 ## Hat Matrix and Leverage Values: Linear regression
 
@@ -156,7 +195,7 @@ source(here("lessons", "14_Model_diagnostics", "Logistic_Dx_Functions.R"))
 
 -   In logistic regression model, the hat matrix is: $$H=V^\frac{1}{2}X\left(X^\prime V\ X\right)^{-1}X^\prime V^\frac{1}{2}$$
 
--   The leverage is $$h_j=m_j\cdot\hat{\pi}\left(\textbf{x}_j\right)\left[1-\hat{\pi}\left(\textbf{x}_j\right)\right]\textbf{x}_j^\prime\left(\textbf{X}^\prime\textbf{VX}\right)^{-1}\textbf{x}_j=v_j\cdot b_j$$
+-   The leverage for covariate pattern $j$ is $$h_j=m_j\cdot\hat{\pi}\left(\textbf{x}_j\right)\left[1-\hat{\pi}\left(\textbf{x}_j\right)\right]\textbf{x}_j^\prime\left(\textbf{X}^\prime\textbf{VX}\right)^{-1}\textbf{x}_j=v_j\cdot b_j$$
 
     -   $b$:    weighted distance of $x_j$ from $\overline{x}$
     -   $v_j$:   model based estimator of the variance of $y_j$
@@ -164,6 +203,7 @@ source(here("lessons", "14_Model_diagnostics", "Logistic_Dx_Functions.R"))
           -   $v_j=m_j\cdot\hat{\pi}\left(\textbf{x}_j\right)\left[1-\hat{\pi}\left(\textbf{x}_j\right)\right]$
 
 -   $h_j$ **reflects the relative influence of each covariate pattern on the model’s fit**
+  - Specifically relating to the distance between $X_j$ and $\overline{X}$
 
 ## Poll Everywhere Question 1
 
@@ -178,11 +218,15 @@ source(here("lessons", "14_Model_diagnostics", "Logistic_Dx_Functions.R"))
         -   Recommendation of Hosmer-Lemeshow textbook
         -   R uses this approach
         -   Identify outliers as group that shares the same covariate values (in the same covariate pattern)
-
+    
+     
+    
     -   **Approach 2**: individual observation approach
 
         -   SAS uses this approach
         -   Identify outliers as individual
+
+ 
 
 -   Why prefer covariate patterns approach?
 
@@ -196,7 +240,7 @@ Consider a covariate pattern with $m_j$ subjects, all did not have event (some $
 
 -   Pearson residual computed by covariate pattern $$r_i=-\sqrt{m_j}\sqrt{\frac{{\hat{\pi}}_j}{(1-{\hat{\pi}}_j)}}$$
 
--   **Difference between aboveresiduals will be large if $m_j$ is large**: usually a problem if less covariate patterns
+-   **Difference between above residuals will be large if $m_j$ is large**: usually a problem if less covariate patterns
 
     -   Residual from covariate pattern will identify poorly fit covariate patterns
 
@@ -220,6 +264,7 @@ Consider a covariate pattern with $m_j$ subjects, all did not have event (some $
 ## Change of Standardized Residuals
 
 -   Change in **standardized Pearson Chi-square statistic** due to deletion of subjects with covariate pattern $x_j$: $$\Delta X_j^2 = r_{sj}^2 = \dfrac{r_j^2}{1-h_j}$$
+  - Aka: Does model fit way better when we delete a covariate pattern group?
 
 -   *Don’t need to know this*: change in **standardized deviance statistic** due to deletion of subjects with covariate pattern $x_j$: $$\Delta D_j = \dfrac{d_j^2}{1-h_j}$$
 
@@ -283,7 +328,7 @@ Consider a covariate pattern with $m_j$ subjects, all did not have event (some $
 
     -   Highly suggest you save this R script for future use!!
 ```{r}
-source(here("lessons", "14_Model_diagnostics", "Logistic_Dx_Functions.R"))
+source(here("lessons", "13_Model_diagnostics", "Logistic_Dx_Functions.R"))
 dx_glow = dx(glow_m3)
 glimpse(dx_glow)
 ```
@@ -301,8 +346,8 @@ colnames(dx_glow)
 For each covariate pattern (which is each row) ...
 
 -   `y`: Number of events
--   `P`: Estimated probability of events
--   `n`: Number of observations
+-   `P`: Estimated probability of events ($\widehat{\pi}$)
+-   `n`: Number of observations ($m_j$)
 -   `yhat`: Estimated number of events 
 -   `Pr`: Pearson residual
 -   `dr`: Deviance
@@ -548,11 +593,12 @@ dx_glow %>% mutate(Cov_patt = 1:nrow(.)) %>%
 -   Do a data quality check
 
     -   Unless you have a very good reason to believe the data are not measured correctly, then we leave it in
+    -   Recall our [slide from Linear Models (BSTA 512/612)](https://nwakim.github.io/BSTA_512_W25/lessons/15_MLR_Diagnostics/15_MLR_Diagnostics.html?q=outlier#/how-do-we-deal-with-influential-points) 
     -   Common to do nothing
     
  
 
--   If only a few covariate pattern does not fit well ($y_j$ differs from $m_j\widehat\pi_j$ ), we are not too worried
+-   If only a few covariate patterns do not fit well ($y_j$ differs from $m_j\widehat\pi_j$ ), we are not too worried
 
     -   We had 15 out of 71 covariate patterns
     
@@ -577,7 +623,7 @@ dx_glow %>% mutate(Cov_patt = 1:nrow(.)) %>%
 
  
 
-**Results:** Our final logistic regression model consisted of the outcome, fracture, and predictors including prior fracture, age, and their interaction. The AUC-ROC was 0.68. We identified 11 covariate patterns with high leverage and 4 with high standardized Pearson residual, standardized deviance, or change in coefficient estimates. No identified observations were omitted. 
+**Results:** Our final logistic regression model consisted of the outcome, fracture, and predictors including prior fracture, age, and their interaction. The AUC-ROC was 0.68. Out of 71 convariate patterns, we identified 11 with high leverage and 4 with high standardized Pearson residual, standardized deviance, or change in coefficient estimates. No identified observations were omitted. 
 
  
 

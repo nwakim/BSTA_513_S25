@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2024-05-20">
+<meta name="description" content="Model Diagnostics and Model Building">
 
-<title>Key Info and Announcements – Categorical Data Analysis</title>
+<title>Week 8 – Categorical Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -39,6 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-62d5ecfa613c5c5644cabfb02a2f4c65.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.0-beta.2/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,35 +70,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -155,12 +129,20 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a>
+  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link" data-scroll-target="#announcements">Announcements</a>
   <ul class="collapse">
-  <li><a href="#recurring" id="toc-recurring" class="nav-link" data-scroll-target="#recurring">Recurring</a></li>
+  <li><a href="#monday-520" id="toc-monday-520" class="nav-link" data-scroll-target="#monday-520">Monday 5/20</a></li>
+  <li><a href="#wednesday-522" id="toc-wednesday-522" class="nav-link" data-scroll-target="#wednesday-522">Wednesday 5/22</a></li>
   </ul></li>
-  <li><a href="#key-dates" id="toc-key-dates" class="nav-link" data-scroll-target="#key-dates">Key Dates</a></li>
-  <li><a href="#last-class" id="toc-last-class" class="nav-link" data-scroll-target="#last-class">Last class</a></li>
+  <li><a href="#class-exit-tickets" id="toc-class-exit-tickets" class="nav-link" data-scroll-target="#class-exit-tickets">Class Exit Tickets</a></li>
+  <li><a href="#muddiest-points-questions" id="toc-muddiest-points-questions" class="nav-link" data-scroll-target="#muddiest-points-questions">Muddiest Points / Questions</a>
+  <ul class="collapse">
+  <li><a href="#how-did-you-determine-the-ages-for-the-r-output-on-slide-24-standardized-deviance-residuals" id="toc-how-did-you-determine-the-ages-for-the-r-output-on-slide-24-standardized-deviance-residuals" class="nav-link" data-scroll-target="#how-did-you-determine-the-ages-for-the-r-output-on-slide-24-standardized-deviance-residuals">1. How did you determine the ages for the R output on slide 24 (standardized deviance residuals)</a></li>
+  <li><a href="#from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods" id="toc-from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods" class="nav-link" data-scroll-target="#from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods">2. From comment on shrinkage vs.&nbsp;regularization vs.&nbsp;penalized methods</a></li>
+  <li><a href="#sign-column-within-vi-output" id="toc-sign-column-within-vi-output" class="nav-link" data-scroll-target="#sign-column-within-vi-output">3. Sign column within <code>vi()</code> output</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -169,14 +151,25 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Key Info and Announcements</h1>
+<h1 class="title">Week 8</h1>
 </div>
 
+<div>
+  <div class="description">
+    Model Diagnostics and Model Building
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 20, 2024</p>
+    </div>
+  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
@@ -192,85 +185,143 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Room Locations for the week
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On Wednesday, 5/22, we will be in RPV Room A (1217)</p>
+</div>
+</div>
+<div class="cell">
+<style type="text/css">
+.title{
+  font-size: 40px;
+  color: #C2352F;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.description{
+  font-size: 20px;
+  color: #fff;
+  background-color: #C2352F;
+  padding: 10px;
+}
+</style>
+</div>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Lesson</th>
+<th>Topic</th>
+<th style="text-align: center;">Slides</th>
+<th style="text-align: center;">Annotated Slides</th>
+<th style="text-align: center;">Recording</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>14</td>
+<td>Model Diagnostics</td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="../../lectures/14_Model_diagnostics/14_Model_diagnostics.qmd"><iconify-icon inline="" icon="ri:slideshow-fill" style="font-size: 30px;"></iconify-icon></a></span></td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="../../lectures/14_Model_diagnostics/14_Model_diagnostics_notes.pdf"><iconify-icon inline="" icon="pepicons-pop:pen-circle-filled" style="font-size: 29px;"></iconify-icon></a></span></td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="https://echo360.org/media/81e8b1c4-1c1a-4747-9b1d-f154a6702c36/public"><iconify-icon inline="" icon="mdi:video" style="font-size: 34px;"></iconify-icon></a></span></td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>Model Building</td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="../../lectures/15_Model_building/15_Model_Building.qmd"><iconify-icon inline="" icon="ri:slideshow-fill" style="font-size: 30px;"></iconify-icon></a></span></td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="../../lectures/15_Model_building/15_Model_Building_notes.pdf"><iconify-icon inline="" icon="pepicons-pop:pen-circle-filled" style="font-size: 29px;"></iconify-icon></a></span></td>
+<td style="text-align: center;"><span style="color:#f8f5f0;"><a href="https://echo360.org/media/476f0600-a8e1-4698-b44c-6879e48aff3a/public"><iconify-icon inline="" icon="mdi:video" style="font-size: 34px;"></iconify-icon></a></span></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="announcements" class="level2">
 <h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<section id="monday-520" class="level3">
+<h3 class="anchored" data-anchor-id="monday-520">Monday 5/20</h3>
 <ul>
-<li>Monday (5/12) is another required in-person attendance day!!
+<li><p>HW 4 part d UPDATED!!</p>
 <ul>
-<li>Email me if you have extenuating circumstances</li>
+<li><a href="week_08/HW4_help.pdf">Help from Monday class</a> on Part e</li>
 </ul></li>
-<li>HW 2
+<li><p>Homework 3</p>
 <ul>
-<li>For the model with LOC, make sure you are creating the indicator for LOC categories! <span class="math display">\[\text{logit} \left(\pi(LOC)\right)=\beta_0 + \beta_1 \times I(LOC =\text{``Deep Stupor"}) + \beta_2 \times I(LOC =\text{``Coma"})\]</span></li>
+<li><p>Remember to include the indicator function for different categories of your variables!!</p></li>
+<li><p>LOC has three levels: there should be two indicator functions and two coefficients for this variable!!</p>
+<p><img src="week_08/loc.png" class="img-fluid"></p></li>
 </ul></li>
-<li>Nicky will be out of office from 5/8-5/12
-<ul>
-<li>Will not be responding to emails</li>
-</ul></li>
-<li>R conference in Portland!! <strong>on 6/20-6/21</strong> <a href="https://cascadiarconf.com/" class="uri">https://cascadiarconf.com/</a>
-<ul>
-<li>$33.85 for in-person on 6/21</li>
-<li>$12.85 for virtual (only on 6/21)</li>
-<li>Each workshop on 6/20 is $33.85
-<ul>
-<li>Here are some that may be of interest:
-<ul>
-<li><a href="https://cascadiarconf.com/2025/workshop/github1/">Intro to Git for R users</a></li>
-<li><a href="https://cascadiarconf.com/2025/workshop/gis/">Intro to GIS and Mapping in R</a></li>
-</ul></li>
-</ul></li>
-<li>If you want to attend but money is an issue, please talk to/email me!
-<ul>
-<li>There are resources at SPH that we can apply for</li>
-</ul></li>
-</ul></li>
-<li>More events at SPH through the Student Success Center <img src="./images/image002.png" class="img-fluid"></li>
 </ul>
-<section id="recurring" class="level3">
-<h3 class="anchored" data-anchor-id="recurring">Recurring</h3>
+</section>
+<section id="wednesday-522" class="level3">
+<h3 class="anchored" data-anchor-id="wednesday-522">Wednesday 5/22</h3>
 <ul>
-<li>The Academic Success Center is hiring peer tutors for AY ’25-’26!
+<li><p>Lab 3</p>
 <ul>
-<li>Subject areas of interest include
+<li><p>When interpreting ORs…</p>
 <ul>
-<li>Pharmacy</li>
-<li>Biostatistics</li>
-<li>NCLEX prep</li>
-<li>Math (dosage calculations, etc.)</li>
-<li>Dentistry (esp.&nbsp;dental anatomy)<br>
-</li>
+<li><p>You all are correct by including as much detail about the covariate as possible</p>
+<ul>
+<li><p>For example: If I was using <code>UNMETCARE_Y</code> and I wrote “The estimated odds of food insecurity for individuals who needed medical care in the last 12 months but could not get it because they could not afford it…”</p>
+<ul>
+<li><p>This is correct!</p></li>
+<li><p>BUT within our longer written report, we should define “unmet care” earlier on. Thus, once we get to interpreting ORs, we can just say “unmet care.”</p></li>
 </ul></li>
-<li>Tutoring is a great way to solidify your own content knowledge, get teaching-adjacent experience for your resume, and give back to the student community. <a href="https://externalcareers-ohsu.icims.com/jobs/28153/peer-tutor/job?hub=6&amp;_gl=1*1kmkhsc*_ga*NjAwNTQyMi4xNzM5MjMwNTQz*_ga_5Y2BYGL910*MTc0NDY1NzA4MC44LjEuMTc0NDY1NzA5MS40OS4wLjA.&amp;mobile=false&amp;width=1252&amp;height=500&amp;bga=true&amp;needsRedirect=false&amp;jan1offset=-480&amp;jun1offset=-420">Apply in OHSU Jobs</a> or email Morgan Gross (grossmo@ohsu.edu), ASC Tutoring Program Coordinator, for more info!</li>
 </ul></li>
-<li>Adri Jones and Student Success Center will be hosting more Community &amp; Chat events (IYKYK) in Vanport 620M for the following dates from 11:00 AM-12:30 PM:
+<li><p>Also, correct for including a list of the variables that you are adjusting for!</p>
 <ul>
-<li>May 21</li>
-<li>June 4</li>
-<li>June 18</li>
-<li>IYKYK = “if you known you know”</li>
+<li><p>But again, we hopefully defined our final model and specifically mentioned the variables that we are adjusting for</p></li>
+<li><p>Thus, once we get to our interpretation, we can say something more like “adjusting for the previously listed variables in our model”</p></li>
+</ul></li>
+</ul></li>
+<li><p>For output of `tbl_regression()` make sure to edit the variable names into more common language</p>
+<ul>
+<li><code>set_variable_labels()</code> <a href="https://rdrr.io/cran/tibbleOne/man/set_variable_labels.html">from tibbleOne package might help!</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
 </section>
-<section id="key-dates" class="level2">
-<h2 class="anchored" data-anchor-id="key-dates">Key Dates</h2>
+<section id="class-exit-tickets" class="level2">
+<h2 class="anchored" data-anchor-id="class-exit-tickets">Class Exit Tickets</h2>
+<p><span style="color:#f8f5f0;"><a href="https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUNzhJTkoyOEtZNEExQjQ1U1hIVTM4UTJKMy4u"><iconify-icon inline="" icon="healthicons:health-worker-form-negative" style="font-size: 30px;"></iconify-icon></a></span> Monday (5/20)</p>
+<p><span style="color:#f8f5f0;"><a href="https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhURTNFQ1haMjNWN1FSMVFHSjdaNFNIV0w4RC4u"><iconify-icon inline="" icon="healthicons:health-worker-form-negative" style="font-size: 30px;"></iconify-icon></a></span> Wednesday (5/22)</p>
+</section>
+<section id="muddiest-points-questions" class="level2">
+<h2 class="anchored" data-anchor-id="muddiest-points-questions">Muddiest Points / Questions</h2>
+<section id="how-did-you-determine-the-ages-for-the-r-output-on-slide-24-standardized-deviance-residuals" class="level3">
+<h3 class="anchored" data-anchor-id="how-did-you-determine-the-ages-for-the-r-output-on-slide-24-standardized-deviance-residuals">1. How did you determine the ages for the R output on slide 24 (standardized deviance residuals)</h3>
+<p>The centered ages are centered around the mean age. A few classes ago I mentioned that the mean was 69 years old, might have gotten lost in this lesson. So calculating the actual ages is just adding the mean age and centered age. So centered age of 6 is 69+6 = 75. Also, very confusing because apparently I can’t add!</p>
+</section>
+<section id="from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods" class="level3">
+<h3 class="anchored" data-anchor-id="from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods">2. From comment on shrinkage vs.&nbsp;regularization vs.&nbsp;penalized methods</h3>
+<p>All these terms are used intercahngeably!</p>
+<p>Penalized regression means that penalty is added to our likelihood function! This may feel like a more generic form of shrinkage or regularization. However, within statistics, I do not see penalized regression used for anything other than minimizing the coefficient values towards zero. I often see it defined as: form of regression that uses a penalty to shrink coefficients towards zero.</p>
+<p>Definitions of regularized regression mirror the above for penalized regression.</p>
+<p>Shrinkage is more the action of reducing coefficient values towards zero. Many people will refer to regularization and penalized regression as shrinkage methods.</p>
 <ul>
-<li>Lab 3 due 5/9</li>
-<li>Quiz 2 open on 5/14
-<ul>
-<li>Will cover Lessons 6-9</li>
-</ul></li>
-<li>Homework 3 due 5/16</li>
+<li>LASSO, ridge, and Elastic net are all types of penalized/regularization/shrinkage methods</li>
 </ul>
 </section>
-<section id="last-class" class="level2">
-<h2 class="anchored" data-anchor-id="last-class">Last class</h2>
-<ul>
-<li>We went over Numeric problems: zero cell count, complete separation, and multicollinearity</li>
-<li>Some of the ways to address these will be helpful in your labs!!</li>
-</ul>
+<section id="sign-column-within-vi-output" class="level3">
+<h3 class="anchored" data-anchor-id="sign-column-within-vi-output">3. Sign column within <code>vi()</code> output</h3>
+<p>The sign column is in fact the sign of the coefficient within the model.</p>
+<p>So within our interaction model, the sign for smoking status is negative. Since smoking status had many interactions, we cannot make claims about the association between smoking and fracture without considering all other variables that it interacts with. ALSO, remember that our goal here is prediction, NOT association.</p>
+</section>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

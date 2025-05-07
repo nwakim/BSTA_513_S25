@@ -1,0 +1,33 @@
+---
+title: "Quiz 2 Info"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+- **Quiz 2** will open on Wednesday at 3pm 
+
+- The quiz will be administered over Sakai 
+
+- The quiz has a total of ___ questions, with ___ multiple choice and __ free response questions
+
+- Concepts and interpretations from Lessons 6-9 will be tested
+  - You will be expected to ____
+
+- If you go to the "Tests & Quizzes" there is a Test Run for you to get familiar with the Sakai formatting.
+
+- Quiz  instructions:
+  - I have written a 30-minute quiz, but there is no time limit on the quiz. You will have from
+  - Wednesday at 3pm to Sunday at 11pm to finish the quiz.
+  - The quiz is open book and open notes. You may use books other than the class textbook, you may use anything on our course webpage, and you may use reference websites (like Wikipedia, Googling expected value of specific distribution, etc.).
+  - No cheating will be tolerated. Cheating includes:
+  - Using ChatGPT
+  - Copy and pasting the question from Sakai to any search engine. 
+  - Using question and answer threads typically seen on sites like StackExchange, WikiHow, Quora, Reddit, StackOverflow, Chegg, etc.    
+  - Asking other students, sharing quiz work or sharing quiz results. 
+  - Each question is worth 3 points, including multiple choice and free response questions.
+
+
