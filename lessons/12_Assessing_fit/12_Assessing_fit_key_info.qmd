@@ -15,9 +15,13 @@ editor_options:
 - Nicky will be out of office from 5/8-5/12
   - Will not be responding to emails
 - R conference in Portland!! **on 6/20-6/21** <https://cascadiarconf.com/>
-  - $30 + fee for in-person: includes workshops!
-  - $10 + fee for virtual (only on 6/21)
-  - If you want to attend but money is an issue, please talk to me! 
+  - $33.85 for in-person on 6/21
+  - $12.85 for virtual (only on 6/21)
+  - Each workshop on 6/20 is $33.85
+    - Here are some that may be of interest:
+      - [Intro to Git for R users](https://cascadiarconf.com/2025/workshop/github1/)
+      - [Intro to GIS and Mapping in R](https://cascadiarconf.com/2025/workshop/gis/)
+  - If you want to attend but money is an issue, please talk to/email me! 
     - There are resources at SPH that we can apply for
 
 - More events at SPH through the Student Success Center ![](./images/image002.png)
