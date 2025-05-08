@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 12: Assessing Model Fit"
 date-modified: "today"
 format: 
   html:
@@ -11,5 +11,49 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### 1. Calculating the g-value in the H-L test.
+
+For sample sizes between 1,000 and 25,000, we calculate $g$. It might help to see it stepped out like this:
+
+1. Find the minimum value between these three values:
+    a. $\frac{n_1}{2}$
+    b. $\frac{n-n_1}{2}$
+    c. $2+8\left(\frac{n}{1000}\right)^2$
+2. Find the maximum between the result of #1 and 10
+
+### 3. Is AIC or BIC better than the other? I had a problem last quarter where one model had a lower AIC and the other had a lower BIC and I didn't know which was actually better.
+
+Neither is better than the other. If you see one model with a higher AIC and one with a higher BIC, then neither model is better than the other. I would end up choosing the model based on field expertise!
+
+### 3. Where does the name Receiver Operating Characteristics come from? What is that referring to?
+
+I asked Google AI, and below is what it answered. It comes from radar detection in World War II!
+
+The name "Receiver Operating Characteristic" (ROC) curve comes from its original use in signal detection theory during World War II, specifically to improve radar detection. The term "receiver" refers to the radar apparatus that detects signals, and "operating characteristic" describes how well the receiver performs in differentiating between actual targets and noise. [1, 1, 2, 2, 3, 4]  
+Here's a more detailed explanation: [2, 5]  
+
+• World War II Radar Detection: During the war, radar operators struggled to distinguish between legitimate signals from enemy aircraft and background noise (like birds or clouds). [2, 5]  
+• Signal Detection Theory: Signal detection theory, which developed in part to address this challenge, provided a framework for analyzing the performance of radar receivers in discriminating signals from noise. [6, 7]  
+• Receiver and Operating Characteristic: The ROC curve is essentially a graphical representation of how well a receiver can distinguish between signal and noise (or true positives and false positives) under different operating conditions (thresholds). The "receiver" is the radar, and the "operating characteristic" is how well it identifies targets. [1, 5]  
+• Psychology and Beyond: The ROC curve's concept of signal detection was later adapted to psychology to understand human perception and has since been used in various fields, including medicine, machine learning, and more. [2, 7, 8]  
+
+Generative AI is experimental.
+
+[1] https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc
+[2] https://en.wikipedia.org/wiki/Receiver_operating_characteristic
+[3] https://medium.com/nerd-for-tech/understanding-receiver-operating-characteristic-roc-curve-f5eed11bc565
+[4] https://stats.stackexchange.com/questions/341043/what-is-the-origin-of-the-receiver-operating-characteristic-roc-terminology
+[5] https://mlu-explain.github.io/roc-auc/
+[6] https://pmc.ncbi.nlm.nih.gov/articles/PMC6022965/
+[7] https://link.springer.com/doi/10.1007/978-0-387-39940-9_569
+[8] https://pmc.ncbi.nlm.nih.gov/articles/PMC8831439/
+Not all images can be exported from Search.
+
+
 ## Muddy Points from Spring 2024
 
+### 1. How do we determine the number of covariate patterns in R?
+
+Theoretically, all you need to do is count the number of groups in each categorical covariates. To find the total number of covariate patterns, you multiple those numbers by each other.
+
+In R, we can take a dataframe with only the predictors in your model. You can use the `distinct()` function to create unique rows. The number of rows outputted will be the number of covariate patterns.

@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -126,8 +155,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a></li>
-  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
+  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a>
+  <ul class="collapse">
+  <li><a href="#calculating-the-g-value-in-the-h-l-test." id="toc-calculating-the-g-value-in-the-h-l-test." class="nav-link" data-scroll-target="#calculating-the-g-value-in-the-h-l-test.">1. Calculating the g-value in the H-L test.</a></li>
+  <li><a href="#is-aic-or-bic-better-than-the-other-i-had-a-problem-last-quarter-where-one-model-had-a-lower-aic-and-the-other-had-a-lower-bic-and-i-didnt-know-which-was-actually-better." id="toc-is-aic-or-bic-better-than-the-other-i-had-a-problem-last-quarter-where-one-model-had-a-lower-aic-and-the-other-had-a-lower-bic-and-i-didnt-know-which-was-actually-better." class="nav-link" data-scroll-target="#is-aic-or-bic-better-than-the-other-i-had-a-problem-last-quarter-where-one-model-had-a-lower-aic-and-the-other-had-a-lower-bic-and-i-didnt-know-which-was-actually-better.">3. Is AIC or BIC better than the other? I had a problem last quarter where one model had a lower AIC and the other had a lower BIC and I didn’t know which was actually better.</a></li>
+  <li><a href="#where-does-the-name-receiver-operating-characteristics-come-from-what-is-that-referring-to" id="toc-where-does-the-name-receiver-operating-characteristics-come-from-what-is-that-referring-to" class="nav-link" data-scroll-target="#where-does-the-name-receiver-operating-characteristics-come-from-what-is-that-referring-to">3. Where does the name Receiver Operating Characteristics come from? What is that referring to?</a></li>
+  </ul></li>
+  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a>
+  <ul class="collapse">
+  <li><a href="#how-do-we-determine-the-number-of-covariate-patterns-in-r" id="toc-how-do-we-determine-the-number-of-covariate-patterns-in-r" class="nav-link" data-scroll-target="#how-do-we-determine-the-number-of-covariate-patterns-in-r">1. How do we determine the number of covariate patterns in R?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -137,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Lesson 1: Welcome</p>
+<p class="subtitle lead">Lesson 12: Assessing Model Fit</p>
 </div>
 
 
@@ -149,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 6, 2025</p>
+      <p class="date-modified">May 7, 2025</p>
     </div>
   </div>
     
@@ -162,11 +199,45 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="muddy-points-from-spring-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2025">Muddy Points from Spring 2025</h2>
+<section id="calculating-the-g-value-in-the-h-l-test." class="level3">
+<h3 class="anchored" data-anchor-id="calculating-the-g-value-in-the-h-l-test.">1. Calculating the g-value in the H-L test.</h3>
+<p>For sample sizes between 1,000 and 25,000, we calculate <span class="math inline">\(g\)</span>. It might help to see it stepped out like this:</p>
+<ol type="1">
+<li>Find the minimum value between these three values:
+<ol type="a">
+<li><span class="math inline">\(\frac{n_1}{2}\)</span></li>
+<li><span class="math inline">\(\frac{n-n_1}{2}\)</span></li>
+<li><span class="math inline">\(2+8\left(\frac{n}{1000}\right)^2\)</span></li>
+</ol></li>
+<li>Find the maximum between the result of #1 and 10</li>
+</ol>
+</section>
+<section id="is-aic-or-bic-better-than-the-other-i-had-a-problem-last-quarter-where-one-model-had-a-lower-aic-and-the-other-had-a-lower-bic-and-i-didnt-know-which-was-actually-better." class="level3">
+<h3 class="anchored" data-anchor-id="is-aic-or-bic-better-than-the-other-i-had-a-problem-last-quarter-where-one-model-had-a-lower-aic-and-the-other-had-a-lower-bic-and-i-didnt-know-which-was-actually-better.">3. Is AIC or BIC better than the other? I had a problem last quarter where one model had a lower AIC and the other had a lower BIC and I didn’t know which was actually better.</h3>
+<p>Neither is better than the other. If you see one model with a higher AIC and one with a higher BIC, then neither model is better than the other. I would end up choosing the model based on field expertise!</p>
+</section>
+<section id="where-does-the-name-receiver-operating-characteristics-come-from-what-is-that-referring-to" class="level3">
+<h3 class="anchored" data-anchor-id="where-does-the-name-receiver-operating-characteristics-come-from-what-is-that-referring-to">3. Where does the name Receiver Operating Characteristics come from? What is that referring to?</h3>
+<p>I asked Google AI, and below is what it answered. It comes from radar detection in World War II!</p>
+<p>The name “Receiver Operating Characteristic” (ROC) curve comes from its original use in signal detection theory during World War II, specifically to improve radar detection. The term “receiver” refers to the radar apparatus that detects signals, and “operating characteristic” describes how well the receiver performs in differentiating between actual targets and noise. [1, 1, 2, 2, 3, 4]<br>
+Here’s a more detailed explanation: [2, 5]</p>
+<p>• World War II Radar Detection: During the war, radar operators struggled to distinguish between legitimate signals from enemy aircraft and background noise (like birds or clouds). [2, 5]<br>
+• Signal Detection Theory: Signal detection theory, which developed in part to address this challenge, provided a framework for analyzing the performance of radar receivers in discriminating signals from noise. [6, 7]<br>
+• Receiver and Operating Characteristic: The ROC curve is essentially a graphical representation of how well a receiver can distinguish between signal and noise (or true positives and false positives) under different operating conditions (thresholds). The “receiver” is the radar, and the “operating characteristic” is how well it identifies targets. [1, 5]<br>
+• Psychology and Beyond: The ROC curve’s concept of signal detection was later adapted to psychology to understand human perception and has since been used in various fields, including medicine, machine learning, and more. [2, 7, 8]</p>
+<p>Generative AI is experimental.</p>
+<p>[1]&nbsp;https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc [2]&nbsp;https://en.wikipedia.org/wiki/Receiver_operating_characteristic [3]&nbsp;https://medium.com/nerd-for-tech/understanding-receiver-operating-characteristic-roc-curve-f5eed11bc565 [4]&nbsp;https://stats.stackexchange.com/questions/341043/what-is-the-origin-of-the-receiver-operating-characteristic-roc-terminology [5]&nbsp;https://mlu-explain.github.io/roc-auc/ [6]&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC6022965/ [7]&nbsp;https://link.springer.com/doi/10.1007/978-0-387-39940-9_569 [8]&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8831439/ Not all images can be exported from Search.</p>
+</section>
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2024">Muddy Points from Spring 2024</h2>
+<section id="how-do-we-determine-the-number-of-covariate-patterns-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="how-do-we-determine-the-number-of-covariate-patterns-in-r">1. How do we determine the number of covariate patterns in R?</h3>
+<p>Theoretically, all you need to do is count the number of groups in each categorical covariates. To find the total number of covariate patterns, you multiple those numbers by each other.</p>
+<p>In R, we can take a dataframe with only the predictors in your model. You can use the <code>distinct()</code> function to create unique rows. The number of rows outputted will be the number of covariate patterns.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
