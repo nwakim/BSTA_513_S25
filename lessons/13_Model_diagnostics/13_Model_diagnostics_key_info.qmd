@@ -10,6 +10,19 @@ editor_options:
 
 ## Announcements
 
-## Key Dates
+- Quiz 2 opens Wednesday
+  - Lesson 6-9
+  - More info on logistics will be updated on [this page](quiz_info/quiz_02_info.qmd)
+  - Think GLM tests in simple logistic regression, in multivariable regression, for a single variable, for groups of variables, and for interactions
+  - Can you interpret an odds ratio in a multivariable model?
+  - Can you interpret a predicted probability?
+- You’re invited to our Antiracism Initiative Town Hall Series, a three-part space for reflection, dialogue, and shared accountability as we continue our school’s antiracism efforts.
+  - [RSVP here by May 14](https://portlandstate.qualtrics.com/jfe/form/SV_8iRKE6ljC7I6xtY)
+  - May 20- Day 1 will offer a general overview of the Antiracism Initiative, including highlights and reflections from Academic Years 2020–2024. We'll revisit the work done so far and where we’re headed.
+  - May 21- Day 2 will center faculty voices as we dive into the Qualitative Data Practice Initiative, which aims to strengthen how we understand and act on student feedback.
+  - **May 22- Day 3 will mirror that conversation from day 2 in a student-centered space, where we’ll invite students to share experiences, ideas, and insights to help shape the future of this initiative.**
 
-## Last class
+
+## Key Dates
+- Quiz 2 opens on 5/14 at 3pm
+- Homework 3 due 5/16

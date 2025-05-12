@@ -250,13 +250,13 @@ Nicky Wakim
 <tr class="odd">
 <td>Pearson residual</td>
 <td>Yes</td>
-<td><span class="math inline">\(X^2=\sum_{j=1}^{J}{r\left(Y_j,{\hat{\pi}}_j\right)^2}\)</span></td>
+<td><span class="math inline">\(X^2=\sum_{j=1}^{J}{r\left(Y_j,{\widehat{\pi}}_j\right)^2}\)</span></td>
 <td>Not given</td>
 </tr>
 <tr class="even">
 <td>Hosmer-Lemeshow test</td>
 <td>Yes</td>
-<td><span class="math inline">\(\hat{C}=\sum_{k=1}^{g}\frac{\left(o_k-n_k^\prime{\bar{\pi}}_k\right)^2}{n_k^\prime{\bar{\pi}}_k(1-{\bar{\pi}}_k)}\)</span></td>
+<td><span class="math inline">\(\widehat{C}=\sum_{k=1}^{g}\frac{\left(o_k-n_k^\prime{\bar{\pi}}_k\right)^2}{n_k^\prime{\bar{\pi}}_k(1-{\bar{\pi}}_k)}\)</span></td>
 <td><code>hoslem.test()</code></td>
 </tr>
 <tr class="odd">
@@ -297,7 +297,10 @@ Nicky Wakim
 <li>Complete separation</li>
 <li>Multicollinearity</li>
 </ul></li>
-<li><p><strong>Today:</strong> We now use model diagnostics to identify any <strong>observations</strong> that the model does not fit well</p></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Today:</strong> We now use model diagnostics to identify any <strong>observations</strong> that the model does not fit well</li>
 </ul>
 </section>
 <section id="assumptions-linear-regression-vs.-logistic-regression" class="slide level2">
@@ -333,7 +336,7 @@ Nicky Wakim
 </div></div>
 <ul>
 <li>Back in <a href="https://nwakim.github.io/BSTA_513_S25/lessons/05_Simple_logistic_reg/05_Simple_logistic_reg.html#/title-slide">Lesson 5: Simple Logistic Regression</a>, we walk through linear regression assumptions that do not hold for logistic regression</li>
-<li>Because our assumptions for logistic regression are a little different than liner regression, we <strong>need different diagnostic tools</strong> to assess observations that may be outliers or influential points</li>
+<li>Because our assumptions for logistic regression are a little different than linear regression, we <strong>need slightly different diagnostic tools</strong> to assess observations that may be outliers or influential points</li>
 </ul>
 </section></section>
 <section>
@@ -382,57 +385,16 @@ Nicky Wakim
 <ul>
 <li><strong>Main diagnostic measurements we will look at: </strong>
 <ul>
-<li>Standardized Pearson residuals, <span class="math inline">\(\Delta X^2_j\)</span> or <span class="math inline">\(r^2_{sj}\)</span></li>
-<li>Standardized Deviance residuals, <span class="math inline">\(\Delta D_j\)</span></li>
+<li>Change in standardized Pearson residuals, <span class="math inline">\(\Delta X^2_j\)</span></li>
+<li>Change in standardized Deviance residuals, <span class="math inline">\(\Delta D_j\)</span></li>
 <li>Leverage, <span class="math inline">\(h_j\)</span></li>
 <li>Change in coefficients, DFBETA or <span class="math inline">\(\Delta \widehat{\beta}_j\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="hat-matrix-and-leverage-values-linear-regression" class="slide level2">
-<h2>Hat Matrix and Leverage Values: Linear regression</h2>
-<ul>
-<li>We have learned “hat” matrix and leverage values from linear regression diagnostics</li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li><p>In linear regression, the hat matrix projects the outcome variable onto the covariate space:</p>
-<p>&nbsp;</p>
-<ul>
-<li><span class="math inline">\(H=X\left(X^\prime X\right)^{-1}X^\prime\)</span> and <span class="math inline">\(\hat{y}=Hy\)</span></li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li>The linear regression residuals is thus <span class="math inline">\(y - \widehat{y}\)</span>, or <span class="math inline">\((I-H)y\)</span></li>
-</ul></li>
-</ul>
-<p>&nbsp;</p>
-<ul>
-<li>The leverage is just the diagonal elements of the hat matrix, which is proportional to the distance of <span class="math inline">\(x_j\)</span> to the mean of the data <span class="math inline">\(\overline{x}\)</span></li>
-</ul>
-</section>
-<section id="hat-matrix-and-leverage-values-logistic-regression" class="slide level2">
-<h2>Hat Matrix and Leverage Values: Logistic regression</h2>
-<ul>
-<li><p>In logistic regression model, the hat matrix is: <span class="math display">\[H=V^\frac{1}{2}X\left(X^\prime V\ X\right)^{-1}X^\prime V^\frac{1}{2}\]</span></p></li>
-<li><p>The leverage for covariate pattern <span class="math inline">\(j\)</span> is <span class="math display">\[h_j=m_j\cdot\hat{\pi}\left(\textbf{x}_j\right)\left[1-\hat{\pi}\left(\textbf{x}_j\right)\right]\textbf{x}_j^\prime\left(\textbf{X}^\prime\textbf{VX}\right)^{-1}\textbf{x}_j=v_j\cdot b_j\]</span></p>
-<ul>
-<li><p><span class="math inline">\(b\)</span>: weighted distance of <span class="math inline">\(x_j\)</span> from <span class="math inline">\(\overline{x}\)</span></p></li>
-<li><p><span class="math inline">\(v_j\)</span>: model based estimator of the variance of <span class="math inline">\(y_j\)</span></p>
-<ul>
-<li><span class="math inline">\(v_j=m_j\cdot\hat{\pi}\left(\textbf{x}_j\right)\left[1-\hat{\pi}\left(\textbf{x}_j\right)\right]\)</span></li>
-</ul></li>
-</ul></li>
-<li><p><span class="math inline">\(h_j\)</span> <strong>reflects the relative influence of each covariate pattern on the model’s fit</strong></p></li>
-<li><p>Specifically relating to the distance between <span class="math inline">\(X_j\)</span> and <span class="math inline">\(\overline{X}\)</span></p></li>
-</ul>
-</section>
-<section id="poll-everywhere-question-1" class="slide level2">
-<h2>Poll Everywhere Question 1</h2>
-</section>
-<section id="poll-everywhere-question-2" class="slide level2">
-<h2>Poll Everywhere Question 2</h2>
-</section>
+
+
+
 <section id="diagnostic-statistics-computation-12" class="slide level2">
 <h2>Diagnostic Statistics Computation (1/2)</h2>
 <ul>
@@ -458,22 +420,14 @@ Nicky Wakim
 <ul>
 <li><p>Why prefer covariate patterns approach?</p>
 <ul>
-<li>When the number of covariate pattern is much smaller than n, there is risk that we may fail to identify influential and/or poorly fit covariate patterns using individual based on residual</li>
+<li>When the number of covariate pattern is much smaller than <span class="math inline">\(n\)</span>, there is risk that we may fail to identify influential and/or poorly fit covariate patterns using individual based on residual</li>
 </ul></li>
 </ul>
 </section>
-<section id="diagnostic-statistics-computation-22" class="slide level2">
-<h2>Diagnostic Statistics Computation (2/2)</h2>
-<p>Consider a covariate pattern with <span class="math inline">\(m_j\)</span> subjects, all did not have event (some <span class="math inline">\(y_i = 0\)</span>). So the estimated logistic probability is <span class="math inline">\(\widehat\pi_j\)</span></p>
-<ul>
-<li><p>Pearson residual computed by individual <span class="math display">\[r_i=-\sqrt{\frac{{\hat{\pi}}_j}{(1-{\hat{\pi}}_j)}}\]</span></p></li>
-<li><p>Pearson residual computed by covariate pattern <span class="math display">\[r_i=-\sqrt{m_j}\sqrt{\frac{{\hat{\pi}}_j}{(1-{\hat{\pi}}_j)}}\]</span></p></li>
-<li><p><strong>Difference between above residuals will be large if <span class="math inline">\(m_j\)</span> is large</strong>: usually a problem if less covariate patterns</p>
-<ul>
-<li>Residual from covariate pattern will identify poorly fit covariate patterns</li>
-</ul></li>
-</ul>
+<section id="poll-everywhere-question-1-1" class="slide level2">
+<h2>Poll Everywhere Question 1</h2>
 </section>
+
 <section id="diagnostics-of-logistic-regression" class="slide level2">
 <h2>Diagnostics of Logistic Regression</h2>
 <ul>
@@ -482,8 +436,8 @@ Nicky Wakim
 <ul>
 <li><p>Look at <span style="color:#70AD47">change in residuals if a covariate pattern is excluded</span></p>
 <ul>
-<li>Standardized Pearson residual</li>
-<li>Standardized Deviance residual</li>
+<li>Change in standardized Pearson residual</li>
+<li>Change in standardized Deviance residual</li>
 </ul></li>
 </ul>
 <p>&nbsp;</p>
@@ -498,7 +452,7 @@ Nicky Wakim
 <li><p>Change in <strong>standardized Pearson Chi-square statistic</strong> due to deletion of subjects with covariate pattern <span class="math inline">\(x_j\)</span>: <span class="math display">\[\Delta X_j^2 = r_{sj}^2 = \dfrac{r_j^2}{1-h_j}\]</span></p></li>
 <li><p>Aka: Does model fit way better when we delete a covariate pattern group?</p></li>
 <li><p><em>Don’t need to know this</em>: change in <strong>standardized deviance statistic</strong> due to deletion of subjects with covariate pattern <span class="math inline">\(x_j\)</span>: <span class="math display">\[\Delta D_j = \dfrac{d_j^2}{1-h_j}\]</span></p></li>
-<li><p>Refer to <em>Lesson 12: Assessing Model Fit</em> for expression of Pearson residual</p></li>
+<li><p>Refer to <a href="https://nwakim.github.io/BSTA_513_S25/lessons/12_Assessing_fit/12_Assessing_fit.html#/pearson-residual"><em>Lesson 12: Assessing Model Fit</em></a> for expression of Pearson residual</p></li>
 </ul>
 </section>
 <section id="change-of-estimated-coefficients" class="slide level2">
@@ -511,11 +465,6 @@ Nicky Wakim
 <li>This is the logistic regression analog of Cook’s influence statistic (in linear regression)</li>
 </ul>
 </section></section>
-<section id="minute-break" class="title-slide slide level1 center">
-<h1>10 minute break</h1>
-
-</section>
-
 <section>
 <section id="learning-objectives-2" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
@@ -540,10 +489,10 @@ Nicky Wakim
 <ul>
 <li><p>Four plots for analysis of diagnostics in logistic regression:</p>
 <ul>
-<li><span class="math inline">\(\Delta X_j^2\)</span> vs.&nbsp;<span class="math inline">\({\hat{\pi}}_j\)</span></li>
-<li><span class="math inline">\(\Delta D_j\)</span> vs.&nbsp;<span class="math inline">\({\hat{\pi}}_j\)</span></li>
-<li><span class="math inline">\(\Delta\widehat{\beta}_j\)</span> vs.&nbsp;<span class="math inline">\({\hat{\pi}}_j\)</span></li>
-<li><span class="math inline">\(h_j\)</span> vs.&nbsp;<span class="math inline">\({\hat{\pi}}_j\)</span></li>
+<li><span class="math inline">\(\Delta X_j^2\)</span> vs.&nbsp;<span class="math inline">\({\widehat{\pi}}_j\)</span></li>
+<li><span class="math inline">\(\Delta D_j\)</span> vs.&nbsp;<span class="math inline">\({\widehat{\pi}}_j\)</span></li>
+<li><span class="math inline">\(\Delta\widehat{\beta}_j\)</span> vs.&nbsp;<span class="math inline">\({\widehat{\pi}}_j\)</span></li>
+<li><span class="math inline">\(h_j\)</span> vs.&nbsp;<span class="math inline">\({\widehat{\pi}}_j\)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -630,8 +579,8 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 </ul>
 </div></div>
 </section>
-<section id="poll-everywhere-question-3" class="slide level2">
-<h2>Poll Everywhere Question 3</h2>
+<section id="poll-everywhere-question-2" class="slide level2">
+<h2>Poll Everywhere Question 2</h2>
 </section>
 <section id="visual-assessment-for-diagnostics-of-logistic-regression" class="slide level2">
 <h2>Visual Assessment for Diagnostics of Logistic Regression</h2>
@@ -647,32 +596,40 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 <li>Large values of <span class="math inline">\(\Delta\widehat{\beta}_j\)</span></li>
 </ul></li>
 </ul></li>
-<li><p>If you are interested to look at the contribution of leverage (ℎ_𝑗) to the values of the diagnostic statistic, you may also look at plots of:</p>
+<li><p>If you are interested to look at the contribution of leverage (<span class="math inline">\(h_j\)</span>) to the values of the diagnostic statistic, you may also look at plots of:</p>
 <ul>
-<li><span class="math inline">\(\Delta X_j^2\)</span> vs.&nbsp;<span class="math inline">\({\hat{\pi}}_j\)</span></li>
-<li><span class="math inline">\(\Delta D_j\)</span> vs.&nbsp;<span class="math inline">\({\hat{\pi}}_j\)</span></li>
-<li><span class="math inline">\(\Delta\widehat{\beta}_j\)</span> vs.&nbsp;<span class="math inline">\({\hat{\pi}}_j\)</span></li>
+<li><span class="math inline">\(\Delta X_j^2\)</span> vs.&nbsp;<span class="math inline">\({\widehat{\pi}}_j\)</span></li>
+<li><span class="math inline">\(\Delta D_j\)</span> vs.&nbsp;<span class="math inline">\({\widehat{\pi}}_j\)</span></li>
+<li><span class="math inline">\(\Delta\widehat{\beta}_j\)</span> vs.&nbsp;<span class="math inline">\({\widehat{\pi}}_j\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="glow-study-standardized-pearson-residuals" class="slide level2">
-<h2>GLOW study: standardized Pearson residuals</h2>
+<section id="glow-study-change-in-standardized-pearson-residuals" class="slide level2">
+<h2>GLOW study: Change in standardized Pearson residuals</h2>
 <div class="columns">
 <div class="column">
 <ul>
-<li><p>Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with <span class="math inline">\(y_j = 1\)</span></p>
+<li><p>Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with <span class="math inline">\(Y_j = 1\)</span></p>
 <ul>
-<li>Opposite corresponds to <span class="math inline">\(y_j = 0\)</span></li>
+<li>Opposite corresponds to <span class="math inline">\(Y_j = 0\)</span></li>
+</ul></li>
+<li><p>Points in the top left or top right corners identify the covariate patterns that are poorly fit</p></li>
+<li><p>We may use 4 as a crude approximation to the upper 95th percentile for <span class="math inline">\(\Delta X_j^2\)</span></p>
+<ul>
+<li>95th percentile of chi-squared distribution is 3.84</li>
 </ul></li>
 </ul>
 </div><div class="column">
 <div class="cell">
 <details class="code-fold">
 <summary>To make the plot</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dChisq), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb5-2"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
-<span id="cb5-3"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Std. Pearson Residual"</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> </span>
+<span id="cb5-2"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dChisq), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb5-4"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Std. Pearson Residual"</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>)) <span class="sc">+</span> </span>
+<span id="cb5-7"><a></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -684,48 +641,14 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 </div>
 </div></div>
 </section>
-<section id="glow-study-standardized-pearson-residuals-1" class="slide level2">
-<h2>GLOW study: standardized Pearson residuals</h2>
+<section id="glow-study-change-in-standardized-pearson-residuals-1" class="slide level2">
+<h2>GLOW study: Change in standardized Pearson residuals</h2>
 <div class="columns">
 <div class="column">
 <ul>
-<li><p>Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with <span class="math inline">\(y_j = 1\)</span></p>
+<li><p>Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with <span class="math inline">\(Y_j = 1\)</span></p>
 <ul>
-<li>Opposite corresponds to <span class="math inline">\(y_j = 0\)</span></li>
-</ul></li>
-<li><p>Points in the top left or top right corners identify the covariate patterns that are poorly fit</p></li>
-<li><p>We may use 4 as a crude approximation to the upper 95th percentile for <span class="math inline">\(\Delta X_j^2\)</span></p>
-<ul>
-<li>95th percentile of chi-squared distribution is 3.84</li>
-</ul></li>
-</ul>
-</div><div class="column">
-<div class="cell">
-<details class="code-fold">
-<summary>To make the plot</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dChisq), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb6-2"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
-<span id="cb6-3"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Std. Pearson Residual"</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-6-1.png" width="768"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="glow-study-standardized-pearson-residuals-2" class="slide level2">
-<h2>GLOW study: standardized Pearson residuals</h2>
-<div class="columns">
-<div class="column">
-<ul>
-<li><p>Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with <span class="math inline">\(y_j = 1\)</span></p>
-<ul>
-<li>Opposite corresponds to <span class="math inline">\(y_j = 0\)</span></li>
+<li>Opposite corresponds to <span class="math inline">\(Y_j = 0\)</span></li>
 </ul></li>
 <li><p>Points in the top left or top right corners identify the covariate patterns that are poorly fit</p></li>
 <li><p>We may use 4 as a crude approximation to the upper 95th percentile for <span class="math inline">\(\Delta X_j^2\)</span></p>
@@ -735,7 +658,8 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 <li><p>Which point is over 4?</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dChisq <span class="sc">&gt;</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(priorfracYes, age_c, P, dChisq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dChisq <span class="sc">&gt;</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a></a>  <span class="fu">select</span>(priorfracYes, age_c, P, dChisq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   priorfracYes age_c         P   dChisq
           &lt;num&gt; &lt;num&gt;     &lt;num&gt;    &lt;num&gt;
@@ -746,23 +670,26 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 <div class="cell">
 <details class="code-fold">
 <summary>To make the plot</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dChisq), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb9-2"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
-<span id="cb9-3"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Std. Pearson Residual"</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> </span>
+<span id="cb8-2"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb8-3"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dChisq), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb8-4"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Std. Pearson Residual"</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>)) <span class="sc">+</span> </span>
+<span id="cb8-7"><a></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-8-1.png" width="768"></p>
+<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-7-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="glow-study-standardized-deviance-residuals" class="slide level2">
-<h2>GLOW study: standardized Deviance residuals</h2>
+<section id="glow-study-change-in-standardized-deviance-residuals" class="slide level2">
+<h2>GLOW study: Change in standardized Deviance residuals</h2>
 <div class="columns">
 <div class="column">
 <ul>
@@ -772,8 +699,8 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 <li><p>Which point is over 4?</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dDev <span class="sc">&gt;</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a></a>  <span class="fu">select</span>(priorfracYes, age_c, P, dDev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dDev <span class="sc">&gt;</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a></a>  <span class="fu">select</span>(priorfracYes, age_c, P, dDev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   priorfracYes age_c         P     dDev
           &lt;num&gt; &lt;num&gt;     &lt;num&gt;    &lt;num&gt;
@@ -786,15 +713,17 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 <div class="cell">
 <details class="code-fold">
 <summary>To make the plot</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dDev), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb12-2"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Std. Deviance Residual"</span>) <span class="sc">+</span></span>
-<span id="cb12-4"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> </span>
+<span id="cb11-2"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dDev), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb11-4"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Std. Deviance Residual"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>)) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-10-1.png" width="768"></p>
+<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-9-1.png" width="768"></p>
 </figure>
 </div>
 </div>
@@ -810,8 +739,8 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 <li><p>All values of <span class="math inline">\(\Delta\widehat{\beta}_j\)</span> are below 0.09</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dBhat <span class="sc">&gt;</span> <span class="fl">0.075</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a></a>  <span class="fu">select</span>(priorfracYes, age_c, P, dBhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dBhat <span class="sc">&gt;</span> <span class="fl">0.075</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a></a>  <span class="fu">select</span>(priorfracYes, age_c, P, dBhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   priorfracYes age_c         P      dBhat
           &lt;num&gt; &lt;num&gt;     &lt;num&gt;      &lt;num&gt;
@@ -822,15 +751,17 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 <div class="cell">
 <details class="code-fold">
 <summary>To make the plot</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dBhat), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb15-2"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
-<span id="cb15-3"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Coefficient Estimates"</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> </span>
+<span id="cb14-2"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>dBhat), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb14-4"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a></a>  <span class="fu">ylab</span>(<span class="st">"Change in Coefficient Estimates"</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>)) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-12-1.png" width="768"></p>
+<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-11-1.png" width="768"></p>
 </figure>
 </div>
 </div>
@@ -854,9 +785,9 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>(h <span class="sc">&gt;</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">4</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a></a>  <span class="fu">select</span>(priorfracYes, age_c, P, h) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-3"><a></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>(h <span class="sc">&gt;</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">4</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a></a>  <span class="fu">select</span>(priorfracYes, age_c, P, h) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   priorfracYes age_c         P          h
           &lt;num&gt; &lt;num&gt;     &lt;num&gt;      &lt;num&gt;
@@ -872,15 +803,17 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 <div class="cell">
 <details class="code-fold">
 <summary>To make the plot</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>h), <span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb18-2"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
-<span id="cb18-3"><a></a>  <span class="fu">ylab</span>(<span class="st">"Leverage"</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">ggplot</span>(dx_glow) <span class="sc">+</span> </span>
+<span id="cb17-2"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">4</span><span class="sc">/</span><span class="dv">500</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>P, <span class="at">y=</span>h), <span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb17-4"><a></a>  <span class="fu">xlab</span>(<span class="st">"Estimated/Predicted Probability of Fracture"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a></a>  <span class="fu">ylab</span>(<span class="st">"Leverage"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">26</span>)) <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-14-1.png" width="768"></p>
+<p><img data-src="13_Model_diagnostics_files/figure-revealjs/unnamed-chunk-13-1.png" width="768"></p>
 </figure>
 </div>
 </div>
@@ -900,11 +833,11 @@ $ dBhat                &lt;dbl&gt; 1.453897e-05, 2.263418e-05, 3.852626e-05, 6.1
 </ul>
 </div><div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Cov_patt =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a></a>  <span class="fu">filter</span>(dChisq <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">|</span> dDev <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">|</span> dBhat <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">|</span> </span>
-<span id="cb19-3"><a></a>          h <span class="sc">&gt;</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">4</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a></a>  <span class="fu">select</span>(Cov_patt, y, P, h, dChisq, dDev, dBhat, h) <span class="sc">%&gt;%</span></span>
-<span id="cb19-5"><a></a>  <span class="fu">round</span>(., <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>dx_glow <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Cov_patt =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a></a>  <span class="fu">filter</span>(dChisq <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">|</span> dDev <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">|</span> dBhat <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">|</span> </span>
+<span id="cb18-3"><a></a>          h <span class="sc">&gt;</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">4</span><span class="sc">/</span><span class="dv">500</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a></a>  <span class="fu">select</span>(Cov_patt, y, P, h, dChisq, dDev, dBhat, h) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a></a>  <span class="fu">round</span>(., <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Cov_patt     y     P     h dChisq  dDev dBhat
        &lt;num&gt; &lt;num&gt; &lt;num&gt; &lt;num&gt;  &lt;num&gt; &lt;num&gt; &lt;num&gt;

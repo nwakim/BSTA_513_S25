@@ -92,7 +92,7 @@ Interpret the odds ratio for the **main effects** in the model from Part d. Plea
 
 #### Part f
 
-From the above model, fill out the following table for the odds ratios. Note, you will only need to report two odds ratios and you already have one from Part d.
+From the above model, fill out the following table for the odds ratios. Note, you will only need to report two odds ratios and you already have one from Part d & e.
 
 | Cancer | Infection | Estimated odds ratio | 95% CI |
 |--------------------|-------------------|-----------------|-----------------|

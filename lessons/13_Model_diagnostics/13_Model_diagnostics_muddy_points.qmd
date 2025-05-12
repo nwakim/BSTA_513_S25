@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 13: Model Diagnostics"
 date-modified: "today"
 format: 
   html:

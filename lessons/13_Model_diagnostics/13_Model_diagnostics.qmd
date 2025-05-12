@@ -69,8 +69,8 @@ source(here("lessons", "13_Model_diagnostics", "Logistic_Dx_Functions.R"))
     
 | Measure of fit       | Hypothesis tested?     | Equation                                                                                                            | R code                     |
 |----------------|----------------|------------------------|----------------|
-| Pearson residual     | Yes                    | $X^2=\sum_{j=1}^{J}{r\left(Y_j,{\hat{\pi}}_j\right)^2}$                                                             | Not given                  |
-| Hosmer-Lemeshow test | Yes                    | $\hat{C}=\sum_{k=1}^{g}\frac{\left(o_k-n_k^\prime{\bar{\pi}}_k\right)^2}{n_k^\prime{\bar{\pi}}_k(1-{\bar{\pi}}_k)}$ | `hoslem.test()`            |
+| Pearson residual     | Yes                    | $X^2=\sum_{j=1}^{J}{r\left(Y_j,{\widehat{\pi}}_j\right)^2}$                                                             | Not given                  |
+| Hosmer-Lemeshow test | Yes                    | $\widehat{C}=\sum_{k=1}^{g}\frac{\left(o_k-n_k^\prime{\bar{\pi}}_k\right)^2}{n_k^\prime{\bar{\pi}}_k(1-{\bar{\pi}}_k)}$ | `hoslem.test()`            |
 | AUC-ROC              | Kinda                  | Not given                                                                                                           | `auc(observed, predicted)` |
 | AIC                  | Only to compare models | $AIC = -2 \cdot \text{log-likelihood} + 2q$                                                                         | `AIC(model_name)`          |
 | BIC                  | Only to compare models | $BIC = -2 \cdot \text{log-likelihood} + q\text{log}(n)$                                                             | `BIC(model_name)`          |
@@ -90,6 +90,8 @@ source(here("lessons", "13_Model_diagnostics", "Logistic_Dx_Functions.R"))
     -   Zero cell count
     -   Complete separation
     -   Multicollinearity
+
+ 
 
 -   **Today:** We now use model diagnostics to identify any **observations** that the model does not fit well
 
@@ -127,7 +129,7 @@ Logistic Regression Assumptions
 :::
 
 - Back in [Lesson 5: Simple Logistic Regression](https://nwakim.github.io/BSTA_513_S25/lessons/05_Simple_logistic_reg/05_Simple_logistic_reg.html#/title-slide), we walk through linear regression assumptions that do not hold for logistic regression
-- Because our assumptions for logistic regression are a little different than liner regression, we **need different diagnostic tools** to assess observations that may be outliers or influential points
+- Because our assumptions for logistic regression are a little different than linear regression, we **need slightly different diagnostic tools** to assess observations that may be outliers or influential points
 
 # Learning Objectives
 
@@ -166,12 +168,12 @@ Logistic Regression Assumptions
  
 
 - **Main diagnostic measurements we will look at: **
-  - Standardized Pearson residuals, $\Delta X^2_j$ or $r^2_{sj}$
-  - Standardized Deviance residuals, $\Delta D_j$
+  - Change in standardized Pearson residuals, $\Delta X^2_j$
+  - Change in standardized Deviance residuals, $\Delta D_j$
   - Leverage, $h_j$
   - Change in coefficients, DFBETA or $\Delta \widehat{\beta}_j$
 
-## Hat Matrix and Leverage Values: Linear regression
+## Hat Matrix and Leverage Values: Linear regression {visibility="hidden"}
 
 -   We have learned “hat” matrix and leverage values from linear regression diagnostics
 
@@ -180,7 +182,7 @@ Logistic Regression Assumptions
 -   In linear regression, the hat matrix projects the outcome variable onto the covariate space: 
     
      
-    -   $H=X\left(X^\prime X\right)^{-1}X^\prime$ and $\hat{y}=Hy$
+    -   $H=X\left(X^\prime X\right)^{-1}X^\prime$ and $\widehat{y}=Hy$
 
      
 
@@ -191,23 +193,23 @@ Logistic Regression Assumptions
 -   The leverage is just the diagonal elements of the hat matrix, which is proportional to the distance of $x_j$ to the mean of the data $\overline{x}$
 
 
-## Hat Matrix and Leverage Values: Logistic regression
+## Hat Matrix and Leverage Values: Logistic regression {visibility="hidden"}
 
 -   In logistic regression model, the hat matrix is: $$H=V^\frac{1}{2}X\left(X^\prime V\ X\right)^{-1}X^\prime V^\frac{1}{2}$$
 
--   The leverage for covariate pattern $j$ is $$h_j=m_j\cdot\hat{\pi}\left(\textbf{x}_j\right)\left[1-\hat{\pi}\left(\textbf{x}_j\right)\right]\textbf{x}_j^\prime\left(\textbf{X}^\prime\textbf{VX}\right)^{-1}\textbf{x}_j=v_j\cdot b_j$$
+-   The leverage for covariate pattern $j$ is $$h_j=m_j\cdot\widehat{\pi}\left(\textbf{x}_j\right)\left[1-\widehat{\pi}\left(\textbf{x}_j\right)\right]\textbf{x}_j^\prime\left(\textbf{X}^\prime\textbf{VX}\right)^{-1}\textbf{x}_j=v_j\cdot b_j$$
 
     -   $b$:    weighted distance of $x_j$ from $\overline{x}$
     -   $v_j$:   model based estimator of the variance of $y_j$
 
-          -   $v_j=m_j\cdot\hat{\pi}\left(\textbf{x}_j\right)\left[1-\hat{\pi}\left(\textbf{x}_j\right)\right]$
+          -   $v_j=m_j\cdot\widehat{\pi}\left(\textbf{x}_j\right)\left[1-\widehat{\pi}\left(\textbf{x}_j\right)\right]$
 
 -   $h_j$ **reflects the relative influence of each covariate pattern on the model’s fit**
   - Specifically relating to the distance between $X_j$ and $\overline{X}$
 
-## Poll Everywhere Question 1
+## Poll Everywhere Question 1 {visibility="hidden"}
 
-## Poll Everywhere Question 2
+- Used to ask what $m_j$ represents 
 
 ## Diagnostic Statistics Computation (1/2)
 
@@ -230,15 +232,17 @@ Logistic Regression Assumptions
 
 -   Why prefer covariate patterns approach?
 
-    -   When the number of covariate pattern is much smaller than n, there is risk that we may fail to identify influential and/or poorly fit covariate patterns using individual based on residual
+    -   When the number of covariate pattern is much smaller than $n$, there is risk that we may fail to identify influential and/or poorly fit covariate patterns using individual based on residual
+    
+## Poll Everywhere Question 1
 
-## Diagnostic Statistics Computation (2/2)
+## Diagnostic Statistics Computation (2/2) {visibility="hidden"}
 
-Consider a covariate pattern with $m_j$ subjects, all did not have event (some $y_i = 0$). So the estimated logistic probability is $\widehat\pi_j$
+Consider a covariate pattern with $m_j$ subjects with estimated probability $\widehat\pi_j$
 
--   Pearson residual computed by individual $$r_i=-\sqrt{\frac{{\hat{\pi}}_j}{(1-{\hat{\pi}}_j)}}$$
+-   Pearson residual computed by individual $$r_i=-\sqrt{\frac{{\widehat{\pi}}_j}{(1-{\widehat{\pi}}_j)}}$$
 
--   Pearson residual computed by covariate pattern $$r_i=-\sqrt{m_j}\sqrt{\frac{{\hat{\pi}}_j}{(1-{\hat{\pi}}_j)}}$$
+-   Pearson residual computed by covariate pattern $$r_j=-\sqrt{m_j}\sqrt{\frac{{\widehat{\pi}}_j}{(1-{\widehat{\pi}}_j)}}$$
 
 -   **Difference between above residuals will be large if $m_j$ is large**: usually a problem if less covariate patterns
 
@@ -253,8 +257,8 @@ Consider a covariate pattern with $m_j$ subjects, all did not have event (some $
 
     -   Look at [change in residuals if a covariate pattern is excluded]{style="color:#70AD47"}
 
-        -   Standardized Pearson residual
-        -   Standardized Deviance residual
+        -   Change in standardized Pearson residual
+        -   Change in standardized Deviance residual
     
      
     
@@ -268,7 +272,7 @@ Consider a covariate pattern with $m_j$ subjects, all did not have event (some $
 
 -   *Don’t need to know this*: change in **standardized deviance statistic** due to deletion of subjects with covariate pattern $x_j$: $$\Delta D_j = \dfrac{d_j^2}{1-h_j}$$
 
--   Refer to *Lesson 12: Assessing Model Fit* for expression of Pearson residual
+-   Refer to [*Lesson 12: Assessing Model Fit*](https://nwakim.github.io/BSTA_513_S25/lessons/12_Assessing_fit/12_Assessing_fit.html#/pearson-residual) for expression of Pearson residual
 
 
 ## Change of Estimated Coefficients
@@ -279,8 +283,6 @@ Consider a covariate pattern with $m_j$ subjects, all did not have event (some $
 
 -   This is the logistic regression analog of Cook’s influence statistic (in linear regression)
 
-
-# 10 minute break
 
 # Learning Objectives
 
@@ -300,10 +302,10 @@ Consider a covariate pattern with $m_j$ subjects, all did not have event (some $
 
 -   Four plots for analysis of diagnostics in logistic regression:
 
-    -   $\Delta X_j^2$ vs. ${\hat{\pi}}_j$
-	  -   $\Delta D_j$ vs. ${\hat{\pi}}_j$
-	  -   $\Delta\widehat{\beta}_j$ vs. ${\hat{\pi}}_j$
-	  -   $h_j$ vs. ${\hat{\pi}}_j$
+    -   $\Delta X_j^2$ vs. ${\widehat{\pi}}_j$
+	  -   $\Delta D_j$ vs. ${\widehat{\pi}}_j$
+	  -   $\Delta\widehat{\beta}_j$ vs. ${\widehat{\pi}}_j$
+	  -   $h_j$ vs. ${\widehat{\pi}}_j$
 
 ## Recall the model we fit: GLOW Study with interactions
 
@@ -361,11 +363,11 @@ For each covariate pattern (which is each row) ...
 :::
 :::
 
-## Poll Everywhere Question 3
+## Poll Everywhere Question 2
 
 ## Visual Assessment for Diagnostics of Logistic Regression
 
--   The plots allow us to identify those covariate patterns that are…
+-   The plots allow us to identify those covariate patterns that are...
 
     -   Poorly fit 
 
@@ -375,48 +377,25 @@ For each covariate pattern (which is each row) ...
 
         -   Large values of $\Delta\widehat{\beta}_j$
         
--   If you are interested to look at the contribution of leverage (ℎ_𝑗) to the values of the diagnostic statistic, you may also look at plots of:
+-   If you are interested to look at the contribution of leverage ($h_j$) to the values of the diagnostic statistic, you may also look at plots of:
 
-    -   $\Delta X_j^2$ vs. ${\hat{\pi}}_j$
-	  -   $\Delta D_j$ vs. ${\hat{\pi}}_j$
-	  -   $\Delta\widehat{\beta}_j$ vs. ${\hat{\pi}}_j$
+    -   $\Delta X_j^2$ vs. ${\widehat{\pi}}_j$
+	  -   $\Delta D_j$ vs. ${\widehat{\pi}}_j$
+	  -   $\Delta\widehat{\beta}_j$ vs. ${\widehat{\pi}}_j$
 
-## GLOW study: standardized Pearson residuals
-
-::: columns
-::: column
--   Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with $y_j = 1$
-
-    -   Opposite corresponds to $y_j = 0$
-:::
-
-::: column
-```{r fig.height=7, fig.width=8}
-#| code-fold: true
-#| code-summary: "To make the plot"
-
-ggplot(dx_glow) + geom_point(aes(x=P, y=dChisq), size = 3) + 
-  xlab("Estimated/Predicted Probability of Fracture") +
-  ylab("Change in Std. Pearson Residual") +
-  theme(text = element_text(size = 26))
-```
-:::
-:::
-
-## GLOW study: standardized Pearson residuals
+## GLOW study: Change in standardized Pearson residuals
 
 ::: columns
 ::: column
--   Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with $y_j = 1$
+-   Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with $Y_j = 1$
 
-    -   Opposite corresponds to $y_j = 0$
-    
+    -   Opposite corresponds to $Y_j = 0$
+
 -   Points in the top left or top right corners identify the covariate patterns that are poorly fit 
 
 -   We may use 4 as a crude approximation to the upper 95th percentile for $\Delta X_j^2$
 
     -   95th percentile of chi-squared distribution is 3.84
-
 :::
 
 ::: column
@@ -424,21 +403,25 @@ ggplot(dx_glow) + geom_point(aes(x=P, y=dChisq), size = 3) +
 #| code-fold: true
 #| code-summary: "To make the plot"
 
-ggplot(dx_glow) + geom_point(aes(x=P, y=dChisq), size = 3) + 
+ggplot(dx_glow) + 
+  geom_hline(yintercept = 4, col = "red", linetype="dashed", size=2) +
+  geom_point(aes(x=P, y=dChisq), size = 3) + 
   xlab("Estimated/Predicted Probability of Fracture") +
   ylab("Change in Std. Pearson Residual") +
-  theme(text = element_text(size = 26))
+  theme(text = element_text(size = 26)) + 
+  xlim(0,1)
 ```
 :::
 :::
 
-## GLOW study: standardized Pearson residuals
+
+## GLOW study: Change in standardized Pearson residuals
 
 ::: columns
 ::: column
--   Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with $y_j = 1$
+-   Generally, the points that curve from top left to bottom right of plot correspond to covariate patterns with $Y_j = 1$
 
-    -   Opposite corresponds to $y_j = 0$
+    -   Opposite corresponds to $Y_j = 0$
     
 -   Points in the top left or top right corners identify the covariate patterns that are poorly fit 
 
@@ -449,7 +432,8 @@ ggplot(dx_glow) + geom_point(aes(x=P, y=dChisq), size = 3) +
 -   Which point is over 4?
 
 ```{r}
-dx_glow %>% filter(dChisq > 4) %>% select(priorfracYes, age_c, P, dChisq)
+dx_glow %>% filter(dChisq > 4) %>% 
+  select(priorfracYes, age_c, P, dChisq)
 ```
 
 :::
@@ -459,15 +443,18 @@ dx_glow %>% filter(dChisq > 4) %>% select(priorfracYes, age_c, P, dChisq)
 #| code-fold: true
 #| code-summary: "To make the plot"
 
-ggplot(dx_glow) + geom_point(aes(x=P, y=dChisq), size = 3) + 
+ggplot(dx_glow) + 
+  geom_hline(yintercept = 4, col = "red", linetype="dashed", size=2) +
+  geom_point(aes(x=P, y=dChisq), size = 3) + 
   xlab("Estimated/Predicted Probability of Fracture") +
   ylab("Change in Std. Pearson Residual") +
-  theme(text = element_text(size = 26))
+  theme(text = element_text(size = 26)) + 
+  xlim(0,1)
 ```
 :::
 :::
 
-## GLOW study: standardized Deviance residuals
+## GLOW study: Change in standardized Deviance residuals
 
 ::: columns
 ::: column
@@ -491,10 +478,12 @@ dx_glow %>% filter(dDev > 4) %>%
 #| code-fold: true
 #| code-summary: "To make the plot"
 
-ggplot(dx_glow) + geom_point(aes(x=P, y=dDev), size = 3) + 
+ggplot(dx_glow) + 
+  geom_hline(yintercept = 4, col = "red", linetype="dashed", size=2) +
+  geom_point(aes(x=P, y=dDev), size = 3) + 
   xlab("Estimated/Predicted Probability of Fracture") +
   ylab("Change in Std. Deviance Residual") +
-  theme(text = element_text(size = 26))
+  theme(text = element_text(size = 26)) + xlim(0, 1)
 ```
 :::
 :::
@@ -520,10 +509,12 @@ dx_glow %>% filter(dBhat > 0.075) %>%
 #| code-fold: true
 #| code-summary: "To make the plot"
 
-ggplot(dx_glow) + geom_point(aes(x=P, y=dBhat), size = 3) + 
+ggplot(dx_glow) + 
+  geom_hline(yintercept = 1, col = "red", linetype="dashed", size=2) +
+  geom_point(aes(x=P, y=dBhat), size = 3) + 
   xlab("Estimated/Predicted Probability of Fracture") +
   ylab("Change in Coefficient Estimates") +
-  theme(text = element_text(size = 26))
+  theme(text = element_text(size = 26)) + xlim(0,1)
 ```
 :::
 :::
@@ -556,10 +547,12 @@ dx_glow %>% filter(h > 3*4/500) %>%
 #| code-fold: true
 #| code-summary: "To make the plot"
 
-ggplot(dx_glow) + geom_point(aes(x=P, y=h), size=3) + 
+ggplot(dx_glow) + 
+  geom_hline(yintercept = 3*4/500, col = "red", linetype="dashed", size=2) +
+  geom_point(aes(x=P, y=h), size=3) + 
   xlab("Estimated/Predicted Probability of Fracture") +
   ylab("Leverage") +
-  theme(text = element_text(size = 26))
+  theme(text = element_text(size = 26)) + xlim(0, 1)
 ```
 :::
 :::

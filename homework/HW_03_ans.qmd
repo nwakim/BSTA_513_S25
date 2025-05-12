@@ -137,10 +137,10 @@ Not given
 
 #### Part f
 
-From the above model, fill out the following table for the odds ratios. Note, you will only need to report two odds ratios and you already have one from Part d.
+From the above model, fill out the following table for the odds ratios. Note, you will only need to report two odds ratios and you already have one from Part d & e.
 
 | Cancer | Infection | Estimated odds ratio | 95% CI |
-|--------------------|-------------------|-----------------|-----------------|
+|-------------------|------------------|------------------|------------------|
 | Cancer part of present problem | Infection probable at ICU intake |  |  |
 |  |       No |  |  |
 |  |       Yes | FILL HERE | FILL HERE |
@@ -150,13 +150,34 @@ From the above model, fill out the following table for the odds ratios. Note, yo
 
 This is a really good way to report odds ratios for interactions between two categorical predictors! Might want to keep this in mind for your project!!
 
+**Answer:**
+
+::: blue
+| Cancer | Infection | Estimated odds ratio | 95% CI |
+|-------------------|------------------|------------------|------------------|
+| Cancer part of present problem | Infection probable at ICU intake |  |  |
+|  |       No |  |  |
+|  |       Yes | 0.556 | Not given |
+| Cancer not part of present problem | Infection probable at ICU intake |  |  |
+|  |       No |  |  |
+|  |       Yes | 2.949 | Not given |
+:::
+
 #### Part g
 
 Interpret the odds ratio from the table in Part e. Please include the 95% confidence interval. What do you notice about the odds ratios (Hint: Think back to my last slides in Lesson 10: Interactions)?
 
+::: blue
+Not given
+:::
+
 #### Part h
 
 Compute the predicted probability for a subject who does not have a present issue with cancer nor an infection upon admittance to the ICU. Compute the 95% confidence interval for the predicted probability. Can you use the Normal approximation?
+
+::: blue
+
+:::
 
 #### Part i
 
@@ -171,16 +192,21 @@ Building off of Part e, fill out the following table for predicted probabilities
 |  |       No | FILL HERE | FILL HERE |
 |  |       Yes | FILL HERE | FILL HERE |
 
+::: blue
+:::
+
 #### Part j
 
 Interpret the predicted probability from Part g, including the confidence interval.
 
+::: blue
+:::
+
 ### Question 2
 
-We will continue with the same dataset from Question 1 above. 
+We will continue with the same dataset from Question 1 above.
 
-We will use the model from Homework 4 Question 1a for this question: 
-$$\text{logit}(\pi(\textbf{X}))=\beta_0 + \beta_1 \cdot AGE + \beta_2 \cdot CAN + \beta_3 \cdot CPR + \\ \beta_4 \cdot INF$$
+We will use the model from Homework 4 Question 1a for this question: $$\text{logit}(\pi(\textbf{X}))=\beta_0 + \beta_1 \cdot AGE + \beta_2 \cdot CAN + \beta_3 \cdot CPR + \\ \beta_4 \cdot INF$$
 
 ```{r message=FALSE, warning=FALSE}
 icu = read_csv(here("data", "icu.csv"))
@@ -196,11 +222,18 @@ icu2 = icu1 %>% mutate(CAN = as.factor(CAN) %>% relevel(ref = "No"),
 
 Assess the fit of the above model. You may use Hosmer-Lemeshow test or Pearson Residual as appropriate. Discuss your choice and interpret.
 
+::: blue
+:::
+
 #### Part b
 
-Assess the your models ability to discriminate vital status (STA) using AUC. 
+Assess the your models ability to discriminate vital status (STA) using AUC.
+
+::: blue
+:::
 
 #### Part c
+
 Let's say a colleague found a different preliminary final model than yours. Using the below model that your colleague found, compare your model to theirs using AIC and BIC.
 
 ```{r message=FALSE, warning=FALSE}
@@ -209,8 +242,13 @@ coll_model = glm(STA ~ SYS + AGE + CPR + INF + AGE*CPR,
 coll_model
 ```
 
-### Question 2
+::: blue
+:::
+
+### Question 3
+
 This question stems from an example from an [online textbook](https://bookdown.org/rwnahhas/RMPH/) by Dr. Ramzi W. Nahhas. The dataset for this problem includes a subset of individuals from the 2019 National Survey on Drug Use and Health (NSDUH). Overall, our study aims included investigating potential risk factors for lifetime heroin use. Lifetime heroin use is a binary outcome, which we regress on age at first use of alcohol (alc_agefirst), age with 6 categories (demog_age_cat6), and sex assigned at birth (demog_sex).
+
 ```{r echo=TRUE}
 load(here("data", "nsduh2019_adult_sub_rmph.RData"))
 nsduh = nsduh_adult_sub %>% 
@@ -218,44 +256,69 @@ nsduh = nsduh_adult_sub %>%
   drop_na()
 ```
 
-#### Part a 
-Using the `nsduh` dataset from the above chunk of code, please run a regression model and present the model summary using lifetime heroin use as our outcome, and age at first use of alcohol, categorical age, and sex assigned at birth as covariates in our model. No need to write out your model, you just need to write the R code to run it. 
+#### Part a
 
+Using the `nsduh` dataset from the above chunk of code, please run a regression model and present the model summary using lifetime heroin use as our outcome, and age at first use of alcohol, categorical age, and sex assigned at birth as covariates in our model. No need to write out your model, you just need to write the R code to run it.
+
+::: blue
+:::
 
 #### Part b
-Are we encountering a numerical problem with our regression? If yes, please name the numerical issue. What first clued you into that issue? Provide conclusive evidence of this numerical issue (with a contingency table), and explain which variable(s) are causing this problem. 
 
+Are we encountering a numerical problem with our regression? If yes, please name the numerical issue. What first clued you into that issue? Provide conclusive evidence of this numerical issue (with a contingency table), and explain which variable(s) are causing this problem.
+
+::: blue
+:::
 
 #### Part c
+
 What would you do to "fix" this numerical issue? Please apply your "fix" and rerun the regression
+
+::: blue
+:::
 
 ## Questions Part 2
 
 The following questions are intended to give you **practice in connecting concepts** that will help you make decisions in real world applications.
 
-### Question 2
+::: blue
+:::
+
+### Question 4
 
 Using a similar table to the one in Lesson 8, go back through the parts in this homework and determine which test can be run.
 
 |   | Wald test/CI | Score test | LRT |
-|--------------------|------------------|------------------|------------------|
+|-------------------|------------------|------------------|------------------|
 | Question 1, Part c: testing group of variables |  |  |  |
 | Question 1, Part d: testing interaction |  |  |  |
 | Question 2, Part e: creating 95% CI for main effects |  |  |  |
 | Question 2, Part f: creating 95% CI for odds ratios |  |  |  |
 
-### Question 3
+::: blue
+:::
+
+### Question 5
 
 Look back at our slides for interactions, [particularly the last slide](https://nwakim.github.io/BSTA_513_S25/lessons/10_Interactions/10_Interactions.html#/how-would-i-report-these-results).
 
 #### Part a
 
-In the lecture, we investigated an interaction between a binary variable and a continuous variable. In Question 1 of this homework, we investigated an interaction between two binary variables. What about the variables types were different? How did this change the presentation of estimated odds ratios and predicted probabilities? 
+In the lecture, we investigated an interaction between a binary variable and a continuous variable. In Question 1 of this homework, we investigated an interaction between two binary variables. What about the variables types were different? How did this change the presentation of estimated odds ratios and predicted probabilities?
+
+::: blue
+:::
 
 #### Part b
 
 How would you present the odds ratios and predicted probabilities if we had an interaction between a 3-category multilevel variable and a continuous variable?
 
+::: blue
+:::
+
 #### Part c
 
 How would you present the odds ratios and predicted probabilities if we had an interaction between a 4-category multilevel variable and a binary variable?
+
+::: blue
+:::
