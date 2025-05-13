@@ -4,7 +4,7 @@ subtitle: "With an emphasis on prediction"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "05/22/2024"
+date: "05/14/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"

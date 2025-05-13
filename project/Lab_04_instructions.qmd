@@ -20,6 +20,8 @@ execute:
 ---
 
 ::: callout-caution
+I made some additional edits on 5/13. No longer need to do the HL test and added a requirement if you do purposeful model selection.
+
 Ready to go! (5/6/25)
 :::
 
@@ -63,21 +65,40 @@ I have left it up to you to load the needed packages for this lab.
 Please restate your research question below using the provided format (1 sentence). You can change the wording if you'd like, but please make sure it is still clear. It’s repetitive, but it helps me contextualize my feedback as I look through your lab.
 :::
 
-In this study, we will investigate the association between food insecurity and ________. 
+In this study, we will investigate the association between food insecurity and \_\_\_\_\_\_\_\_.
 
 ### Build your model
 
-This lab is very open-ended. You will need to build a model for your outcome. You can focus on (1) prediction modeling and LASSO regression or (2) association modeling and purposeful model selection. We discussed prediction modeling in Lesson 14. We discussed association modeling in [BSTA 512/612](https://nwakim.github.io/BSTA_512_W25/schedule.html), also Lesson 14.
+You will need to build a model for your outcome. You can focus on (1) prediction modeling and LASSO regression or (2) association modeling and purposeful model selection. We discussed prediction modeling in Lesson 14. We discussed association modeling in [BSTA 512/612](https://nwakim.github.io/BSTA_512_W25/schedule.html), also Lesson 14.
 
-**You may either use LASSO regression *OR* Purposeful model selection to build a model.** I highly suggest picking the model selection strategy based on your desired learning objective. LASSO will help stretch your R coding and machine learning skills. Purposeful model selection will allow you to cement many concepts that we learned within 512/612 and 513/613. 
+**For this activity, you may either:**
+
+1.  **Use LASSO to build a model with no interactions**
+2.  **Use Purposeful model selection to build a model with at least one interaction**
+
+I highly suggest picking the model selection strategy based on your desired learning objective. LASSO will help stretch your R coding and machine learning skills. Purposeful model selection will allow you to cement many concepts that we learned within 512/612 and 513/613.
 
 I will not be taking you through step-by-step. Please follow my work from Lesson 14 in 513/613 or from [Lab 4](https://nwakim.github.io/BSTA_512_W25/labs/Lab_04_instructions.html) in 512/612.
 
+::: callout-important
+#### Task
+
+You may either:
+
+1.  Use LASSO to build a model with no interactions
+2.  Use Purposeful model selection to build a model with at least one interaction
+:::
+
 ### Assess your model fit
 
-Check if your model fits the data well (Hosmer-Lemeshow test). Calculate the ROC-AUC of your model. 
+::: callout-important
+#### Task
+Calculate the ROC-AUC of your model.
+:::
 
 ### Perform model diagnostics
 
+::: callout-important
+#### Task
 Check your diagnostic plots and cutoffs (change in Pearson residuals, change in coefficients, and leverage) to identify and investigate any influential or outlier observations. Are these observations feasible?
-
+:::

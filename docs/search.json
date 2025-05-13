@@ -4582,7 +4582,7 @@
     "href": "project/Lab_04_instructions.html",
     "title": "Lab 4 Instructions",
     "section": "",
-    "text": "Caution\n\n\n\nReady to go! (5/6/25)"
+    "text": "Caution\n\n\n\nI made some additional edits on 5/13. No longer need to do the HL test and added a requirement if you do purposeful model selection.\nReady to go! (5/6/25)"
   },
   {
     "objectID": "project/Lab_04_instructions.html#directions",
@@ -4596,7 +4596,7 @@
     "href": "project/Lab_04_instructions.html#lab-activities",
     "title": "Lab 4 Instructions",
     "section": "2 Lab activities",
-    "text": "2 Lab activities\n\n\n\n\n\n\nNote\n\n\n\nI have left it up to you to load the needed packages for this lab.\n\n\n\n2.1 Restate research question\n\n\n\n\n\n\nTask\n\n\n\nPlease restate your research question below using the provided format (1 sentence). You can change the wording if you’d like, but please make sure it is still clear. It’s repetitive, but it helps me contextualize my feedback as I look through your lab.\n\n\nIn this study, we will investigate the association between food insecurity and ________.\n\n\n2.2 Build your model\nThis lab is very open-ended. You will need to build a model for your outcome. You can focus on (1) prediction modeling and LASSO regression or (2) association modeling and purposeful model selection. We discussed prediction modeling in Lesson 14. We discussed association modeling in BSTA 512/612, also Lesson 14.\nYou may either use LASSO regression OR Purposeful model selection to build a model. I highly suggest picking the model selection strategy based on your desired learning objective. LASSO will help stretch your R coding and machine learning skills. Purposeful model selection will allow you to cement many concepts that we learned within 512/612 and 513/613.\nI will not be taking you through step-by-step. Please follow my work from Lesson 14 in 513/613 or from Lab 4 in 512/612.\n\n\n2.3 Assess your model fit\nCheck if your model fits the data well (Hosmer-Lemeshow test). Calculate the ROC-AUC of your model.\n\n\n2.4 Perform model diagnostics\nCheck your diagnostic plots and cutoffs (change in Pearson residuals, change in coefficients, and leverage) to identify and investigate any influential or outlier observations. Are these observations feasible?"
+    "text": "2 Lab activities\n\n\n\n\n\n\nNote\n\n\n\nI have left it up to you to load the needed packages for this lab.\n\n\n\n2.1 Restate research question\n\n\n\n\n\n\nTask\n\n\n\nPlease restate your research question below using the provided format (1 sentence). You can change the wording if you’d like, but please make sure it is still clear. It’s repetitive, but it helps me contextualize my feedback as I look through your lab.\n\n\nIn this study, we will investigate the association between food insecurity and ________.\n\n\n2.2 Build your model\nYou will need to build a model for your outcome. You can focus on (1) prediction modeling and LASSO regression or (2) association modeling and purposeful model selection. We discussed prediction modeling in Lesson 14. We discussed association modeling in BSTA 512/612, also Lesson 14.\nFor this activity, you may either:\n\nUse LASSO to build a model with no interactions\nUse Purposeful model selection to build a model with at least one interaction\n\nI highly suggest picking the model selection strategy based on your desired learning objective. LASSO will help stretch your R coding and machine learning skills. Purposeful model selection will allow you to cement many concepts that we learned within 512/612 and 513/613.\nI will not be taking you through step-by-step. Please follow my work from Lesson 14 in 513/613 or from Lab 4 in 512/612.\n\n\n\n\n\n\nTask\n\n\n\nYou may either:\n\nUse LASSO to build a model with no interactions\nUse Purposeful model selection to build a model with at least one interaction\n\n\n\n\n\n2.3 Assess your model fit\n\n\n\n\n\n\nTask\n\n\n\nCalculate the ROC-AUC of your model.\n\n\n\n\n2.4 Perform model diagnostics\n\n\n\n\n\n\nTask\n\n\n\nCheck your diagnostic plots and cutoffs (change in Pearson residuals, change in coefficients, and leverage) to identify and investigate any influential or outlier observations. Are these observations feasible?"
   },
   {
     "objectID": "project.html#labs",
@@ -8894,14 +8894,14 @@
     "href": "project/LastName_FirstInit_Lab_04.html",
     "title": "Lab 4",
     "section": "",
-    "text": "This is your editing file. Please do not remove anything from this editing file!! You will only add your code and work to this file.\n\n\nThe purpose of this lab is to fit a multiple logistic regression model and practice how we would interpret our results for this study."
+    "text": "This is your editing file. Please do not remove anything from this editing file!! You will only add your code and work to this file."
   },
   {
     "objectID": "project/LastName_FirstInit_Lab_04.html#directions",
     "href": "project/LastName_FirstInit_Lab_04.html#directions",
     "title": "Lab 4",
     "section": "",
-    "text": "This is your editing file. Please do not remove anything from this editing file!! You will only add your code and work to this file.\n\n\nThe purpose of this lab is to fit a multiple logistic regression model and practice how we would interpret our results for this study."
+    "text": "This is your editing file. Please do not remove anything from this editing file!! You will only add your code and work to this file."
   },
   {
     "objectID": "project/LastName_FirstInit_Lab_04.html#lab-activities",
@@ -9531,7 +9531,7 @@
     "href": "lessons/14_Model_building/14_Model_Building.html#step-1-splitting-data-1",
     "title": "Lesson 15: Model Building",
     "section": "Step 1: Splitting data",
-    "text": "Step 1: Splitting data\n\n\n\n\nTraining set\n\n\n\nSandbox for model building\nSpend most of your time using the training set to develop the model\nMajority of the data (usually 80%)\n\n\n\n\n\n\nTesting set\n\n\n\nHeld in reserve to determine efficacy of one or two chosen models\nCritical to look at it once at the end, otherwise it becomes part of the modeling process\nRemainder of the data (usually 20%)\n\n\n\n\n\n     \n \n\nSlide content from Data Science in a Box"
+    "text": "Step 1: Splitting data\n\n\n\n\nTraining set\n\n\n\nSandbox for model building\nSpend most of your time using the training set to develop the model\nMajority of the data (usually 80%)\n\n\n\n\n\n\nTesting set\n\n\n\nHeld in reserve to determine efficacy of one or two chosen models\nCritical to look at it once at the end, otherwise it becomes part of the modeling process\nRemainder of the data (usually 20%)\n\n\n\n\n     \n \n\nSlide content from Data Science in a Box"
   },
   {
     "objectID": "lessons/14_Model_building/14_Model_Building.html#poll-everywhere-question-3",
@@ -9545,7 +9545,7 @@
     "href": "lessons/14_Model_building/14_Model_Building.html#step-1-splitting-data-2",
     "title": "Lesson 15: Model Building",
     "section": "Step 1: Splitting data",
-    "text": "Step 1: Splitting data\n\nWhen splitting data, we need to be conscious of the proportions of our outcomes\n\nIs there imbalance within our outcome?\nWe want to randomly select observations but make sure the proportions of No and Yes stay the same\nWe stratify by the outcome, meaning we pick Yes’s and No’s separately for the training set\n\n\n\nggplot(glow1, aes(x = fracture)) + geom_bar()\n\n\n\n\n\n\n\n\n\nSide note: took out bmi and weight bc we have multicollinearity issues\n\nCombo of I hate these variables and my previous work in the LASSO identified these as not important\n\n\n\nglow = glow1 %&gt;%\n    dplyr::select(-sub_id, -site_id, -phy_id, -age, -bmi, -weight)"
+    "text": "Step 1: Splitting data\n\nWhen splitting data, we need to be conscious of the proportions of our outcomes\n\nIs there imbalance within our outcome?\nWe want to randomly select observations but make sure the proportions of No and Yes stay the same\nWe stratify by the outcome, meaning we pick Yes’s and No’s separately for the training set\n\n\n\nggplot(glow1, aes(x = fracture)) + geom_bar()\n\n\n\nSide note: took out bmi and weight bc we have multicollinearity issues\n\nCombo of I hate these variables and my previous work in the LASSO identified these as not important\n\n\n\nglow = glow1 %&gt;%\n    dplyr::select(-sub_id, -site_id, -phy_id, -age, -bmi, -weight)"
   },
   {
     "objectID": "lessons/14_Model_building/14_Model_Building.html#step-1-splitting-data-3",
@@ -9580,7 +9580,7 @@
     "href": "lessons/14_Model_building/14_Model_Building.html#step-2-fit-lasso-main-effects-identify-variables",
     "title": "Lesson 15: Model Building",
     "section": "Step 2: Fit LASSO: Main effects: Identify variables",
-    "text": "Step 2: Fit LASSO: Main effects: Identify variables\n\nlibrary(vip)  \n\n\nAttaching package: 'vip'\n\n\nThe following object is masked from 'package:utils':\n\n    vi\n\nvi_data_main = glow_fit_main %&gt;% \n    pull_workflow_fit() %&gt;%\n    vi(lambda = 0.001) %&gt;%\n    filter(Importance != 0)\n\nWarning: `pull_workflow_fit()` was deprecated in workflows 0.2.3.\nℹ Please use `extract_fit_parsnip()` instead.\n\nvi_data_main\n\n# A tibble: 9 × 3\n  Variable         Importance Sign \n  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;\n1 raterisk_Greater     0.559  POS  \n2 momfrac_Yes          0.542  POS  \n3 priorfrac_Yes        0.493  POS  \n4 raterisk_Same        0.438  POS  \n5 smoke_Yes            0.376  NEG  \n6 premeno_Yes          0.285  POS  \n7 fracscore            0.197  POS  \n8 armassist_Yes        0.146  POS  \n9 height               0.0382 NEG  \n\n\n\nLooks like age is removed!"
+    "text": "Step 2: Fit LASSO: Main effects: Identify variables\n\nlibrary(vip)  \nvi_data_main = glow_fit_main %&gt;% \n    pull_workflow_fit() %&gt;%\n    vi(lambda = 0.001) %&gt;%\n    filter(Importance != 0)\nvi_data_main\n\n# A tibble: 9 × 3\n  Variable         Importance Sign \n  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;\n1 raterisk_Greater     0.559  POS  \n2 momfrac_Yes          0.542  POS  \n3 priorfrac_Yes        0.493  POS  \n4 raterisk_Same        0.438  POS  \n5 smoke_Yes            0.376  NEG  \n6 premeno_Yes          0.285  POS  \n7 fracscore            0.197  POS  \n8 armassist_Yes        0.146  POS  \n9 height               0.0382 NEG  \n\n\n\nLooks like age is removed!"
   },
   {
     "objectID": "lessons/14_Model_building/14_Model_Building.html#step-2-fit-lasso-main-effects-interactions",
@@ -9608,7 +9608,7 @@
     "href": "lessons/14_Model_building/14_Model_Building.html#step-2-fit-lasso-identify-interactions-2",
     "title": "Lesson 15: Model Building",
     "section": "Step 2: Fit LASSO: Identify interactions",
-    "text": "Step 2: Fit LASSO: Identify interactions\n\nI combed through the column names of the results to find the interactions\n\nI used ChatGPT to help me because I’m pretty new to tidymodels: let’s view what I asked\n\n\n\ninteractions = vi_data_int %&gt;% filter(grepl(\"_x_\", Variable)) %&gt;%\n                select(Variable) %&gt;% separate(Variable, \"_x_\")\n\nWarning: Expected 1 pieces. Additional pieces discarded in 29 rows [1, 2, 3, 4, 5, 6, 7,\n8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...].\n\ninteraction_terms = ~ (all_predictors()^2) - #Makes interactions b/w all predictors\n                      fracscore:starts_with(\"premeno\") - # Removes this interaction\n                      height:starts_with(\"premeno\") - \n                      height:starts_with(\"smoke\") - \n                      height:starts_with(\"momfrac\")"
+    "text": "Step 2: Fit LASSO: Identify interactions\n\nI combed through the column names of the results to find the interactions\n\nI used ChatGPT to help me because I’m pretty new to tidymodels: let’s view what I asked\n\n\n\ninteractions = vi_data_int %&gt;% filter(grepl(\"_x_\", Variable)) %&gt;%\n                select(Variable) %&gt;% separate(Variable, \"_x_\")\n                \n\ninteraction_terms = ~ (all_predictors()^2) - #Makes interactions b/w all predictors\n                      fracscore:starts_with(\"premeno\") - # Removes this interaction\n                      height:starts_with(\"premeno\") - \n                      height:starts_with(\"smoke\") - \n                      height:starts_with(\"momfrac\")"
   },
   {
     "objectID": "lessons/14_Model_building/14_Model_Building.html#step-2-fit-lasso-create-recipe-and-fit-model-from-lasso",

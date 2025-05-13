@@ -35,11 +35,6 @@ library(here)
 
 This is your **editing** file. **Please do not remove anything from this editing file!!** You will only add your code and work to this file.
 
-### Purpose
-
-The purpose of this lab is to fit a multiple logistic regression model and practice how we would interpret our results for this study.
-
-
 ## Lab activities
 
 ::: callout-note
