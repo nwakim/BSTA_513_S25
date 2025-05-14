@@ -36,9 +36,11 @@ Homework is ready to go!! (5/5/2025)
 
 ## Purpose
 
-This homework is designed to help you practice the following important skills and knowledge that we covered in Lesson 10:
+This homework is designed to help you practice the following important skills and knowledge that we covered in Lesson 10-12:
 
 -   A bunch of work on interactions
+-   Identifying numerical problems and thinking through potential fixes
+-   Assessing overall measure of model fit
 
 ## Directions
 
@@ -115,6 +117,10 @@ Compute the predicted probability for a subject who does not have a present issu
 
 #### Part i
 
+Interpret the predicted probability from Part h (right above), including the confidence interval.
+
+#### Part j
+
 Building off of Part e, fill out the following table for predicted probabilities. What do you notice about the predicted probabilities (Hint: Think back to my last slides in Lesson 10: Interactions)?
 
 | Cancer | Infection | Predicted probability | 95% CI |
@@ -125,10 +131,6 @@ Building off of Part e, fill out the following table for predicted probabilities
 | Cancer not part of present problem | Infection probable at ICU intake |  |  |
 |  |       No | FILL HERE | FILL HERE |
 |  |       Yes | FILL HERE | FILL HERE |
-
-#### Part j
-
-Interpret the predicted probability from Part g, including the confidence interval.
 
 ### Question 2
 
@@ -166,6 +168,7 @@ coll_model = glm(STA ~ SYS + AGE + CPR + INF + AGE*CPR,
 ```
 
 ### Question 3
+
 This question stems from an example from an [online textbook](https://bookdown.org/rwnahhas/RMPH/) by Dr. Ramzi W. Nahhas. The dataset for this problem includes a subset of individuals from the 2019 National Survey on Drug Use and Health (NSDUH). Overall, our study aims included investigating potential risk factors for lifetime heroin use. Lifetime heroin use is a binary outcome, which we regress on age at first use of alcohol (alc_agefirst), age with 6 categories (demog_age_cat6), and sex assigned at birth (demog_sex).
 ```{r echo=TRUE}
 load(here("data", "nsduh2019_adult_sub_rmph.RData"))

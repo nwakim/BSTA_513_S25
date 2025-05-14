@@ -176,10 +176,18 @@ Not given
 Compute the predicted probability for a subject who does not have a present issue with cancer nor an infection upon admittance to the ICU. Compute the 95% confidence interval for the predicted probability. Can you use the Normal approximation?
 
 ::: blue
-
+0.126
 :::
 
 #### Part i
+
+Interpret the predicted probability from Part h (right above), including the confidence interval.
+
+::: blue
+Not given
+:::
+
+#### Part j
 
 Building off of Part e, fill out the following table for predicted probabilities. What do you notice about the predicted probabilities (Hint: Think back to my last slides in Lesson 10: Interactions)?
 
@@ -193,20 +201,21 @@ Building off of Part e, fill out the following table for predicted probabilities
 |  |       Yes | FILL HERE | FILL HERE |
 
 ::: blue
-:::
-
-#### Part j
-
-Interpret the predicted probability from Part g, including the confidence interval.
-
-::: blue
+| Cancer | Infection | Predicted probability | 95% CI |
+|-------------------|------------------|------------------|------------------|
+| Cancer part of present problem | Infection probable at ICU intake |  |  |
+|  |       No |  | 0.002, 0.460 |
+|  |       Yes | 0.143 |  |
+| Cancer not part of present problem | Infection probable at ICU intake |  |  |
+|  |       No | 0.126 |  |
+|  |       Yes |  | 0.196, 0.401 |
 :::
 
 ### Question 2
 
 We will continue with the same dataset from Question 1 above.
 
-We will use the model from Homework 4 Question 1a for this question: $$\text{logit}(\pi(\textbf{X}))=\beta_0 + \beta_1 \cdot AGE + \beta_2 \cdot CAN + \beta_3 \cdot CPR + \\ \beta_4 \cdot INF$$
+We will use the model from Homework 4 Question 1a for this question: $$\text{logit}(\pi(\textbf{X}))=\beta_0 + \beta_1 \cdot AGE + \beta_2 \cdot I(CAN=\text{``Yes"}) + \beta_3 \cdot I(CPR=\text{``Yes"}) + \\ \beta_4 \cdot I(INF=\text{``Yes"})$$
 
 ```{r message=FALSE, warning=FALSE}
 icu = read_csv(here("data", "icu.csv"))
@@ -223,6 +232,7 @@ icu2 = icu1 %>% mutate(CAN = as.factor(CAN) %>% relevel(ref = "No"),
 Assess the fit of the above model. You may use Hosmer-Lemeshow test or Pearson Residual as appropriate. Discuss your choice and interpret.
 
 ::: blue
+Model does not fit data well
 :::
 
 #### Part b
@@ -230,6 +240,7 @@ Assess the fit of the above model. You may use Hosmer-Lemeshow test or Pearson R
 Assess the your models ability to discriminate vital status (STA) using AUC.
 
 ::: blue
+AUC = 0.6912
 :::
 
 #### Part c
@@ -243,6 +254,7 @@ coll_model
 ```
 
 ::: blue
+Not given
 :::
 
 ### Question 3
@@ -261,6 +273,18 @@ nsduh = nsduh_adult_sub %>%
 Using the `nsduh` dataset from the above chunk of code, please run a regression model and present the model summary using lifetime heroin use as our outcome, and age at first use of alcohol, categorical age, and sex assigned at birth as covariates in our model. No need to write out your model, you just need to write the R code to run it.
 
 ::: blue
+```{r}
+#| warning: false
+#| echo: false
+her_model = glm(her_lifetime ~ alc_agefirst + demog_age_cat6 +
+                demog_sex, family = binomial, data = nsduh)
+
+m_tidy = tidy(her_model, conf.int = T) 
+
+m_tidy %>% gt() %>% 
+  tab_options(table.font.size = 16) %>%
+  fmt_number(decimals = 3)
+```
 :::
 
 #### Part b
@@ -268,6 +292,7 @@ Using the `nsduh` dataset from the above chunk of code, please run a regression 
 Are we encountering a numerical problem with our regression? If yes, please name the numerical issue. What first clued you into that issue? Provide conclusive evidence of this numerical issue (with a contingency table), and explain which variable(s) are causing this problem.
 
 ::: blue
+Yes
 :::
 
 #### Part c
@@ -275,14 +300,12 @@ Are we encountering a numerical problem with our regression? If yes, please name
 What would you do to "fix" this numerical issue? Please apply your "fix" and rerun the regression
 
 ::: blue
+Not given
 :::
 
 ## Questions Part 2
 
 The following questions are intended to give you **practice in connecting concepts** that will help you make decisions in real world applications.
-
-::: blue
-:::
 
 ### Question 4
 
@@ -296,6 +319,14 @@ Using a similar table to the one in Lesson 8, go back through the parts in this 
 | Question 2, Part f: creating 95% CI for odds ratios |  |  |  |
 
 ::: blue
+One row filled out:
+
+|   | Wald test/CI | Score test | LRT |
+|-------------------|------------------|------------------|------------------|
+| Question 1, Part c: testing group of variables | No | No | Yes |
+| Question 1, Part d: testing interaction |  |  |  |
+| Question 2, Part e: creating 95% CI for main effects |  |  |  |
+| Question 2, Part f: creating 95% CI for odds ratios |  |  |  |
 :::
 
 ### Question 5

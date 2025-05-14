@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.2.7)  7 MAY 2025 18:19
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.2.7)  14 MAY 2025 10:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1139,21 +1139,21 @@ File: ./images/ICU_codebook.png Graphic file (type bmp)
 
 [4]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.665pt on input line 432.
+(Font)              scaled to size 7.665pt on input line 436.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.475pt on input line 432.
+(Font)              scaled to size 5.475pt on input line 436.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.95099pt on input line 432.
+(Font)              scaled to size 10.95099pt on input line 436.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.66568pt on input line 432.
+(Font)              scaled to size 7.66568pt on input line 436.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.4755pt on input line 432.
+(Font)              scaled to size 5.4755pt on input line 436.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.94882pt on input line 432.
+(Font)              scaled to size 10.94882pt on input line 436.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.66417pt on input line 432.
+(Font)              scaled to size 7.66417pt on input line 436.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.47441pt on input line 432.
+(Font)              scaled to size 5.47441pt on input line 436.
 
 
 [5]
@@ -1165,7 +1165,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.462 ...(CPR=\text{``Yes"}) \cdot AGE \end{align}
+l.466 ...(CPR=\text{``Yes"}) \cdot AGE \end{align}
                                                   \] 
 Here is how much of TeX's memory you used:
  38949 strings out of 475785
