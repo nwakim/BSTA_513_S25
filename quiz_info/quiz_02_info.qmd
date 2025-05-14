@@ -12,10 +12,14 @@ editor_options:
 
 - The quiz will be administered over Sakai 
 
-- The quiz has a total of ___ questions, with ___ multiple choice and __ free response questions
+- The quiz has a total of 8 questions, with 5 multiple choice and 3 free response questions
 
 - Concepts and interpretations from Lessons 6-9 will be tested
-  - You will be expected to ____
+  - Think GLM tests in simple logistic regression, in multivariable regression, for a single variable, for groups of variables, and for interactions
+    - How many coefficients are you testing?
+    - Which test is appropriate for different scenarios?
+  - Can you interpret an odds ratio in a simple logistic regression model AND a multivariable model?
+  - Can you interpret a predicted probability?
 
 - If you go to the "Tests & Quizzes" there is a Test Run for you to get familiar with the Sakai formatting.
 

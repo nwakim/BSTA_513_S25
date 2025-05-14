@@ -11,7 +11,7 @@
 
   <meta name="author" content="Nicky Wakim">
   <meta name="dcterms.date" content="2025-05-14">
-  <title>Categorical Data Analysis – Lesson 15: Model Building</title>
+  <title>Categorical Data Analysis – Lesson 14: Model Building</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -195,7 +195,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#C2352F" class="quarto-title-block center">
-  <h1 class="title">Lesson 15: Model Building</h1>
+  <h1 class="title">Lesson 14: Model Building</h1>
   <p class="subtitle">With an emphasis on prediction</p>
 
 <div class="quarto-title-authors">
@@ -216,6 +216,11 @@ Nicky Wakim
 <li><p>Understand how penalized regression is a form of model/variable selection.</p></li>
 <li><p>Perform LASSO regression on a dataset using R and the general process for classification methods.</p></li>
 </ol>
+<p><strong>Keep in mind:</strong></p>
+<ul>
+<li>We will be introducing another coding technique to fit models</li>
+<li>We will be introducing another way to build models</li>
+</ul>
 </section>
 
 <section>
@@ -286,6 +291,11 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 </div>
 </div></div>
 </section>
+<section id="visual-of-overfitting-and-underfitting-data" class="slide level2">
+<h2>Visual of overfitting and underfitting data</h2>
+<p>From <a href="https://datasciencebox.org/course-materials/_slides/u4-d07-prediction-overfitting/u4-d07-prediction-overfitting#9">Data Science in a Box</a>:</p>
+
+<img data-src="14_Model_Building_files/figure-revealjs/unnamed-chunk-2-1.png" style="width:70.0%" class="r-stretch"></section>
 <section id="the-goals-of-association-vs.-prediction" class="slide level2">
 <h2>The goals of association vs.&nbsp;prediction</h2>
 <div class="columns">
@@ -331,7 +341,7 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <ul>
 <li>Selection of potential models is tied more with the research context with some incorporation of prediction scores</li>
 </ul>
-<p>&nbsp;</p>
+<hr>
 <ul>
 <li><p>Pre-specification of multivariable model</p></li>
 <li><p>Purposeful model selection</p>
@@ -354,13 +364,13 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <ul>
 <li>Selection of potential models is fully dependent on prediction scores</li>
 </ul>
-<p>&nbsp;</p>
+<hr>
 <ul>
-<li><p>Logistic regression with more refined model selection</p>
+<li>Logistic regression with more refined model selection
 <ul>
 <li>Regularization techniques (LASSO, Ridge, Elastic net)</li>
 </ul></li>
-<li><p>Machine learning realm</p>
+<li>Machine learning realm
 <ul>
 <li>Decision trees, random forest, k-nearest neighbors, Neural networks</li>
 </ul></li>
@@ -424,7 +434,7 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <section id="logistic-regression-is-a-classification-method" class="slide level2">
 <h2>Logistic regression is a classification method</h2>
 <ul>
-<li>But to be a good classifier, our logistic regression model needs to built a certain way</li>
+<li>But to be a <strong>good classifier</strong>, our logistic regression model needs to be <strong>built a certain way</strong></li>
 </ul>
 <p>&nbsp;</p>
 <ul>
@@ -463,8 +473,14 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <section id="before-i-get-really-into-things" class="slide level2">
 <h2>Before I get really into things!!</h2>
 <ul>
-<li><p><code>tidymodels</code> is a great package when we are performing prediction</p></li>
-<li><p>One problem: it uses very different syntax for model fitting than we are used to…</p></li>
+<li><code>tidymodels</code> is a great package when we are performing prediction</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>One problem: it uses very different syntax for model fitting than we are used to…</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
 <li><p><code>tidymodels</code> syntax dictates that we need to define:</p>
 <ul>
 <li>A model</li>
@@ -476,19 +492,49 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <section id="tidymodels-with-glow" class="slide level2">
 <h2><code>tidymodels</code> with GLOW</h2>
 <p>To fit our logistic regression model with the interaction between age and prior fracture, we use:</p>
+<ul>
+<li><strong>Model:</strong> saves the type of regression that we will use (we will be performing logistic regression)</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># model</span></span>
-<span id="cb1-2"><a></a>model <span class="ot">=</span> <span class="fu">logistic_reg</span>()</span>
-<span id="cb1-3"><a></a><span class="co"># recipe</span></span>
-<span id="cb1-4"><a></a>recipe <span class="ot">=</span> <span class="fu">recipe</span>(fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c, <span class="at">data =</span> glow1) <span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a></a>            <span class="fu">step_dummy</span>(priorfrac) <span class="sc">%&gt;%</span></span>
-<span id="cb1-6"><a></a>            <span class="fu">step_interact</span>(<span class="at">terms =</span> <span class="sc">~</span> age_c<span class="sc">:</span><span class="fu">starts_with</span>(<span class="st">"priorfrac"</span>))</span>
-<span id="cb1-7"><a></a><span class="co"># workflow</span></span>
-<span id="cb1-8"><a></a>workflow <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> <span class="fu">add_model</span>(model) <span class="sc">%&gt;%</span> <span class="fu">add_recipe</span>(recipe)</span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a>fit <span class="ot">=</span> workflow <span class="sc">%&gt;%</span> <span class="fu">fit</span>(<span class="at">data =</span> glow1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>model <span class="ot">=</span> <span class="fu">logistic_reg</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<ul>
+<li><strong>Recipe:</strong> sets the formula for the regression model
+<ul>
+<li>Specify categorical variables with <code>step_dummy()</code></li>
+<li>Specify interactions with <code>step_interactions()</code></li>
+</ul></li>
+</ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>recipe <span class="ot">=</span> <span class="fu">recipe</span>(fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c, <span class="at">data =</span> glow1) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a></a>            <span class="fu">step_dummy</span>(priorfrac) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a></a>            <span class="fu">step_interact</span>(<span class="at">terms =</span> <span class="sc">~</span> age_c<span class="sc">:</span><span class="fu">starts_with</span>(<span class="st">"priorfrac"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>Workflow:</strong> step through the model and recipe
+<ul>
+<li>Similar to the single step taken in <code>glm()</code></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>workflow <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span> <span class="fu">add_model</span>(model) <span class="sc">%&gt;%</span> <span class="fu">add_recipe</span>(recipe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>Fit:</strong> specify the data with which we will fit the model</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>fit <span class="ot">=</span> workflow <span class="sc">%&gt;%</span> <span class="fu">fit</span>(<span class="at">data =</span> glow1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tidymodels-with-glow-results" class="slide level2">
+<h2><code>tidymodels</code> with GLOW: Results</h2>
+<ul>
+<li>Print the results from our fitted model using <code>tidymodels</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">tidy</span>(fit, <span class="at">conf.int =</span> T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="acjsoapsxa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#acjsoapsxa table {
@@ -999,13 +1045,13 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <section id="same-as-results-from-previous-lessons" class="slide level2">
 <h2>Same as results from previous lessons</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>glow_m3 <span class="ot">=</span> <span class="fu">glm</span>(fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> priorfrac<span class="sc">*</span>age_c, </span>
-<span id="cb2-2"><a></a>              <span class="at">data =</span> glow1, <span class="at">family =</span> binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>glow_m3 <span class="ot">=</span> <span class="fu">glm</span>(fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> priorfrac<span class="sc">*</span>age_c, </span>
+<span id="cb6-2"><a></a>              <span class="at">data =</span> glow1, <span class="at">family =</span> binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">tidy</span>(glow_m3, <span class="at">conf.int =</span> T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">tidy</span>(glow_m3, <span class="at">conf.int =</span> T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="uufcqkxros" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#uufcqkxros table {
@@ -1512,7 +1558,7 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 </div>
 </div>
 </div>
-<p><span style="color:#70AD47"><strong>Interaction model: </strong></span> <span class="math display">\[\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = \widehat\beta_0 &amp;+ &amp;\widehat\beta_1\cdot I(\text{PF}) &amp; + &amp;\widehat\beta_2\cdot Age&amp; + &amp;\widehat\beta_3 \cdot I(\text{PF}) \cdot Age \\  
+<p><span style="color:#70AD47"><strong>Interaction model:</strong></span> <span class="math display">\[\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = \widehat\beta_0 &amp;+ &amp;\widehat\beta_1\cdot I(\text{PF}) &amp; + &amp;\widehat\beta_2\cdot Age&amp; + &amp;\widehat\beta_3 \cdot I(\text{PF}) \cdot Age \\  
 \text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = -1.376 &amp;+ &amp;1.002\cdot I(\text{PF})&amp; + &amp;0.063\cdot Age&amp; -&amp;0.057 \cdot I(\text{PF}) \cdot Age
 \end{aligned}\]</span></p>
 <ul>
@@ -1545,7 +1591,10 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li>Also known as <em>shrinkage</em> or <em>regularization</em> methods</li>
+<li>Also known as <em>shrinkage</em> or <em>regularization</em> methods
+<ul>
+<li>“Shrinks” coefficient estimates to 0</li>
+</ul></li>
 </ul>
 <p>&nbsp;</p>
 <ul>
@@ -1573,7 +1622,7 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 </div>
 <div class="prop-cont">
 <ul>
-<li><p>Penalty called L2 norm, uses sqaured values</p></li>
+<li><p>Penalty called L2 norm, uses squared values</p></li>
 <li><p>Pros</p>
 <ul>
 <li>Reduces overfitting</li>
@@ -1650,21 +1699,21 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 </ol>
 </div>
 </section>
-<section id="overview-of-the-process" class="slide level2">
-<h2>Overview of the process</h2>
+<section id="overview-of-predicton-model-building-steps" class="slide level2">
+<h2>Overview of predicton model building steps</h2>
 <ol type="1">
-<li>Split data into training and testing datasets</li>
+<li>Split data into <span style="color:#5B9BD5; font-weight: bold;">training</span> and <span style="color:#70AD47; font-weight: bold;">testing</span> datasets</li>
 </ol>
 <p>&nbsp;</p>
 <ol start="2" type="1">
-<li><p>Perform our classification method on training set</p>
+<li><p>Perform our classification method on <span style="color:#5B9BD5; font-weight: bold;">training set</span></p>
 <ul>
 <li>This is where we will use penalized regression!</li>
 </ul></li>
 </ol>
 <p>&nbsp;</p>
 <ol start="3" type="1">
-<li>Measure predictive accuracy on testing set</li>
+<li>Measure predictive accuracy on <span style="color:#70AD47; font-weight: bold;">testing set</span></li>
 </ol>
 </section>
 <section id="example-to-be-used-glow-study" class="slide level2">
@@ -1694,15 +1743,17 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 </section>
 <section id="step-1-splitting-data" class="slide level2">
 <h2>Step 1: Splitting data</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
 <ul>
-<li><p><strong>Training:</strong> act of creating our prediction model based on our observed data</p>
+<li><p><span style="color:#5B9BD5; font-weight: bold;"><strong>Training:</strong></span> act of creating our prediction model based on our observed data</p>
 <ul>
 <li>Supervised: Means we keep information on our outcome while training</li>
 </ul></li>
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li><strong>Testing:</strong> act of measuring the predictive accuracy of our model by trying it out on <em>new</em> data</li>
+<li><span style="color:#70AD47; font-weight: bold;"><strong>Testing:</strong></span> act of measuring the predictive accuracy of our model by trying it out on <em>new</em> data</li>
 </ul>
 <p>&nbsp;</p>
 <ul>
@@ -1713,8 +1764,12 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li>So an important first step in prediction modeling is to <em>split our data</em> into a <strong>training set</strong> and a <strong>testing set</strong>!</li>
+<li>So an important first step in prediction modeling is to <em>split our data</em> into a <span style="color:#5B9BD5; font-weight: bold;"><strong>training set</strong></span> and a <span style="color:#70AD47; font-weight: bold;"><strong>testing set</strong></span>!</li>
 </ul>
+</div><div class="column" style="width:30%;">
+<p>&nbsp;</p>
+<p><img data-src="images/data_split.png"></p>
+</div></div>
 </section>
 <section id="step-1-splitting-data-1" class="slide level2">
 <h2>Step 1: Splitting data</h2>
@@ -1765,19 +1820,31 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <li><p>We <strong>stratify</strong> by the outcome, meaning we pick Yes’s and No’s separately for the training set</p></li>
 </ul></li>
 </ul>
+<div class="columns">
+<div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">ggplot</span>(glow1, <span class="fu">aes</span>(<span class="at">x =</span> fracture)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">ggplot</span>(glow1, <span class="fu">aes</span>(<span class="at">x =</span> fracture)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<img data-src="14_Model_Building_files/figure-revealjs/unnamed-chunk-6-1.png" width="288" class="r-stretch"><ul>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="14_Model_Building_files/figure-revealjs/unnamed-chunk-11-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<ul>
 <li><p>Side note: took out <code>bmi</code> and <code>weight</code> bc we have multicollinearity issues</p>
 <ul>
 <li>Combo of I hate these variables and my previous work in the LASSO identified these as not important</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>glow <span class="ot">=</span> glow1 <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>sub_id, <span class="sc">-</span>site_id, <span class="sc">-</span>phy_id, <span class="sc">-</span>age, <span class="sc">-</span>bmi, <span class="sc">-</span>weight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>glow <span class="ot">=</span> glow1 <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>sub_id, <span class="sc">-</span>site_id, <span class="sc">-</span>phy_id, <span class="sc">-</span>age, <span class="sc">-</span>bmi, <span class="sc">-</span>weight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-1-splitting-data-3" class="slide level2">
@@ -1786,11 +1853,12 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <li><p>From package <code>rsample</code> within <code>tidyverse</code>, we can use <code>initial_split()</code> to create training and testing data</p>
 <ul>
 <li>Use <code>strata</code> to stratify by fracture</li>
+<li>Use <code>prop</code> to set the proportion of training data</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>glow_split <span class="ot">=</span> <span class="fu">initial_split</span>(glow, <span class="at">strata =</span> fracture, <span class="at">prop =</span> <span class="fl">0.8</span>)</span>
-<span id="cb6-2"><a></a>glow_split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>glow_split <span class="ot">=</span> <span class="fu">initial_split</span>(glow, <span class="at">strata =</span> fracture, <span class="at">prop =</span> <span class="fl">0.8</span>)</span>
+<span id="cb10-2"><a></a>glow_split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;Training/Testing/Total&gt;
 &lt;400/100/500&gt;</code></pre>
@@ -1800,8 +1868,8 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <li>Then we can pull the training and testing data into their own datasets</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>glow_train <span class="ot">=</span> <span class="fu">training</span>(glow_split)</span>
-<span id="cb8-2"><a></a>glow_test <span class="ot">=</span> <span class="fu">testing</span>(glow_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>glow_train <span class="ot">=</span> <span class="fu">training</span>(glow_split)</span>
+<span id="cb12-2"><a></a>glow_test <span class="ot">=</span> <span class="fu">testing</span>(glow_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-1-splitting-data-peek-at-the-split" class="slide level2 smaller">
@@ -1809,7 +1877,7 @@ MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\b
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">glimpse</span>(glow_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">glimpse</span>(glow_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 400
 Columns: 10
@@ -1827,7 +1895,7 @@ $ age_c     &lt;dbl&gt; -7, -4, 19, 13, -8, -2, 15, 13, 17, -11, -2, -5, -1, -2,
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">glimpse</span>(glow_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">glimpse</span>(glow_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 10
@@ -1853,9 +1921,9 @@ $ age_c     &lt;dbl&gt; -13, -10, 3, -8, 17, 0, 6, -5, 1, 17, -11, -6, -10, -12,
 </ul>
 <p>&nbsp;</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>lasso_mod <span class="ot">=</span> <span class="fu">logistic_reg</span>(<span class="at">penalty =</span> <span class="fl">0.001</span>, <span class="at">mixture =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a></a></span>
-<span id="cb13-3"><a></a>            <span class="fu">set_engine</span>(<span class="st">"glmnet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>lasso_mod <span class="ot">=</span> <span class="fu">logistic_reg</span>(<span class="at">penalty =</span> <span class="fl">0.002</span>, <span class="at">mixture =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a></a></span>
+<span id="cb17-3"><a></a>            <span class="fu">set_engine</span>(<span class="st">"glmnet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p><code>glmnet</code> takes the basic fitting of <code>glm</code> and adds penalties!</p>
@@ -1872,219 +1940,602 @@ $ age_c     &lt;dbl&gt; -13, -10, 3, -8, 17, 0, 6, -5, 1, 17, -11, -6, -10, -12,
 </section>
 <section id="step-2-fit-lasso-main-effects" class="slide level2">
 <h2>Step 2: Fit LASSO: Main effects</h2>
+<ul>
+<li>Set the recipe so that we include all possible variables (from <code>fracture ~ .</code>)</li>
+<li>Set <code>step_dummy()</code> so R identifies categorical variables</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>glow_rec_main <span class="ot">=</span> <span class="fu">recipe</span>(fracture <span class="sc">~</span> ., <span class="at">data =</span> glow_train) <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a></a></span>
-<span id="cb14-3"><a></a>  <span class="fu">step_dummy</span>(priorfrac, premeno, momfrac, armassist, smoke, raterisk)</span>
-<span id="cb14-4"><a></a></span>
-<span id="cb14-5"><a></a>glow_workflow_main <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb14-6"><a></a></span>
-<span id="cb14-7"><a></a>      <span class="fu">add_model</span>(lasso_mod) <span class="sc">%&gt;%</span> <span class="fu">add_recipe</span>(glow_rec_main)</span>
-<span id="cb14-8"><a></a>  </span>
-<span id="cb14-9"><a></a>glow_fit_main <span class="ot">=</span> glow_workflow_main <span class="sc">%&gt;%</span> <span class="fu">fit</span>(glow_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>glow_rec_main <span class="ot">=</span> <span class="fu">recipe</span>(fracture <span class="sc">~</span> ., <span class="at">data =</span> glow_train) <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a>  <span class="fu">step_dummy</span>(priorfrac, premeno, momfrac, armassist, smoke, raterisk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<ul>
+<li>We can add the LASSO model we already constructed</li>
+<li>Then we fit the model with the training data</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>glow_workflow_main <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a></a></span>
+<span id="cb19-3"><a></a>      <span class="fu">add_model</span>(lasso_mod) <span class="sc">%&gt;%</span> <span class="fu">add_recipe</span>(glow_rec_main)</span>
+<span id="cb19-4"><a></a>  </span>
+<span id="cb19-5"><a></a>glow_fit_main <span class="ot">=</span> glow_workflow_main <span class="sc">%&gt;%</span> <span class="fu">fit</span>(glow_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2-fit-lasso-main-effects-identify-variables" class="slide level2">
 <h2>Step 2: Fit LASSO: Main effects: Identify variables</h2>
+<div class="columns">
+<div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">library</span>(vip)  </span>
-<span id="cb15-2"><a></a>vi_data_main <span class="ot">=</span> glow_fit_main <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a></a>    <span class="fu">pull_workflow_fit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a></a>    <span class="fu">vi</span>(<span class="at">lambda =</span> <span class="fl">0.001</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-5"><a></a>    <span class="fu">filter</span>(Importance <span class="sc">!=</span> <span class="dv">0</span>)</span>
-<span id="cb15-6"><a></a>vi_data_main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(vip)  </span>
+<span id="cb20-2"><a></a>vi_data_main <span class="ot">=</span> glow_fit_main <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a></a>    <span class="fu">pull_workflow_fit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a></a>    <span class="fu">vi</span>(<span class="at">lambda =</span> <span class="fl">0.002</span>) <span class="sc">%&gt;%</span> <span class="co"># vi: variable importance</span></span>
+<span id="cb20-5"><a></a>    <span class="fu">filter</span>(Importance <span class="sc">!=</span> <span class="dv">0</span>)</span>
+<span id="cb20-6"><a></a>vi_data_main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
   Variable         Importance Sign 
   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;
-1 raterisk_Greater     0.559  POS  
-2 momfrac_Yes          0.542  POS  
-3 priorfrac_Yes        0.493  POS  
-4 raterisk_Same        0.438  POS  
-5 smoke_Yes            0.376  NEG  
-6 premeno_Yes          0.285  POS  
-7 fracscore            0.197  POS  
-8 armassist_Yes        0.146  POS  
-9 height               0.0382 NEG  </code></pre>
+1 raterisk_Greater     0.535  POS  
+2 momfrac_Yes          0.526  POS  
+3 priorfrac_Yes        0.485  POS  
+4 raterisk_Same        0.413  POS  
+5 smoke_Yes            0.344  NEG  
+6 premeno_Yes          0.267  POS  
+7 fracscore            0.196  POS  
+8 armassist_Yes        0.138  POS  
+9 height               0.0370 NEG  </code></pre>
 </div>
 </div>
+</div><div class="column">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>glow_fit_main <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a></a>  <span class="fu">extract_fit_parsnip</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a></a>  <span class="fu">vip</span>(<span class="at">num_features =</span> <span class="dv">20</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">24</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="14_Model_Building_files/figure-revealjs/unnamed-chunk-22-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 <ul>
 <li>Looks like age is removed!</li>
 </ul>
 </section>
-<section id="step-2-fit-lasso-main-effects-interactions" class="slide level2">
-<h2>Step 2: Fit LASSO: Main effects + interactions</h2>
-<ul>
-<li>We want to include interactions in our regression</li>
-<li>The main effect model will be our starting point
-<ul>
-<li>Otherwise, we may drop main effects but not their interactions</li>
-<li>Cannot do that: see <a href="http://www.feat.engineering/interactions-guiding-principles">hierarchy principle</a></li>
-</ul></li>
-<li>I remove <code>age_c</code> from this section because main effects did not include it</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>glow_rec_int <span class="ot">=</span> <span class="fu">recipe</span>(fracture <span class="sc">~</span> ., <span class="at">data =</span> glow_train) <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a></a>  <span class="fu">update_role</span>(age_c, <span class="at">new_role =</span> <span class="st">"dont_use"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a></a></span>
-<span id="cb17-4"><a></a>  <span class="fu">step_dummy</span>(priorfrac, premeno, momfrac, armassist, smoke, raterisk) <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a></a></span>
-<span id="cb17-6"><a></a>  <span class="fu">step_interact</span>(<span class="at">terms =</span> <span class="sc">~</span> <span class="fu">all_predictors</span>()<span class="sc">:</span><span class="fu">all_predictors</span>())</span>
-<span id="cb17-7"><a></a></span>
-<span id="cb17-8"><a></a>glow_workflow_int <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb17-9"><a></a>      <span class="fu">add_model</span>(lasso_mod) <span class="sc">%&gt;%</span> <span class="fu">add_recipe</span>(glow_rec_int)</span>
-<span id="cb17-10"><a></a>  </span>
-<span id="cb17-11"><a></a>glow_fit_int <span class="ot">=</span> glow_workflow_int <span class="sc">%&gt;%</span> <span class="fu">fit</span>(glow_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="step-2-fit-lasso-identify-interactions" class="slide level2">
-<h2>Step 2: Fit LASSO: Identify interactions</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>vi_data_int <span class="ot">=</span> glow_fit_int <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a></a>    <span class="fu">pull_workflow_fit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a></a>    <span class="fu">vi</span>(<span class="at">lambda =</span> <span class="fl">0.001</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a></a>    <span class="fu">filter</span>(Importance <span class="sc">!=</span> <span class="dv">0</span>)</span>
-<span id="cb18-5"><a></a>vi_data_int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 34 × 3
-   Variable                       Importance Sign 
-   &lt;chr&gt;                               &lt;dbl&gt; &lt;chr&gt;
- 1 smoke_Yes                            4.29 NEG  
- 2 smoke_Yes_x_raterisk_Greater         3.89 POS  
- 3 smoke_Yes_x_raterisk_Same            3.14 POS  
- 4 premeno_Yes_x_smoke_Yes              3.00 NEG  
- 5 momfrac_Yes_x_armassist_Yes          2.82 NEG  
- 6 priorfrac_Yes_x_premeno_Yes          2.50 NEG  
- 7 priorfrac_Yes                        1.82 POS  
- 8 armassist_Yes_x_smoke_Yes            1.44 POS  
- 9 premeno_Yes_x_raterisk_Greater       1.31 POS  
-10 momfrac_Yes_x_smoke_Yes              1.17 POS  
-# ℹ 24 more rows</code></pre>
-</div>
-</div>
-<ul>
-<li>This is where things got a little annoying for me…</li>
-</ul>
-</section>
-<section id="step-2-fit-lasso-identify-interactions-1" class="slide level2">
-<h2>Step 2: Fit LASSO: Identify interactions</h2>
-<ul>
-<li>I combed through the column names of the results to find the interactions</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>vi_data_int<span class="sc">$</span>Variable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "smoke_Yes"                        "smoke_Yes_x_raterisk_Greater"    
- [3] "smoke_Yes_x_raterisk_Same"        "premeno_Yes_x_smoke_Yes"         
- [5] "momfrac_Yes_x_armassist_Yes"      "priorfrac_Yes_x_premeno_Yes"     
- [7] "priorfrac_Yes"                    "armassist_Yes_x_smoke_Yes"       
- [9] "premeno_Yes_x_raterisk_Greater"   "momfrac_Yes_x_smoke_Yes"         
-[11] "priorfrac_Yes_x_momfrac_Yes"      "priorfrac_Yes_x_armassist_Yes"   
-[13] "premeno_Yes_x_armassist_Yes"      "momfrac_Yes_x_raterisk_Same"     
-[15] "priorfrac_Yes_x_raterisk_Greater" "armassist_Yes_x_raterisk_Greater"
-[17] "fracscore_x_momfrac_Yes"          "priorfrac_Yes_x_smoke_Yes"       
-[19] "premeno_Yes_x_raterisk_Same"      "fracscore_x_priorfrac_Yes"       
-[21] "fracscore_x_premeno_Yes"          "raterisk_Same"                   
-[23] "fracscore"                        "fracscore_x_raterisk_Greater"    
-[25] "armassist_Yes_x_raterisk_Same"    "fracscore_x_smoke_Yes"           
-[27] "height"                           "momfrac_Yes_x_raterisk_Greater"  
-[29] "priorfrac_Yes_x_raterisk_Same"    "fracscore_x_raterisk_Same"       
-[31] "height_x_raterisk_Greater"        "height_x_premeno_Yes"            
-[33] "height_x_fracscore"               "height_x_armassist_Yes"          </code></pre>
-</div>
-</div>
-</section>
-<section id="step-2-fit-lasso-identify-interactions-2" class="slide level2">
-<h2>Step 2: Fit LASSO: Identify interactions</h2>
-<ul>
-<li>I combed through the column names of the results to find the interactions
-<ul>
-<li>I used ChatGPT to help me because I’m pretty new to <code>tidymodels</code>: <a href="https://chatgpt.com/c/506e4235-52fc-46b9-a9ad-6edf425818d5">let’s view what I asked</a></li>
-</ul></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>interactions <span class="ot">=</span> vi_data_int <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"_x_"</span>, Variable)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a></a>                <span class="fu">select</span>(Variable) <span class="sc">%&gt;%</span> <span class="fu">separate</span>(Variable, <span class="st">"_x_"</span>)</span>
-<span id="cb22-3"><a></a>                </span>
-<span id="cb22-4"><a></a></span>
-<span id="cb22-5"><a></a>interaction_terms <span class="ot">=</span> <span class="er">~</span> (<span class="fu">all_predictors</span>()<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> <span class="co">#Makes interactions b/w all predictors</span></span>
-<span id="cb22-6"><a></a>                      fracscore<span class="sc">:</span><span class="fu">starts_with</span>(<span class="st">"premeno"</span>) <span class="sc">-</span> <span class="co"># Removes this interaction</span></span>
-<span id="cb22-7"><a></a>                      height<span class="sc">:</span><span class="fu">starts_with</span>(<span class="st">"premeno"</span>) <span class="sc">-</span> </span>
-<span id="cb22-8"><a></a>                      height<span class="sc">:</span><span class="fu">starts_with</span>(<span class="st">"smoke"</span>) <span class="sc">-</span> </span>
-<span id="cb22-9"><a></a>                      height<span class="sc">:</span><span class="fu">starts_with</span>(<span class="st">"momfrac"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="step-2-fit-lasso-create-recipe-and-fit-model-from-lasso" class="slide level2">
-<h2>Step 2: Fit LASSO: Create recipe and fit model (from LASSO)</h2>
-<ul>
-<li>This is not the typical procedure for LASSO, but the <code>tidymodels</code> framework for interactions did not let me keep all main effects when looking at my interactions</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>glow_rec_int2 <span class="ot">=</span> <span class="fu">recipe</span>(fracture <span class="sc">~</span> ., <span class="at">data =</span> glow_train) <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a></a>  <span class="fu">update_role</span>(age_c, <span class="at">new_role =</span> <span class="st">"dont_use"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a></a></span>
-<span id="cb23-4"><a></a>  <span class="fu">step_dummy</span>(priorfrac, premeno, momfrac, armassist, smoke, raterisk) <span class="sc">%&gt;%</span></span>
-<span id="cb23-5"><a></a></span>
-<span id="cb23-6"><a></a>  <span class="fu">step_interact</span>(<span class="at">terms =</span> interaction_terms)</span>
-<span id="cb23-7"><a></a>  </span>
-<span id="cb23-8"><a></a>log_model <span class="ot">=</span> <span class="fu">logistic_reg</span>()</span>
-<span id="cb23-9"><a></a></span>
-<span id="cb23-10"><a></a>glow_workflow_int2 <span class="ot">=</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-11"><a></a>      <span class="fu">add_model</span>(log_model) <span class="sc">%&gt;%</span> <span class="fu">add_recipe</span>(glow_rec_int2)</span>
-<span id="cb23-12"><a></a>  </span>
-<span id="cb23-13"><a></a>glow_fit_int2 <span class="ot">=</span> glow_workflow_int2 <span class="sc">%&gt;%</span> <span class="fu">fit</span>(glow_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
+
+
+
+
+
 <section id="step-2-fit-lasso-look-at-model-fit" class="slide level2">
 <h2>Step 2: Fit LASSO: Look at model fit</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">print</span>(<span class="fu">tidy</span>(glow_fit_int2), <span class="at">n=</span><span class="dv">60</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 42 × 5
-   term                              estimate std.error statistic p.value
-   &lt;chr&gt;                                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
- 1 (Intercept)                        3.09      10.3       0.300   0.764 
- 2 height                            -0.0415     0.0637   -0.652   0.515 
- 3 fracscore                         -2.92       2.15     -1.36    0.175 
- 4 priorfrac_Yes                     15.1        8.61      1.75    0.0793
- 5 premeno_Yes                       -0.805      1.14     -0.709   0.478 
- 6 momfrac_Yes                       -1.71       1.74     -0.984   0.325 
- 7 armassist_Yes                     18.5       10.7       1.73    0.0838
- 8 smoke_Yes                        -22.8      838.       -0.0272  0.978 
- 9 raterisk_Same                     16.0       10.1       1.59    0.112 
-10 raterisk_Greater                   1.13       9.16      0.123   0.902 
-11 height_x_fracscore                 0.0215     0.0136    1.58    0.113 
-12 height_x_priorfrac_Yes            -0.0825     0.0531   -1.55    0.120 
-13 height_x_armassist_Yes            -0.114      0.0645   -1.77    0.0762
-14 height_x_raterisk_Same            -0.0940     0.0623   -1.51    0.131 
-15 height_x_raterisk_Greater          0.00238    0.0563    0.0423  0.966 
-16 fracscore_x_priorfrac_Yes         -0.373      0.177    -2.10    0.0353
-17 fracscore_x_momfrac_Yes            0.608      0.313     1.94    0.0520
-18 fracscore_x_armassist_Yes         -0.111      0.178    -0.626   0.531 
-19 fracscore_x_smoke_Yes              0.604      0.564     1.07    0.284 
-20 fracscore_x_raterisk_Same         -0.257      0.209    -1.23    0.217 
-21 fracscore_x_raterisk_Greater      -0.318      0.212    -1.50    0.133 
-22 priorfrac_Yes_x_premeno_Yes       -2.72       1.06     -2.56    0.0104
-23 priorfrac_Yes_x_momfrac_Yes       -1.35       1.35     -1.00    0.317 
-24 priorfrac_Yes_x_armassist_Yes      1.45       0.820     1.76    0.0779
-25 priorfrac_Yes_x_smoke_Yes         -0.329      1.68     -0.196   0.845 
-26 priorfrac_Yes_x_raterisk_Same      0.122      0.837     0.146   0.884 
-27 priorfrac_Yes_x_raterisk_Greater   0.838      0.916     0.915   0.360 
-28 premeno_Yes_x_momfrac_Yes          0.304      1.58      0.192   0.848 
-29 premeno_Yes_x_armassist_Yes        1.73       0.923     1.87    0.0615
-30 premeno_Yes_x_smoke_Yes           -3.98       1.84     -2.17    0.0300
-31 premeno_Yes_x_raterisk_Same        0.716      1.16      0.620   0.535 
-32 premeno_Yes_x_raterisk_Greater     1.71       1.19      1.44    0.150 
-33 momfrac_Yes_x_armassist_Yes       -3.60       1.43     -2.52    0.0118
-34 momfrac_Yes_x_smoke_Yes            2.73       2.67      1.02    0.307 
-35 momfrac_Yes_x_raterisk_Same        1.87       1.33      1.41    0.160 
-36 momfrac_Yes_x_raterisk_Greater     0.730      1.33      0.548   0.583 
-37 armassist_Yes_x_smoke_Yes          1.58       1.67      0.948   0.343 
-38 armassist_Yes_x_raterisk_Same      0.690      0.893     0.774   0.439 
-39 armassist_Yes_x_raterisk_Greater  -0.247      0.975    -0.253   0.800 
-40 smoke_Yes_x_raterisk_Same         19.5      838.        0.0232  0.981 
-41 smoke_Yes_x_raterisk_Greater      20.0      838.        0.0239  0.981 
-42 raterisk_Same_x_raterisk_Greater  NA         NA        NA      NA     </code></pre>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>glow_fit_main <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="gxzlykwvrb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gxzlykwvrb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gxzlykwvrb thead, #gxzlykwvrb tbody, #gxzlykwvrb tfoot, #gxzlykwvrb tr, #gxzlykwvrb td, #gxzlykwvrb th {
+  border-style: none;
+}
+
+#gxzlykwvrb p {
+  margin: 0;
+  padding: 0;
+}
+
+#gxzlykwvrb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 35px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gxzlykwvrb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gxzlykwvrb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gxzlykwvrb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gxzlykwvrb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gxzlykwvrb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gxzlykwvrb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gxzlykwvrb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gxzlykwvrb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gxzlykwvrb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gxzlykwvrb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gxzlykwvrb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gxzlykwvrb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gxzlykwvrb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gxzlykwvrb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxzlykwvrb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gxzlykwvrb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gxzlykwvrb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gxzlykwvrb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxzlykwvrb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gxzlykwvrb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxzlykwvrb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gxzlykwvrb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxzlykwvrb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gxzlykwvrb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxzlykwvrb .gt_left {
+  text-align: left;
+}
+
+#gxzlykwvrb .gt_center {
+  text-align: center;
+}
+
+#gxzlykwvrb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gxzlykwvrb .gt_font_normal {
+  font-weight: normal;
+}
+
+#gxzlykwvrb .gt_font_bold {
+  font-weight: bold;
+}
+
+#gxzlykwvrb .gt_font_italic {
+  font-style: italic;
+}
+
+#gxzlykwvrb .gt_super {
+  font-size: 65%;
+}
+
+#gxzlykwvrb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gxzlykwvrb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gxzlykwvrb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gxzlykwvrb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gxzlykwvrb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gxzlykwvrb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gxzlykwvrb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gxzlykwvrb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gxzlykwvrb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">estimate</th>
+<th id="penalty" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">penalty</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">(Intercept)</td>
+<td class="gt_row gt_right" headers="estimate">3.417</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">height</td>
+<td class="gt_row gt_right" headers="estimate">−0.037</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">fracscore</td>
+<td class="gt_row gt_right" headers="estimate">0.196</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">age_c</td>
+<td class="gt_row gt_right" headers="estimate">0.000</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">priorfrac_Yes</td>
+<td class="gt_row gt_right" headers="estimate">0.485</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">premeno_Yes</td>
+<td class="gt_row gt_right" headers="estimate">0.267</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">momfrac_Yes</td>
+<td class="gt_row gt_right" headers="estimate">0.526</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">armassist_Yes</td>
+<td class="gt_row gt_right" headers="estimate">0.138</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">smoke_Yes</td>
+<td class="gt_row gt_right" headers="estimate">−0.344</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">raterisk_Same</td>
+<td class="gt_row gt_right" headers="estimate">0.413</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">raterisk_Greater</td>
+<td class="gt_row gt_right" headers="estimate">0.535</td>
+<td class="gt_row gt_right" headers="penalty">0.002</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 </section>
@@ -2094,31 +2545,31 @@ $ age_c     &lt;dbl&gt; -13, -10, 3, -8, 17, 0, 6, -5, 1, 17, -11, -6, -10, -12,
 <section id="step-3-prediction-on-testing-set" class="slide level2">
 <h2>Step 3: Prediction on testing set</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>glow_test_pred <span class="ot">=</span> <span class="fu">predict</span>(glow_fit_int2, <span class="at">new_data =</span> glow_test, <span class="at">type =</span> <span class="st">"prob"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a></a>    <span class="fu">bind_cols</span>(glow_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>glow_test_pred <span class="ot">=</span> <span class="fu">predict</span>(glow_fit_main, <span class="at">new_data =</span> glow_test, <span class="at">type =</span> <span class="st">"prob"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a></a>    <span class="fu">bind_cols</span>(glow_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="columns">
 <div class="column" style="width:45%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>glow_test_pred <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a></a>  <span class="fu">roc_auc</span>(<span class="at">truth =</span> fracture, </span>
-<span id="cb27-3"><a></a>                  .pred_No)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>glow_test_pred <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a></a>  <span class="fu">roc_auc</span>(<span class="at">truth =</span> fracture, </span>
+<span id="cb30-3"><a></a>                  .pred_No)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-1 roc_auc binary         0.644</code></pre>
+1 roc_auc binary         0.672</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:55%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>glow_test_pred <span class="sc">%&gt;%</span> </span>
-<span id="cb29-2"><a></a>  <span class="fu">roc_curve</span>(<span class="at">truth =</span> fracture, .pred_No) <span class="sc">%&gt;%</span></span>
-<span id="cb29-3"><a></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>glow_test_pred <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a></a>  <span class="fu">roc_curve</span>(<span class="at">truth =</span> fracture, .pred_No) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="14_Model_Building_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center" width="672"></p>
+<p><img data-src="14_Model_Building_files/figure-revealjs/unnamed-chunk-31-1.png" class="quarto-figure quarto-figure-center" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2128,20 +2579,20 @@ $ age_c     &lt;dbl&gt; -13, -10, 3, -8, 17, 0, 6, -5, 1, 17, -11, -6, -10, -12,
 <section id="step-3-prediction-on-testing-set-1" class="slide level2">
 <h2>Step 3: Prediction on testing set</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>glow_test_pred <span class="ot">=</span> <span class="fu">predict</span>(glow_fit_int2, <span class="at">new_data =</span> glow_test, <span class="at">type =</span> <span class="st">"prob"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a></a>    <span class="fu">bind_cols</span>(glow_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>glow_test_pred <span class="ot">=</span> <span class="fu">predict</span>(glow_fit_main, <span class="at">new_data =</span> glow_test, <span class="at">type =</span> <span class="st">"prob"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a></a>    <span class="fu">bind_cols</span>(glow_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="columns">
 <div class="column" style="width:45%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>glow_test_pred <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a></a>  <span class="fu">roc_auc</span>(<span class="at">truth =</span> fracture, </span>
-<span id="cb31-3"><a></a>                  .pred_No)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>glow_test_pred <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a></a>  <span class="fu">roc_auc</span>(<span class="at">truth =</span> fracture, </span>
+<span id="cb34-3"><a></a>                  .pred_No)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
-1 roc_auc binary         0.644</code></pre>
+1 roc_auc binary         0.672</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -2155,13 +2606,13 @@ $ age_c     &lt;dbl&gt; -13, -10, 3, -8, 17, 0, 6, -5, 1, 17, -11, -6, -10, -12,
 </div>
 </div><div class="column" style="width:55%;">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>glow_test_pred <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a></a>  <span class="fu">roc_curve</span>(<span class="at">truth =</span> fracture, .pred_No) <span class="sc">%&gt;%</span></span>
-<span id="cb33-3"><a></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>glow_test_pred <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a></a>  <span class="fu">roc_curve</span>(<span class="at">truth =</span> fracture, .pred_No) <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a></a>  <span class="fu">autoplot</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="14_Model_Building_files/figure-revealjs/unnamed-chunk-26-1.png" class="quarto-figure quarto-figure-center" width="672"></p>
+<p><img data-src="14_Model_Building_files/figure-revealjs/unnamed-chunk-34-1.png" class="quarto-figure quarto-figure-center" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2189,7 +2640,8 @@ $ age_c     &lt;dbl&gt; -13, -10, 3, -8, 17, 0, 6, -5, 1, 17, -11, -6, -10, -12,
 <li><a href="https://www.youtube.com/watch?v=a7VTTQovUGU&amp;ab_channel=AndrewCouch">TidyTuesday video on LASSO with interactions</a></li>
 </ul></li>
 </ul></li>
-<li><p>Cross-validation</p>
+<li><p><a href="https://glmnet.stanford.edu/articles/glmnet.html#logistic-regression-family-binomial">More info on <code>glmnet</code> function</a></p></li>
+<li><p>Performing cross-validation</p>
 <ul>
 <li>Under <a href="https://datasciencebox.org/02-making-rigorous-conclusions#model-validation">Cross validation within Data Science in a Box</a></li>
 </ul></li>
@@ -2223,6 +2675,7 @@ $ age_c     &lt;dbl&gt; -13, -10, 3, -8, 17, 0, 6, -5, 1, 17, -11, -6, -10, -12,
 <li><p>You can use purposeful selection, like we did last quarter</p>
 <ul>
 <li><p>If you want to focus on <strong>association</strong> modeling!</p></li>
+<li><p>But you will need to include at least one interaction!!</p></li>
 <li><p>A good way to practice this again if you struggled with it previously</p></li>
 </ul></li>
 </ul>
@@ -2240,7 +2693,7 @@ $ age_c     &lt;dbl&gt; -13, -10, 3, -8, 17, 0, 6, -5, 1, 17, -11, -6, -10, -12,
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Lesson 15: Model Building</p>
+<p>Lesson 14: Model Building</p>
 </div>
 </div></div>
 
