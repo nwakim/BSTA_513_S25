@@ -45,8 +45,6 @@ theme_set(theme_minimal() +
 
 # Learning Objectives
 
-1.  Review Generalized Linear Models and how we can branch to other types of regression.
-
 2.  Understand what we can measure with Poisson regression and how to interpret coefficients.
 
 3.  Understand how to adjust for different follow-up times among individuals
@@ -66,58 +64,6 @@ theme_set(theme_minimal() +
 2.  Understand what we can measure with Poisson regression and how to interpret coefficients.
 
 3.  Understand how to adjust for different follow-up times among individuals
-
-## Review: Generalized Linear Models (GLMs)
-
-![](./images/GLM_comp.png)
-
-## GLM: Random Component
-
--   The random component specifies the response variable $Y$ and selects a probability distribution for it
-
- 
-
- 
-
--   Basically, we are just identifying the distribution for our outcome
-
-    -   If Y is [binary]{style="color:#F6C342; font-weight: bold;"}: assumes a [binomial]{style="color:#F6C342; font-weight: bold;"} distribution of Y
-
-    -   If Y is [count]{style="color:#5B9BD5; font-weight: bold;"}: assumes [Poisson]{style="color:#5B9BD5; font-weight: bold;"} or negative binomial distribution of Y
-
-    -   If Y is [continuous]{style="color:#70AD47; font-weight: bold;"}: assumea [Normal]{style="color:#70AD47; font-weight: bold;"} distribution of Y
-
-## GLM: Systematic Component
-
--   The systematic component specifies the explanatory variables, which enter linearly as predictors $$\beta_0+\beta_1X_1+\ldots+\beta_kX_k$$
-
- 
-
--   Above equation includes:
-
-    -   Centered variables
-    -   Interactions
-    -   Transformations of variables (like squares)
-
- 
-
--   Systematic component is the **same** as what we learned in Linear Models
-
-## GLM: Link Function
-
--   If $\mu = E(Y)$, then the link function specifies a function $g(.)$ that relates $\mu$ to the linear predictor as: $$g\left(\mu\right)=\beta_0+\beta_1X_1+\ldots+\beta_kX_k$$
-
-    -   $g\left(\mu\right)$ is the transformation we make to $E(Y)$ (aka $\mu$) so that the linear predictors (right side of equation) can be linked to the outcome
-
--   The link function connects the random component with the systematic component
-
--   Can also think of this as: $$\mu=g^{-1}\left(\beta_0+\beta_1X_1+\ldots+\beta_kX_k\right)$$
-
-## GLM: Link Function {background-image="./images/title_green.png" background-size="2500px 150px" background-position="top"}
-
-![](./images/links.png){fig-align="center"}
-
-## Poll Everywhere Question 1
 
 # Learning Objectives
 

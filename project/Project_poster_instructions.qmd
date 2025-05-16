@@ -24,6 +24,8 @@ Poster instructions will be edited for clarity, specifics about our dataset, and
 
 The purpose section was partially developed using ChatGPT by feeding in my previous project report instructions and asking ChatGPT to edit for a poster.
 
+## Things needed between Lab 4 and Poster
+
 ## Directions
 
 ### Purpose

@@ -1,0 +1,180 @@
+---
+title: "Lesson 16: Log-binomial Regression"
+author: "Nicky Wakim"
+title-slide-attributes:
+    data-background-color: "#C2352F"
+date: "05/19/2025"
+format: 
+  revealjs:
+    theme: "../simple_NW.scss"
+    chalkboard: true
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "Lesson 16: Log-binomial Regression"
+    html-math-method: mathjax
+    highlight-style: ayu
+execute:
+  echo: true
+  freeze: auto  # re-render only when source changes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(gt)
+library(janitor)
+library(rstatix)
+library(knitr)
+library(gtsummary)
+library(moderndive)
+library(broom) 
+library(here) 
+library(ggplot2)
+library(ggpubr)
+
+theme_set(theme_minimal() + 
+            theme(text = element_text(size = 28)))
+
+load(here("data", "bc_diagnosis.Rda"))
+mean_age = mean(bc$Age)
+bc = bc %>% mutate(Late_stage_num = as.numeric(Late_stage_diag)-1, 
+                   Age_c = Age - mean(Age))
+
+library(aplore3)
+mean_age = mean(glow500$age) %>% round()
+glow = glow500 %>% mutate(age_c = age - mean_age)
+```
+
+# Learning Objectives
+
+1.  Review Generalized Linear Models and how we can branch to other types of regression.
+
+
+```{css, echo=FALSE}
+.reveal code {
+  max-height: 80% !important;
+}
+```
+
+## Log-binomial Regression
+
+::: columns
+::: column
+-   [**Outcome type:**]{style="color:#70AD47"} binary, yes or no
+
+ 
+
+-   [**Example outcomes:**]{style="color:#5B9BD5"}
+    -   Food insecurity
+    -   Disease diagnosis for patient
+    -   Fracture
+:::
+
+::: column
+-   [**Population model**]{style="color:#ED7D31"} 
+
+$$ \log(\mu) = \beta_0 + \beta_1 X$$
+
+-   [**Interpretations**]{style="color:#D6295E"}
+    -   We have log of probability on the left
+    -   So exponential of our coefficients will be **risk ratio**
+:::
+:::
+
+## Logistic regression vs. log-binomial regression
+
+- Outcome is the same
+- Logistic = log of odds
+  - Aim to get odds ratios for interpretation (exponential of coefficients)
+- Log-binomial = log of probability
+  - Aim to get risk ratio or prevalence ratio (exponential of coefficients)
+  
+- Disadvantage of log-binomial: left hand side ($\log(\pi(X))$) is only a positive value, while right hand side can range from $-\infty$ to $\infty$
+
+
+## A few classes ago: GLOW Study with interactions
+
+-   **Outcome variable:** any fracture in the first year of follow up (FRACTURE: 0 or 1)
+
+-   **Risk factor/variable of interest:** history of prior fracture (PRIORFRAC: 0 or 1)
+
+-   **Potential confounder or effect modifier:** age (AGE, a continuous variable)
+
+-   Fitted **LOGISTIC REGRESSION** model with interactions: $$\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) & = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age \\  
+    \text{logit}\left(\widehat\pi(\mathbf{X})\right) & = -1.376 + 1.002  \cdot I(\text{PF}=\text{``Yes"}) + 0.063  \cdot Age - 0.057  \cdot I(\text{PF}=\text{``Yes"}) \cdot Age
+    \end{aligned}$$
+    
+## What would a log-binomial regression model look like?
+
+- For the same GLOW data, we could fit a log-binomial model:
+
+$$\text{log}\left(\widehat\pi(\mathbf{X})\right) = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age $$
+
+```{r}
+glow_log_binom = glow %>% glm(formula = fracture ~ priorfrac + age_c + priorfrac*age_c, 
+                              family = binomial(link = "log"))
+```
+
+```{r}
+#| echo: false
+
+tidy(glow_log_binom, conf.int = T, exponentiate = T) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 30) %>%
+  fmt_number(decimals = 3)
+```
+
+## Logistic regression: Reporting results of GLOW Study with interactions
+
+-   Remember our main covariate is prior fracture, so we want to focuse on how age changes the relationship between prior fracture and a new fracture!
+
+::: columns
+::: column
+For individuals 69 years old, the estimated odds of a new fracture for individuals with prior fracture is 2.72 times the estimated odds of a new fracture for individuals with no prior fracture (95% CI: 1.70, 4.35). As seen in @fig-plots-1, the odds ratio of a new fracture when comparing prior fracture status decreases with age, indicating that the effect of prior fractures on new fractures decreases as individuals get older. In @fig-plots-2, it is evident that for both prior fracture statuses, the predict probability of a new fracture increases as age increases. However, the predicted probability of new fracture for those without a prior fracture increases at a higher rate than that of individuals with a prior fracture. Thus, the predicted probabilities of a new fracture converge at age \[insert age here\].
+:::
+
+::: column
+```{r}
+#| label: fig-plots
+#| fig-cap: "Plots of odds ratio and predicted probability from fitted interaction model" 
+#| fig-subcap:
+#|   - "Odds ratio of fracture outcome comparing prior fracture to no prior fracture"
+#|   - "Predicted probability of fracture" 
+#| layout-ncol: 2
+#| echo: false
+
+load(here("lessons", "12_Assessing_fit/data", "glow_results.Rda"))
+ggplot(pred_glow2) +
+  geom_hline(yintercept = 1) +
+  geom_smooth(method = "loess", aes(x = age, y = OR_YN)) +
+  theme(text = element_text(size=20), title = element_text(size=16)) +
+  labs(x = "Age (years)", y = "Estimated odds ratio")
+
+frac_pred = predict(glow_m3, prior_age, se.fit = T, type="response")
+pred_glow = prior_age %>% mutate(frac_pred = frac_pred$fit, 
+                                  age = age_c + mean_age)
+
+ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +
+  geom_smooth(method = "loess", aes(x = age, y = frac_pred, color = priorfrac)) +
+  theme(text = element_text(size=20), title = element_text(size=16)) + ylim(0,1) +
+  labs(color = "Prior Fracture", x = "Age (years)", y = "Predicted Probability of Fracture")
+```
+:::
+:::
+
+## Testing different variables
+
+## Interpretations and visualizations 
+
+## Predictions and visualizations
+
+## Assessing model fit
+
+

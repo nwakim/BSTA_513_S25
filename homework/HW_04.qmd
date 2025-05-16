@@ -40,9 +40,13 @@ Nicky needs to edit
 
 ## Purpose
 
-This homework is designed to help you practice the following important skills and knowledge that we covered in Lesson 10:
+This homework is designed to help you practice the following important skills and knowledge that we covered in Lesson 13, 15-16:
 
--   A bunch of work on interactions
+- Visually assessing observations for which the model does not fit well
+- Other types of regression 
+- Poisson regression
+- Log-binomial
+- Multinomial
 
 ## Directions
 
@@ -61,3 +65,62 @@ This homework is designed to help you practice the following important skills an
 ::: callout-tip
 It is a good idea to try rendering your document from time to time as you go along! Note that rendering automatically saves your qmd file and rendering frequently helps you catch your errors more quickly.
 :::
+
+## Questions Part 1
+
+
+
+## Questions Part 2
+
+### Question 1
+
+For each of the following outcomes, what type of regression would you use? Explain your answer.
+
+#### Part a
+
+Number of minutes of moderate-to-vigorous physical activity per week (range: 0 to 600+)
+
+Which regression model is most appropriate?
+
+a. Linear regression
+b. Logistic regression
+c. Log-binomial regression
+d. Poisson regression
+e. Multinomial logistic regression
+
+#### Part b
+
+Whether the participant meets CDC recommendations for weekly physical activity (Yes/No)
+
+Which regression model is most appropriate?
+
+a. Linear regression
+b. Logistic regression
+c. Log-binomial regression
+d. Poisson regression
+e. Multinomial logistic regression
+
+#### Part c
+
+Number of workouts the person completed in the past week (values: 0, 1, 2, ..., 14)
+
+Which regression model is most appropriate?
+
+a. Linear regression
+b. Logistic regression
+c. Log-binomial regression
+d. Poisson regression
+e. Multinomial logistic regression
+
+#### Part d
+
+Self-reported activity level: Sedentary, Moderately active, Highly active
+
+Which regression model is most appropriate?
+
+a. Linear regression
+b. Logistic regression
+c. Log-binomial regression
+d. Poisson regression
+e. Multinomial logistic regression
+

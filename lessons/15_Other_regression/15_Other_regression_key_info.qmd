@@ -1,0 +1,30 @@
+---
+title: "Key Info and Announcements"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Announcements
+
+- I removed HW 5
+  - Last HW will be HW 4
+
+### Email from Jamie about PE
+
+Please share this email widely with EPI and BSTA students.
+
+I just met with OHSU Orthopaedics and they are looking for an epi student AND a biostatistics student to do a research PE with Dr. Yoo over multiple terms. This project will most likely pivot to multiple PE opportunities, as well. This will also be posted to the opportunities board, but I wanted to get the word out ASAP. Below are some details about the PE. 
+
+- OHSU (hybrid), unpaid, duration of PE is flexible (two terms is encouraged), start date preferred: June 23 (but flexible to start in fall) 
+- Project: Multiple project opportunities for answering nuanced questions in orthopaedic surgery using large datasets through EPIC Cosmos etc
+- Deliverables: Opportunity to own multiple questions - great opportunity for a motivated student looking for a springboard into academia.
+- All students, regardless of citizenship status (DACA, undocumented, international) are eligible and encouraged to apply!
+
+Interested students can email Jamie, and she will connect them with Zach, who is assisting with the PE set up. Please let me know if you or students have any questions!
+
+## Key Dates
+
