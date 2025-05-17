@@ -175,6 +175,22 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 
 ## Predictions and visualizations
 
+```{r}
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 4.5
+
+prior_age = expand_grid(priorfrac = c("No", "Yes"), age_c = (55:90)-69)
+frac_pred = predict(glow_log_binom, prior_age, se.fit = T, type="response")
+pred_glow = prior_age %>% mutate(frac_pred = frac_pred$fit, 
+                                  age = age_c + mean_age)
+
+ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +
+  geom_smooth(method = "loess", aes(x = age, y = frac_pred, color = priorfrac)) +
+  theme(text = element_text(size=20), title = element_text(size=16)) + ylim(0,1) +
+  labs(color = "Prior Fracture", x = "Age (years)", y = "Predicted Probability of Fracture")
+```
+
 ## Assessing model fit
 
 
