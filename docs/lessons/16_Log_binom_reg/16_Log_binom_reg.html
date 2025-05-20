@@ -254,15 +254,22 @@ Nicky Wakim
 <section id="logistic-regression-vs.-log-binomial-regression" class="slide level2">
 <h2>Logistic regression vs.&nbsp;log-binomial regression</h2>
 <ul>
-<li>Outcome is the same</li>
-<li>Logistic = log of odds
+<li>Outcome is the same: still a binary variable
 <ul>
-<li>Aim to get odds ratios for interpretation (exponential of coefficients)</li>
+<li>Still modeling with probability of event: <span class="math inline">\(P(Y=1|X)\)</span></li>
+</ul></li>
+<li>Logistic = logit = log of odds
+<ul>
+<li>Aim to get <strong>odds ratios</strong> for interpretation (exponential of coefficients)</li>
+<li>You <em>can</em> convert the odds ratios to risk ratios</li>
 </ul></li>
 <li>Log-binomial = log of probability
 <ul>
-<li>Aim to get risk ratio or prevalence ratio (exponential of coefficients)</li>
+<li>Aim to get <strong>risk ratio</strong> or prevalence ratio (exponential of coefficients)</li>
 </ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
 <li>Disadvantage of log-binomial: left hand side (<span class="math inline">\(\log(\pi(X))\)</span>) is only a positive value, while right hand side can range from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span></li>
 </ul>
 </section>
@@ -277,6 +284,52 @@ Nicky Wakim
 \end{aligned}\]</span></p></li>
 </ul>
 </section>
+<section id="logistic-regression-reporting-results-of-glow-study-with-interactions" class="slide level2">
+<h2>Logistic regression: Reporting results of GLOW Study with interactions</h2>
+<ul>
+<li>Remember our main covariate is prior fracture, so we want to focuse on how age changes the relationship between prior fracture and a new fracture!</li>
+</ul>
+<div class="columns">
+<div class="column">
+<p>For individuals 69 years old, the estimated odds of a new fracture for individuals with prior fracture is 2.72 times the estimated odds of a new fracture for individuals with no prior fracture (95% CI: 1.70, 4.35). As seen in <a href="#/fig-plots-1" class="quarto-xref">Figure&nbsp;1 (a)</a>, the odds ratio of a new fracture when comparing prior fracture status decreases with age, indicating that the effect of prior fractures on new fractures decreases as individuals get older. In <a href="#/fig-plots-2" class="quarto-xref">Figure&nbsp;1 (b)</a>, it is evident that for both prior fracture statuses, the predict probability of a new fracture increases as age increases. However, the predicted probability of new fracture for those without a prior fracture increases at a higher rate than that of individuals with a prior fracture. Thus, the predicted probabilities of a new fracture converge at age [insert age here].</p>
+</div><div class="column">
+<div id="fig-plots" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-plots-1" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-plots-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="16_Log_binom_reg_files/figure-revealjs/fig-plots-1.png" data-ref-parent="fig-plots" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-plots-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Odds ratio of fracture outcome comparing prior fracture to no prior fracture
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-plots-2" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-subfloat-fig">
+<div aria-describedby="fig-plots-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="16_Log_binom_reg_files/figure-revealjs/fig-plots-2.png" data-ref-parent="fig-plots" width="960">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-plots-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Predicted probability of fracture
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interaction model
+</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
 <section id="what-would-a-log-binomial-regression-model-look-like" class="slide level2">
 <h2>What would a log-binomial regression model look like?</h2>
 <ul>
@@ -289,23 +342,23 @@ Nicky Wakim
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="aluawaveaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aluawaveaj table {
+<div id="iyuxumfewy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iyuxumfewy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aluawaveaj thead, #aluawaveaj tbody, #aluawaveaj tfoot, #aluawaveaj tr, #aluawaveaj td, #aluawaveaj th {
+#iyuxumfewy thead, #iyuxumfewy tbody, #iyuxumfewy tfoot, #iyuxumfewy tr, #iyuxumfewy td, #iyuxumfewy th {
   border-style: none;
 }
 
-#aluawaveaj p {
+#iyuxumfewy p {
   margin: 0;
   padding: 0;
 }
 
-#aluawaveaj .gt_table {
+#iyuxumfewy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -331,12 +384,12 @@ Nicky Wakim
   border-left-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_caption {
+#iyuxumfewy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aluawaveaj .gt_title {
+#iyuxumfewy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -348,7 +401,7 @@ Nicky Wakim
   border-bottom-width: 0;
 }
 
-#aluawaveaj .gt_subtitle {
+#iyuxumfewy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -360,7 +413,7 @@ Nicky Wakim
   border-top-width: 0;
 }
 
-#aluawaveaj .gt_heading {
+#iyuxumfewy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -372,13 +425,13 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_bottom_border {
+#iyuxumfewy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_col_headings {
+#iyuxumfewy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -393,7 +446,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_col_heading {
+#iyuxumfewy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -413,7 +466,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#aluawaveaj .gt_column_spanner_outer {
+#iyuxumfewy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -425,15 +478,15 @@ Nicky Wakim
   padding-right: 4px;
 }
 
-#aluawaveaj .gt_column_spanner_outer:first-child {
+#iyuxumfewy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aluawaveaj .gt_column_spanner_outer:last-child {
+#iyuxumfewy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aluawaveaj .gt_column_spanner {
+#iyuxumfewy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -445,11 +498,11 @@ Nicky Wakim
   width: 100%;
 }
 
-#aluawaveaj .gt_spanner_row {
+#iyuxumfewy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aluawaveaj .gt_group_heading {
+#iyuxumfewy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -475,7 +528,7 @@ Nicky Wakim
   text-align: left;
 }
 
-#aluawaveaj .gt_empty_group_heading {
+#iyuxumfewy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -490,15 +543,15 @@ Nicky Wakim
   vertical-align: middle;
 }
 
-#aluawaveaj .gt_from_md > :first-child {
+#iyuxumfewy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aluawaveaj .gt_from_md > :last-child {
+#iyuxumfewy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aluawaveaj .gt_row {
+#iyuxumfewy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -517,7 +570,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#aluawaveaj .gt_stub {
+#iyuxumfewy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -530,7 +583,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#aluawaveaj .gt_stub_row_group {
+#iyuxumfewy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -544,15 +597,15 @@ Nicky Wakim
   vertical-align: top;
 }
 
-#aluawaveaj .gt_row_group_first td {
+#iyuxumfewy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aluawaveaj .gt_row_group_first th {
+#iyuxumfewy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aluawaveaj .gt_summary_row {
+#iyuxumfewy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -562,16 +615,16 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#aluawaveaj .gt_first_summary_row {
+#iyuxumfewy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_first_summary_row.thick {
+#iyuxumfewy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aluawaveaj .gt_last_summary_row {
+#iyuxumfewy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -581,7 +634,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_grand_summary_row {
+#iyuxumfewy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -591,7 +644,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#aluawaveaj .gt_first_grand_summary_row {
+#iyuxumfewy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -601,7 +654,7 @@ Nicky Wakim
   border-top-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_last_grand_summary_row_top {
+#iyuxumfewy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -611,11 +664,11 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_striped {
+#iyuxumfewy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aluawaveaj .gt_table_body {
+#iyuxumfewy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -624,7 +677,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_footnotes {
+#iyuxumfewy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -638,7 +691,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_footnote {
+#iyuxumfewy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -647,7 +700,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#aluawaveaj .gt_sourcenotes {
+#iyuxumfewy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -661,7 +714,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#aluawaveaj .gt_sourcenote {
+#iyuxumfewy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -669,72 +722,72 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#aluawaveaj .gt_left {
+#iyuxumfewy .gt_left {
   text-align: left;
 }
 
-#aluawaveaj .gt_center {
+#iyuxumfewy .gt_center {
   text-align: center;
 }
 
-#aluawaveaj .gt_right {
+#iyuxumfewy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aluawaveaj .gt_font_normal {
+#iyuxumfewy .gt_font_normal {
   font-weight: normal;
 }
 
-#aluawaveaj .gt_font_bold {
+#iyuxumfewy .gt_font_bold {
   font-weight: bold;
 }
 
-#aluawaveaj .gt_font_italic {
+#iyuxumfewy .gt_font_italic {
   font-style: italic;
 }
 
-#aluawaveaj .gt_super {
+#iyuxumfewy .gt_super {
   font-size: 65%;
 }
 
-#aluawaveaj .gt_footnote_marks {
+#iyuxumfewy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aluawaveaj .gt_asterisk {
+#iyuxumfewy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aluawaveaj .gt_indent_1 {
+#iyuxumfewy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aluawaveaj .gt_indent_2 {
+#iyuxumfewy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aluawaveaj .gt_indent_3 {
+#iyuxumfewy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aluawaveaj .gt_indent_4 {
+#iyuxumfewy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aluawaveaj .gt_indent_5 {
+#iyuxumfewy .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aluawaveaj .katex-display {
+#iyuxumfewy .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aluawaveaj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iyuxumfewy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -795,73 +848,1113 @@ Nicky Wakim
 </div>
 </div>
 </section>
-<section id="logistic-regression-reporting-results-of-glow-study-with-interactions" class="slide level2">
-<h2>Logistic regression: Reporting results of GLOW Study with interactions</h2>
+<section id="issues-with-log-binomial-in-glm" class="slide level2">
+<h2>Issues with log-binomial in <code>glm</code></h2>
 <ul>
-<li>Remember our main covariate is prior fracture, so we want to focuse on how age changes the relationship between prior fracture and a new fracture!</li>
+<li>What happens when we remove specific people from our study</li>
 </ul>
-<div class="columns">
-<div class="column">
-<p>For individuals 69 years old, the estimated odds of a new fracture for individuals with prior fracture is 2.72 times the estimated odds of a new fracture for individuals with no prior fracture (95% CI: 1.70, 4.35). As seen in <a href="#/fig-plots-1" class="quarto-xref">Figure&nbsp;1 (a)</a>, the odds ratio of a new fracture when comparing prior fracture status decreases with age, indicating that the effect of prior fractures on new fractures decreases as individuals get older. In <a href="#/fig-plots-2" class="quarto-xref">Figure&nbsp;1 (b)</a>, it is evident that for both prior fracture statuses, the predict probability of a new fracture increases as age increases. However, the predicted probability of new fracture for those without a prior fracture increases at a higher rate than that of individuals with a prior fracture. Thus, the predicted probabilities of a new fracture converge at age [insert age here].</p>
-</div><div class="column">
-<div id="fig-plots" class="quarto-layout-panel">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-plots-1" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-subfloat-fig">
-<div aria-describedby="fig-plots-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="16_Log_binom_reg_files/figure-revealjs/fig-plots-1.png" data-ref-parent="fig-plots" width="960">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>glow2 <span class="ot">=</span> glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>( age <span class="sc">&lt;</span> <span class="dv">80</span> <span class="sc">|</span> fracture <span class="sc">==</span> <span class="st">"Yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-plots-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) Odds ratio of fracture outcome comparing prior fracture to no prior fracture
-</figcaption>
-</figure>
+<ul>
+<li>Run a logistic regression model using <code>glm()</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>glow2_logistic <span class="ot">=</span> glow2 <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a></a>  <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> priorfrac<span class="sc">*</span>age_c, </span>
+<span id="cb3-3"><a></a>                              <span class="at">family =</span> binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Run a log-binomial model using <code>glm()</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>glow2_log_binom <span class="ot">=</span> glow2 <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a></a>  <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> priorfrac<span class="sc">*</span>age_c, </span>
+<span id="cb4-3"><a></a>                              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>Error: no valid set of coefficients has been found: please supply starting values</code></p>
+</section>
+<section id="how-to-fix-this" class="slide level2">
+<h2>How to fix this?</h2>
+<ul>
+<li>We can fit the log-binomial model using <code>logbin()</code>
+<ul>
+<li>This function uses something called the EM algorithm to fit the data</li>
+<li>Recall that <code>glm</code> uses an iteratively reweighted least squares algorithm</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>glow3 <span class="ot">=</span> glow2 <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a></a>  <span class="fu">mutate</span>(<span class="at">interaction_PF_age =</span> <span class="fu">as.numeric</span>(priorfrac)<span class="sc">*</span>age_c)</span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a>glow2_log_binom <span class="ot">=</span> <span class="fu">logbin</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> interaction_PF_age, </span>
+<span id="cb5-5"><a></a>         <span class="at">data =</span> glow3)</span>
+<span id="cb5-6"><a></a></span>
+<span id="cb5-7"><a></a><span class="fu">tidy</span>(glow2_log_binom, <span class="at">conf.int =</span> T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-9"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fheeniguif" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fheeniguif table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#fheeniguif thead, #fheeniguif tbody, #fheeniguif tfoot, #fheeniguif tr, #fheeniguif td, #fheeniguif th {
+  border-style: none;
+}
+
+#fheeniguif p {
+  margin: 0;
+  padding: 0;
+}
+
+#fheeniguif .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fheeniguif .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#fheeniguif .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fheeniguif .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fheeniguif .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fheeniguif .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fheeniguif .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fheeniguif .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fheeniguif .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fheeniguif .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fheeniguif .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fheeniguif .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fheeniguif .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#fheeniguif .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#fheeniguif .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fheeniguif .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fheeniguif .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fheeniguif .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fheeniguif .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fheeniguif .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fheeniguif .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fheeniguif .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#fheeniguif .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fheeniguif .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fheeniguif .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fheeniguif .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fheeniguif .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fheeniguif .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fheeniguif .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fheeniguif .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fheeniguif .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fheeniguif .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fheeniguif .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fheeniguif .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fheeniguif .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fheeniguif .gt_left {
+  text-align: left;
+}
+
+#fheeniguif .gt_center {
+  text-align: center;
+}
+
+#fheeniguif .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fheeniguif .gt_font_normal {
+  font-weight: normal;
+}
+
+#fheeniguif .gt_font_bold {
+  font-weight: bold;
+}
+
+#fheeniguif .gt_font_italic {
+  font-style: italic;
+}
+
+#fheeniguif .gt_super {
+  font-size: 65%;
+}
+
+#fheeniguif .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#fheeniguif .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fheeniguif .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#fheeniguif .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#fheeniguif .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fheeniguif .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fheeniguif .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#fheeniguif .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#fheeniguif div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p.value</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.low</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">(Intercept)</td>
+<td class="gt_row gt_right" headers="estimate">0.236</td>
+<td class="gt_row gt_right" headers="std.error">NaN</td>
+<td class="gt_row gt_right" headers="statistic">NaN</td>
+<td class="gt_row gt_right" headers="p.value">NaN</td>
+<td class="gt_row gt_right" headers="conf.low">NaN</td>
+<td class="gt_row gt_right" headers="conf.high">NaN</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">priorfracYes</td>
+<td class="gt_row gt_right" headers="estimate">1.491</td>
+<td class="gt_row gt_right" headers="std.error">NaN</td>
+<td class="gt_row gt_right" headers="statistic">NaN</td>
+<td class="gt_row gt_right" headers="p.value">NaN</td>
+<td class="gt_row gt_right" headers="conf.low">NaN</td>
+<td class="gt_row gt_right" headers="conf.high">NaN</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">age_c</td>
+<td class="gt_row gt_right" headers="estimate">1.054</td>
+<td class="gt_row gt_right" headers="std.error">NaN</td>
+<td class="gt_row gt_right" headers="statistic">NaN</td>
+<td class="gt_row gt_right" headers="p.value">NaN</td>
+<td class="gt_row gt_right" headers="conf.low">NaN</td>
+<td class="gt_row gt_right" headers="conf.high">NaN</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">interaction_PF_age</td>
+<td class="gt_row gt_right" headers="estimate">1.000</td>
+<td class="gt_row gt_right" headers="std.error">NaN</td>
+<td class="gt_row gt_right" headers="statistic">NaN</td>
+<td class="gt_row gt_right" headers="p.value">NaN</td>
+<td class="gt_row gt_right" headers="conf.low">NaN</td>
+<td class="gt_row gt_right" headers="conf.high">NaN</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-plots-2" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-subfloat-fig">
-<div aria-describedby="fig-plots-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="16_Log_binom_reg_files/figure-revealjs/fig-plots-2.png" data-ref-parent="fig-plots" width="960">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-plots-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) Predicted probability of fracture
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interaction model
-</figcaption>
-</figure>
-</div>
-</div></div>
 </section>
 <section id="testing-different-variables" class="slide level2">
 <h2>Testing different variables</h2>
+<ul>
+<li>We would go through the same procedure as logistic regression</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Use LRT to test multiple variables OR one categorical variable with multiple levels</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Use Wald test to construct confidence intervals
+<ul>
+<li>Or test one continuous or one binary variable</li>
+</ul></li>
+</ul>
 </section>
-<section id="interpretations-and-visualizations" class="slide level2">
-<h2>Interpretations and visualizations</h2>
+<section id="interpretations-and-visualizations-no-interactions" class="slide level2">
+<h2>Interpretations and visualizations: no interactions</h2>
+<ul>
+<li>If we have no interactions in the model:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>glow_main <span class="ot">=</span> glow <span class="sc">%&gt;%</span> <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c, </span>
+<span id="cb6-2"><a></a>                              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Above did not run</p></li>
+<li><p>So need to run it with <code>logbin</code></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>glow_main <span class="ot">=</span> <span class="fu">logbin</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c, <span class="at">data =</span> glow)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">tidy</span>(glow_main, <span class="at">conf.int =</span> T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="kohhhaeabs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kohhhaeabs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kohhhaeabs thead, #kohhhaeabs tbody, #kohhhaeabs tfoot, #kohhhaeabs tr, #kohhhaeabs td, #kohhhaeabs th {
+  border-style: none;
+}
+
+#kohhhaeabs p {
+  margin: 0;
+  padding: 0;
+}
+
+#kohhhaeabs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kohhhaeabs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kohhhaeabs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kohhhaeabs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kohhhaeabs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kohhhaeabs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kohhhaeabs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kohhhaeabs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kohhhaeabs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kohhhaeabs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kohhhaeabs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kohhhaeabs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kohhhaeabs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kohhhaeabs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kohhhaeabs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kohhhaeabs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kohhhaeabs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kohhhaeabs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kohhhaeabs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kohhhaeabs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kohhhaeabs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kohhhaeabs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kohhhaeabs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kohhhaeabs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kohhhaeabs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kohhhaeabs .gt_left {
+  text-align: left;
+}
+
+#kohhhaeabs .gt_center {
+  text-align: center;
+}
+
+#kohhhaeabs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kohhhaeabs .gt_font_normal {
+  font-weight: normal;
+}
+
+#kohhhaeabs .gt_font_bold {
+  font-weight: bold;
+}
+
+#kohhhaeabs .gt_font_italic {
+  font-style: italic;
+}
+
+#kohhhaeabs .gt_super {
+  font-size: 65%;
+}
+
+#kohhhaeabs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kohhhaeabs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kohhhaeabs .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kohhhaeabs .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kohhhaeabs .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kohhhaeabs .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kohhhaeabs .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kohhhaeabs .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kohhhaeabs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p.value</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.low</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">(Intercept)</td>
+<td class="gt_row gt_right" headers="estimate">0.203</td>
+<td class="gt_row gt_right" headers="std.error">0.103</td>
+<td class="gt_row gt_right" headers="statistic">−15.428</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">0.166</td>
+<td class="gt_row gt_right" headers="conf.high">0.248</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">priorfracYes</td>
+<td class="gt_row gt_right" headers="estimate">1.724</td>
+<td class="gt_row gt_right" headers="std.error">0.159</td>
+<td class="gt_row gt_right" headers="statistic">3.416</td>
+<td class="gt_row gt_right" headers="p.value">0.001</td>
+<td class="gt_row gt_right" headers="conf.low">1.261</td>
+<td class="gt_row gt_right" headers="conf.high">2.356</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">age_c</td>
+<td class="gt_row gt_right" headers="estimate">1.026</td>
+<td class="gt_row gt_right" headers="std.error">0.008</td>
+<td class="gt_row gt_right" headers="statistic">3.104</td>
+<td class="gt_row gt_right" headers="p.value">0.002</td>
+<td class="gt_row gt_right" headers="conf.low">1.010</td>
+<td class="gt_row gt_right" headers="conf.high">1.043</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="interpretations-and-visualizations-interactions" class="slide level2">
+<h2>Interpretations and visualizations: interactions</h2>
 </section>
 <section id="predictions-and-visualizations" class="slide level2">
 <h2>Predictions and visualizations</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>prior_age <span class="ot">=</span> <span class="fu">expand_grid</span>(<span class="at">priorfrac =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>), <span class="at">age_c =</span> (<span class="dv">55</span><span class="sc">:</span><span class="dv">90</span>)<span class="sc">-</span><span class="dv">69</span>)</span>
-<span id="cb2-2"><a></a>frac_pred <span class="ot">=</span> <span class="fu">predict</span>(glow_log_binom, prior_age, <span class="at">se.fit =</span> T, <span class="at">type=</span><span class="st">"response"</span>)</span>
-<span id="cb2-3"><a></a>pred_glow <span class="ot">=</span> prior_age <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">frac_pred =</span> frac_pred<span class="sc">$</span>fit, </span>
-<span id="cb2-4"><a></a>                                  <span class="at">age =</span> age_c <span class="sc">+</span> mean_age)</span>
-<span id="cb2-5"><a></a></span>
-<span id="cb2-6"><a></a><span class="fu">ggplot</span>(pred_glow) <span class="sc">+</span> <span class="co">#geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +</span></span>
-<span id="cb2-7"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> frac_pred, <span class="at">color =</span> priorfrac)) <span class="sc">+</span></span>
-<span id="cb2-8"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>), <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">16</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb2-9"><a></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Prior Fracture"</span>, <span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"Predicted Probability of Fracture"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>prior_age <span class="ot">=</span> <span class="fu">expand_grid</span>(<span class="at">priorfrac =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>), <span class="at">age_c =</span> (<span class="dv">55</span><span class="sc">:</span><span class="dv">90</span>)<span class="sc">-</span><span class="dv">69</span>)</span>
+<span id="cb9-2"><a></a>frac_pred <span class="ot">=</span> <span class="fu">predict</span>(glow_log_binom, prior_age, <span class="at">se.fit =</span> T, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb9-3"><a></a>pred_glow <span class="ot">=</span> prior_age <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">frac_pred =</span> frac_pred<span class="sc">$</span>fit, </span>
+<span id="cb9-4"><a></a>                                  <span class="at">age =</span> age_c <span class="sc">+</span> mean_age)</span>
+<span id="cb9-5"><a></a></span>
+<span id="cb9-6"><a></a><span class="fu">ggplot</span>(pred_glow) <span class="sc">+</span> <span class="co">#geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +</span></span>
+<span id="cb9-7"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> frac_pred, <span class="at">color =</span> priorfrac)) <span class="sc">+</span></span>
+<span id="cb9-8"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>), <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">16</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-9"><a></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Prior Fracture"</span>, <span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"Predicted Probability of Fracture"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="16_Log_binom_reg_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"></section>
+<img data-src="16_Log_binom_reg_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"></section>
 <section id="assessing-model-fit" class="slide level2">
 <h2>Assessing model fit</h2>
 

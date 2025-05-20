@@ -68,7 +68,9 @@ It is a good idea to try rendering your document from time to time as you go alo
 
 ## Questions Part 1
 
+### Question on model diagnostics
 
+### Question on log-binomial regression
 
 ## Questions Part 2
 

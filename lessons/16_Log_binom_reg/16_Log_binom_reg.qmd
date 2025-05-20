@@ -38,6 +38,7 @@ library(broom)
 library(here) 
 library(ggplot2)
 library(ggpubr)
+library(logbin)
 
 theme_set(theme_minimal() + 
             theme(text = element_text(size = 28)))
@@ -90,12 +91,16 @@ $$ \log(\mu) = \beta_0 + \beta_1 X$$
 
 ## Logistic regression vs. log-binomial regression
 
-- Outcome is the same
-- Logistic = log of odds
-  - Aim to get odds ratios for interpretation (exponential of coefficients)
+- Outcome is the same: still a binary variable
+  - Still modeling with probability of event: $P(Y=1|X)$
+- Logistic = logit = log of odds
+  - Aim to get **odds ratios** for interpretation (exponential of coefficients)
+  - You *can* convert the odds ratios to risk ratios
 - Log-binomial = log of probability
-  - Aim to get risk ratio or prevalence ratio (exponential of coefficients)
-  
+  - Aim to get **risk ratio** or prevalence ratio (exponential of coefficients)
+
+ 
+
 - Disadvantage of log-binomial: left hand side ($\log(\pi(X))$) is only a positive value, while right hand side can range from $-\infty$ to $\infty$
 
 
@@ -110,6 +115,47 @@ $$ \log(\mu) = \beta_0 + \beta_1 X$$
 -   Fitted **LOGISTIC REGRESSION** model with interactions: $$\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) & = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age \\  
     \text{logit}\left(\widehat\pi(\mathbf{X})\right) & = -1.376 + 1.002  \cdot I(\text{PF}=\text{``Yes"}) + 0.063  \cdot Age - 0.057  \cdot I(\text{PF}=\text{``Yes"}) \cdot Age
     \end{aligned}$$
+    
+## Logistic regression: Reporting results of GLOW Study with interactions
+
+-   Remember our main covariate is prior fracture, so we want to focuse on how age changes the relationship between prior fracture and a new fracture!
+
+::: columns
+::: column
+For individuals 69 years old, the estimated odds of a new fracture for individuals with prior fracture is 2.72 times the estimated odds of a new fracture for individuals with no prior fracture (95% CI: 1.70, 4.35). As seen in @fig-plots-1, the odds ratio of a new fracture when comparing prior fracture status decreases with age, indicating that the effect of prior fractures on new fractures decreases as individuals get older. In @fig-plots-2, it is evident that for both prior fracture statuses, the predict probability of a new fracture increases as age increases. However, the predicted probability of new fracture for those without a prior fracture increases at a higher rate than that of individuals with a prior fracture. Thus, the predicted probabilities of a new fracture converge at age \[insert age here\].
+:::
+
+::: column
+```{r}
+#| label: fig-plots
+#| fig-cap: "Plots of odds ratio and predicted probability from fitted interaction model" 
+#| fig-subcap:
+#|   - "Odds ratio of fracture outcome comparing prior fracture to no prior fracture"
+#|   - "Predicted probability of fracture" 
+#| fig-height: 9
+#| layout-ncol: 2
+#| echo: false
+
+load(here("lessons", "12_Assessing_fit/data", "glow_results.Rda"))
+ggplot(pred_glow2) +
+  geom_hline(yintercept = 1) +
+  geom_smooth(method = "loess", aes(x = age, y = OR_YN)) +
+  theme(text = element_text(size=35), title = element_text(size=35)) +
+  labs(x = "Age (years)", y = "Estimated odds ratio")
+
+frac_pred = predict(glow_m3, prior_age, se.fit = T, type="response")
+pred_glow = prior_age %>% mutate(frac_pred = frac_pred$fit, 
+                                  age = age_c + mean_age)
+
+ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +
+  geom_smooth(method = "loess", aes(x = age, y = frac_pred, color = priorfrac)) +
+  theme(text = element_text(size=35), title = element_text(size=35)) + ylim(0,1) +
+  labs(color = "Prior Fracture", x = "Age (years)", y = "Predicted Probability of Fracture")
+```
+:::
+:::
+
+
     
 ## What would a log-binomial regression model look like?
 
@@ -131,47 +177,105 @@ tidy(glow_log_binom, conf.int = T, exponentiate = T) %>%
   fmt_number(decimals = 3)
 ```
 
-## Logistic regression: Reporting results of GLOW Study with interactions
+## Issues with log-binomial in `glm`
 
--   Remember our main covariate is prior fracture, so we want to focuse on how age changes the relationship between prior fracture and a new fracture!
+- What happens when we remove specific people from our study
 
-::: columns
-::: column
-For individuals 69 years old, the estimated odds of a new fracture for individuals with prior fracture is 2.72 times the estimated odds of a new fracture for individuals with no prior fracture (95% CI: 1.70, 4.35). As seen in @fig-plots-1, the odds ratio of a new fracture when comparing prior fracture status decreases with age, indicating that the effect of prior fractures on new fractures decreases as individuals get older. In @fig-plots-2, it is evident that for both prior fracture statuses, the predict probability of a new fracture increases as age increases. However, the predicted probability of new fracture for those without a prior fracture increases at a higher rate than that of individuals with a prior fracture. Thus, the predicted probabilities of a new fracture converge at age \[insert age here\].
-:::
-
-::: column
 ```{r}
-#| label: fig-plots
-#| fig-cap: "Plots of odds ratio and predicted probability from fitted interaction model" 
-#| fig-subcap:
-#|   - "Odds ratio of fracture outcome comparing prior fracture to no prior fracture"
-#|   - "Predicted probability of fracture" 
-#| layout-ncol: 2
-#| echo: false
-
-load(here("lessons", "12_Assessing_fit/data", "glow_results.Rda"))
-ggplot(pred_glow2) +
-  geom_hline(yintercept = 1) +
-  geom_smooth(method = "loess", aes(x = age, y = OR_YN)) +
-  theme(text = element_text(size=20), title = element_text(size=16)) +
-  labs(x = "Age (years)", y = "Estimated odds ratio")
-
-frac_pred = predict(glow_m3, prior_age, se.fit = T, type="response")
-pred_glow = prior_age %>% mutate(frac_pred = frac_pred$fit, 
-                                  age = age_c + mean_age)
-
-ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +
-  geom_smooth(method = "loess", aes(x = age, y = frac_pred, color = priorfrac)) +
-  theme(text = element_text(size=20), title = element_text(size=16)) + ylim(0,1) +
-  labs(color = "Prior Fracture", x = "Age (years)", y = "Predicted Probability of Fracture")
+glow2 = glow %>% filter( age < 80 | fracture == "Yes")
 ```
-:::
-:::
+
+- Run a logistic regression model using `glm()`
+
+```{r}
+glow2_logistic = glow2 %>% 
+  glm(formula = fracture ~ priorfrac + age_c + priorfrac*age_c, 
+                              family = binomial)
+```
+
+- Run a log-binomial model using `glm()`
+
+```{r}
+#| eval: false
+glow2_log_binom = glow2 %>% 
+  glm(formula = fracture ~ priorfrac + age_c + priorfrac*age_c, 
+                              family = binomial(link = "log"))
+```
+
+`Error: no valid set of coefficients has been found: please supply starting values`
+
+## How to fix this?
+
+- We can fit the log-binomial model using `logbin()`
+  - This function uses something called the EM algorithm to fit the data
+  - Recall that `glm` uses an iteratively reweighted least squares algorithm
+  
+```{r}
+glow3 = glow2 %>%
+  mutate(interaction_PF_age = as.numeric(priorfrac)*age_c)
+
+glow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c + interaction_PF_age, 
+         data = glow3)
+
+tidy(glow2_log_binom, conf.int = T, exponentiate = T) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 30) %>%
+  fmt_number(decimals = 3)
+```
+
+```{r}
+#| echo: false
+#| eval: false
+
+tidy(glow2_logistic, conf.int = T) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 30) %>%
+  fmt_number(decimals = 3)
+
+tidy(glow2_log_binom, conf.int = T, exponentiate = T) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 30) %>%
+  fmt_number(decimals = 3)
+```
+
 
 ## Testing different variables
 
-## Interpretations and visualizations 
+- We would go through the same procedure as logistic regression 
+
+ 
+
+- Use LRT to test multiple variables OR one categorical variable with multiple levels
+
+ 
+
+- Use Wald test to construct confidence intervals
+  - Or test one continuous or one binary variable
+
+## Interpretations and visualizations: no interactions
+
+- If we have no interactions in the model: 
+```{r}
+#| eval: false
+glow_main = glow %>% glm(formula = fracture ~ priorfrac + age_c, 
+                              family = binomial(link = "log"))
+```
+
+- Above did not run
+
+- So need to run it with `logbin`
+```{r}
+glow_main = logbin(formula = fracture ~ priorfrac + age_c, data = glow)
+```
+
+```{r}
+tidy(glow_main, conf.int = T, exponentiate = T) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 30) %>%
+  fmt_number(decimals = 3)
+```
+
+## Interpretations and visualizations: interactions
 
 ## Predictions and visualizations
 
@@ -192,5 +296,4 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 ```
 
 ## Assessing model fit
-
 

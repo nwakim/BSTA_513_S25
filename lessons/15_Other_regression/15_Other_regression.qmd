@@ -3,7 +3,7 @@ title: "Lesson 15: Other types of categorical regression"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "05/19/2025"
+date: "05/21/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
