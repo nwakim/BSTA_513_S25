@@ -1,0 +1,38 @@
+---
+title: "Key Info and Announcements"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Announcements
+
+- CascadiaR conference
+  - Needs based scholarship app (due 5/31) <https://forms.gle/U4DHy3aU2qrq989M9>
+- I removed HW 5
+  - Last HW will be HW 4
+  - HW 4 will have a log-binomial regression on it!!
+    - But will be covered next Wednesday
+
+### Email from Jamie about PE
+
+Please share this email widely with EPI and BSTA students.
+
+I just met with OHSU Orthopaedics and they are looking for an epi student AND a biostatistics student to do a research PE with Dr. Yoo over multiple terms. This project will most likely pivot to multiple PE opportunities, as well. This will also be posted to the opportunities board, but I wanted to get the word out ASAP. Below are some details about the PE. 
+
+- OHSU (hybrid), unpaid, duration of PE is flexible (two terms is encouraged), start date preferred: June 23 (but flexible to start in fall) 
+- Project: Multiple project opportunities for answering nuanced questions in orthopaedic surgery using large datasets through EPIC Cosmos etc
+- Deliverables: Opportunity to own multiple questions - great opportunity for a motivated student looking for a springboard into academia.
+- All students, regardless of citizenship status (DACA, undocumented, international) are eligible and encouraged to apply!
+
+Interested students can email Jamie, and she will connect them with Zach, who is assisting with the PE set up. Please let me know if you or students have any questions!
+
+## Key Dates
+- Lab 4 due this Friday (5/23)
+- Quiz 3 opens on 5/28, closes on 6/1
+- HW 4 due next Friday (5/30)
+  - Extension can be granted until 6/6
+  

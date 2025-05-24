@@ -1,7 +1,7 @@
 ---
-title: "Homework 4"
+title: "Homework 4 Answers"
 subtitle: "BSTA 513/613"
-author: "Your name here - update this!!!!"
+author: "Nicky Wakim"
 date-modified: "today"
 format: 
   html:
@@ -32,36 +32,6 @@ library(haven)
 library(here)
 ```
 
-::: callout-caution
-This is ready to go! (5/23)
-:::
-
-## Purpose
-
-This homework is designed to help you practice the following important skills and knowledge that we covered in Lesson 13, 15-16:
-
-- Visually assessing observations for which the model does not fit well
-- Selecting the appropriate regression model based on outcome type
-- Fitting and interpreting a log-binomial regressions
-
-## Directions
-
--   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_513_S25/blob/main/homework/HW_04.qmd)
-
--   You will need to download the datasets from our shared folder.
-
--   Please upload your homework to Sakai. Upload both your `.qmd` code file and the rendered .html file
-
-    -   Please rename you homework as `Lastname_Firstinitial_HW04.qmd`. This will help organize the homeworks when the TAs grade them.
-
--   For each question, make sure to include all code and resulting output in the html file to support your answers
-
--   Show the work of your calculations using R code within a code chunk. Make sure that both your code and output are visible in the rendered html file. This is the default setting.
-
-::: callout-tip
-It is a good idea to try rendering your document from time to time as you go along! Note that rendering automatically saves your qmd file and rendering frequently helps you catch your errors more quickly.
-:::
-
 ## Questions Part 1
 
 ### Question 1
@@ -76,9 +46,7 @@ A code sheet for the variables to be considered is displayed in Table 1.5 below 
 
 ![](./images/ICU_codebook.png){width="557"}
 
-
-**We will use the following model:**
-$$\text{logit}(\pi(\textbf{X}))=\beta_0 + \beta_1 \cdot I(CAN=\text{``Yes"}) + \beta_2 \cdot I(CPR=\text{``Yes"}) + \\ \beta_3 \cdot I(INF=\text{``Yes"})$$
+**We will use the following model:** $$\text{logit}(\pi(\textbf{X}))=\beta_0 + \beta_1 \cdot I(CAN=\text{``Yes"}) + \beta_2 \cdot I(CPR=\text{``Yes"}) + \\ \beta_3 \cdot I(INF=\text{``Yes"})$$
 
 ```{r message=FALSE, warning=FALSE}
 icu = read_csv(here("data", "icu.csv"))
@@ -90,29 +58,82 @@ icu2 = icu1 %>% mutate(CAN = as.factor(CAN) %>% relevel(ref = "No"),
                        relevel(ref = "No Coma or Deep Stupor"))
 ```
 
+::: blue
+```{r}
+#| echo: false
+
+model1 = glm(STA ~ CAN + CPR + INF,
+            data = icu2, family = binomial)
+m1_tidy = tidy(model1, conf.int = T) 
+
+m1_tidy %>% gt() %>% 
+  tab_options(table.font.size = 16) %>%
+  fmt_number(decimals = 3)
+```
+
+
+```{r}
+#| echo: false
+
+source(here("data", "Logistic_Dx_Functions.R"))
+dx_icu = dx(model1)
+glimpse(dx_icu)
+```
+
+:::
+
 #### Part a
 
 How many covariate patterns does the regression equation have?
+
+::: blue
+Not given
+:::
 
 #### Part b
 
 Plot the change in standardized Pearson residual by predicted probability. Do you notice any potential outliers? Explain your reasoning.
 
+::: blue
+```{r fig.height=5, fig.width=8}
+
+ggplot(dx_icu) + 
+  geom_hline(yintercept = 4, col = "red", linetype="dashed", linewidth=1) +
+  geom_point(aes(x=P, y=dChisq), size = 3) + 
+  xlab("Estimated/Predicted Probability of Death") +
+  ylab("Change in Std. Pearson Residual") +
+  theme(text = element_text(size = 18)) + 
+  xlim(0,1)
+```
+:::
+
 #### Part c
 
 Plot the change in standardized Deviance residual by predicted probability. Do you notice any potential outliers? Explain your reasoning.
+
+::: blue
+Not given
+:::
 
 #### Part d
 
 Plot the change in coefficient estimate by predicted probability. Do you notice any influential points? Explain your reasoning.
 
+::: blue
+Not given
+:::
+
 #### Part e
 
 Plot the leverage by predicted probability. Do you notice any influential points? Explain your reasoning.
 
+::: blue
+Not given
+:::
+
 ### Question 2
 
-*In this problem, we will practice fitting and interpreting a **log-binomial regression.** *
+*In this problem, we will practice fitting and interpreting a **log-binomial regression.***
 
 This question is taken from the Hosmer and Lemeshow textbook. The ICU study data set consists of a sample of 200 subjects who were part of a much larger study on survival of patients following admission to an adult intensive care unit (ICU). The dataset should be available in our shared folder. The major goal of this study was to develop a logistic regression model to predict the probability of survival to hospital discharge of these patients. In this question, the primary outcome variable is vital (survival) status at hospital discharge, STA. Clinicians associated with the study felt that a key determinant of survival was the patient’s age at admission, AGE. We will build to a multivariable logistic regression model while adjusting for cancer part of the present problem (CAN), CPR prior to ICU admission (CPR), infection probable at ICU admission (INF), and level of consciousness at ICU admission (LOC).
 
@@ -126,23 +147,51 @@ A code sheet for the variables to be considered is displayed in Table 1.5 below 
 
 Write down the population equation for the log-binomial regression model of STA on AGE, CAN, CPR, and INF. How many parameters does this model contain?
 
+::: blue
+This model contains 4 parameters.
+:::
+
 #### Part b
 
 Try using `glm()` to obtain the maximum likelihood estimates of the parameters of the log-binomial regression model in Part a. Do you run into any issues using `glm()`? If you try `logbin()`, does it fix the issues? Explain why and what warnings `logbin()` gives you. 
 
 *Hint: keep the `glm()` function in its own code chunk so you can add `#| eval: false`. `glm()` may throw an error, so we want to show the work for `glm()` even though it'll break your qmd rendering.*
 
+::: blue
+`glm()` does not work. `logbin()` has warnings.
+:::
+
 #### Part c
 
 Using `logbin()`, obtain the maximum likelihood estimates of the parameters of the log-binomial regression model in Part a, **but now take out age**. Using these estimates, write down the equation with the fitted values.
 
-#### Part c
+::: blue
+
+```{r}
+#| echo: false
+
+library(logbin)
+logbin_mod2 <- logbin(STA ~ CAN + CPR + INF, 
+                  data = icu2)
+summary(logbin_mod2)
+```
+:::
+
+#### Part d
 
 Interpret the exponential of the coefficient (risk ratio) estimate for `CPR`.
+
+::: blue
+Not given
+:::
 
 #### Part e
 
 We were not able to fit a model with age, but let's just entertain a scenario here. Let's say we fit the model in Part a and got a coefficient estimate of 0.29 with a 95% confidence interval of 0.23 to 0.35. Using the model is Part a, interpret the exponential of the coefficient (risk ratio) estimate for `AGE`.
+
+::: blue
+Not given
+:::
 
 ## Questions Part 2
 
@@ -156,11 +205,15 @@ Number of minutes of moderate-to-vigorous physical activity per week (range: 0 t
 
 Which regression model is most appropriate?
 
-a. Linear regression
-b. Logistic regression
-c. Log-binomial regression
-d. Poisson regression
-e. Multinomial logistic regression
+a.  Linear regression
+b.  Logistic regression
+c.  Log-binomial regression
+d.  Poisson regression
+e.  Multinomial logistic regression
+
+::: blue
+a.  Linear regression
+:::
 
 #### Part b
 
@@ -168,11 +221,15 @@ Whether the participant meets CDC recommendations for weekly physical activity (
 
 Which regression model is most appropriate?
 
-a. Linear regression
-b. Logistic regression
-c. Log-binomial regression
-d. Poisson regression
-e. Multinomial logistic regression
+a.  Linear regression
+b.  Logistic regression
+c.  Log-binomial regression
+d.  Poisson regression
+e.  Multinomial logistic regression
+
+::: blue
+Not given
+:::
 
 #### Part c
 
@@ -180,11 +237,15 @@ Number of workouts the person completed in the past week (values: 0, 1, 2, ..., 
 
 Which regression model is most appropriate?
 
-a. Linear regression
-b. Logistic regression
-c. Log-binomial regression
-d. Poisson regression
-e. Multinomial logistic regression
+a.  Linear regression
+b.  Logistic regression
+c.  Log-binomial regression
+d.  Poisson regression
+e.  Multinomial logistic regression
+
+::: blue
+Not given
+:::
 
 #### Part d
 
@@ -192,9 +253,12 @@ Self-reported activity level: Sedentary, Moderately active, Highly active
 
 Which regression model is most appropriate?
 
-a. Linear regression
-b. Logistic regression
-c. Log-binomial regression
-d. Poisson regression
-e. Multinomial logistic regression
+a.  Linear regression
+b.  Logistic regression
+c.  Log-binomial regression
+d.  Poisson regression
+e.  Multinomial logistic regression
 
+::: blue
+Not given
+:::

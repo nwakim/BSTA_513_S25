@@ -194,14 +194,14 @@ The following questions are intended to give you **practice in connecting concep
 
 ### Question 4
 
-Using a similar table to the one in Lesson 8, go back through the parts in this homework and determine which test can be run.
+Using a similar table to the one in Lesson 8, go back through the parts in Question 1 and determine which test can be run.
 
 |   | Wald test/CI | Score test | LRT |
 |--------------------|------------------|------------------|------------------|
 | Question 1, Part c: testing group of variables |  |  |  |
 | Question 1, Part d: testing interaction |  |  |  |
-| Question 2, Part e: creating 95% CI for main effects |  |  |  |
-| Question 2, Part f: creating 95% CI for odds ratios |  |  |  |
+| Question 1, Part e: creating 95% CI for main effects |  |  |  |
+| Question 1, Part f: creating 95% CI for odds ratios |  |  |  |
 
 ### Question 5
 

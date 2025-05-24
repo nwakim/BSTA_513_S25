@@ -1,10 +1,8 @@
 ---
-title: "Homework 3"
+title: "Homework 3 Answers"
 subtitle: "BSTA 513/613"
-author: "Your name here - update this!!!!"
-description: "Due: Thursday May 9, 2024 at 11pm"
+author: "Nicky Wakim"
 date-modified: "today"
-date: "5/9/2024"
 format: 
   html:
     link-external-newwindow: true

@@ -98,6 +98,8 @@ Calculate the ROC-AUC of your model.
 
 ### Perform model diagnostics
 
+You can find the R script for the `dx()` function [here.](https://ohsuitg-my.sharepoint.com/:u:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/S25_BSTA_513/Student_files/Lab/Logistic_Dx_Functions.R?csf=1&web=1&e=d0Kyij)
+
 ::: callout-important
 #### Task
 Check your diagnostic plots and cutoffs (change in Pearson residuals, change in coefficients, and leverage) to identify and investigate any influential or outlier observations. Are these observations feasible?
