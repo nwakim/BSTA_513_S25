@@ -1,0 +1,37 @@
+---
+title: "Quiz 3 Info"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+- **Quiz 3** will open on Wednesday at 3pm 
+
+- The quiz will be administered over Sakai 
+
+- The quiz has a total of 10 questions, with 9 multiple choice and 1 free response questions
+  - One question will require some addition and muliplication
+
+- Concepts and interpretations from Lessons 10-14 will be tested
+  - Interactions are important! How do you test them? How do you calculate odds ratios? (Big in HW 3)
+  - You should know different model diagnostics 
+  - You should know how to test or interpret the overall model assessment measurements
+  - You should know about concepts of model building, like prediction and association
+
+- If you go to the "Tests & Quizzes" there is a Test Run for you to get familiar with the Sakai formatting.
+
+- Quiz  instructions:
+  - I have written a 30-minute quiz, but there is no time limit on the quiz. You will have from
+  - Wednesday at 3pm to Sunday at 11pm to finish the quiz.
+  - The quiz is open book and open notes. You may use books other than the class textbook, you may use anything on our course webpage, and you may use reference websites (like Wikipedia, Googling expected value of specific distribution, etc.).
+  - No cheating will be tolerated. Cheating includes:
+  - Using ChatGPT
+  - Copy and pasting the question from Sakai to any search engine. 
+  - Using question and answer threads typically seen on sites like StackExchange, WikiHow, Quora, Reddit, StackOverflow, Chegg, etc.    
+  - Asking other students, sharing quiz work or sharing quiz results. 
+  - Each question is worth 3 points, including multiple choice and free response questions.
+
+
