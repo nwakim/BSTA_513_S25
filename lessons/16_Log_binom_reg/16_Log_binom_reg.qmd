@@ -3,7 +3,7 @@ title: "Lesson 16: Log-binomial Regression"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "05/19/2025"
+date: "05/28/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -55,8 +55,16 @@ glow = glow500 %>% mutate(age_c = age - mean_age)
 
 # Learning Objectives
 
-1.  Revisit the key information for log-binomial regression.
-2. 
+1. Revisit the key distinctions between logistic and log-binomial regression.
+2. Interpret and visualize coefficient estimates, risk ratios, and predicted probabilities.
+
+# Learning Objectives
+
+::: lob
+1. Revisit the key distinctions between logistic and log-binomial regression.
+:::
+
+2. Interpret and visualize coefficient estimates, risk ratios, and predicted probabilities.
 
 
 ```{css, echo=FALSE}
@@ -115,6 +123,8 @@ $$ \log(\mu) = \beta_0 + \beta_1 X$$
 
 -   **Potential confounder or effect modifier:** age (AGE, a continuous variable)
 
+ 
+
 -   Fit a [**logistic regression**]{style="color:#70AD47"} model with interactions: 
 
 \begin{aligned} 
@@ -165,40 +175,43 @@ ggplot(pred_glow) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) 
 
 
     
-## What would a log-binomial regression model look like?
+## What would a log-binomial equivalent look like?
 
 - For the same GLOW data, we could fit a log-binomial model:
 
 $$\text{log}\left(\widehat\pi(\mathbf{X})\right) = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age $$
 
+- What does this look like in the `glm` function?
 ```{r}
 glow_log_binom = glow %>% glm(formula = fracture ~ priorfrac + age_c + priorfrac*age_c, 
                               family = binomial(link = "log"))
 ```
 
 ```{r}
-#| echo: false
+#| code-fold: true
+#| code-summary: "Table for coefficient estimates"
 
-tidy(glow_log_binom, conf.int = T, exponentiate = T) %>% 
+tidy(glow_log_binom, conf.int = T) %>% 
   gt() %>% 
   tab_options(table.font.size = 30) %>%
   fmt_number(decimals = 3)
 ```
 
-## Issues with log-binomial in `glm`
+## Let's start with a model with main effects only 
 
-- **Hypothetical situation:** What happens when we remove specific people from our study?
+- Just so we have a simpler model as we first demostrate the log-binomial:
+
+$$\text{log}\left(\widehat\pi(\mathbf{X})\right) = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age $$
 
 ```{r}
-glow2 = glow %>% filter( age < 84 | fracture == "Yes")
+#| echo: false
+glow2 = glow %>% filter( age < 84 | fracture == "Yes") 
 ```
-
- 
 
 - Run a logistic regression model using `glm()`: *works!*
 
 ```{r}
-glow2_logistic = glow2 %>% 
+glow2_logistic = glow %>% 
   glm(formula = fracture ~ priorfrac + age_c, 
                               family = binomial)
 ```
@@ -209,7 +222,7 @@ glow2_logistic = glow2 %>%
 
 ```{r}
 #| eval: false
-glow2_log_binom = glow2 %>% 
+glow2_log_binom = glow %>% 
   glm(formula = fracture ~ priorfrac + age_c, 
                               family = binomial(link = "log"))
 ```
@@ -224,9 +237,17 @@ glow2_log_binom = glow2 %>%
   
 ```{r}
 glow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c, 
-         data = glow2)
+         data = glow)
+```
 
-tidy(glow2_log_binom, conf.int = T, exponentiate = T) %>% 
+- Using `logbin` instead of `glm` will often fix the issue with fitting
+  - But it does not work 100% of the time! 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Table for coefficient estimates from logbin()"
+
+tidy(glow2_log_binom, conf.int = T) %>% 
   gt() %>% 
   tab_options(table.font.size = 33) %>%
   fmt_number(decimals = 3)
@@ -248,9 +269,10 @@ tidy(glow2_log_binom, conf.int = T, exponentiate = T) %>%
 ```
 
 
-## Testing different variables
+## Model tests: same as logistic regression
 
 - We would go through the same procedure as logistic regression 
+  - Because both models are rooted in the likelihood function!
 
  
 
@@ -260,6 +282,14 @@ tidy(glow2_log_binom, conf.int = T, exponentiate = T) %>%
 
 - Use Wald test to construct confidence intervals
   - Or test one continuous or one binary variable
+  
+# Learning Objectives
+
+1. Revisit the key distinctions between logistic and log-binomial regression.
+
+::: lob
+2. Interpret and visualize coefficient estimates, risk ratios, and predicted probabilities.
+:::
 
 ## Interpreting risk ratios from log-binomial regression
 
@@ -278,30 +308,22 @@ $$\text{log}\left(\widehat\pi(\mathbf{X})\right) = \widehat\beta_0 + \widehat\be
 *Recall that once I estimate the coefficients, my interpretations need to reflect that they are estimated by saying "estimated risk"
 
 
-## Interpretations and visualizations: no interactions
+## Interpretation of risk ratio: no interactions (1/2)
 
-- If we have no interactions in the model: 
-```{r}
-#| eval: false
-glow_main = glow %>% glm(formula = fracture ~ priorfrac + age_c, 
-                              family = binomial(link = "log"))
-```
-
-- Above did not run
-
-- So need to run it with `logbin`
+- If we have no interactions in the model (using `logbin`): 
 ```{r}
 glow_main = logbin(formula = fracture ~ priorfrac + age_c, data = glow)
 ```
 
+- Look at the exponential of the coefficients (risk ratio):
 ```{r}
 tidy(glow_main, conf.int = T, exponentiate = T) %>% 
   gt() %>% 
-  tab_options(table.font.size = 30) %>%
+  tab_options(table.font.size = 35) %>%
   fmt_number(decimals = 3)
 ```
 
-## Interpretations and visualizations: no interactions
+## Interpretation of risk ratio: no interactions (2/2)
 
 ```{r}
 #| echo: false
@@ -318,10 +340,28 @@ tidy(glow_main, conf.int = T, exponentiate = T) %>%
 - $\exp(\widehat{\beta}_2)$: For every one year increase in age, the estimated risk of fracture is `r round(exp(glow_main$coefficients[3]), 2)` times, adjusting for prior fracture.
   - OR: For every one year increase in age, the estimated risk of fracture increases `r round(100*(exp(glow_main$coefficients[3])-1), 2)`%, adjusting for prior fracture.
   
-## 
+## Visualization: We can look at the log-risk
 
+- This will help us understand the model that we fit
+- Ultimately, we do not need a visualization of the risk ratio because the main effects model is constant across age
 
+::: columns
+::: {.column width="40%"}
 ```{r}
+#| code-fold: true
+#| code-summary: "Table of coefficient estimates"
+tidy(glow_main) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 30) %>%
+  fmt_number(decimals = 3)
+```
+:::
+::: {.column width="60%"}
+```{r}
+#| code-fold: true
+#| code-summary: "Code to make the following plot"
+
+
 prior_age = expand_grid(priorfrac = c("No", "Yes"), age_c = (55:90)-69)
 frac_pred_lb = predict(glow_main, prior_age, se.fit = F, type="link")
 pred_glow_lb = prior_age %>% mutate(frac_pred = frac_pred_lb, 
@@ -330,31 +370,78 @@ pred_glow_lb = prior_age %>% mutate(frac_pred = frac_pred_lb,
 ggplot(pred_glow_lb) +
   geom_vline(xintercept = 69) +
   geom_smooth(method = "loess", aes(x = age, y = frac_pred, color = priorfrac)) +
-  theme(text = element_text(size=35), title = element_text(size=35)) +
+  theme(text = element_text(size=35), title = element_text(size=22)) +
   labs(x = "Age (years)", y = "Estimated log-risk")
 ```
+:::
+:::
 
-## Interpretations and visualizations: interactions
+
+## Interactions: interpretations and visualizations
+
+$$\text{log}\left(\widehat\pi(\mathbf{X})\right) = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3 \cdot I(\text{PF}= \text{``Yes"}) \cdot Age$$
 
 ```{r}
-glow3 = glow2 %>%
+glow3 = glow %>%
   mutate(interaction_PF_age = as.numeric(priorfrac)*age_c)
 
-glow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c, # + interaction_PF_age, 
-         data = glow2)
+glow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c + interaction_PF_age, 
+         data = glow3)
 
-tidy(glow2_log_binom, conf.int = T, exponentiate = T) %>% 
+tidy(glow2_log_binom, conf.int = T) %>% 
   gt() %>% 
   tab_options(table.font.size = 30) %>%
   fmt_number(decimals = 3)
 ```
 
-## Predictions and visualizations
+## Visualization of interaction: We can look at the log-risk
+
+- This will help us understand the model that we fit
+- Ultimately, we do not need a visualization of the risk ratio because the main effects model is constant across age
+
+::: columns
+::: {.column width="40%"}
+```{r}
+#| code-fold: true
+#| code-summary: "Table of coefficient estimates"
+tidy(glow2_log_binom) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 30) %>%
+  fmt_number(decimals = 3)
+```
+:::
+::: {.column width="60%"}
+```{r}
+#| code-fold: true
+#| code-summary: "Code to make the following plot"
+
+
+prior_age = expand_grid(priorfrac = c("No", "Yes"), age_c = (55:90)-69) %>%
+            mutate(interaction_PF_age = ifelse(priorfrac=="Yes", 1, 0)*age_c)
+frac_pred_lb = predict(glow2_log_binom, prior_age, se.fit = F, type="link")
+pred_glow_lb = prior_age %>% mutate(frac_pred = frac_pred_lb, 
+                                  age = age_c + mean_age)
+
+ggplot(pred_glow_lb) +
+  geom_vline(xintercept = 69) +
+  geom_smooth(method = "loess", aes(x = age, y = frac_pred, color = priorfrac)) +
+  theme(text = element_text(size=35), title = element_text(size=22)) +
+  labs(x = "Age (years)", y = "Estimated log-risk")
+```
+:::
+:::
+
+## Predicted probabilities and visualizations
+
+- Does this look familiar?? It should!
+  - The predicted probabilities from the logistic regression and the log-binomial regression should be the same!
 
 ```{r}
 #| fig-align: center
 #| fig-width: 7
-#| fig-height: 4.5
+#| fig-height: 4
+#| code-fold: true
+#| code-summary: "Code to make the following plot"
 
 prior_age = expand_grid(priorfrac = c("No", "Yes"), age_c = (55:90)-69)
 frac_pred_lb = predict(glow_log_binom, prior_age, se.fit = T, type="response")
@@ -367,8 +454,22 @@ ggplot(pred_glow_lb) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac
   labs(color = "Prior Fracture", x = "Age (years)", y = "Predicted Probability of Fracture")
 ```
 
+## Final words on log-binomial vs logistic
+
+- Log-binomial is more common in field of Epidemiology
+
+ 
+
+- I prefer to use logistic regression because it is more stable AND I can calculate risk ratio from my odds ratio and predicted probability
+
+ 
+
+- If you use $OR \approx RR$, then logistic regression will over-estimate the RR
+  - BUT you can still use logistic regression to calculate the RR
+  - Find the predicted probabilities for two groups you are comparing and then calculate the RR
 
 ## More resources
 
 - [Log-binomial models: exploring failed convergence](https://pmc.ncbi.nlm.nih.gov/articles/PMC3909339/)
-
+- [Parameter estimation and goodness-of-fit in log binomial regression](https://pubmed.ncbi.nlm.nih.gov/16544809/)
+  - Needs PSU login for full access

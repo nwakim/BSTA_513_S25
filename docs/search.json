@@ -11001,7 +11001,7 @@
     "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#a-few-classes-ago-glow-study-with-interactions",
     "title": "Lesson 16: Log-binomial Regression",
     "section": "A few classes ago: GLOW Study with interactions",
-    "text": "A few classes ago: GLOW Study with interactions\n\nOutcome variable: any fracture in the first year of follow up (FRACTURE: 0 or 1)\nRisk factor/variable of interest: history of prior fracture (PRIORFRAC: 0 or 1)\nPotential confounder or effect modifier: age (AGE, a continuous variable)\nFit a logistic regression model with interactions:\n\n\\[\\begin{aligned}\n\\text{logit}\\left(\\pi(\\mathbf{X})\\right) & = \\beta_0 + \\beta_1  \\cdot I(\\text{PF}= \\text{``Yes\"}) + \\beta_2  \\cdot Age + \\beta_3  \\cdot I(\\text{PF} = \\text{``Yes\"}) \\cdot Age \\\\  \n\\text{logit}\\left(\\widehat\\pi(\\mathbf{X})\\right) & = \\widehat\\beta_0 + \\widehat\\beta_1  \\cdot I(\\text{PF}= \\text{``Yes\"}) + \\widehat\\beta_2  \\cdot Age + \\widehat\\beta_3  \\cdot I(\\text{PF} = \\text{``Yes\"}) \\cdot Age \\\\\n\n\\text{logit}\\left(\\widehat\\pi(\\mathbf{X})\\right) & = -1.376 + 1.002  \\cdot I(\\text{PF}=\\text{``Yes\"}) + 0.063  \\cdot Age - 0.057  \\cdot I(\\text{PF}=\\text{``Yes\"}) \\cdot Age\n\\end{aligned}\\]"
+    "text": "A few classes ago: GLOW Study with interactions\n\nOutcome variable: any fracture in the first year of follow up (FRACTURE: 0 or 1)\nRisk factor/variable of interest: history of prior fracture (PRIORFRAC: 0 or 1)\nPotential confounder or effect modifier: age (AGE, a continuous variable)\n\n \n\nFit a logistic regression model with interactions:\n\n\\[\\begin{aligned}\n\\text{logit}\\left(\\pi(\\mathbf{X})\\right) & = \\beta_0 + \\beta_1  \\cdot I(\\text{PF}= \\text{``Yes\"}) + \\beta_2  \\cdot Age + \\beta_3  \\cdot I(\\text{PF} = \\text{``Yes\"}) \\cdot Age \\\\  \n\\text{logit}\\left(\\widehat\\pi(\\mathbf{X})\\right) & = \\widehat\\beta_0 + \\widehat\\beta_1  \\cdot I(\\text{PF}= \\text{``Yes\"}) + \\widehat\\beta_2  \\cdot Age + \\widehat\\beta_3  \\cdot I(\\text{PF} = \\text{``Yes\"}) \\cdot Age \\\\\n\n\\text{logit}\\left(\\widehat\\pi(\\mathbf{X})\\right) & = -1.376 + 1.002  \\cdot I(\\text{PF}=\\text{``Yes\"}) + 0.063  \\cdot Age - 0.057  \\cdot I(\\text{PF}=\\text{``Yes\"}) \\cdot Age\n\\end{aligned}\\]"
   },
   {
     "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#logistic-regression-reporting-results-of-glow-study-with-interactions",
@@ -11029,28 +11029,28 @@
     "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#how-to-fix-this",
     "title": "Lesson 16: Log-binomial Regression",
     "section": "How to fix this?",
-    "text": "How to fix this?\n\nWe can fit the log-binomial model using logbin()\n\nThis function uses something called the EM algorithm to fit the data\nRecall that glm uses an iteratively reweighted least squares algorithm\n\n\n\nglow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c, \n         data = glow2)\n\ntidy(glow2_log_binom, conf.int = T, exponentiate = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 33) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.210\n0.102\n−15.352\n0.000\n0.172\n0.257\n\n\npriorfracYes\n1.677\n0.148\n3.482\n0.000\n1.254\n2.244\n\n\nage_c\n1.049\n0.008\n6.010\n0.000\n1.032\n1.065"
+    "text": "How to fix this?\n\nWe can fit the log-binomial model using logbin()\n\nThis function uses something called the EM algorithm to fit the data\nRecall that glm uses an iteratively reweighted least squares algorithm\n\n\n\nglow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c, \n         data = glow)\n\n\nUsing logbin instead of glm will often fix the issue with fitting\n\nBut it does not work 100% of the time!\n\n\n\n\nTable for coefficient estimates from logbin()\ntidy(glow2_log_binom, conf.int = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 33) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n−1.595\n0.103\n−15.428\n0.000\n−1.798\n−1.393\n\n\npriorfracYes\n0.545\n0.159\n3.416\n0.001\n0.232\n0.857\n\n\nage_c\n0.026\n0.008\n3.104\n0.002\n0.009\n0.042"
   },
   {
     "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#issues-with-log-binomial-in-glm",
     "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#issues-with-log-binomial-in-glm",
     "title": "Lesson 16: Log-binomial Regression",
     "section": "Issues with log-binomial in glm",
-    "text": "Issues with log-binomial in glm\n\nHypothetical situation: What happens when we remove specific people from our study?\n\n\nglow2 = glow %&gt;% filter( age &lt; 84 | fracture == \"Yes\")\n\n \n\nRun a logistic regression model using glm(): works!\n\n\nglow2_logistic = glow2 %&gt;% \n  glm(formula = fracture ~ priorfrac + age_c, \n                              family = binomial)\n\n \n\nRun a log-binomial model using glm(): does not work!\n\n\nglow2_log_binom = glow2 %&gt;% \n  glm(formula = fracture ~ priorfrac + age_c, \n                              family = binomial(link = \"log\"))\n\nError: no valid set of coefficients has been found: please supply starting values"
+    "text": "Issues with log-binomial in glm\n\nHypothetical situation: What happens when we remove 17 people from our study?\n\n\nglow2 = glow %&gt;% filter( age &lt; 84 | fracture == \"Yes\") \n\n \n\nRun a logistic regression model using glm(): works!\n\n\nglow2_logistic = glow2 %&gt;% \n  glm(formula = fracture ~ priorfrac + age_c, \n                              family = binomial)\n\n \n\nRun a log-binomial model using glm(): does not work!\n\n\nglow2_log_binom = glow2 %&gt;% \n  glm(formula = fracture ~ priorfrac + age_c, \n                              family = binomial(link = \"log\"))\n\nError: no valid set of coefficients has been found: please supply starting values"
   },
   {
     "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpretations-and-visualizations-no-interactions",
     "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpretations-and-visualizations-no-interactions",
     "title": "Lesson 16: Log-binomial Regression",
     "section": "Interpretations and visualizations: no interactions",
-    "text": "Interpretations and visualizations: no interactions\n\nIf we have no interactions in the model:\n\n\nglow_main = glow %&gt;% glm(formula = fracture ~ priorfrac + age_c, \n                              family = binomial(link = \"log\"))\n\n\nAbove did not run\nSo need to run it with logbin\n\n\nglow_main = logbin(formula = fracture ~ priorfrac + age_c, data = glow)\n\n\ntidy(glow_main, conf.int = T, exponentiate = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.203\n0.103\n−15.428\n0.000\n0.166\n0.248\n\n\npriorfracYes\n1.724\n0.159\n3.416\n0.001\n1.261\n2.356\n\n\nage_c\n1.026\n0.008\n3.104\n0.002\n1.010\n1.043"
+    "text": "Interpretations and visualizations: no interactions\n\nIf we have no interactions in the model (using logbin):\n\n\nglow_main = logbin(formula = fracture ~ priorfrac + age_c, data = glow)\n\n\nLook at the exponential of the coefficients (risk ratio):\n\n\ntidy(glow_main, conf.int = T, exponentiate = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 35) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.203\n0.103\n−15.428\n0.000\n0.166\n0.248\n\n\npriorfracYes\n1.724\n0.159\n3.416\n0.001\n1.261\n2.356\n\n\nage_c\n1.026\n0.008\n3.104\n0.002\n1.010\n1.043"
   },
   {
     "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpretations-and-visualizations-interactions",
     "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpretations-and-visualizations-interactions",
     "title": "Lesson 16: Log-binomial Regression",
     "section": "Interpretations and visualizations: interactions",
-    "text": "Interpretations and visualizations: interactions\n\nglow3 = glow2 %&gt;%\n  mutate(interaction_PF_age = as.numeric(priorfrac)*age_c)\n\nglow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c, # + interaction_PF_age, \n         data = glow2)\n\ntidy(glow2_log_binom, conf.int = T, exponentiate = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.210\n0.102\n−15.352\n0.000\n0.172\n0.257\n\n\npriorfracYes\n1.677\n0.148\n3.482\n0.000\n1.254\n2.244\n\n\nage_c\n1.049\n0.008\n6.010\n0.000\n1.032\n1.065"
+    "text": "Interpretations and visualizations: interactions\n\nglow3 = glow %&gt;%\n  mutate(interaction_PF_age = as.numeric(priorfrac)*age_c)\n\nglow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c+ interaction_PF_age, \n         data = glow3)\n\ntidy(glow2_log_binom, conf.int = T, exponentiate = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.203\n0.104\n−15.414\n0.000\n0.165\n0.248\n\n\npriorfracYes\n1.779\n0.170\n3.382\n0.001\n1.274\n2.483\n\n\nage_c\n1.038\n0.026\n1.440\n0.150\n0.987\n1.092\n\n\ninteraction_PF_age\n0.991\n0.017\n−0.546\n0.585\n0.959\n1.024"
   },
   {
     "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg_key_info.html",
@@ -11113,7 +11113,7 @@
     "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#more-resources",
     "title": "Lesson 16: Log-binomial Regression",
     "section": "More resources",
-    "text": "More resources\n\nLog-binomial models: exploring failed convergence"
+    "text": "More resources\n\nLog-binomial models: exploring failed convergence\nParameter estimation and goodness-of-fit in log binomial regression\n\nNeeds PSU login for full access"
   },
   {
     "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpreting-risk-ratios-from-log-binomial-regression",
@@ -11135,5 +11135,82 @@
     "title": "Lesson 16: Log-binomial Regression",
     "section": "",
     "text": "prior_age = expand_grid(priorfrac = c(\"No\", \"Yes\"), age_c = (55:90)-69)\nfrac_pred_lb = predict(glow_main, prior_age, se.fit = F, type=\"link\")\npred_glow_lb = prior_age %&gt;% mutate(frac_pred = frac_pred_lb, \n                                  age = age_c + mean_age)\n\nggplot(pred_glow_lb) +\n  geom_vline(xintercept = 69) +\n  geom_smooth(method = \"loess\", aes(x = age, y = frac_pred, color = priorfrac)) +\n  theme(text = element_text(size=35), title = element_text(size=35)) +\n  labs(x = \"Age (years)\", y = \"Estimated log-risk\")"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#what-would-a-log-binomial-equivalent-look-like",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#what-would-a-log-binomial-equivalent-look-like",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "What would a log-binomial equivalent look like?",
+    "text": "What would a log-binomial equivalent look like?\n\nFor the same GLOW data, we could fit a log-binomial model:\n\n\\[\\text{log}\\left(\\widehat\\pi(\\mathbf{X})\\right) = \\widehat\\beta_0 + \\widehat\\beta_1  \\cdot I(\\text{PF}= \\text{``Yes\"}) + \\widehat\\beta_2  \\cdot Age + \\widehat\\beta_3  \\cdot I(\\text{PF} = \\text{``Yes\"}) \\cdot Age \\]\n\nWhat does this look like in the glm function?\n\n\nglow_log_binom = glow %&gt;% glm(formula = fracture ~ priorfrac + age_c + priorfrac*age_c, \n                              family = binomial(link = \"log\"))\n\n\n\nTable for coefficient estimates\ntidy(glow_log_binom, conf.int = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n−1.625\n0.106\n−15.269\n0.000\n−1.846\n−1.427\n\n\npriorfracYes\n0.727\n0.159\n4.570\n0.000\n0.404\n1.034\n\n\nage_c\n0.046\n0.011\n4.217\n0.000\n0.025\n0.066\n\n\npriorfracYes:age_c\n−0.043\n0.016\n−2.710\n0.007\n−0.074\n−0.012"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#lets-start-with-a-model-with-main-effects-only",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#lets-start-with-a-model-with-main-effects-only",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Let’s start with a model with main effects only",
+    "text": "Let’s start with a model with main effects only\n\nJust so we have a simpler model as we first demostrate the log-binomial:\n\n\\[\\text{log}\\left(\\widehat\\pi(\\mathbf{X})\\right) = \\widehat\\beta_0 + \\widehat\\beta_1  \\cdot I(\\text{PF}= \\text{``Yes\"}) + \\widehat\\beta_2  \\cdot Age \\]\n\nRun a logistic regression model using glm(): works!\n\n\nglow2_logistic = glow %&gt;% \n  glm(formula = fracture ~ priorfrac + age_c, \n                              family = binomial)\n\n \n\nRun a log-binomial model using glm(): does not work!\n\n\nglow2_log_binom = glow %&gt;% \n  glm(formula = fracture ~ priorfrac + age_c, \n                              family = binomial(link = \"log\"))\n\nError: no valid set of coefficients has been found: please supply starting values"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#model-tests-same-as-logistic-regression",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#model-tests-same-as-logistic-regression",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Model tests: same as logistic regression",
+    "text": "Model tests: same as logistic regression\n\nWe would go through the same procedure as logistic regression\n\nBecause both models are rooted in the likelihood function!\n\n\n \n\nUse LRT to test multiple variables OR one categorical variable with multiple levels\n\n \n\nUse Wald test to construct confidence intervals\n\nOr test one continuous or one binary variable"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#we-can-look-at-the-log-risk",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#we-can-look-at-the-log-risk",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "We can look at the log-risk",
+    "text": "We can look at the log-risk\n\nThis will help us understand the model that we fit\nUltimately, we do not need a visualization of the risk ratio because the main effects model is constant across age\n\n\n\nCode to make the following plot\nprior_age = expand_grid(priorfrac = c(\"No\", \"Yes\"), age_c = (55:90)-69)\nfrac_pred_lb = predict(glow_main, prior_age, se.fit = F, type=\"link\")\npred_glow_lb = prior_age %&gt;% mutate(frac_pred = frac_pred_lb, \n                                  age = age_c + mean_age)\n\nggplot(pred_glow_lb) +\n  geom_vline(xintercept = 69) +\n  geom_smooth(method = \"loess\", aes(x = age, y = frac_pred, color = priorfrac)) +\n  theme(text = element_text(size=35), title = element_text(size=22)) +\n  labs(x = \"Age (years)\", y = \"Estimated log-risk\")"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpretation-of-risk-ratio-no-interactions-12",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpretation-of-risk-ratio-no-interactions-12",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Interpretation of risk ratio: no interactions (1/2)",
+    "text": "Interpretation of risk ratio: no interactions (1/2)\n\nIf we have no interactions in the model (using logbin):\n\n\nglow_main = logbin(formula = fracture ~ priorfrac + age_c, data = glow)\n\n\nLook at the exponential of the coefficients (risk ratio):\n\n\ntidy(glow_main, conf.int = T, exponentiate = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 35) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.203\n0.103\n−15.428\n0.000\n0.166\n0.248\n\n\npriorfracYes\n1.724\n0.159\n3.416\n0.001\n1.261\n2.356\n\n\nage_c\n1.026\n0.008\n3.104\n0.002\n1.010\n1.043"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpretation-of-risk-ratio-no-interactions-22",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interpretation-of-risk-ratio-no-interactions-22",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Interpretation of risk ratio: no interactions (2/2)",
+    "text": "Interpretation of risk ratio: no interactions (2/2)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.203\n0.103\n−15.428\n0.000\n0.166\n0.248\n\n\npriorfracYes\n1.724\n0.159\n3.416\n0.001\n1.261\n2.356\n\n\nage_c\n1.026\n0.008\n3.104\n0.002\n1.010\n1.043\n\n\n\n\n\n\n\n\n\\(\\exp(\\widehat{\\beta}_0)\\): The estimated risk of fracture is 0.2 for someone who had no prior fracture and is the mean age of 69 years old\n\\(\\exp(\\widehat{\\beta}_1)\\): The estimated risk of fracture for someone who had a prior fracture is 1.72 times the estimated risk of fracture for someone who did not have a prior fracture, adjusting for age.\n\\(\\exp(\\widehat{\\beta}_2)\\): For every one year increase in age, the estimated risk of fracture is 1.03 times, adjusting for prior fracture.\n\nOR: For every one year increase in age, the estimated risk of fracture increases 2.61%, adjusting for prior fracture."
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#visualization-we-can-look-at-the-log-risk",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#visualization-we-can-look-at-the-log-risk",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Visualization: We can look at the log-risk",
+    "text": "Visualization: We can look at the log-risk\n\nThis will help us understand the model that we fit\nUltimately, we do not need a visualization of the risk ratio because the main effects model is constant across age\n\n\n\n\n\nTable of coefficient estimates\ntidy(glow_main) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n−1.595\n0.103\n−15.428\n0.000\n\n\npriorfracYes\n0.545\n0.159\n3.416\n0.001\n\n\nage_c\n0.026\n0.008\n3.104\n0.002\n\n\n\n\n\n\n\n\n\n\nCode to make the following plot\nprior_age = expand_grid(priorfrac = c(\"No\", \"Yes\"), age_c = (55:90)-69)\nfrac_pred_lb = predict(glow_main, prior_age, se.fit = F, type=\"link\")\npred_glow_lb = prior_age %&gt;% mutate(frac_pred = frac_pred_lb, \n                                  age = age_c + mean_age)\n\nggplot(pred_glow_lb) +\n  geom_vline(xintercept = 69) +\n  geom_smooth(method = \"loess\", aes(x = age, y = frac_pred, color = priorfrac)) +\n  theme(text = element_text(size=35), title = element_text(size=22)) +\n  labs(x = \"Age (years)\", y = \"Estimated log-risk\")"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#predicted-probabilities-and-visualizations",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#predicted-probabilities-and-visualizations",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Predicted probabilities and visualizations",
+    "text": "Predicted probabilities and visualizations\n\nDoes this look familiar?? It should!\n\nThe predicted probabilities from the logistic regression and the log-binomial regression should be the same!\n\n\n\n\nCode to make the following plot\nprior_age = expand_grid(priorfrac = c(\"No\", \"Yes\"), age_c = (55:90)-69)\nfrac_pred_lb = predict(glow_log_binom, prior_age, se.fit = T, type=\"response\")\npred_glow_lb = prior_age %&gt;% mutate(frac_pred = frac_pred_lb$fit, \n                                  age = age_c + mean_age)\n\nggplot(pred_glow_lb) + #geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +\n  geom_smooth(method = \"loess\", aes(x = age, y = frac_pred, color = priorfrac)) +\n  theme(text = element_text(size=20), title = element_text(size=16)) + ylim(0,1) +\n  labs(color = \"Prior Fracture\", x = \"Age (years)\", y = \"Predicted Probability of Fracture\")"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interactions-interpretations-and-visualizations",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#interactions-interpretations-and-visualizations",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Interactions: interpretations and visualizations",
+    "text": "Interactions: interpretations and visualizations\n\\[\\text{log}\\left(\\widehat\\pi(\\mathbf{X})\\right) = \\widehat\\beta_0 + \\widehat\\beta_1  \\cdot I(\\text{PF}= \\text{``Yes\"}) + \\widehat\\beta_2  \\cdot Age + \\widehat\\beta_3 \\cdot I(\\text{PF}= \\text{``Yes\"}) \\cdot Age\\]\n\nglow3 = glow %&gt;%\n  mutate(interaction_PF_age = as.numeric(priorfrac)*age_c)\n\nglow2_log_binom = logbin(formula = fracture ~ priorfrac + age_c + interaction_PF_age, \n         data = glow3)\n\ntidy(glow2_log_binom, conf.int = T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n−1.596\n0.104\n−15.414\n0.000\n−1.799\n−1.393\n\n\npriorfracYes\n0.576\n0.170\n3.382\n0.001\n0.242\n0.910\n\n\nage_c\n0.037\n0.026\n1.440\n0.150\n−0.013\n0.088\n\n\ninteraction_PF_age\n−0.009\n0.017\n−0.546\n0.585\n−0.042\n0.023"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#visualization-of-interaction-we-can-look-at-the-log-risk",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#visualization-of-interaction-we-can-look-at-the-log-risk",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Visualization of interaction: We can look at the log-risk",
+    "text": "Visualization of interaction: We can look at the log-risk\n\nThis will help us understand the model that we fit\nUltimately, we do not need a visualization of the risk ratio because the main effects model is constant across age\n\n\n\n\n\nTable of coefficient estimates\ntidy(glow2_log_binom) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n−1.596\n0.104\n−15.414\n0.000\n\n\npriorfracYes\n0.576\n0.170\n3.382\n0.001\n\n\nage_c\n0.037\n0.026\n1.440\n0.150\n\n\ninteraction_PF_age\n−0.009\n0.017\n−0.546\n0.585\n\n\n\n\n\n\n\n\n\n\nCode to make the following plot\nprior_age = expand_grid(priorfrac = c(\"No\", \"Yes\"), age_c = (55:90)-69) %&gt;%\n            mutate(interaction_PF_age = ifelse(priorfrac==\"Yes\", 1, 0)*age_c)\nfrac_pred_lb = predict(glow2_log_binom, prior_age, se.fit = F, type=\"link\")\npred_glow_lb = prior_age %&gt;% mutate(frac_pred = frac_pred_lb, \n                                  age = age_c + mean_age)\n\nggplot(pred_glow_lb) +\n  geom_vline(xintercept = 69) +\n  geom_smooth(method = \"loess\", aes(x = age, y = frac_pred, color = priorfrac)) +\n  theme(text = element_text(size=35), title = element_text(size=22)) +\n  labs(x = \"Age (years)\", y = \"Estimated log-risk\")"
+  },
+  {
+    "objectID": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#final-words-on-log-binomial-vs-logistic",
+    "href": "lessons/16_Log_binom_reg/16_Log_binom_reg.html#final-words-on-log-binomial-vs-logistic",
+    "title": "Lesson 16: Log-binomial Regression",
+    "section": "Final words on log-binomial vs logistic",
+    "text": "Final words on log-binomial vs logistic\n\nLog-binomial is more common in field of Epidemiology\n\n \n\nI prefer to use logistic regression because it is more stable AND I can calculate risk ratio from my odds ratio and predicted probability\n\n \n\nIf you use \\(OR \\approx RR\\), then logistic regression will over-estimate the RR\n\nBUT you can still use logistic regression to calculate the RR\nFind the predicted probabilities for two groups you are comparing and then calculate the RR"
   }
 ]
