@@ -211,7 +211,8 @@ Nicky Wakim
 <section id="learning-objectives" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
-<li>Review Generalized Linear Models and how we can branch to other types of regression.</li>
+<li>Revisit the key information for log-binomial regression.</li>
+<li></li>
 </ol>
 <div class="cell">
 <style type="text/css">
@@ -258,19 +259,23 @@ Nicky Wakim
 <ul>
 <li>Still modeling with probability of event: <span class="math inline">\(P(Y=1|X)\)</span></li>
 </ul></li>
-<li>Logistic = logit = log of odds
+<li><span style="color:#70AD47">Logistic = logit = log of odds</span>
 <ul>
 <li>Aim to get <strong>odds ratios</strong> for interpretation (exponential of coefficients)</li>
 <li>You <em>can</em> convert the odds ratios to risk ratios</li>
 </ul></li>
-<li>Log-binomial = log of probability
+<li><span style="color:#ED7D31">Log-binomial = log of probability</span>
 <ul>
 <li>Aim to get <strong>risk ratio</strong> or prevalence ratio (exponential of coefficients)</li>
 </ul></li>
 </ul>
 <p>&nbsp;</p>
 <ul>
-<li>Disadvantage of log-binomial: left hand side (<span class="math inline">\(\log(\pi(X))\)</span>) is only a positive value, while right hand side can range from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span></li>
+<li>Disadvantage of log-binomial
+<ul>
+<li>Left hand side (aka <span class="math inline">\(\log(\pi(X))\)</span>) is only a positive value, while right hand side can range from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span></li>
+<li>Prone to issues while trying to fit the model!</li>
+</ul></li>
 </ul>
 </section>
 <section id="a-few-classes-ago-glow-study-with-interactions" class="slide level2">
@@ -279,10 +284,14 @@ Nicky Wakim
 <li><p><strong>Outcome variable:</strong> any fracture in the first year of follow up (FRACTURE: 0 or 1)</p></li>
 <li><p><strong>Risk factor/variable of interest:</strong> history of prior fracture (PRIORFRAC: 0 or 1)</p></li>
 <li><p><strong>Potential confounder or effect modifier:</strong> age (AGE, a continuous variable)</p></li>
-<li><p>Fitted <strong>LOGISTIC REGRESSION</strong> model with interactions: <span class="math display">\[\begin{aligned} \text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age \\  
-\text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = -1.376 + 1.002  \cdot I(\text{PF}=\text{``Yes"}) + 0.063  \cdot Age - 0.057  \cdot I(\text{PF}=\text{``Yes"}) \cdot Age
-\end{aligned}\]</span></p></li>
+<li><p>Fit a <span style="color:#70AD47"><strong>logistic regression</strong></span> model with interactions:</p></li>
 </ul>
+<span class="math display">\[\begin{aligned}
+\text{logit}\left(\pi(\mathbf{X})\right) &amp; = \beta_0 + \beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \beta_2  \cdot Age + \beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age \\  
+\text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age + \widehat\beta_3  \cdot I(\text{PF} = \text{``Yes"}) \cdot Age \\
+
+\text{logit}\left(\widehat\pi(\mathbf{X})\right) &amp; = -1.376 + 1.002  \cdot I(\text{PF}=\text{``Yes"}) + 0.063  \cdot Age - 0.057  \cdot I(\text{PF}=\text{``Yes"}) \cdot Age
+\end{aligned}\]</span>
 </section>
 <section id="logistic-regression-reporting-results-of-glow-study-with-interactions" class="slide level2">
 <h2>Logistic regression: Reporting results of GLOW Study with interactions</h2>
@@ -342,23 +351,23 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="iyuxumfewy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iyuxumfewy table {
+<div id="ppsbxswhrw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ppsbxswhrw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iyuxumfewy thead, #iyuxumfewy tbody, #iyuxumfewy tfoot, #iyuxumfewy tr, #iyuxumfewy td, #iyuxumfewy th {
+#ppsbxswhrw thead, #ppsbxswhrw tbody, #ppsbxswhrw tfoot, #ppsbxswhrw tr, #ppsbxswhrw td, #ppsbxswhrw th {
   border-style: none;
 }
 
-#iyuxumfewy p {
+#ppsbxswhrw p {
   margin: 0;
   padding: 0;
 }
 
-#iyuxumfewy .gt_table {
+#ppsbxswhrw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -384,12 +393,12 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-left-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_caption {
+#ppsbxswhrw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iyuxumfewy .gt_title {
+#ppsbxswhrw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -401,7 +410,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-width: 0;
 }
 
-#iyuxumfewy .gt_subtitle {
+#ppsbxswhrw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -413,7 +422,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-top-width: 0;
 }
 
-#iyuxumfewy .gt_heading {
+#ppsbxswhrw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -425,13 +434,13 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_bottom_border {
+#ppsbxswhrw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_col_headings {
+#ppsbxswhrw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -446,7 +455,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_col_heading {
+#ppsbxswhrw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -466,7 +475,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   overflow-x: hidden;
 }
 
-#iyuxumfewy .gt_column_spanner_outer {
+#ppsbxswhrw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -478,15 +487,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 4px;
 }
 
-#iyuxumfewy .gt_column_spanner_outer:first-child {
+#ppsbxswhrw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iyuxumfewy .gt_column_spanner_outer:last-child {
+#ppsbxswhrw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iyuxumfewy .gt_column_spanner {
+#ppsbxswhrw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -498,11 +507,11 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   width: 100%;
 }
 
-#iyuxumfewy .gt_spanner_row {
+#ppsbxswhrw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iyuxumfewy .gt_group_heading {
+#ppsbxswhrw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -528,7 +537,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   text-align: left;
 }
 
-#iyuxumfewy .gt_empty_group_heading {
+#ppsbxswhrw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -543,15 +552,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   vertical-align: middle;
 }
 
-#iyuxumfewy .gt_from_md > :first-child {
+#ppsbxswhrw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iyuxumfewy .gt_from_md > :last-child {
+#ppsbxswhrw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iyuxumfewy .gt_row {
+#ppsbxswhrw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -570,7 +579,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   overflow-x: hidden;
 }
 
-#iyuxumfewy .gt_stub {
+#ppsbxswhrw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -583,7 +592,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#iyuxumfewy .gt_stub_row_group {
+#ppsbxswhrw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -597,15 +606,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   vertical-align: top;
 }
 
-#iyuxumfewy .gt_row_group_first td {
+#ppsbxswhrw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iyuxumfewy .gt_row_group_first th {
+#ppsbxswhrw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iyuxumfewy .gt_summary_row {
+#ppsbxswhrw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -615,16 +624,16 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#iyuxumfewy .gt_first_summary_row {
+#ppsbxswhrw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_first_summary_row.thick {
+#ppsbxswhrw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iyuxumfewy .gt_last_summary_row {
+#ppsbxswhrw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -634,7 +643,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_grand_summary_row {
+#ppsbxswhrw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -644,7 +653,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#iyuxumfewy .gt_first_grand_summary_row {
+#ppsbxswhrw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -654,7 +663,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-top-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_last_grand_summary_row_top {
+#ppsbxswhrw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -664,11 +673,11 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_striped {
+#ppsbxswhrw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iyuxumfewy .gt_table_body {
+#ppsbxswhrw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -677,7 +686,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_footnotes {
+#ppsbxswhrw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -691,7 +700,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_footnote {
+#ppsbxswhrw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -700,7 +709,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#iyuxumfewy .gt_sourcenotes {
+#ppsbxswhrw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -714,7 +723,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#iyuxumfewy .gt_sourcenote {
+#ppsbxswhrw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -722,72 +731,72 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#iyuxumfewy .gt_left {
+#ppsbxswhrw .gt_left {
   text-align: left;
 }
 
-#iyuxumfewy .gt_center {
+#ppsbxswhrw .gt_center {
   text-align: center;
 }
 
-#iyuxumfewy .gt_right {
+#ppsbxswhrw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iyuxumfewy .gt_font_normal {
+#ppsbxswhrw .gt_font_normal {
   font-weight: normal;
 }
 
-#iyuxumfewy .gt_font_bold {
+#ppsbxswhrw .gt_font_bold {
   font-weight: bold;
 }
 
-#iyuxumfewy .gt_font_italic {
+#ppsbxswhrw .gt_font_italic {
   font-style: italic;
 }
 
-#iyuxumfewy .gt_super {
+#ppsbxswhrw .gt_super {
   font-size: 65%;
 }
 
-#iyuxumfewy .gt_footnote_marks {
+#ppsbxswhrw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iyuxumfewy .gt_asterisk {
+#ppsbxswhrw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iyuxumfewy .gt_indent_1 {
+#ppsbxswhrw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iyuxumfewy .gt_indent_2 {
+#ppsbxswhrw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iyuxumfewy .gt_indent_3 {
+#ppsbxswhrw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iyuxumfewy .gt_indent_4 {
+#ppsbxswhrw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iyuxumfewy .gt_indent_5 {
+#ppsbxswhrw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#iyuxumfewy .katex-display {
+#ppsbxswhrw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#iyuxumfewy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ppsbxswhrw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -851,25 +860,27 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 <section id="issues-with-log-binomial-in-glm" class="slide level2">
 <h2>Issues with log-binomial in <code>glm</code></h2>
 <ul>
-<li>What happens when we remove specific people from our study</li>
+<li><strong>Hypothetical situation:</strong> What happens when we remove specific people from our study?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>glow2 <span class="ot">=</span> glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>( age <span class="sc">&lt;</span> <span class="dv">80</span> <span class="sc">|</span> fracture <span class="sc">==</span> <span class="st">"Yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>glow2 <span class="ot">=</span> glow <span class="sc">%&gt;%</span> <span class="fu">filter</span>( age <span class="sc">&lt;</span> <span class="dv">84</span> <span class="sc">|</span> fracture <span class="sc">==</span> <span class="st">"Yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>&nbsp;</p>
 <ul>
-<li>Run a logistic regression model using <code>glm()</code></li>
+<li>Run a logistic regression model using <code>glm()</code>: <em>works!</em></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>glow2_logistic <span class="ot">=</span> glow2 <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a></a>  <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> priorfrac<span class="sc">*</span>age_c, </span>
+<span id="cb3-2"><a></a>  <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c, </span>
 <span id="cb3-3"><a></a>                              <span class="at">family =</span> binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>&nbsp;</p>
 <ul>
-<li>Run a log-binomial model using <code>glm()</code></li>
+<li>Run a log-binomial model using <code>glm()</code>: <em>does not work!</em></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>glow2_log_binom <span class="ot">=</span> glow2 <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a></a>  <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> priorfrac<span class="sc">*</span>age_c, </span>
+<span id="cb4-2"><a></a>  <span class="fu">glm</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c, </span>
 <span id="cb4-3"><a></a>                              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>Error: no valid set of coefficients has been found: please supply starting values</code></p>
@@ -884,41 +895,38 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>glow3 <span class="ot">=</span> glow2 <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a></a>  <span class="fu">mutate</span>(<span class="at">interaction_PF_age =</span> <span class="fu">as.numeric</span>(priorfrac)<span class="sc">*</span>age_c)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>glow2_log_binom <span class="ot">=</span> <span class="fu">logbin</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c, </span>
+<span id="cb5-2"><a></a>         <span class="at">data =</span> glow2)</span>
 <span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a>glow2_log_binom <span class="ot">=</span> <span class="fu">logbin</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c <span class="sc">+</span> interaction_PF_age, </span>
-<span id="cb5-5"><a></a>         <span class="at">data =</span> glow3)</span>
-<span id="cb5-6"><a></a></span>
-<span id="cb5-7"><a></a><span class="fu">tidy</span>(glow2_log_binom, <span class="at">conf.int =</span> T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-8"><a></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-9"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-10"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a></a><span class="fu">tidy</span>(glow2_log_binom, <span class="at">conf.int =</span> T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">33</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fheeniguif" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fheeniguif table {
+<div id="zfkgejngls" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zfkgejngls table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fheeniguif thead, #fheeniguif tbody, #fheeniguif tfoot, #fheeniguif tr, #fheeniguif td, #fheeniguif th {
+#zfkgejngls thead, #zfkgejngls tbody, #zfkgejngls tfoot, #zfkgejngls tr, #zfkgejngls td, #zfkgejngls th {
   border-style: none;
 }
 
-#fheeniguif p {
+#zfkgejngls p {
   margin: 0;
   padding: 0;
 }
 
-#fheeniguif .gt_table {
+#zfkgejngls .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 30px;
+  font-size: 33px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -937,12 +945,12 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-left-color: #D3D3D3;
 }
 
-#fheeniguif .gt_caption {
+#zfkgejngls .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fheeniguif .gt_title {
+#zfkgejngls .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -954,7 +962,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-width: 0;
 }
 
-#fheeniguif .gt_subtitle {
+#zfkgejngls .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -966,7 +974,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-top-width: 0;
 }
 
-#fheeniguif .gt_heading {
+#zfkgejngls .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -978,13 +986,13 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#fheeniguif .gt_bottom_border {
+#zfkgejngls .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fheeniguif .gt_col_headings {
+#zfkgejngls .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -999,7 +1007,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#fheeniguif .gt_col_heading {
+#zfkgejngls .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1019,7 +1027,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   overflow-x: hidden;
 }
 
-#fheeniguif .gt_column_spanner_outer {
+#zfkgejngls .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1031,15 +1039,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 4px;
 }
 
-#fheeniguif .gt_column_spanner_outer:first-child {
+#zfkgejngls .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fheeniguif .gt_column_spanner_outer:last-child {
+#zfkgejngls .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fheeniguif .gt_column_spanner {
+#zfkgejngls .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1051,11 +1059,11 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   width: 100%;
 }
 
-#fheeniguif .gt_spanner_row {
+#zfkgejngls .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fheeniguif .gt_group_heading {
+#zfkgejngls .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1081,7 +1089,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   text-align: left;
 }
 
-#fheeniguif .gt_empty_group_heading {
+#zfkgejngls .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1096,15 +1104,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   vertical-align: middle;
 }
 
-#fheeniguif .gt_from_md > :first-child {
+#zfkgejngls .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fheeniguif .gt_from_md > :last-child {
+#zfkgejngls .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fheeniguif .gt_row {
+#zfkgejngls .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1123,7 +1131,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   overflow-x: hidden;
 }
 
-#fheeniguif .gt_stub {
+#zfkgejngls .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1136,7 +1144,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#fheeniguif .gt_stub_row_group {
+#zfkgejngls .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1150,15 +1158,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   vertical-align: top;
 }
 
-#fheeniguif .gt_row_group_first td {
+#zfkgejngls .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fheeniguif .gt_row_group_first th {
+#zfkgejngls .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fheeniguif .gt_summary_row {
+#zfkgejngls .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1168,16 +1176,16 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#fheeniguif .gt_first_summary_row {
+#zfkgejngls .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fheeniguif .gt_first_summary_row.thick {
+#zfkgejngls .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fheeniguif .gt_last_summary_row {
+#zfkgejngls .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1187,7 +1195,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#fheeniguif .gt_grand_summary_row {
+#zfkgejngls .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1197,7 +1205,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#fheeniguif .gt_first_grand_summary_row {
+#zfkgejngls .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1207,7 +1215,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-top-color: #D3D3D3;
 }
 
-#fheeniguif .gt_last_grand_summary_row_top {
+#zfkgejngls .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1217,11 +1225,11 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#fheeniguif .gt_striped {
+#zfkgejngls .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fheeniguif .gt_table_body {
+#zfkgejngls .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1230,7 +1238,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#fheeniguif .gt_footnotes {
+#zfkgejngls .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1244,7 +1252,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#fheeniguif .gt_footnote {
+#zfkgejngls .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1253,7 +1261,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#fheeniguif .gt_sourcenotes {
+#zfkgejngls .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1267,7 +1275,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#fheeniguif .gt_sourcenote {
+#zfkgejngls .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1275,72 +1283,72 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#fheeniguif .gt_left {
+#zfkgejngls .gt_left {
   text-align: left;
 }
 
-#fheeniguif .gt_center {
+#zfkgejngls .gt_center {
   text-align: center;
 }
 
-#fheeniguif .gt_right {
+#zfkgejngls .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fheeniguif .gt_font_normal {
+#zfkgejngls .gt_font_normal {
   font-weight: normal;
 }
 
-#fheeniguif .gt_font_bold {
+#zfkgejngls .gt_font_bold {
   font-weight: bold;
 }
 
-#fheeniguif .gt_font_italic {
+#zfkgejngls .gt_font_italic {
   font-style: italic;
 }
 
-#fheeniguif .gt_super {
+#zfkgejngls .gt_super {
   font-size: 65%;
 }
 
-#fheeniguif .gt_footnote_marks {
+#zfkgejngls .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fheeniguif .gt_asterisk {
+#zfkgejngls .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fheeniguif .gt_indent_1 {
+#zfkgejngls .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fheeniguif .gt_indent_2 {
+#zfkgejngls .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fheeniguif .gt_indent_3 {
+#zfkgejngls .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fheeniguif .gt_indent_4 {
+#zfkgejngls .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fheeniguif .gt_indent_5 {
+#zfkgejngls .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fheeniguif .katex-display {
+#zfkgejngls .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fheeniguif div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zfkgejngls div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1360,39 +1368,30 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="term">(Intercept)</td>
-<td class="gt_row gt_right" headers="estimate">0.236</td>
-<td class="gt_row gt_right" headers="std.error">NaN</td>
-<td class="gt_row gt_right" headers="statistic">NaN</td>
-<td class="gt_row gt_right" headers="p.value">NaN</td>
-<td class="gt_row gt_right" headers="conf.low">NaN</td>
-<td class="gt_row gt_right" headers="conf.high">NaN</td>
+<td class="gt_row gt_right" headers="estimate">0.210</td>
+<td class="gt_row gt_right" headers="std.error">0.102</td>
+<td class="gt_row gt_right" headers="statistic">−15.352</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">0.172</td>
+<td class="gt_row gt_right" headers="conf.high">0.257</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="term">priorfracYes</td>
-<td class="gt_row gt_right" headers="estimate">1.491</td>
-<td class="gt_row gt_right" headers="std.error">NaN</td>
-<td class="gt_row gt_right" headers="statistic">NaN</td>
-<td class="gt_row gt_right" headers="p.value">NaN</td>
-<td class="gt_row gt_right" headers="conf.low">NaN</td>
-<td class="gt_row gt_right" headers="conf.high">NaN</td>
+<td class="gt_row gt_right" headers="estimate">1.677</td>
+<td class="gt_row gt_right" headers="std.error">0.148</td>
+<td class="gt_row gt_right" headers="statistic">3.482</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">1.254</td>
+<td class="gt_row gt_right" headers="conf.high">2.244</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="term">age_c</td>
-<td class="gt_row gt_right" headers="estimate">1.054</td>
-<td class="gt_row gt_right" headers="std.error">NaN</td>
-<td class="gt_row gt_right" headers="statistic">NaN</td>
-<td class="gt_row gt_right" headers="p.value">NaN</td>
-<td class="gt_row gt_right" headers="conf.low">NaN</td>
-<td class="gt_row gt_right" headers="conf.high">NaN</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="term">interaction_PF_age</td>
-<td class="gt_row gt_right" headers="estimate">1.000</td>
-<td class="gt_row gt_right" headers="std.error">NaN</td>
-<td class="gt_row gt_right" headers="statistic">NaN</td>
-<td class="gt_row gt_right" headers="p.value">NaN</td>
-<td class="gt_row gt_right" headers="conf.low">NaN</td>
-<td class="gt_row gt_right" headers="conf.high">NaN</td>
+<td class="gt_row gt_right" headers="estimate">1.049</td>
+<td class="gt_row gt_right" headers="std.error">0.008</td>
+<td class="gt_row gt_right" headers="statistic">6.010</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">1.032</td>
+<td class="gt_row gt_right" headers="conf.high">1.065</td>
 </tr>
 </tbody>
 </table>
@@ -1418,6 +1417,20 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 </ul></li>
 </ul>
 </section>
+<section id="interpreting-risk-ratios-from-log-binomial-regression" class="slide level2">
+<h2>Interpreting risk ratios from log-binomial regression</h2>
+<ul>
+<li>Let’s say we ran the following model:</li>
+</ul>
+<p><span class="math display">\[\text{log}\left(\widehat\pi(\mathbf{X})\right) = \widehat\beta_0 + \widehat\beta_1  \cdot I(\text{PF}= \text{``Yes"}) + \widehat\beta_2  \cdot Age\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\exp(\beta_0)\)</span>: The risk of fracture (outcome event) for someone who had no prior fracture and is the mean age of 69 years old</p></li>
+<li><p><span class="math inline">\(\exp(\beta_1)\)</span>: The risk of fracture for someone who had a prior fracture is <span class="math inline">\(\exp(\beta_1)\)</span> times the risk of fracture for someone who did not have a prior fracture, adjusting for age.</p></li>
+<li><p><span class="math inline">\(\exp(\beta_2)\)</span>: For every one year increase in age, the risk of fracture is <span class="math inline">\(\exp(\beta_2)\)</span> times, adjusting for prior fracture.</p></li>
+</ul>
+<p>&nbsp;</p>
+<p>*Recall that once I estimate the coefficients, my interpretations need to reflect that they are estimated by saying “estimated risk”</p>
+</section>
 <section id="interpretations-and-visualizations-no-interactions" class="slide level2">
 <h2>Interpretations and visualizations: no interactions</h2>
 <ul>
@@ -1440,23 +1453,23 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 <span id="cb8-3"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb8-4"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="kohhhaeabs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kohhhaeabs table {
+<div id="ofmajqveri" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ofmajqveri table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kohhhaeabs thead, #kohhhaeabs tbody, #kohhhaeabs tfoot, #kohhhaeabs tr, #kohhhaeabs td, #kohhhaeabs th {
+#ofmajqveri thead, #ofmajqveri tbody, #ofmajqveri tfoot, #ofmajqveri tr, #ofmajqveri td, #ofmajqveri th {
   border-style: none;
 }
 
-#kohhhaeabs p {
+#ofmajqveri p {
   margin: 0;
   padding: 0;
 }
 
-#kohhhaeabs .gt_table {
+#ofmajqveri .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1482,12 +1495,12 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-left-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_caption {
+#ofmajqveri .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kohhhaeabs .gt_title {
+#ofmajqveri .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1499,7 +1512,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-width: 0;
 }
 
-#kohhhaeabs .gt_subtitle {
+#ofmajqveri .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1511,7 +1524,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-top-width: 0;
 }
 
-#kohhhaeabs .gt_heading {
+#ofmajqveri .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1523,13 +1536,13 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_bottom_border {
+#ofmajqveri .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_col_headings {
+#ofmajqveri .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1544,7 +1557,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_col_heading {
+#ofmajqveri .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1564,7 +1577,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   overflow-x: hidden;
 }
 
-#kohhhaeabs .gt_column_spanner_outer {
+#ofmajqveri .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1576,15 +1589,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 4px;
 }
 
-#kohhhaeabs .gt_column_spanner_outer:first-child {
+#ofmajqveri .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kohhhaeabs .gt_column_spanner_outer:last-child {
+#ofmajqveri .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kohhhaeabs .gt_column_spanner {
+#ofmajqveri .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1596,11 +1609,11 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   width: 100%;
 }
 
-#kohhhaeabs .gt_spanner_row {
+#ofmajqveri .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kohhhaeabs .gt_group_heading {
+#ofmajqveri .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1626,7 +1639,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   text-align: left;
 }
 
-#kohhhaeabs .gt_empty_group_heading {
+#ofmajqveri .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1641,15 +1654,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   vertical-align: middle;
 }
 
-#kohhhaeabs .gt_from_md > :first-child {
+#ofmajqveri .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kohhhaeabs .gt_from_md > :last-child {
+#ofmajqveri .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kohhhaeabs .gt_row {
+#ofmajqveri .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1668,7 +1681,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   overflow-x: hidden;
 }
 
-#kohhhaeabs .gt_stub {
+#ofmajqveri .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1681,7 +1694,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#kohhhaeabs .gt_stub_row_group {
+#ofmajqveri .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1695,15 +1708,15 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   vertical-align: top;
 }
 
-#kohhhaeabs .gt_row_group_first td {
+#ofmajqveri .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kohhhaeabs .gt_row_group_first th {
+#ofmajqveri .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kohhhaeabs .gt_summary_row {
+#ofmajqveri .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1713,16 +1726,16 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#kohhhaeabs .gt_first_summary_row {
+#ofmajqveri .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_first_summary_row.thick {
+#ofmajqveri .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kohhhaeabs .gt_last_summary_row {
+#ofmajqveri .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1732,7 +1745,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_grand_summary_row {
+#ofmajqveri .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1742,7 +1755,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#kohhhaeabs .gt_first_grand_summary_row {
+#ofmajqveri .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1752,7 +1765,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-top-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_last_grand_summary_row_top {
+#ofmajqveri .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1762,11 +1775,11 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_striped {
+#ofmajqveri .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kohhhaeabs .gt_table_body {
+#ofmajqveri .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1775,7 +1788,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-bottom-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_footnotes {
+#ofmajqveri .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1789,7 +1802,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_footnote {
+#ofmajqveri .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1798,7 +1811,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#kohhhaeabs .gt_sourcenotes {
+#ofmajqveri .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1812,7 +1825,7 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   border-right-color: #D3D3D3;
 }
 
-#kohhhaeabs .gt_sourcenote {
+#ofmajqveri .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1820,72 +1833,72 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
   padding-right: 5px;
 }
 
-#kohhhaeabs .gt_left {
+#ofmajqveri .gt_left {
   text-align: left;
 }
 
-#kohhhaeabs .gt_center {
+#ofmajqveri .gt_center {
   text-align: center;
 }
 
-#kohhhaeabs .gt_right {
+#ofmajqveri .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kohhhaeabs .gt_font_normal {
+#ofmajqveri .gt_font_normal {
   font-weight: normal;
 }
 
-#kohhhaeabs .gt_font_bold {
+#ofmajqveri .gt_font_bold {
   font-weight: bold;
 }
 
-#kohhhaeabs .gt_font_italic {
+#ofmajqveri .gt_font_italic {
   font-style: italic;
 }
 
-#kohhhaeabs .gt_super {
+#ofmajqveri .gt_super {
   font-size: 65%;
 }
 
-#kohhhaeabs .gt_footnote_marks {
+#ofmajqveri .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kohhhaeabs .gt_asterisk {
+#ofmajqveri .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kohhhaeabs .gt_indent_1 {
+#ofmajqveri .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kohhhaeabs .gt_indent_2 {
+#ofmajqveri .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kohhhaeabs .gt_indent_3 {
+#ofmajqveri .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kohhhaeabs .gt_indent_4 {
+#ofmajqveri .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kohhhaeabs .gt_indent_5 {
+#ofmajqveri .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kohhhaeabs .katex-display {
+#ofmajqveri .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kohhhaeabs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ofmajqveri div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1937,26 +1950,1062 @@ Figure&nbsp;1: Plots of odds ratio and predicted probability from fitted interac
 </div>
 </div>
 </section>
+<section id="interpretations-and-visualizations-no-interactions-1" class="slide level2">
+<h2>Interpretations and visualizations: no interactions</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="dgqqdbdnvj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dgqqdbdnvj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dgqqdbdnvj thead, #dgqqdbdnvj tbody, #dgqqdbdnvj tfoot, #dgqqdbdnvj tr, #dgqqdbdnvj td, #dgqqdbdnvj th {
+  border-style: none;
+}
+
+#dgqqdbdnvj p {
+  margin: 0;
+  padding: 0;
+}
+
+#dgqqdbdnvj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dgqqdbdnvj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dgqqdbdnvj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dgqqdbdnvj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dgqqdbdnvj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dgqqdbdnvj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dgqqdbdnvj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dgqqdbdnvj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dgqqdbdnvj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dgqqdbdnvj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dgqqdbdnvj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dgqqdbdnvj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dgqqdbdnvj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dgqqdbdnvj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dgqqdbdnvj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dgqqdbdnvj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dgqqdbdnvj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dgqqdbdnvj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dgqqdbdnvj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dgqqdbdnvj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dgqqdbdnvj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dgqqdbdnvj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dgqqdbdnvj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dgqqdbdnvj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dgqqdbdnvj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dgqqdbdnvj .gt_left {
+  text-align: left;
+}
+
+#dgqqdbdnvj .gt_center {
+  text-align: center;
+}
+
+#dgqqdbdnvj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dgqqdbdnvj .gt_font_normal {
+  font-weight: normal;
+}
+
+#dgqqdbdnvj .gt_font_bold {
+  font-weight: bold;
+}
+
+#dgqqdbdnvj .gt_font_italic {
+  font-style: italic;
+}
+
+#dgqqdbdnvj .gt_super {
+  font-size: 65%;
+}
+
+#dgqqdbdnvj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dgqqdbdnvj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dgqqdbdnvj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dgqqdbdnvj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dgqqdbdnvj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dgqqdbdnvj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dgqqdbdnvj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#dgqqdbdnvj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dgqqdbdnvj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p.value</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.low</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">(Intercept)</td>
+<td class="gt_row gt_right" headers="estimate">0.203</td>
+<td class="gt_row gt_right" headers="std.error">0.103</td>
+<td class="gt_row gt_right" headers="statistic">−15.428</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">0.166</td>
+<td class="gt_row gt_right" headers="conf.high">0.248</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">priorfracYes</td>
+<td class="gt_row gt_right" headers="estimate">1.724</td>
+<td class="gt_row gt_right" headers="std.error">0.159</td>
+<td class="gt_row gt_right" headers="statistic">3.416</td>
+<td class="gt_row gt_right" headers="p.value">0.001</td>
+<td class="gt_row gt_right" headers="conf.low">1.261</td>
+<td class="gt_row gt_right" headers="conf.high">2.356</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">age_c</td>
+<td class="gt_row gt_right" headers="estimate">1.026</td>
+<td class="gt_row gt_right" headers="std.error">0.008</td>
+<td class="gt_row gt_right" headers="statistic">3.104</td>
+<td class="gt_row gt_right" headers="p.value">0.002</td>
+<td class="gt_row gt_right" headers="conf.low">1.010</td>
+<td class="gt_row gt_right" headers="conf.high">1.043</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li><p><span class="math inline">\(\exp(\widehat{\beta}_0)\)</span>: The estimated risk of fracture is 0.2 for someone who had no prior fracture and is the mean age of 69 years old</p></li>
+<li><p><span class="math inline">\(\exp(\widehat{\beta}_1)\)</span>: The estimated risk of fracture for someone who had a prior fracture is 1.72 times the estimated risk of fracture for someone who did not have a prior fracture, adjusting for age.</p></li>
+<li><p><span class="math inline">\(\exp(\widehat{\beta}_2)\)</span>: For every one year increase in age, the estimated risk of fracture is 1.03 times, adjusting for prior fracture.</p>
+<ul>
+<li>OR: For every one year increase in age, the estimated risk of fracture increases 2.61%, adjusting for prior fracture.</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>prior_age <span class="ot">=</span> <span class="fu">expand_grid</span>(<span class="at">priorfrac =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>), <span class="at">age_c =</span> (<span class="dv">55</span><span class="sc">:</span><span class="dv">90</span>)<span class="sc">-</span><span class="dv">69</span>)</span>
+<span id="cb9-2"><a></a>frac_pred_lb <span class="ot">=</span> <span class="fu">predict</span>(glow_main, prior_age, <span class="at">se.fit =</span> F, <span class="at">type=</span><span class="st">"link"</span>)</span>
+<span id="cb9-3"><a></a>pred_glow_lb <span class="ot">=</span> prior_age <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">frac_pred =</span> frac_pred_lb, </span>
+<span id="cb9-4"><a></a>                                  <span class="at">age =</span> age_c <span class="sc">+</span> mean_age)</span>
+<span id="cb9-5"><a></a></span>
+<span id="cb9-6"><a></a><span class="fu">ggplot</span>(pred_glow_lb) <span class="sc">+</span></span>
+<span id="cb9-7"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">69</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> frac_pred, <span class="at">color =</span> priorfrac)) <span class="sc">+</span></span>
+<span id="cb9-9"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">35</span>), <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">35</span>)) <span class="sc">+</span></span>
+<span id="cb9-10"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"Estimated log-risk"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="16_Log_binom_reg_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
 <section id="interpretations-and-visualizations-interactions" class="slide level2">
 <h2>Interpretations and visualizations: interactions</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>glow3 <span class="ot">=</span> glow2 <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a></a>  <span class="fu">mutate</span>(<span class="at">interaction_PF_age =</span> <span class="fu">as.numeric</span>(priorfrac)<span class="sc">*</span>age_c)</span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a>glow2_log_binom <span class="ot">=</span> <span class="fu">logbin</span>(<span class="at">formula =</span> fracture <span class="sc">~</span> priorfrac <span class="sc">+</span> age_c, <span class="co"># + interaction_PF_age, </span></span>
+<span id="cb10-5"><a></a>         <span class="at">data =</span> glow2)</span>
+<span id="cb10-6"><a></a></span>
+<span id="cb10-7"><a></a><span class="fu">tidy</span>(glow2_log_binom, <span class="at">conf.int =</span> T, <span class="at">exponentiate =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-8"><a></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-9"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="eaoqknuipm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eaoqknuipm table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#eaoqknuipm thead, #eaoqknuipm tbody, #eaoqknuipm tfoot, #eaoqknuipm tr, #eaoqknuipm td, #eaoqknuipm th {
+  border-style: none;
+}
+
+#eaoqknuipm p {
+  margin: 0;
+  padding: 0;
+}
+
+#eaoqknuipm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#eaoqknuipm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#eaoqknuipm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#eaoqknuipm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#eaoqknuipm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#eaoqknuipm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#eaoqknuipm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#eaoqknuipm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#eaoqknuipm .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#eaoqknuipm .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#eaoqknuipm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#eaoqknuipm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#eaoqknuipm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#eaoqknuipm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#eaoqknuipm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eaoqknuipm .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#eaoqknuipm .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#eaoqknuipm .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#eaoqknuipm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eaoqknuipm .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#eaoqknuipm .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eaoqknuipm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#eaoqknuipm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eaoqknuipm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#eaoqknuipm .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#eaoqknuipm .gt_left {
+  text-align: left;
+}
+
+#eaoqknuipm .gt_center {
+  text-align: center;
+}
+
+#eaoqknuipm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#eaoqknuipm .gt_font_normal {
+  font-weight: normal;
+}
+
+#eaoqknuipm .gt_font_bold {
+  font-weight: bold;
+}
+
+#eaoqknuipm .gt_font_italic {
+  font-style: italic;
+}
+
+#eaoqknuipm .gt_super {
+  font-size: 65%;
+}
+
+#eaoqknuipm .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#eaoqknuipm .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#eaoqknuipm .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#eaoqknuipm .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#eaoqknuipm .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#eaoqknuipm .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#eaoqknuipm .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#eaoqknuipm .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#eaoqknuipm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">std.error</th>
+<th id="statistic" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">statistic</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p.value</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.low</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">conf.high</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">(Intercept)</td>
+<td class="gt_row gt_right" headers="estimate">0.210</td>
+<td class="gt_row gt_right" headers="std.error">0.102</td>
+<td class="gt_row gt_right" headers="statistic">−15.352</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">0.172</td>
+<td class="gt_row gt_right" headers="conf.high">0.257</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">priorfracYes</td>
+<td class="gt_row gt_right" headers="estimate">1.677</td>
+<td class="gt_row gt_right" headers="std.error">0.148</td>
+<td class="gt_row gt_right" headers="statistic">3.482</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">1.254</td>
+<td class="gt_row gt_right" headers="conf.high">2.244</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">age_c</td>
+<td class="gt_row gt_right" headers="estimate">1.049</td>
+<td class="gt_row gt_right" headers="std.error">0.008</td>
+<td class="gt_row gt_right" headers="statistic">6.010</td>
+<td class="gt_row gt_right" headers="p.value">0.000</td>
+<td class="gt_row gt_right" headers="conf.low">1.032</td>
+<td class="gt_row gt_right" headers="conf.high">1.065</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
 <section id="predictions-and-visualizations" class="slide level2">
 <h2>Predictions and visualizations</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>prior_age <span class="ot">=</span> <span class="fu">expand_grid</span>(<span class="at">priorfrac =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>), <span class="at">age_c =</span> (<span class="dv">55</span><span class="sc">:</span><span class="dv">90</span>)<span class="sc">-</span><span class="dv">69</span>)</span>
-<span id="cb9-2"><a></a>frac_pred <span class="ot">=</span> <span class="fu">predict</span>(glow_log_binom, prior_age, <span class="at">se.fit =</span> T, <span class="at">type=</span><span class="st">"response"</span>)</span>
-<span id="cb9-3"><a></a>pred_glow <span class="ot">=</span> prior_age <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">frac_pred =</span> frac_pred<span class="sc">$</span>fit, </span>
-<span id="cb9-4"><a></a>                                  <span class="at">age =</span> age_c <span class="sc">+</span> mean_age)</span>
-<span id="cb9-5"><a></a></span>
-<span id="cb9-6"><a></a><span class="fu">ggplot</span>(pred_glow) <span class="sc">+</span> <span class="co">#geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +</span></span>
-<span id="cb9-7"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> frac_pred, <span class="at">color =</span> priorfrac)) <span class="sc">+</span></span>
-<span id="cb9-8"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>), <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">16</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb9-9"><a></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Prior Fracture"</span>, <span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"Predicted Probability of Fracture"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>prior_age <span class="ot">=</span> <span class="fu">expand_grid</span>(<span class="at">priorfrac =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>), <span class="at">age_c =</span> (<span class="dv">55</span><span class="sc">:</span><span class="dv">90</span>)<span class="sc">-</span><span class="dv">69</span>)</span>
+<span id="cb11-2"><a></a>frac_pred_lb <span class="ot">=</span> <span class="fu">predict</span>(glow_log_binom, prior_age, <span class="at">se.fit =</span> T, <span class="at">type=</span><span class="st">"response"</span>)</span>
+<span id="cb11-3"><a></a>pred_glow_lb <span class="ot">=</span> prior_age <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">frac_pred =</span> frac_pred_lb<span class="sc">$</span>fit, </span>
+<span id="cb11-4"><a></a>                                  <span class="at">age =</span> age_c <span class="sc">+</span> mean_age)</span>
+<span id="cb11-5"><a></a></span>
+<span id="cb11-6"><a></a><span class="fu">ggplot</span>(pred_glow_lb) <span class="sc">+</span> <span class="co">#geom_point(aes(x = age, y = frac_pred, color = priorfrac)) +</span></span>
+<span id="cb11-7"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> frac_pred, <span class="at">color =</span> priorfrac)) <span class="sc">+</span></span>
+<span id="cb11-8"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">20</span>), <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">16</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Prior Fracture"</span>, <span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"Predicted Probability of Fracture"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="16_Log_binom_reg_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"></section>
-<section id="assessing-model-fit" class="slide level2">
-<h2>Assessing model fit</h2>
+<img data-src="16_Log_binom_reg_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"></section>
+<section id="more-resources" class="slide level2">
+<h2>More resources</h2>
+<ul>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3909339/">Log-binomial models: exploring failed convergence</a></li>
+</ul>
 
 
 </section></section>

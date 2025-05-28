@@ -10,12 +10,15 @@ editor_options:
 
 ## Announcements
 
+- Next week: final two lectures!
+- I am getting the project poster instructions finalized!
 - CascadiaR conference
   - Needs based scholarship app (due 5/31) <https://forms.gle/U4DHy3aU2qrq989M9>
 - I removed HW 5
   - Last HW will be HW 4
   - HW 4 will have a log-binomial regression on it!!
     - But will be covered next Wednesday
+- Quiz questions between lecture and lab discussion
 
 ### Email from Jamie about PE
 
@@ -31,8 +34,7 @@ I just met with OHSU Orthopaedics and they are looking for an epi student AND a 
 Interested students can email Jamie, and she will connect them with Zach, who is assisting with the PE set up. Please let me know if you or students have any questions!
 
 ## Key Dates
-- Lab 4 due this Friday (5/23)
-- Quiz 3 opens on 5/28, closes on 6/1
-- HW 4 due next Friday (5/30)
+- Quiz 3 opens TODAY 5/28, closes on 6/1
+- HW 4 due Friday (5/30)
   - Extension can be granted until 6/6
   
