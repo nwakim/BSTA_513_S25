@@ -1,0 +1,70 @@
+---
+title: "Untitled"
+---
+
+| Category | Item Description |
+|------------------------|----------------------------------------------|
+| **Submission & Formatting** | Poster submitted on Sakai in PDF format. |
+|  | Poster dimensions are 36"x24" or 6:4 ratio (landscape). |
+|  | Font size is no less than 20pt. |
+|  | Main sections (Intro, Methods, Results, Conclusion, References) are present. |
+|  | Title information (title, name, date) is at the top of the poster. |
+|  | Overall writing, spelling, and grammar are admissible (few errors). |
+|  | No code chunks are showing in the poster. |
+|  | No output warnings or messages are showing. |
+| **Figures and Tables** | Table 1 summarizing participant characteristics is present and overall. |
+|  | If purposeful model selection: Table/figure with regression results is present. |
+|  | If LASSO: Table/figure with variable importance is present. |
+|  | At least one additional helpful figure (e.g., DAG, AUC-ROC, model fit, unadjusted relationship) is included. |
+|  | All tables and figures have titles/captions. |
+|  | Tables and figures do NOT have variable names as they appear in the data frame. |
+|  | Variable names in figures/tables are understood by a reader (full words). |
+|  | Figures and tables appear on the same page or close to where they are first referenced. |
+|  | Tables and figures are an appropriate size and readable. |
+|  | Figures and tables are clear and crisp (not blurred). |
+|  | Colors in figures are only used if conveying information. |
+|  | Intended message of figures is easily understood (e.g., ordered x-axis). |
+| **Introduction** | Provides good background for the research question. |
+|  | Includes motivation for the research question. |
+|  | References previous research that justifies the analysis (for purposeful model selection). |
+|  | Clearly states the guiding question (and mentions prediction if LASSO). |
+|  | Section is non-technical and broadly understandable. |
+|  | Introduction has 5-8 bullet points. |
+|  | Introduction contains references. |
+| **Methods** (Each item worth 1 point towards 8 total points) | Describes general approach to the dataset (2-3 bullets). |
+|  | States where the data came from. |
+|  | Discusses data quality control (if any). |
+|  | States complete case analysis for missing data. |
+|  | Mentions program used to analyze data. |
+|  | Describes variables and variable creation, including Table 1 summary statistics. |
+|  | Describes indicators for gender/race, BMI, or categorizing continuous variables (if applicable). |
+|  | Describes scoring for ordered categorical variables (if applicable). |
+|  | States if purposeful selection OR LASSO was performed. |
+|  | If purposeful selection: Describes the process of purposeful selection. |
+|  | If purposeful selection: Discusses consideration of confounders and effect modifiers. |
+|  | If LASSO: Mentions percent split for training/testing data. |
+|  | If LASSO: States the value of the penalty. |
+|  | Writes out the final model (equation or list of variables). |
+|  | Describes the process of investigating model diagnostics. |
+|  | Methods describe the approach/process, not results (general adherence). |
+| **Results** (Each item worth 1 point towards 8 total points) | Correctly interprets coefficients for explanatory variable (purposeful selection). |
+|  | Interpretation of explanatory variable accounts for all interactions (if applicable). |
+|  | Identifies other interesting trends beyond explanatory variable (purposeful selection). |
+|  | For LASSO: Discusses important variables (1-3 most important). |
+|  | For LASSO: Focuses on variables that contribute most to prediction. |
+|  | Section primarily consists of figures with 2-3 bullet points of text. |
+|  | Highlights pertinent numerical results to the reader. |
+| **Conclusion/Discussion** | Main research question is answered (conclusion). |
+|  | Statistical caveats are described to a non-technical person (conclusion). |
+|  | Mentions direction of association (if purposeful selection, conclusion). |
+|  | Discusses other interesting results (conclusion). |
+|  | Discusses limitations of the results. |
+|  | Discusses consequences of the limitations/results. |
+|  | Discusses positive parts/impact of the results. |
+|  | Notes any overarching trends. |
+|  | Conclusion has 3-6 bullet points. |
+|  | Discussion has 3-5 bullet points. |
+| **References** | References are included in the References section. |
+|  | Introduction contains references. |
+|  | WBNS data source is referenced. |
+|  | References are cited consistently within the report. |
