@@ -158,6 +158,8 @@ If you did LASSO:
 
 4.  Interpretations of important variables: identify top 1-3 that predict outcome
 :::
+:::
+
 
 ## 1. Table 1 (table summary in Lesson 2)
 
@@ -180,7 +182,7 @@ gapm2_vars = gapm2 %>%
     income_levels1
   )
 
-tbl_summary(
+table1 = tbl_summary(
   gapm2_vars, 
   label = list(
     FemaleLiteracyRate = "Female literacy rate (%)", 
@@ -193,6 +195,8 @@ tbl_summary(
     ),
   statistic = list(all_continuous() ~ "{mean} ({sd})")
   )
+
+table1
 ```
 :::
 
@@ -211,7 +215,7 @@ gapm2_vars = gapm2 %>%
     income_levels1
   )
 
-tbl_summary(
+table1 = tbl_summary(
   gapm2_vars, 
   label = list(
     FemaleLiteracyRate = "Female literacy rate (%)", 
@@ -226,6 +230,7 @@ tbl_summary(
   ) %>% 
   as_gt() %>% 
   tab_options(table.font.size = 26)
+table1
 ```
 :::
 :::::
@@ -238,7 +243,7 @@ tbl_summary(
 #| echo: true
 #| eval: false
 
-tbl_regression(
+reg_table = tbl_regression(
   final_model, 
   label = list(
     FemaleLiteracyRate ~ "Female literacy rate (%)", 
@@ -252,12 +257,13 @@ tbl_regression(
   as_gt() %>% 
   tab_options(table.font.size = 20) %>%
   cols_width(label ~ px(250))
+reg_table
 ```
 :::
 
 ::: {.column width="48%"}
 ```{r}
-tbl_regression(
+reg_table = tbl_regression(
   final_model, 
   label = list(
     FemaleLiteracyRate ~ "Female literacy rate (%)", 
@@ -271,6 +277,7 @@ tbl_regression(
   as_gt() %>% 
   tab_options(table.font.size = 20) %>%
   cols_width(label ~ px(250))
+reg_table
 ```
 :::
 :::::
@@ -293,7 +300,7 @@ model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
   tidy_add_reference_rows() %>% tidy_add_estimate_to_reference_rows() %>%
   tidy_add_term_labels()
 
-ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
+forest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
   facet_grid(rows = vars(var_label), scales = "free",
              space='free_y', switch = "y") + 
   geom_point(size = 3) +  geom_errorbarh(height=.2) + 
@@ -303,6 +310,7 @@ ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high))
   theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), 
         title = element_text(size = 20), strip.placement = "outside", 
         strip.text = element_text(size = 20), strip.background = element_blank())
+forest_plot
 ```
 :::
 
@@ -319,7 +327,7 @@ model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
   tidy_add_reference_rows() %>% tidy_add_estimate_to_reference_rows() %>%
   tidy_add_term_labels()
 
-ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
+forest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
   facet_grid(rows = vars(var_label), scales = "free",
              space='free_y', switch = "y") + 
   geom_point(size = 3) +  geom_errorbarh(height=.2) + 
@@ -329,15 +337,34 @@ ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high))
   theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), 
         title = element_text(size = 20), strip.placement = "outside", 
         strip.text = element_text(size = 20), strip.background = element_blank())
+forest_plot
 ```
 :::
 :::::
 
 ## Saving tables
 
+- For tables: `gtsave` in the `gt` package should work!
+- For figures/plots: `ggsave` in the `ggplot2` package should work!
+```{r}
+#| echo: true
+gtsave(reg_table, filename = here("lessons/19_Poster_help/reg_table.png"))
+gtsave(table1, filename = here("lessons/19_Poster_help/table1.png"))
+ggsave(forest_plot, filename = here("lessons/19_Poster_help/forest_plot.png"))
+```
+
+- When I first ran the above, I got the following message: 
+`The package "webshot2" is required to save gt tables as images. ✖ Would you like to install it? 1: Yes 2: No`
+  - I inputted `1`
+
 ## Important note if you have interactions
+
+- Please check your Quiz 3 feedback! 
+  - Many of you are not quite interpreting interactions correctly
 
 -   There is extra care to reporting results from interactions
 
 -   Please make sure you use `estimable()` to get the correct effects!
     - If you have an interaction with a categorical variable, then your main variable's "effect" should be reported for each category
+    
+- See HW 3 and Lecture 10 for reporting!

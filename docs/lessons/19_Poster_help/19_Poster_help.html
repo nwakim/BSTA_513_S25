@@ -316,7 +316,9 @@ Nicky Wakim
 <li><p>One additional figure or table to help understand your question</p></li>
 <li><p>Interpretations of important variables: identify top 1-3 that predict outcome</p></li>
 </ol>
-</div><section id="table-1-table-summary-in-lesson-2" class="slide level2">
+</div></div>
+</section>
+<section id="table-1-table-summary-in-lesson-2" class="slide level2">
 <h2>1. Table 1 (table summary in Lesson 2)</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -334,7 +336,7 @@ Nicky Wakim
 <span id="cb1-11"><a></a>    income_levels1</span>
 <span id="cb1-12"><a></a>  )</span>
 <span id="cb1-13"><a></a></span>
-<span id="cb1-14"><a></a><span class="fu">tbl_summary</span>(</span>
+<span id="cb1-14"><a></a>table1 <span class="ot">=</span> <span class="fu">tbl_summary</span>(</span>
 <span id="cb1-15"><a></a>  gapm2_vars, </span>
 <span id="cb1-16"><a></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
 <span id="cb1-17"><a></a>    <span class="at">FemaleLiteracyRate =</span> <span class="st">"Female literacy rate (%)"</span>, </span>
@@ -346,28 +348,30 @@ Nicky Wakim
 <span id="cb1-23"><a></a>    <span class="at">members_oecd_g77 =</span> <span class="st">"Intergovernmental group"</span></span>
 <span id="cb1-24"><a></a>    ),</span>
 <span id="cb1-25"><a></a>  <span class="at">statistic =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">"{mean} ({sd})"</span>)</span>
-<span id="cb1-26"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-26"><a></a>  )</span>
+<span id="cb1-27"><a></a></span>
+<span id="cb1-28"><a></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="cinlshhdig" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cinlshhdig table {
+<div id="ewrhuhcrod" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ewrhuhcrod table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cinlshhdig thead, #cinlshhdig tbody, #cinlshhdig tfoot, #cinlshhdig tr, #cinlshhdig td, #cinlshhdig th {
+#ewrhuhcrod thead, #ewrhuhcrod tbody, #ewrhuhcrod tfoot, #ewrhuhcrod tr, #ewrhuhcrod td, #ewrhuhcrod th {
   border-style: none;
 }
 
-#cinlshhdig p {
+#ewrhuhcrod p {
   margin: 0;
   padding: 0;
 }
 
-#cinlshhdig .gt_table {
+#ewrhuhcrod .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -393,12 +397,12 @@ Nicky Wakim
   border-left-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_caption {
+#ewrhuhcrod .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cinlshhdig .gt_title {
+#ewrhuhcrod .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -410,7 +414,7 @@ Nicky Wakim
   border-bottom-width: 0;
 }
 
-#cinlshhdig .gt_subtitle {
+#ewrhuhcrod .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -422,7 +426,7 @@ Nicky Wakim
   border-top-width: 0;
 }
 
-#cinlshhdig .gt_heading {
+#ewrhuhcrod .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -434,13 +438,13 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_bottom_border {
+#ewrhuhcrod .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_col_headings {
+#ewrhuhcrod .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -455,7 +459,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_col_heading {
+#ewrhuhcrod .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -475,7 +479,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#cinlshhdig .gt_column_spanner_outer {
+#ewrhuhcrod .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -487,15 +491,15 @@ Nicky Wakim
   padding-right: 4px;
 }
 
-#cinlshhdig .gt_column_spanner_outer:first-child {
+#ewrhuhcrod .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cinlshhdig .gt_column_spanner_outer:last-child {
+#ewrhuhcrod .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cinlshhdig .gt_column_spanner {
+#ewrhuhcrod .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -507,11 +511,11 @@ Nicky Wakim
   width: 100%;
 }
 
-#cinlshhdig .gt_spanner_row {
+#ewrhuhcrod .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cinlshhdig .gt_group_heading {
+#ewrhuhcrod .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -537,7 +541,7 @@ Nicky Wakim
   text-align: left;
 }
 
-#cinlshhdig .gt_empty_group_heading {
+#ewrhuhcrod .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -552,15 +556,15 @@ Nicky Wakim
   vertical-align: middle;
 }
 
-#cinlshhdig .gt_from_md > :first-child {
+#ewrhuhcrod .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cinlshhdig .gt_from_md > :last-child {
+#ewrhuhcrod .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cinlshhdig .gt_row {
+#ewrhuhcrod .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -579,7 +583,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#cinlshhdig .gt_stub {
+#ewrhuhcrod .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -592,7 +596,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#cinlshhdig .gt_stub_row_group {
+#ewrhuhcrod .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,15 +610,15 @@ Nicky Wakim
   vertical-align: top;
 }
 
-#cinlshhdig .gt_row_group_first td {
+#ewrhuhcrod .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cinlshhdig .gt_row_group_first th {
+#ewrhuhcrod .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cinlshhdig .gt_summary_row {
+#ewrhuhcrod .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -624,16 +628,16 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#cinlshhdig .gt_first_summary_row {
+#ewrhuhcrod .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_first_summary_row.thick {
+#ewrhuhcrod .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cinlshhdig .gt_last_summary_row {
+#ewrhuhcrod .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -643,7 +647,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_grand_summary_row {
+#ewrhuhcrod .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -653,7 +657,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#cinlshhdig .gt_first_grand_summary_row {
+#ewrhuhcrod .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -663,7 +667,7 @@ Nicky Wakim
   border-top-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_last_grand_summary_row_top {
+#ewrhuhcrod .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -673,11 +677,11 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_striped {
+#ewrhuhcrod .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cinlshhdig .gt_table_body {
+#ewrhuhcrod .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -686,7 +690,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_footnotes {
+#ewrhuhcrod .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -700,7 +704,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_footnote {
+#ewrhuhcrod .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -709,7 +713,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#cinlshhdig .gt_sourcenotes {
+#ewrhuhcrod .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -723,7 +727,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#cinlshhdig .gt_sourcenote {
+#ewrhuhcrod .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -731,72 +735,72 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#cinlshhdig .gt_left {
+#ewrhuhcrod .gt_left {
   text-align: left;
 }
 
-#cinlshhdig .gt_center {
+#ewrhuhcrod .gt_center {
   text-align: center;
 }
 
-#cinlshhdig .gt_right {
+#ewrhuhcrod .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cinlshhdig .gt_font_normal {
+#ewrhuhcrod .gt_font_normal {
   font-weight: normal;
 }
 
-#cinlshhdig .gt_font_bold {
+#ewrhuhcrod .gt_font_bold {
   font-weight: bold;
 }
 
-#cinlshhdig .gt_font_italic {
+#ewrhuhcrod .gt_font_italic {
   font-style: italic;
 }
 
-#cinlshhdig .gt_super {
+#ewrhuhcrod .gt_super {
   font-size: 65%;
 }
 
-#cinlshhdig .gt_footnote_marks {
+#ewrhuhcrod .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cinlshhdig .gt_asterisk {
+#ewrhuhcrod .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cinlshhdig .gt_indent_1 {
+#ewrhuhcrod .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cinlshhdig .gt_indent_2 {
+#ewrhuhcrod .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cinlshhdig .gt_indent_3 {
+#ewrhuhcrod .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cinlshhdig .gt_indent_4 {
+#ewrhuhcrod .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cinlshhdig .gt_indent_5 {
+#ewrhuhcrod .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cinlshhdig .katex-display {
+#ewrhuhcrod .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cinlshhdig div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ewrhuhcrod div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -900,12 +904,13 @@ Nicky Wakim
 </div>
 </div>
 </div></div>
-</section><section id="regression-table-or-forest-plot" class="slide level2">
+</section>
+<section id="regression-table-or-forest-plot" class="slide level2">
 <h2>2. Regression table or Forest plot</h2>
 <div class="columns">
 <div class="column" style="width:52%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">tbl_regression</span>(</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>reg_table <span class="ot">=</span> <span class="fu">tbl_regression</span>(</span>
 <span id="cb2-2"><a></a>  final_model, </span>
 <span id="cb2-3"><a></a>  <span class="at">label =</span> <span class="fu">list</span>(</span>
 <span id="cb2-4"><a></a>    FemaleLiteracyRate <span class="sc">~</span> <span class="st">"Female literacy rate (%)"</span>, </span>
@@ -918,28 +923,29 @@ Nicky Wakim
 <span id="cb2-11"><a></a>    )) <span class="sc">%&gt;%</span>   </span>
 <span id="cb2-12"><a></a>  <span class="fu">as_gt</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb2-13"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-14"><a></a>  <span class="fu">cols_width</span>(label <span class="sc">~</span> <span class="fu">px</span>(<span class="dv">250</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-14"><a></a>  <span class="fu">cols_width</span>(label <span class="sc">~</span> <span class="fu">px</span>(<span class="dv">250</span>))</span>
+<span id="cb2-15"><a></a>reg_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:48%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="crnixlosrj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#crnixlosrj table {
+<div id="ctwsdodxdp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ctwsdodxdp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#crnixlosrj thead, #crnixlosrj tbody, #crnixlosrj tfoot, #crnixlosrj tr, #crnixlosrj td, #crnixlosrj th {
+#ctwsdodxdp thead, #ctwsdodxdp tbody, #ctwsdodxdp tfoot, #ctwsdodxdp tr, #ctwsdodxdp td, #ctwsdodxdp th {
   border-style: none;
 }
 
-#crnixlosrj p {
+#ctwsdodxdp p {
   margin: 0;
   padding: 0;
 }
 
-#crnixlosrj .gt_table {
+#ctwsdodxdp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -965,12 +971,12 @@ Nicky Wakim
   border-left-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_caption {
+#ctwsdodxdp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#crnixlosrj .gt_title {
+#ctwsdodxdp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -982,7 +988,7 @@ Nicky Wakim
   border-bottom-width: 0;
 }
 
-#crnixlosrj .gt_subtitle {
+#ctwsdodxdp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -994,7 +1000,7 @@ Nicky Wakim
   border-top-width: 0;
 }
 
-#crnixlosrj .gt_heading {
+#ctwsdodxdp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1006,13 +1012,13 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_bottom_border {
+#ctwsdodxdp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_col_headings {
+#ctwsdodxdp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1027,7 +1033,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_col_heading {
+#ctwsdodxdp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1047,7 +1053,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#crnixlosrj .gt_column_spanner_outer {
+#ctwsdodxdp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1059,15 +1065,15 @@ Nicky Wakim
   padding-right: 4px;
 }
 
-#crnixlosrj .gt_column_spanner_outer:first-child {
+#ctwsdodxdp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#crnixlosrj .gt_column_spanner_outer:last-child {
+#ctwsdodxdp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#crnixlosrj .gt_column_spanner {
+#ctwsdodxdp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1079,11 +1085,11 @@ Nicky Wakim
   width: 100%;
 }
 
-#crnixlosrj .gt_spanner_row {
+#ctwsdodxdp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#crnixlosrj .gt_group_heading {
+#ctwsdodxdp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1109,7 +1115,7 @@ Nicky Wakim
   text-align: left;
 }
 
-#crnixlosrj .gt_empty_group_heading {
+#ctwsdodxdp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1124,15 +1130,15 @@ Nicky Wakim
   vertical-align: middle;
 }
 
-#crnixlosrj .gt_from_md > :first-child {
+#ctwsdodxdp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#crnixlosrj .gt_from_md > :last-child {
+#ctwsdodxdp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#crnixlosrj .gt_row {
+#ctwsdodxdp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1151,7 +1157,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#crnixlosrj .gt_stub {
+#ctwsdodxdp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1164,7 +1170,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#crnixlosrj .gt_stub_row_group {
+#ctwsdodxdp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1178,15 +1184,15 @@ Nicky Wakim
   vertical-align: top;
 }
 
-#crnixlosrj .gt_row_group_first td {
+#ctwsdodxdp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#crnixlosrj .gt_row_group_first th {
+#ctwsdodxdp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#crnixlosrj .gt_summary_row {
+#ctwsdodxdp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1196,16 +1202,16 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#crnixlosrj .gt_first_summary_row {
+#ctwsdodxdp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_first_summary_row.thick {
+#ctwsdodxdp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#crnixlosrj .gt_last_summary_row {
+#ctwsdodxdp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1215,7 +1221,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_grand_summary_row {
+#ctwsdodxdp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1225,7 +1231,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#crnixlosrj .gt_first_grand_summary_row {
+#ctwsdodxdp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1235,7 +1241,7 @@ Nicky Wakim
   border-top-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_last_grand_summary_row_top {
+#ctwsdodxdp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1245,11 +1251,11 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_striped {
+#ctwsdodxdp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#crnixlosrj .gt_table_body {
+#ctwsdodxdp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1258,7 +1264,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_footnotes {
+#ctwsdodxdp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1272,7 +1278,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_footnote {
+#ctwsdodxdp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1281,7 +1287,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#crnixlosrj .gt_sourcenotes {
+#ctwsdodxdp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1295,7 +1301,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#crnixlosrj .gt_sourcenote {
+#ctwsdodxdp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1303,72 +1309,72 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#crnixlosrj .gt_left {
+#ctwsdodxdp .gt_left {
   text-align: left;
 }
 
-#crnixlosrj .gt_center {
+#ctwsdodxdp .gt_center {
   text-align: center;
 }
 
-#crnixlosrj .gt_right {
+#ctwsdodxdp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#crnixlosrj .gt_font_normal {
+#ctwsdodxdp .gt_font_normal {
   font-weight: normal;
 }
 
-#crnixlosrj .gt_font_bold {
+#ctwsdodxdp .gt_font_bold {
   font-weight: bold;
 }
 
-#crnixlosrj .gt_font_italic {
+#ctwsdodxdp .gt_font_italic {
   font-style: italic;
 }
 
-#crnixlosrj .gt_super {
+#ctwsdodxdp .gt_super {
   font-size: 65%;
 }
 
-#crnixlosrj .gt_footnote_marks {
+#ctwsdodxdp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#crnixlosrj .gt_asterisk {
+#ctwsdodxdp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#crnixlosrj .gt_indent_1 {
+#ctwsdodxdp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#crnixlosrj .gt_indent_2 {
+#ctwsdodxdp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#crnixlosrj .gt_indent_3 {
+#ctwsdodxdp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#crnixlosrj .gt_indent_4 {
+#ctwsdodxdp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#crnixlosrj .gt_indent_5 {
+#ctwsdodxdp .gt_indent_5 {
   text-indent: 25px;
 }
 
-#crnixlosrj .katex-display {
+#ctwsdodxdp .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#crnixlosrj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ctwsdodxdp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1543,7 +1549,8 @@ Nicky Wakim
 </div>
 </div>
 </div></div>
-</section><section id="regression-table-or-forest-plot-needs-work" class="slide level2">
+</section>
+<section id="regression-table-or-forest-plot-needs-work" class="slide level2">
 <h2>2. Regression table or Forest plot (needs work!)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -1559,7 +1566,7 @@ Nicky Wakim
 <span id="cb3-5"><a></a>  <span class="fu">tidy_add_reference_rows</span>() <span class="sc">%&gt;%</span> <span class="fu">tidy_add_estimate_to_reference_rows</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb3-6"><a></a>  <span class="fu">tidy_add_term_labels</span>()</span>
 <span id="cb3-7"><a></a></span>
-<span id="cb3-8"><a></a><span class="fu">ggplot</span>(<span class="at">data=</span>model_tidy, <span class="fu">aes</span>(<span class="at">y=</span>label, <span class="at">x=</span>estimate, <span class="at">xmin=</span>conf.low, <span class="at">xmax=</span>conf.high)) <span class="sc">+</span> </span>
+<span id="cb3-8"><a></a>forest_plot <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="at">data=</span>model_tidy, <span class="fu">aes</span>(<span class="at">y=</span>label, <span class="at">x=</span>estimate, <span class="at">xmin=</span>conf.low, <span class="at">xmax=</span>conf.high)) <span class="sc">+</span> </span>
 <span id="cb3-9"><a></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(var_label), <span class="at">scales =</span> <span class="st">"free"</span>,</span>
 <span id="cb3-10"><a></a>             <span class="at">space=</span><span class="st">'free_y'</span>, <span class="at">switch =</span> <span class="st">"y"</span>) <span class="sc">+</span> </span>
 <span id="cb3-11"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="fu">geom_errorbarh</span>(<span class="at">height=</span>.<span class="dv">2</span>) <span class="sc">+</span> </span>
@@ -1568,7 +1575,8 @@ Nicky Wakim
 <span id="cb3-14"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Beta"</span>, <span class="at">y =</span> <span class="st">"Variables"</span>) <span class="sc">+</span></span>
 <span id="cb3-15"><a></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), </span>
 <span id="cb3-16"><a></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">strip.placement =</span> <span class="st">"outside"</span>, </span>
-<span id="cb3-17"><a></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-17"><a></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb3-18"><a></a>forest_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
@@ -1581,21 +1589,41 @@ Nicky Wakim
 </div>
 </div>
 </div></div>
-</section><section id="saving-tables" class="slide level2">
+</section>
+<section id="saving-tables" class="slide level2">
 <h2>Saving tables</h2>
-</section><section id="important-note-if-you-have-interactions" class="slide level2">
+<ul>
+<li>For tables: <code>gtsave</code> in the <code>gt</code> package should work!</li>
+<li>For figures/plots: <code>ggsave</code> in the <code>ggplot2</code> package should work!</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">gtsave</span>(reg_table, <span class="at">filename =</span> <span class="fu">here</span>(<span class="st">"lessons/19_Poster_help/reg_table.png"</span>))</span>
+<span id="cb4-2"><a></a><span class="fu">gtsave</span>(table1, <span class="at">filename =</span> <span class="fu">here</span>(<span class="st">"lessons/19_Poster_help/table1.png"</span>))</span>
+<span id="cb4-3"><a></a><span class="fu">ggsave</span>(forest_plot, <span class="at">filename =</span> <span class="fu">here</span>(<span class="st">"lessons/19_Poster_help/forest_plot.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>When I first ran the above, I got the following message: <code>The package "webshot2" is required to save gt tables as images. ✖ Would you like to install it? 1: Yes 2: No</code>
+<ul>
+<li>I inputted <code>1</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="important-note-if-you-have-interactions" class="slide level2">
 <h2>Important note if you have interactions</h2>
 <ul>
+<li><p>Please check your Quiz 3 feedback!</p>
+<ul>
+<li>Many of you are not quite interpreting interactions correctly</li>
+</ul></li>
 <li><p>There is extra care to reporting results from interactions</p></li>
 <li><p>Please make sure you use <code>estimable()</code> to get the correct effects!</p>
 <ul>
 <li>If you have an interaction with a categorical variable, then your main variable’s “effect” should be reported for each category</li>
 </ul></li>
+<li><p>See HW 3 and Lecture 10 for reporting!</p></li>
 </ul>
 
 
-</section>
-</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
