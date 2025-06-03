@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 15: Other regressions"
 date-modified: "today"
 format: 
   html:
@@ -11,5 +11,11 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
-## Muddy Points from Spring 2024
+###	With multinomial regression so we are comparing several groups to each other depending on the variable and number of categories is this correct?
+
+### My muddy point is why logistic regression gives us log odds/odds ratio (exp(B_k)) and log-binomial gives us risk ratio. Does it simply have to do with the fact we are using logit(µ) and log(µ)?
+
+### I need more practice on figuring out when log-binomial and logistic regression are preferred over each other -- recalling that we can transform risk ratios to odds ratios...
+
+### Still a little unclear of why you would use the log link instead of the logit link for the Bernoulli/Binomial distribution
 

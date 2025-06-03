@@ -23,7 +23,7 @@ editor_options:
 ## Labs
 
 | Lab | Rubric | Due Date | Discussion Date | Topics |
-|---------------|---------------|---------------|---------------|---------------|
+|----|----|----|----|----|
 | [Lab 1](/project/Lab_01_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_01_rubric.qmd)]{style="color:#f8f5f0;"} | 4/11 | 4/16 | Exploring the question and data |
 | [Lab 2](/project/Lab_02_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_02_rubric.qmd)]{style="color:#f8f5f0;"} | 4/25 | 4/30 | EDA continued + Simple logistic regression |
 | [Lab 3](/project/Lab_03_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_03_rubric.qmd)]{style="color:#f8f5f0;"} | 5/9 | 5/12 | Temporary multiple logistic regression + practice interpreting ORs |

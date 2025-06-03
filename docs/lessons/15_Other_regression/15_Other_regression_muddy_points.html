@@ -126,8 +126,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a></li>
-  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
+  <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a>
+  <ul class="collapse">
+  <li><a href="#with-multinomial-regression-so-we-are-comparing-several-groups-to-each-other-depending-on-the-variable-and-number-of-categories-is-this-correct" id="toc-with-multinomial-regression-so-we-are-comparing-several-groups-to-each-other-depending-on-the-variable-and-number-of-categories-is-this-correct" class="nav-link" data-scroll-target="#with-multinomial-regression-so-we-are-comparing-several-groups-to-each-other-depending-on-the-variable-and-number-of-categories-is-this-correct">With multinomial regression so we are comparing several groups to each other depending on the variable and number of categories is this correct?</a></li>
+  <li><a href="#my-muddy-point-is-why-logistic-regression-gives-us-log-oddsodds-ratio-expb_k-and-log-binomial-gives-us-risk-ratio.-does-it-simply-have-to-do-with-the-fact-we-are-using-logitµ-and-logµ" id="toc-my-muddy-point-is-why-logistic-regression-gives-us-log-oddsodds-ratio-expb_k-and-log-binomial-gives-us-risk-ratio.-does-it-simply-have-to-do-with-the-fact-we-are-using-logitµ-and-logµ" class="nav-link" data-scroll-target="#my-muddy-point-is-why-logistic-regression-gives-us-log-oddsodds-ratio-expb_k-and-log-binomial-gives-us-risk-ratio.-does-it-simply-have-to-do-with-the-fact-we-are-using-logitµ-and-logµ">My muddy point is why logistic regression gives us log odds/odds ratio (exp(B_k)) and log-binomial gives us risk ratio. Does it simply have to do with the fact we are using logit(µ) and log(µ)?</a></li>
+  <li><a href="#i-need-more-practice-on-figuring-out-when-log-binomial-and-logistic-regression-are-preferred-over-each-other-recalling-that-we-can-transform-risk-ratios-to-odds-ratios" id="toc-i-need-more-practice-on-figuring-out-when-log-binomial-and-logistic-regression-are-preferred-over-each-other-recalling-that-we-can-transform-risk-ratios-to-odds-ratios" class="nav-link" data-scroll-target="#i-need-more-practice-on-figuring-out-when-log-binomial-and-logistic-regression-are-preferred-over-each-other-recalling-that-we-can-transform-risk-ratios-to-odds-ratios">I need more practice on figuring out when log-binomial and logistic regression are preferred over each other – recalling that we can transform risk ratios to odds ratios…</a></li>
+  <li><a href="#still-a-little-unclear-of-why-you-would-use-the-log-link-instead-of-the-logit-link-for-the-bernoullibinomial-distribution" id="toc-still-a-little-unclear-of-why-you-would-use-the-log-link-instead-of-the-logit-link-for-the-bernoullibinomial-distribution" class="nav-link" data-scroll-target="#still-a-little-unclear-of-why-you-would-use-the-log-link-instead-of-the-logit-link-for-the-bernoullibinomial-distribution">Still a little unclear of why you would use the log link instead of the logit link for the Bernoulli/Binomial distribution</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -137,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Lesson 1: Welcome</p>
+<p class="subtitle lead">Lesson 15: Other regressions</p>
 </div>
 
 
@@ -149,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 15, 2025</p>
+      <p class="date-modified">June 2, 2025</p>
     </div>
   </div>
     
@@ -162,11 +167,20 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="muddy-points-from-spring-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2025">Muddy Points from Spring 2025</h2>
+<section id="with-multinomial-regression-so-we-are-comparing-several-groups-to-each-other-depending-on-the-variable-and-number-of-categories-is-this-correct" class="level3">
+<h3 class="anchored" data-anchor-id="with-multinomial-regression-so-we-are-comparing-several-groups-to-each-other-depending-on-the-variable-and-number-of-categories-is-this-correct">With multinomial regression so we are comparing several groups to each other depending on the variable and number of categories is this correct?</h3>
 </section>
-<section id="muddy-points-from-spring-2024" class="level2">
-<h2 class="anchored" data-anchor-id="muddy-points-from-spring-2024">Muddy Points from Spring 2024</h2>
+<section id="my-muddy-point-is-why-logistic-regression-gives-us-log-oddsodds-ratio-expb_k-and-log-binomial-gives-us-risk-ratio.-does-it-simply-have-to-do-with-the-fact-we-are-using-logitµ-and-logµ" class="level3">
+<h3 class="anchored" data-anchor-id="my-muddy-point-is-why-logistic-regression-gives-us-log-oddsodds-ratio-expb_k-and-log-binomial-gives-us-risk-ratio.-does-it-simply-have-to-do-with-the-fact-we-are-using-logitµ-and-logµ">My muddy point is why logistic regression gives us log odds/odds ratio (exp(B_k)) and log-binomial gives us risk ratio. Does it simply have to do with the fact we are using logit(µ) and log(µ)?</h3>
+</section>
+<section id="i-need-more-practice-on-figuring-out-when-log-binomial-and-logistic-regression-are-preferred-over-each-other-recalling-that-we-can-transform-risk-ratios-to-odds-ratios" class="level3">
+<h3 class="anchored" data-anchor-id="i-need-more-practice-on-figuring-out-when-log-binomial-and-logistic-regression-are-preferred-over-each-other-recalling-that-we-can-transform-risk-ratios-to-odds-ratios">I need more practice on figuring out when log-binomial and logistic regression are preferred over each other – recalling that we can transform risk ratios to odds ratios…</h3>
+</section>
+<section id="still-a-little-unclear-of-why-you-would-use-the-log-link-instead-of-the-logit-link-for-the-bernoullibinomial-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="still-a-little-unclear-of-why-you-would-use-the-log-link-instead-of-the-logit-link-for-the-bernoullibinomial-distribution">Still a little unclear of why you would use the log link instead of the logit link for the Bernoulli/Binomial distribution</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

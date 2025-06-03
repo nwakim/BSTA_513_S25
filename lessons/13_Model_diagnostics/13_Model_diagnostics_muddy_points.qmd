@@ -11,5 +11,16 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
+### Just reminding myself with model selection what residuals are meant to represent?
+
+### Can you restate the info from the " Diagnostics of Logistic regression" slide? A change in residuals if a covariate is excluded, if the model is better then it means the covariate pattern is bad. What do we do with the covariate pattern then? Doesn’t it have to stay in our analysis? Or would we take out smoking (Y/N) on future bone fracture (Y/N) and replace smoking with fiber intake above 50 g a day (Y/N) alongside future bone fracture (Y/N).
+
+### 
+
 ## Muddy Points from Spring 2024
+
+### 1. How did you determine the ages for the R output on slide 24 (standardized deviance residuals)
+
+The centered ages are centered around the mean age. A few classes ago I mentioned that the mean was 69 years old, might have gotten lost in this lesson. So calculating the actual ages is just adding the mean age and centered age. So centered age of 6 is 69+6 = 75. Also, very confusing because apparently I can't add!
+
 

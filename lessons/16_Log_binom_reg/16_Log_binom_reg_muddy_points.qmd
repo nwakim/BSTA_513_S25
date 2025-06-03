@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lesson 1: Welcome"
+subtitle: "Lesson 16: Log-binomial regression"
 date-modified: "today"
 format: 
   html:
@@ -11,5 +11,5 @@ editor_options:
 
 ## Muddy Points from Spring 2025
 
-## Muddy Points from Spring 2024
+### I think the difficult part of class was why we need to do extra stuff for log-binomial. It seems that logistic regression seems so streamlined when doing regression, but log-binomial seems a little convoluted
 

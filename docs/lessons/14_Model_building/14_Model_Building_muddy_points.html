@@ -127,7 +127,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#muddy-points-from-spring-2025" id="toc-muddy-points-from-spring-2025" class="nav-link active" data-scroll-target="#muddy-points-from-spring-2025">Muddy Points from Spring 2025</a></li>
-  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a></li>
+  <li><a href="#muddy-points-from-spring-2024" id="toc-muddy-points-from-spring-2024" class="nav-link" data-scroll-target="#muddy-points-from-spring-2024">Muddy Points from Spring 2024</a>
+  <ul class="collapse">
+  <li><a href="#from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods" id="toc-from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods" class="nav-link" data-scroll-target="#from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods">1. From comment on shrinkage vs.&nbsp;regularization vs.&nbsp;penalized methods</a></li>
+  <li><a href="#sign-column-within-vi-output" id="toc-sign-column-within-vi-output" class="nav-link" data-scroll-target="#sign-column-within-vi-output">2. Sign column within <code>vi()</code> output</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -137,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Lesson 1: Welcome</p>
+<p class="subtitle lead">Lesson 14: Model Building</p>
 </div>
 
 
@@ -149,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 7, 2025</p>
+      <p class="date-modified">June 2, 2025</p>
     </div>
   </div>
     
@@ -165,8 +169,23 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="muddy-points-from-spring-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-spring-2024">Muddy Points from Spring 2024</h2>
+<section id="from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods" class="level3">
+<h3 class="anchored" data-anchor-id="from-comment-on-shrinkage-vs.-regularization-vs.-penalized-methods">1. From comment on shrinkage vs.&nbsp;regularization vs.&nbsp;penalized methods</h3>
+<p>All these terms are used intercahngeably!</p>
+<p>Penalized regression means that penalty is added to our likelihood function! This may feel like a more generic form of shrinkage or regularization. However, within statistics, I do not see penalized regression used for anything other than minimizing the coefficient values towards zero. I often see it defined as: form of regression that uses a penalty to shrink coefficients towards zero.</p>
+<p>Definitions of regularized regression mirror the above for penalized regression.</p>
+<p>Shrinkage is more the action of reducing coefficient values towards zero. Many people will refer to regularization and penalized regression as shrinkage methods.</p>
+<ul>
+<li>LASSO, ridge, and Elastic net are all types of penalized/regularization/shrinkage methods</li>
+</ul>
+</section>
+<section id="sign-column-within-vi-output" class="level3">
+<h3 class="anchored" data-anchor-id="sign-column-within-vi-output">2. Sign column within <code>vi()</code> output</h3>
+<p>The sign column is in fact the sign of the coefficient within the model.</p>
+<p>So within our interaction model, the sign for smoking status is negative. Since smoking status had many interactions, we cannot make claims about the association between smoking and fracture without considering all other variables that it interacts with. ALSO, remember that our goal here is prediction, NOT association.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
