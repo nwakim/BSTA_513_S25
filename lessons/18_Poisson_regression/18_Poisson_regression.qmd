@@ -1,9 +1,9 @@
 ---
-title: "Lesson 16: Poisson Regression"
+title: "Lesson 18: Introduction to Poisson Regression"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
-date: "05/29/2024"
+date: "06/4/2025"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -12,7 +12,7 @@ format:
     show-slide-number: all
     width: 1955
     height: 1100
-    footer: "Lesson 16: Poisson Regression"
+    footer: "Lesson 18: Poisson Regression"
     html-math-method: mathjax
     highlight-style: ayu
 execute:
@@ -55,41 +55,79 @@ theme_set(theme_minimal() +
 }
 ```
 
-# Learning Objectives
-
-::: lob
-1.  Review Generalized Linear Models and how we can branch to other types of regression.
-:::
-
-2.  Understand what we can measure with Poisson regression and how to interpret coefficients.
-
-3.  Understand how to adjust for different follow-up times among individuals
 
 # Learning Objectives
 
-1.  Review Generalized Linear Models and how we can branch to other types of regression.
-
 ::: lob
-2.  Understand what we can measure with Poisson regression and how to interpret coefficients.
+1.  Understand what we can measure with Poisson regression and how to interpret coefficients.
 :::
 
-3.  Understand how to adjust for different follow-up times among individuals
+2.  Understand how to adjust for different follow-up times among individuals
 
-## Poisson Distribution
+## From Lesson 15: Poisson Regression
 
+::: columns
+::: column
+-   [**Outcome type:**]{style="color:#70AD47"} Counts or rates
+
+ 
+
+-   [**Example outcomes:**]{style="color:#5B9BD5"}
+    -   Number of children in household
+    -   Number of hospital admissions
+    -   Rate of incidence for COVID in US counties
+:::
+
+::: column
+-   [**Population model**]{style="color:#ED7D31"} 
+
+$$ \log(\mu) = \log(\lambda) = \beta_0 + \beta_1 X$$
+
+-   [**Interpretations**]{style="color:#D6295E"}
+    -   The count (or rate) ratio for every 1 unit increase in $X$
+:::
+:::
+
+
+
+## Modeling with a Poisson Distribution
+
+- Observations in Poisson regression will have counts of events 
+  - Might be counting a binary event, but each observation can have a count > 1
+
+::: columns
+::: column
+
+::: theorem
+::: thm-title
+Count data modeled as Poisson distribution
+:::
+::: thm-cont
 -   This distribution is often used to model [**count data**]{style="color:#70AD47"}
 -   Examples:
     -   Distribution of number of deaths due to lung cancer
     -   Distribution of number of individuals diagnosed with leukemia
     -   Distribution of number of hospitalizations
+:::
+:::
+:::
 
- 
-
+::: column
+::: definition
+::: def-title
+Rate data modeled as Poisson distribution
+:::
+::: def-cont
 -   This distribution is often used to model [**rate data**]{style="color:#5B9BD5"}
+    - With time as a big component
 -   Examples:
     -   Distribution of number of deaths due to lung cancer **per year**
     -   Distribution of number of individuals diagnosed with leukemia **over follow-up time**
-    -   Distribution of number of hospitalizations **in a day**
+    -   Distribution of number of hospitalizations **per day**
+:::
+:::
+:::
+:::
 
 ## Example 1: Horseshoe Crabs and Satellites
 
@@ -108,7 +146,8 @@ Each female horseshoe crab in the study had a male crab attached to her in her n
 library(rsq)
 data(hcrabs)
 ggplot(data = hcrabs) + 
-  geom_bar(aes(x = num.satellites))
+  geom_bar(aes(x = num.satellites)) +
+  xlab("Number of satellites")
 ```
 :::
 :::
@@ -132,7 +171,7 @@ ggplot(data = hcrabs) +
 :::
 :::
 
-## Poll Everywhere Question 2
+## Poll Everywhere Question 1
 
 ## Example 2: Lung Cancer Incidence
 
@@ -150,10 +189,12 @@ lc_inc = eba1977 %>% mutate(lpop = log(pop))
 
 ## Poisson Distribution with a rate
 
--   If we look at the probability of $y$ events **in a time period** $t$ for a Poisson random variable, we could write: $$P(Y = y | \mu) = \dfrac{\mu^y e^{-\mu}}{y!} = \dfrac{(\lambda t)^y e^{-\lambda t}}{y!}$$
+-   If we look at the probability of $y$ events **in a time period or in a population** $t$ for a Poisson random variable, we could write: $$P(Y = y | \mu) = \dfrac{\mu^y e^{-\mu}}{y!} = \dfrac{(\lambda t)^y e^{-\lambda t}}{y!}$$
     -   Where $y$'s are non-negative integers $y=0, 1, 2,...$
-    -   Where $\mu = \lambda t$, where $\lambda$ is the expected number of events per unit time (aka **rate**)
-    -   Then $\mu$ is the expected number of events over time $t$
+    -   Where $\mu = \lambda t$, where $\lambda$ is the expected number of events per unit time (aka **rate**) OR per capita (per person)
+        - $\lambda t$: rate $\times$ time
+        - $\lambda t$: rate $\times$ population
+    -   Then $\mu$ is the expected number of events over time $t$ or over population $t$
 
 ## What does $\lambda$ represent in the Poisson distribution?
 
@@ -163,6 +204,7 @@ lc_inc = eba1977 %>% mutate(lpop = log(pop))
  
 
 -   Example: Number of patient arrivals into the Emergency Room per hour
+-   Example: Number of individuals with positive COVID test in a county per capita
 
  
 
@@ -180,9 +222,9 @@ lc_inc = eba1977 %>% mutate(lpop = log(pop))
 
  
 
--   Log of conditional mean of Y given x
-    -   Conditional mean of Y given x is represented as $E(Y \mid X) = \mu(X)$
-    -   Let Y be a Poisson count **for a given unit of time**, then $\mu(X) =\lambda(X)$
+-   Log of conditional mean of $Y$ given $X$
+    -   Conditional mean of $Y$ given $X$ is represented as $E(Y \mid X) = \mu(X)$
+    -   Let $Y$ be a Poisson count **for a given unit of time or per capita**, then $\mu(X) =\lambda(X)$
     -   In a simple Poisson regression, we have
 
 $$\ln(\mu(X)) = \ln(\lambda(X)) = \beta_0 + \beta_1 X$$
@@ -190,6 +232,24 @@ $$\ln(\mu(X)) = \ln(\lambda(X)) = \beta_0 + \beta_1 X$$
  
 
 -   So this is also called a **log-linear model**
+
+## Poisson model assumptions
+
+- Count or rate response
+  - The response variable is a count (non-negative integers)
+  - It is suitable for grouped or ungrouped data since the sum of Poisson distributed observations is also Poisson
+    - Grouped by time or by capita
+
+- Independent events
+  - The counts, i.e. the events, are assumed to be independent of each other
+
+- Variance is same as mean 
+  - By definition of the Poisson distribution, the variance is assumed to be equal to the mean 
+  - When this assumption does not hold, we should consider a Quasipoisson GLM for overdispersed (or underdispersed) data or a Negative Binomial GLM instead
+
+ 
+
+- The text above was largely pulled [from this tutorial on Poisson regression](https://rpubs.com/Julian_Sampedro/1047952)
 
 ## Parameter Interpretation: Binary $X$ (1/2)
 
@@ -205,13 +265,13 @@ $$\ln(\mu(X)) = \ln(\lambda(X)) = \beta_0 + \beta_1 X$$
 ## Parameter Interpretation: Binary $X$ (2/2)
 
 -   When $X$ is a binary variable: How do we interpret $\beta_1$?
-    -   By subtraction, we have $$\beta_1 = \ln(\mu(X = 1)) -  \ln(\mu(X = 0)) = \ln \left( \dfrac{\mu(X = 1)}{\mu(X = 0)} \right)$$
+    -   By subtraction, we have $$\beta_1 = \beta_0 + \beta_1 - (\beta_0) = \ln(\mu(X = 1)) -  \ln(\mu(X = 0)) = \ln \left( \dfrac{\mu(X = 1)}{\mu(X = 0)} \right)$$
 
     -   $\beta_1$: log-count ratio or log-rate ratio
 
         -   Since $\mu(X)$ is $\lambda(X)$ is the rate of $Y$
 
-    -   So $\exp(\beta_1)$ is the count or rate ratio!
+    -   So $\exp(\beta_1)$ is the count or rate ratio comparing $X=1$ to $X=0$
 
 ## Parameter Interpretation: Continuous $X$
 
@@ -289,16 +349,14 @@ tidy(lc_mod, conf.int=T,
 :::
 :::
 
-## Poll Everywhere Question 3
+## Poll Everywhere Question 2
 
 # Learning Objectives
 
-1.  Review Generalized Linear Models and how we can branch to other types of regression.
-
-2.  Understand what we can measure with Poisson regression and how to interpret coefficients.
+1.  Understand what we can measure with Poisson regression and how to interpret coefficients.
 
 ::: lob
-3.  Understand how to adjust for different follow-up times among individuals
+2.  Understand how to adjust for different follow-up times among individuals
 :::
 
 ## Building towards person-years
@@ -395,6 +453,10 @@ summary(lc_mod)
 ## Further reading / tutorials on Poisson regression
 
 -   [Good tutorial in R](https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/)
+
+- [Another good tutorial that includes overdispersion](https://rpubs.com/Julian_Sampedro/1047952)
+
+- [Comparison between Poisson and log-binomial regressions](https://pmc.ncbi.nlm.nih.gov/articles/PMC2292207/)
 
 -   When people are followed for different amounts of time, we should include an offset
 

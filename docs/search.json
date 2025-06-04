@@ -12161,72 +12161,72 @@
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#some-notes",
     "href": "lessons/19_Poster_help/19_Poster_help.html#some-notes",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "Some notes",
-    "text": "Some notes\n\nI will NOT be counting exact bullet points\n\nIf it says 2-3, anything less than 4 is okay\nIf it says 5-6, it shouldn’t be 1 and it shouldn’t be &gt;10\n\nDo NOT make bullet points really long!\nI tried the QMD poster, and it is REALLY hard to troubleshoot\n\nI highly suggest making your poster in powerpoint!"
+    "text": "Some notes\n\nI will NOT be counting exact bullet points\n\nIf it says 2-3, anything less than 4 is okay\nIf it says 5-6, it shouldn’t be 1 and it shouldn’t be &gt;10\n\nDo NOT make bullet points really long!\n\nThis was a big issue in last quarter’s poster\nWork to make things concise!! You are likely including too much information\n\nI tried the QMD poster, and it is REALLY hard to troubleshoot\n\nI highly suggest making your poster in powerpoint!"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#background",
     "href": "lessons/19_Poster_help/19_Poster_help.html#background",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "Background",
     "text": "Background\n\nLength: 5-8 bullets\nPurpose: Introduce the research question and why it is important to study\nThis section is non-technical.\n\nBy reading just the introduction and conclusion, someone without a technical background should have an idea of what they study was about, why it is important, and what the main results are\n\nYou may start with your bullets from Lab 1, but you should edit it and make sure it flows into your report well!\nShould contain some references"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#methods",
     "href": "lessons/19_Poster_help/19_Poster_help.html#methods",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "Methods",
     "text": "Methods\n\nLength: 8-10 bullets\nPurpose: Describe the analyses that were conducted and methods used to select variables and check diagnostics\nSome important methods to discuss (You may divide these into your sections, not necessarily with these names)\n\nGeneral approach to the dataset\nVariables and variable creation\nModel building: we performed purposeful selection\nFinal model\nModel diagnostics"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#methods-for-life-expectancy",
     "href": "lessons/19_Poster_help/19_Poster_help.html#methods-for-life-expectancy",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "Methods for life expectancy",
-    "text": "Methods for life expectancy\n\nData were collected from Gapminder and World Bank with 197 countries in 2011\nWe performed a complete case analysis on 72 countries\nWe generated categorized variables for CO2 emissions and income levels\n\nCO2 emissions used quartiles\nIncome levels used the specified groupings by Gapminder\n\nWe used purposeful model selection, a combination of field expertise and statistical methods, to determine the final model\nWe performed linear regression on our outcome, life expectancy, with a main effect for female literacy rate while adjusting for confounders \\[\\widehat{\\text{LE}} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\text{FLR} + \\text{other confounders}\\]\n\nWe adjusted for: CO2 emissions, income levels, world region, access to improved water, food supply, and intergovernmental groups\n\nWe investigated model assumptions and diagnostics using standardized residuals, leverage, Cook’s distance, and variance inflation factors (VIFs)\nWe used R version 4.4.1 to analyze data"
+    "text": "Methods for life expectancy\n\nData were collected from Gapminder and World Bank with 197 countries in 2011\nWe performed a complete case analysis on 72 countries\nWe generated categorized variables for CO2 emissions and income levels\n\nCO2 emissions used quartiles\nIncome levels used the specified groupings by Gapminder\n\nWe used purposeful model selection, a combination of field expertise and statistical methods, to determine the final model\nWe performed linear regression on our outcome, life expectancy, with a main effect for female literacy rate while adjusting for confounders\n\nWe adjusted for: CO2 emissions, income levels, world region, access to improved water, food supply, and intergovernmental groups\nWe included an interaction between ____ and ____\n\nWe investigated model assumptions and diagnostics using standardized residuals, leverage, Cook’s distance, and variance inflation factors (VIFs)\nWe used R version 4.4.1 to analyze data"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#results-what-should-be-in-your-results",
     "href": "lessons/19_Poster_help/19_Poster_help.html#results-what-should-be-in-your-results",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "Results: What should be in your results?",
-    "text": "Results: What should be in your results?\n\n\nIf you did purposeful model selection:\n\nTable 1\nTable showing odds ratios for your main variable + variable from interaction\nOne additional figure or table to help understand your question\nInterpretations of odds ratios from Table in #2\n\n\nIf you did LASSO:\n\nTable 1\nTable or plot showing most important variables\nOne additional figure or table to help understand your question\nInterpretations of important variables: identify top 1-3 that predict outcome"
+    "text": "Results: What should be in your results?\n\n\nIf you did purposeful model selection:\n\nTable 1\nTable showing odds ratios for your main variable + variable from interaction\nOne additional figure or table to understand your research question\nInterpretations of odds ratios from Table in #2\n\n\nIf you did LASSO:\n\nTable 1\nTable or plot showing most important variables\nOne additional figure or table to help understand your question\nInterpretations of important variables: identify top 1-3 that predict outcome"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#table-1-table-summary-in-lesson-2",
     "href": "lessons/19_Poster_help/19_Poster_help.html#table-1-table-summary-in-lesson-2",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "1. Table 1 (table summary in Lesson 2)",
     "text": "1. Table 1 (table summary in Lesson 2)\n\n\n\nlibrary(gtsummary)\n\ngapm2_vars = gapm2 %&gt;% \n  select(\n    CO2emissions, \n    FoodSupplykcPPD, \n    FemaleLiteracyRate, \n    WaterSourcePrct, \n    four_regions, \n    members_oecd_g77, \n    income_levels1\n  )\n\ntable1 = tbl_summary(\n  gapm2_vars, \n  label = list(\n    FemaleLiteracyRate = \"Female literacy rate (%)\", \n    CO2emissions = \"CO2 emissions quartiles\", \n    income_levels1 = \"Income levels\", \n    four_regions = \"World region\",\n    WaterSourcePrct = \"Access to improved water (%)\",\n    FoodSupplykcPPD = \"Food supply (kcal PPD)\",\n    members_oecd_g77 = \"Intergovernmental group\"\n    ),\n  statistic = list(all_continuous() ~ \"{mean} ({sd})\")\n  )\n\ntable1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN = 721\n\n\n\n\nCO2 emissions quartiles\n4.1 (5.6)\n\n\nFood supply (kcal PPD)\n2,812 (407)\n\n\nFemale literacy rate (%)\n82 (23)\n\n\nAccess to improved water (%)\n86 (16)\n\n\nWorld region\n\n\n\n\n    Africa\n20 (28%)\n\n\n    Americas\n12 (17%)\n\n\n    Asia\n17 (24%)\n\n\n    Europe\n23 (32%)\n\n\nIntergovernmental group\n\n\n\n\n    Group of 77\n47 (65%)\n\n\n    OECD\n7 (9.7%)\n\n\n    Others\n18 (25%)\n\n\nIncome levels\n\n\n\n\n    Low income\n10 (14%)\n\n\n    Lower middle income\n24 (33%)\n\n\n    Upper middle income\n24 (33%)\n\n\n    High income\n14 (19%)\n\n\n\n1 Mean (SD); n (%)"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot",
     "href": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "2. Regression table or Forest plot",
     "text": "2. Regression table or Forest plot\n\n\n\nreg_table = tbl_regression(\n  final_model, \n  label = list(\n    FemaleLiteracyRate ~ \"Female literacy rate (%)\", \n    CO2_q ~ \"CO2 emissions quartiles\", \n    income_levels1 ~ \"Income levels\", \n    four_regions ~ \"World region\",\n    WaterSourcePrct ~ \"Access to improved water (%)\",\n    FoodSupplykcPPD ~ \"Food supply (kcal PPD)\",\n    members_oecd_g77 ~ \"Intergovernmental group\"\n    )) %&gt;%   \n  as_gt() %&gt;% \n  tab_options(table.font.size = 20) %&gt;%\n  cols_width(label ~ px(250))\nreg_table\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI1\np-value\n\n\n\n\nFemale literacy rate (%)\n-0.07\n-0.17, 0.02\n0.13\n\n\nCO2 emissions quartiles\n\n\n\n\n\n\n\n\n    Quartile 1\n—\n—\n\n\n\n\n    Quartile 2\n1.1\n-2.7, 4.9\n0.6\n\n\n    Quartile 3\n-0.29\n-5.1, 4.6\n&gt;0.9\n\n\n    Quartile 4\n-0.60\n-5.6, 4.5\n0.8\n\n\nIncome levels\n\n\n\n\n\n\n\n\n    Low income\n—\n—\n\n\n\n\n    Lower middle income\n5.4\n0.75, 10\n0.024\n\n\n    Upper middle income\n6.1\n0.20, 12\n0.043\n\n\n    High income\n8.0\n1.4, 15\n0.018\n\n\nWorld region\n\n\n\n\n\n\n\n\n    Africa\n—\n—\n\n\n\n\n    Americas\n9.0\n4.9, 13\n&lt;0.001\n\n\n    Asia\n5.3\n2.0, 8.5\n0.002\n\n\n    Europe\n6.9\n1.1, 13\n0.020\n\n\nAccess to improved water (%)\n0.17\n0.03, 0.30\n0.015\n\n\nFood supply (kcal PPD)\n0.00\n0.00, 0.01\n0.073\n\n\nIntergovernmental group\n\n\n\n\n\n\n\n\n    Group of 77\n—\n—\n\n\n\n\n    OECD\n1.1\n-4.2, 6.5\n0.7\n\n\n    Others\n1.0\n-4.0, 6.1\n0.7\n\n\n\n1 CI = Confidence Interval"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-needs-work",
     "href": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-needs-work",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "2. Regression table or Forest plot (needs work!)",
-    "text": "2. Regression table or Forest plot (needs work!)\n\n\n\nThis is a fun one to investigate!\nStick to the regression table if you are having trouble with this!\n\n\nlibrary(broom.helpers)\n\nmodel_tidy = tidy_and_attach(final_model, conf.int=T) %&gt;%\n  tidy_remove_intercept() %&gt;%\n  tidy_add_reference_rows() %&gt;% tidy_add_estimate_to_reference_rows() %&gt;%\n  tidy_add_term_labels()\n\nforest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + \n  facet_grid(rows = vars(var_label), scales = \"free\",\n             space='free_y', switch = \"y\") + \n  geom_point(size = 3) +  geom_errorbarh(height=.2) + \n  geom_vline(xintercept=0, color='#C2352F', linetype='dashed', alpha=1) +\n  theme_classic() +\n  labs(x = \"Beta\", y = \"Variables\") +\n  theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), \n        title = element_text(size = 20), strip.placement = \"outside\", \n        strip.text = element_text(size = 20), strip.background = element_blank())\nforest_plot"
+    "text": "2. Regression table or Forest plot (needs work!)\n\nlibrary(broom.helpers)\nmodel_tidy = tidy_and_attach(final_model, conf.int=T) %&gt;%\n  tidy_remove_intercept() %&gt;%\n  tidy_add_reference_rows() %&gt;% tidy_add_estimate_to_reference_rows() %&gt;%\n  tidy_add_term_labels() %&gt;%\n  mutate(var_label = case_match(var_label, \n                               \"Female literacy rate (%)\" ~ \"\", \n                               \"Food supply (kcal PPD)\" ~ \" \", \n                               \"Access to improved water (%)\" ~ \"   \", \n                               \"CO2 emissions quartiles\" ~ \"CO2 emissions \\n quartiles\", \n                               \"Income levels\" ~ \"Income levels\", \n                               \"Intergovernmental group\" ~ \"Intergovern- \\n mental group\", \n                               .default = var_label\n                         ))\n\nforest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + \n  facet_grid(rows = vars(var_label), scales = \"free\",\n             space='free_y', switch = \"y\") + \n  geom_point(size = 3) +  geom_errorbarh(height=.2) + \n  geom_vline(xintercept=0, color='#C2352F', linetype='dashed', alpha=1) +\n  theme_classic() +\n  labs(x = \"Beta\", y = \"Variables\") +\n  theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), \n        title = element_text(size = 20), strip.placement = \"outside\", \n        strip.text.y.left = element_text(size = 18, angle = 0), \n        strip.background = element_blank())"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#saving-tables",
     "href": "lessons/19_Poster_help/19_Poster_help.html#saving-tables",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "Saving tables",
     "text": "Saving tables\n\nFor tables: gtsave in the gt package should work!\nFor figures/plots: ggsave in the ggplot2 package should work!\n\n\ngtsave(reg_table, filename = here(\"lessons/19_Poster_help/reg_table.png\"))\ngtsave(table1, filename = here(\"lessons/19_Poster_help/table1.png\"))\nggsave(forest_plot, filename = here(\"lessons/19_Poster_help/forest_plot.png\"))\n\n\nWhen I first ran the above, I got the following message: The package \"webshot2\" is required to save gt tables as images. ✖ Would you like to install it? 1: Yes 2: No\n\nI inputted 1"
   },
   {
     "objectID": "lessons/19_Poster_help/19_Poster_help.html#important-note-if-you-have-interactions",
     "href": "lessons/19_Poster_help/19_Poster_help.html#important-note-if-you-have-interactions",
-    "title": "Poster Results Help Session",
+    "title": "Poster Info and Help",
     "section": "Important note if you have interactions",
-    "text": "Important note if you have interactions\n\nPlease check your Quiz 3 feedback!\n\nMany of you are not quite interpreting interactions correctly\n\nThere is extra care to reporting results from interactions\nPlease make sure you use estimable() to get the correct effects!\n\nIf you have an interaction with a categorical variable, then your main variable’s “effect” should be reported for each category\n\nSee HW 3 and Lecture 10 for reporting!"
+    "text": "Important note if you have interactions\n\nPlease check your Quiz 3 feedback!\n\nMany of you are not quite interpreting interactions correctly\n\nThere is extra care to reporting results from interactions\nPlease make sure you use estimable() to get the correct effects!\n\nIf you have an interaction with a categorical variable, then your main variable’s “effect” should be reported for each category\n\nSee HW 3 and Lecture 10 for reporting!\nYou will NOT include the adjusting variables in the table/plot\n\nBut you need to say adjusting for all other variables in model from methods"
   },
   {
     "objectID": "lessons/17_Missing_data/17_Missing_data_key_info.html",
@@ -12255,5 +12255,320 @@
     "title": "Muddy Points",
     "section": "",
     "text": "None?"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression_key_info.html",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression_key_info.html",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Epi end of year party tomorrow: \nPoster session on 6/9\n\nPoster session will be in VPT 515 1-2:50pm\nWe will set up posters from 1-1:15pm\nTime to eat and be merry until ~1:30pm, then we will start meandering around posters\nPosters need to be printed before 1pm\nThere is a color printer on the 5th floor in the cubicles across from the 510 offices. This is the area near the 515 classroom that faces North.\nI will bring the main dish (maybe pizza, but I’m open to other ideas).\n\nDietary restrictions question in 6/4 exit ticket. Please fill out!!\nFeel free to bring more food!\n\nI will have a few slides today (6/4) to discuss posters\nIf you did purposeful model selection, make sure you have a structured way to interpret interactions and main effects that involve interactions! (See Quiz 3 note)\n\nQuiz 3\n\nJust finished grading!\nPlease make sure you can see your answers, the correct answer, and my comments to you.\nPlease revisit the last question on interpreting an odds ratio when there is an interaction! If you did purposeful model selection in your poster, you will need to interpret all odds ratios correctly!\n\nHave you received the course feedback form yet?\n\nPlease fill it out!\nIt is one of the main components of my promotion\n\nSo if you enjoyed the course, felt meh about it, or hated it, please fill it out!\n\nReminder for all course evals: these evals go directly to our supervisors\n\nPlease check your grades in Sakai!!\n\nDo you have a 0 for a HW that you thought you turned in?\nDo you have a 0 for an exit ticket that you thought you did?\nLab attendance/make-up?"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression_key_info.html#announcements",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression_key_info.html#announcements",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Epi end of year party tomorrow: \nPoster session on 6/9\n\nPoster session will be in VPT 515 1-2:50pm\nWe will set up posters from 1-1:15pm\nTime to eat and be merry until ~1:30pm, then we will start meandering around posters\nPosters need to be printed before 1pm\nThere is a color printer on the 5th floor in the cubicles across from the 510 offices. This is the area near the 515 classroom that faces North.\nI will bring the main dish (maybe pizza, but I’m open to other ideas).\n\nDietary restrictions question in 6/4 exit ticket. Please fill out!!\nFeel free to bring more food!\n\nI will have a few slides today (6/4) to discuss posters\nIf you did purposeful model selection, make sure you have a structured way to interpret interactions and main effects that involve interactions! (See Quiz 3 note)\n\nQuiz 3\n\nJust finished grading!\nPlease make sure you can see your answers, the correct answer, and my comments to you.\nPlease revisit the last question on interpreting an odds ratio when there is an interaction! If you did purposeful model selection in your poster, you will need to interpret all odds ratios correctly!\n\nHave you received the course feedback form yet?\n\nPlease fill it out!\nIt is one of the main components of my promotion\n\nSo if you enjoyed the course, felt meh about it, or hated it, please fill it out!\n\nReminder for all course evals: these evals go directly to our supervisors\n\nPlease check your grades in Sakai!!\n\nDo you have a 0 for a HW that you thought you turned in?\nDo you have a 0 for an exit ticket that you thought you did?\nLab attendance/make-up?"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression_key_info.html#key-dates",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression_key_info.html#key-dates",
+    "title": "Key Info and Announcements",
+    "section": "Key Dates",
+    "text": "Key Dates\n\nPoster session on 6/9\nPoster submission on 6/9 at 11pm!"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression_key_info.html#last-class",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression_key_info.html#last-class",
+    "title": "Key Info and Announcements",
+    "section": "Last class",
+    "text": "Last class"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html",
+    "title": "Lesson 16: Poisson Regression",
+    "section": "",
+    "text": "Understand what we can measure with Poisson regression and how to interpret coefficients.\nUnderstand how to adjust for different follow-up times among individuals"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#poisson-distribution",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#poisson-distribution",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Poisson Distribution",
+    "text": "Poisson Distribution\n\n\n\n\nCount data modeled as Poisson distribution\n\n\n\nThis distribution is often used to model count data\nExamples:\n\nDistribution of number of deaths due to lung cancer\nDistribution of number of individuals diagnosed with leukemia\nDistribution of number of hospitalizations\n\n\n\n\n\n\n\nRate data modeled as Poisson distribution\n\n\n\nThis distribution is often used to model rate data\n\nWith time as a big component\n\nExamples:\n\nDistribution of number of deaths due to lung cancer per year\nDistribution of number of individuals diagnosed with leukemia over follow-up time\nDistribution of number of hospitalizations per day"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-1-horseshoe-crabs-and-satellites",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-1-horseshoe-crabs-and-satellites",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Example 1: Horseshoe Crabs and Satellites",
+    "text": "Example 1: Horseshoe Crabs and Satellites\n\n\nExample of count data:\nEach female horseshoe crab in the study had a male crab attached to her in her nest. The study investigated factors that affect whether the female crab had any other males, called satellites, residing near her. Explanatory variables that are thought to affect this included the female crab’s color, spine condition, and carapace width, and weight. The response outcome for each female crab is the number of satellites. There are 173 females in this study.\n\n\n\n\n\n\n\nlibrary(rsq)\ndata(hcrabs)\nggplot(data = hcrabs) + \n  geom_bar(aes(x = num.satellites)) +\n  xlab(\"Number of satellites\")"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#poisson-distribution-with-a-count",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#poisson-distribution-with-a-count",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Poisson Distribution with a count",
+    "text": "Poisson Distribution with a count\n\n\n\nThe probability function of Poisson distribution: \\[P(Y = y | \\mu) = \\dfrac{\\mu^y e^{-\\mu}}{y!}\\]\n\nWhere \\(y\\)’s are non-negative integers \\(y=0, 1, 2,...\\)\nWhere \\(\\mu\\) is the mean of \\(Y\\), that is \\(E(Y)=\\mu\\)\nAnd also, \\(\\text{var}(Y)=\\mu\\)\n\nFor a Poisson distribution, \\(Y \\sim \\text{Poisson}(\\mu)\\)\n\nRange: \\([0, \\infty)\\)\n\n\n\nFrom Wikipedia:"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#poll-everywhere-question-2",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#poll-everywhere-question-2",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Poll Everywhere Question 2",
+    "text": "Poll Everywhere Question 2"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-2-lung-cancer-incidence",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-2-lung-cancer-incidence",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Example 2: Lung Cancer Incidence",
+    "text": "Example 2: Lung Cancer Incidence\nExample of rate data:\nWe can look at the lung cancer incident counts (cases) per age group for four Danish cities from 1968 to 1971. Since it’s reasonable to assume that the expected count of lung cancer incidents is proportional to the population size, we would prefer to model the rate of incidents per capita.\n \n\nlibrary(ISwR)\ndata(eba1977)\nlc_inc = eba1977 %&gt;% mutate(lpop = log(pop))"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#poisson-distribution-with-a-rate",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#poisson-distribution-with-a-rate",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Poisson Distribution with a rate",
+    "text": "Poisson Distribution with a rate\n\nIf we look at the probability of \\(y\\) events in a time period or in a population \\(t\\) for a Poisson random variable, we could write: \\[P(Y = y | \\mu) = \\dfrac{\\mu^y e^{-\\mu}}{y!} = \\dfrac{(\\lambda t)^y e^{-\\lambda t}}{y!}\\]\n\nWhere \\(y\\)’s are non-negative integers \\(y=0, 1, 2,...\\)\nWhere \\(\\mu = \\lambda t\\), where \\(\\lambda\\) is the expected number of events per unit time (aka rate) OR per capita (per person)\n\n\\(\\lambda t\\): rate \\(\\times\\) time\n\\(\\lambda t\\): rate \\(\\times\\) population\n\nThen \\(\\mu\\) is the expected number of events over time \\(t\\) or over population \\(t\\)"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#what-does-lambda-represent-in-the-poisson-distribution",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#what-does-lambda-represent-in-the-poisson-distribution",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "What does \\(\\lambda\\) represent in the Poisson distribution?",
+    "text": "What does \\(\\lambda\\) represent in the Poisson distribution?\n\nWhat does \\(\\lambda\\) represent?\n\nA rate, the expected number of events in a given population over a given period time\n\n\n \n\nExample: Number of patient arrivals into the Emergency Room per hour\nExample: Number of individuals with positive COVID test in a county per capita\n\n \n\nThe Poisson distribution is the prototype for assigning probabilities of observing any number of events"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#review-simple-logistic-regression",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#review-simple-logistic-regression",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Review: Simple Logistic Regression",
+    "text": "Review: Simple Logistic Regression\n\nLet Y is the dependent variable of interest and x is a predictor variable,\n\nIn simple logistic regression, we have \\[\\log\\left(\\frac{\\pi(X)}{1 - \\pi(X)}\\right) = \\beta_0 + \\beta_1 X\\]\nwhere \\(\\pi (X) =P(Y = 1 \\mid X = x)\\)"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#simple-poisson-regression-model",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#simple-poisson-regression-model",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Simple Poisson Regression Model",
+    "text": "Simple Poisson Regression Model\n\nWhat do we model in a Poisson regression?\n\n \n\nLog of conditional mean of \\(Y\\) given \\(X\\)\n\nConditional mean of \\(Y\\) given \\(X\\) is represented as \\(E(Y \\mid X) = \\mu(X)\\)\nLet \\(Y\\) be a Poisson count for a given unit of time or per capita, then \\(\\mu(X) =\\lambda(X)\\)\nIn a simple Poisson regression, we have\n\n\n\\[\\ln(\\mu(X)) = \\ln(\\lambda(X)) = \\beta_0 + \\beta_1 X\\]\n \n\nSo this is also called a log-linear model"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#parameter-interpretation-binary-x-12",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#parameter-interpretation-binary-x-12",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Parameter Interpretation: Binary \\(X\\) (1/2)",
+    "text": "Parameter Interpretation: Binary \\(X\\) (1/2)\n\nIn simple Poisson regression: \\[\\ln(\\mu(X)) = \\ln(\\lambda(X)) = \\beta_0 + \\beta_1 X\\]\nWhen \\(X\\) is a binary variable: How do we interpret \\(\\beta_1\\)?\n\nWhen \\(X=0\\): \\[\\ln(\\mu(X = 0)) = \\beta_0 + \\beta_1 \\cdot 0 = \\beta_0\\]\n\n\\(\\mu(X = 0) = \\exp (\\beta_0)\\): the mean count or rate of \\(Y\\) when \\(X=0\\)\n\nWhen \\(X=1\\): \\[\\ln(\\mu(X = 1)) = \\beta_0 + \\beta_1 \\cdot 1 = \\beta_0 + \\beta_1\\]\n\n\\(\\mu(X = 1) = \\exp (\\beta_0 + \\beta_1)\\): the mean count or rate of \\(Y\\) when \\(X=1\\)"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#parameter-interpretation-binary-x-22",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#parameter-interpretation-binary-x-22",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Parameter Interpretation: Binary \\(X\\) (2/2)",
+    "text": "Parameter Interpretation: Binary \\(X\\) (2/2)\n\nWhen \\(X\\) is a binary variable: How do we interpret \\(\\beta_1\\)?\n\nBy subtraction, we have \\[\\beta_1 = \\beta_0 + \\beta_1 - (\\beta_0) = \\ln(\\mu(X = 1)) -  \\ln(\\mu(X = 0)) = \\ln \\left( \\dfrac{\\mu(X = 1)}{\\mu(X = 0)} \\right)\\]\n\\(\\beta_1\\): log-count ratio or log-rate ratio\n\nSince \\(\\mu(X)\\) is \\(\\lambda(X)\\) is the rate of \\(Y\\)\n\nSo \\(\\exp(\\beta_1)\\) is the count or rate ratio comparing \\(X=1\\) to \\(X=0\\)"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#parameter-interpretation-continuous-x",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#parameter-interpretation-continuous-x",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Parameter Interpretation: Continuous \\(X\\)",
+    "text": "Parameter Interpretation: Continuous \\(X\\)\n\nWhen \\(X\\) is a continuous variable: How do we interpret \\(\\beta_0\\)?\n\n\\(\\beta_0\\): log-count or log-rate when \\(X\\) is 0\nSo \\(\\exp(\\beta_0)\\) is the expected count or rate when \\(X\\) is 0\n\nWhen \\(X\\) is a continuous variable: How do we interpret \\(\\beta_1\\)?\n\n\\(\\beta_1\\): log-count ratio or log-rate ratio for every 1 unit increase in \\(X\\)\n\nSince \\(\\mu(X)\\) is \\(\\lambda(X)\\) is the rate of \\(Y\\)\n\nSo \\(\\exp(\\beta_1)\\) is the rate ratio for every 1 unit increase in \\(X\\)"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-1-horseshoe-crabs-and-satellites-1",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-1-horseshoe-crabs-and-satellites-1",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Example 1: Horseshoe Crabs and Satellites",
+    "text": "Example 1: Horseshoe Crabs and Satellites\n\n\n\nggplot(hcrabs, \n       aes(x=width, \n           y=num.satellites)) + \n  geom_point(size = 2)\n\n\n\n\n\n\n\n\n\n\ncrab_mod = glm(num.satellites ~ width, \n                family=poisson, \n                data=hcrabs)\ntidy(crab_mod, conf.int=T, \n     exponentiate=T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 35) %&gt;%\n  fmt_number(decimals = 2)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.04\n0.54\n−6.09\n0.00\n0.01\n0.11\n\n\nwidth\n1.18\n0.02\n8.22\n0.00\n1.13\n1.23\n\n\n\n\n\n\n\n\nInterpretation: For every 1-cm increase in carapace width, the expected number of satellites increases by 18% (95% CI: 13%, 23%)."
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-2-lung-cancer-incidence-1",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-2-lung-cancer-incidence-1",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Example 2: Lung Cancer Incidence",
+    "text": "Example 2: Lung Cancer Incidence\n\n\n\nggplot(lc_inc, aes(x=age, y=cases, \n           color = city)) + \n  geom_point(size = 2)\n\n\n\n\n\n\n\n\n\n\nlc_mod = glm(cases ~ city + age, \n            offset=lpop, \n            family=poisson, \n            data=lc_inc)\n\n\n\nRegression table\ntidy(lc_mod, conf.int=T, \n     exponentiate=T) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30) %&gt;%\n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.004\n0.200\n−28.125\n0.000\n0.002\n0.005\n\n\ncityHorsens\n0.719\n0.182\n−1.818\n0.069\n0.503\n1.026\n\n\ncityKolding\n0.690\n0.188\n−1.978\n0.048\n0.476\n0.995\n\n\ncityVejle\n0.762\n0.188\n−1.450\n0.147\n0.525\n1.099\n\n\nage55-59\n3.007\n0.248\n4.434\n0.000\n1.843\n4.901\n\n\nage60-64\n4.566\n0.232\n6.556\n0.000\n2.907\n7.236\n\n\nage65-69\n5.857\n0.229\n7.704\n0.000\n3.748\n9.249\n\n\nage70-74\n6.404\n0.235\n7.891\n0.000\n4.043\n10.212\n\n\nage75+\n4.136\n0.250\n5.672\n0.000\n2.523\n6.762"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#poll-everywhere-question-3",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#poll-everywhere-question-3",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Poll Everywhere Question 3",
+    "text": "Poll Everywhere Question 3"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#building-towards-person-years",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#building-towards-person-years",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Building towards person-years",
+    "text": "Building towards person-years\n\nIn an example of number of patient arrivals, an event does not conclude the study\n\nIf someone arrives within the first minute of the study, then we keep counting\nWe may be able to study the association of arrivals with qualities of the hospital, but we can’t measure qualities of the individuals arriving\n\n\n \n\nFor example, in the lung cancer study, we can only discuss the incidence of cancer at the city-wide level\n\n \n\nWhat happens if we want to measure qualities of the individual?\n\nWe can measure a hospitalization rate"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#why-person-years",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#why-person-years",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Why Person-Years?",
+    "text": "Why Person-Years?\n\nIf we are measuring at the individual level and counting something that is “terminal” then our count will always be 0 or 1\n\nExample: Number of individuals diagnosed with leukemia\nThis only happens once, so how do we measure the rate here?\n\n\n \n\nSince rate involves the counts and time – we can use the time to diagnosis to estimate the rate\n\nOften expressed in units such as events per thousand person-years\n\n\n \n\nPerson-years allow us to follow individuals for different amounts of time"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#what-is-a-person-year-and-how-to-calculate",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#what-is-a-person-year-and-how-to-calculate",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "What is a Person-Year and how to calculate?",
+    "text": "What is a Person-Year and how to calculate?\n\nOne person-year is a unit of time defined as one person being followed for one year\n\n \n\nPerson-years for a sample of n subjects is calculated as the total years followed for the n subjects, where each subject could have different follow-up time\n\n \n\nExample: suppose we have 5 subjects, two of the subjects were followed for 2 years, and two of them are followed for 3 years and the fifth subject was followed for 3.8 years\n\n\\[\\text{person-years} = 2 \\text{ people} \\cdot 2 \\text{ years} +2 \\text{ people} \\cdot 3 \\text{ years}+ 1 \\text{ person} \\cdot 3.8 \\text{ years} = 13.8 \\text{ person-years}\\]"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#calculating-rate",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#calculating-rate",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Calculating Rate",
+    "text": "Calculating Rate\n\nSuppose that we observe one event during the follow-up period, then\n\n\\[\\begin{aligned}\n\\text{Rate of event} &= \\dfrac{\\# events}{\\text{person-years}}= \\dfrac{1 \\text{ event}}{13.8 \\text{person-years}} \\\\ &= 0.072 \\text{ events per person−year} \\\\ &=72 \\text{ events per } 1000 \\text{ person−years} \\end{aligned}\\]\n\nNow our rate of event is measured per person-year\n\nOften use 1000 person-years to count the events with whole numbers"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#including-an-offset-when-we-have-different-follow-up-times",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#including-an-offset-when-we-have-different-follow-up-times",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Including an offset when we have different follow-up times",
+    "text": "Including an offset when we have different follow-up times\n\nWhat if we have data that each observation has different period of time?\n\nFor example, we look at number of ED visits when subjects are enrolled in Oregon Health Plan, however, each subjects are enrolled in the plan for different length of time…\nHow do we incorporate this different length of time?\n\nNote we have: \\(\\mu = \\lambda t\\) and with predictor \\(X\\), \\(\\mu(X) = \\lambda(X) \\cdot t(X)\\)\n\n\\(t\\) is now a function of the individual, represented with \\(X\\)\n\nThen we construct:\n\n\\[\\begin{aligned} \\ln(\\lambda(X)) = & \\beta_0 + \\beta_1 X \\\\\n\\ln(\\lambda(X)) = \\ln\\left(\\dfrac{\\mu(X)}{t(X)}\\right) = \\ln(\\mu(X)) - \\ln(t(X)) = &\\beta_0 + \\beta_1 X \\\\\n\\ln(\\mu(X)) = & \\ln(t(X)) + \\beta_0 + \\beta_1 X\\\\ \\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#including-an-offset-when-we-have-different-follow-up-times-1",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#including-an-offset-when-we-have-different-follow-up-times-1",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Including an offset when we have different follow-up times",
+    "text": "Including an offset when we have different follow-up times\n\nThat is, to incorporate the different lengths in the model,\n\n\\[\\ln(\\mu(X)) =  \\ln(t(X)) + \\beta_0 + \\beta_1 X\\]\n\nWe have one more term in the model and this term is called offset, a known term in the model since \\(t(X)\\) is known for each individual\n\\(\\ln(t(X))\\) is called the offset\nOffsets can also be something like the population size in a city…"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-2-lung-cancer-incidence-2",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#example-2-lung-cancer-incidence-2",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Example 2: Lung Cancer Incidence",
+    "text": "Example 2: Lung Cancer Incidence\n\nlc_mod = glm(cases ~ city + age, offset=lpop, family=poisson, data=lc_inc)\nsummary(lc_mod)\n\n\nCall:\nglm(formula = cases ~ city + age, family = poisson, data = lc_inc, \n    offset = lpop)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  -5.6321     0.2003 -28.125  &lt; 2e-16 ***\ncityHorsens  -0.3301     0.1815  -1.818   0.0690 .  \ncityKolding  -0.3715     0.1878  -1.978   0.0479 *  \ncityVejle    -0.2723     0.1879  -1.450   0.1472    \nage55-59      1.1010     0.2483   4.434 9.23e-06 ***\nage60-64      1.5186     0.2316   6.556 5.53e-11 ***\nage65-69      1.7677     0.2294   7.704 1.31e-14 ***\nage70-74      1.8569     0.2353   7.891 3.00e-15 ***\nage75+        1.4197     0.2503   5.672 1.41e-08 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 129.908  on 23  degrees of freedom\nResidual deviance:  23.447  on 15  degrees of freedom\nAIC: 137.84\n\nNumber of Fisher Scoring iterations: 5"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#further-reading-tutorials-on-poisson-regression",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#further-reading-tutorials-on-poisson-regression",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Further reading / tutorials on Poisson regression",
+    "text": "Further reading / tutorials on Poisson regression\n\nGood tutorial in R\nAnother good tutorial that includes overdispersion\nComparison between Poisson and log-binomial regressions\nWhen people are followed for different amounts of time, we should include an offset\n\nPoisson Regression Modeling Using Rate Data: section from above site that discusses offsets\n\nWe can use Wald test and LRT in the same way as logistic regression to test our coefficients and variables"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression_muddy_points.html#muddy-points-from-spring-2024",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression_muddy_points.html#muddy-points-from-spring-2024",
+    "title": "Muddy Points",
+    "section": "Muddy Points from Spring 2024",
+    "text": "Muddy Points from Spring 2024"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#from-lesson-15-poisson-regression",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#from-lesson-15-poisson-regression",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "From Lesson 15: Poisson Regression",
+    "text": "From Lesson 15: Poisson Regression\n\n\n\nOutcome type: Counts or rates\n\n \n\nExample outcomes:\n\nNumber of children in household\nNumber of hospital admissions\nRate of incidence for COVID in US counties\n\n\n\n\nPopulation model\n\n\\[ \\log(\\mu) = \\log(\\lambda) = \\beta_0 + \\beta_1 X\\]\n\nInterpretations\n\nThe count (or rate) ratio for every 1 unit increase in \\(X\\)"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#poll-everywhere-question-1",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#poll-everywhere-question-1",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Poll Everywhere Question 1",
+    "text": "Poll Everywhere Question 1"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#modeling-with-a-poisson-distribution",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#modeling-with-a-poisson-distribution",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Modeling with a Poisson Distribution",
+    "text": "Modeling with a Poisson Distribution\n\nObservations in Poisson regression will have counts of events\n\nMight be counting a binary event, but each observation can have a count &gt; 1\n\n\n\n\n\n\nCount data modeled as Poisson distribution\n\n\n\nThis distribution is often used to model count data\nExamples:\n\nDistribution of number of deaths due to lung cancer\nDistribution of number of individuals diagnosed with leukemia\nDistribution of number of hospitalizations\n\n\n\n\n\n\n\nRate data modeled as Poisson distribution\n\n\n\nThis distribution is often used to model rate data\n\nWith time as a big component\n\nExamples:\n\nDistribution of number of deaths due to lung cancer per year\nDistribution of number of individuals diagnosed with leukemia over follow-up time\nDistribution of number of hospitalizations per day"
+  },
+  {
+    "objectID": "lessons/18_Poisson_regression/18_Poisson_regression.html#poisson-model-assumptions",
+    "href": "lessons/18_Poisson_regression/18_Poisson_regression.html#poisson-model-assumptions",
+    "title": "Lesson 18: Introduction to Poisson Regression",
+    "section": "Poisson model assumptions",
+    "text": "Poisson model assumptions\n\nCount or rate response\n\nThe response variable is a count (non-negative integers)\nIt is suitable for grouped or ungrouped data since the sum of Poisson distributed observations is also Poisson\n\nGrouped by time or by capita\n\n\nIndependent events\n\nThe counts, i.e. the events, are assumed to be independent of each other\n\nVariance is same as mean\n\nBy definition of the Poisson distribution, the variance is assumed to be equal to the mean\nWhen this assumption does not hold, we should consider a Quasipoisson GLM for overdispersed (or underdispersed) data or a Negative Binomial GLM instead\n\n\n \n\nThe text above was largely pulled from this tutorial on Poisson regression"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#some-notes-from-last-quarters-posters",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#some-notes-from-last-quarters-posters",
+    "title": "Poster Info and Help",
+    "section": "Some notes from last quarter’s posters",
+    "text": "Some notes from last quarter’s posters\n\nCan you all see my feedback from last quarter? Let me know if you cannot, but want to\nIn methods, there is a difference between coding procedure and statistical procedure\n\nExample of something we do NOT report: If we get a dataset where the categorical variables (with worded categories) are represented as integers, then we convert the integers to the categories.\n\nThis is a coding procedure that automatically needs to be done to represent the variable accurately.\nThis is NOT a statistics procedure and we don’t report it. We’re not “converting” a continuous variable to a categorical one. We are performing data management to make sure the data code represent the data.\n\n\nIn conclusion/discussion, many people mentioned limitations but not how they affect the results\n\nOr made a wrong conclusion about the consequences\nSee me to double check!!\n\nResults\n\nNo need to interpret the intercept unless you have an interaction\nIf purposeful model selection, do NOT skip the odds ratios interpretations!!\nIf you are limiting your Regression table to only the main variable, you need to explicitly state that this is from the final model and adjusted for other variables\n\nThere was A LOT of talk about generalizability being an issue because of the spread of our data\n\nSample sistribution ALONE does not mean our results are not generalizable\nThe more important question is: Are there enough people (in counts) in each group/demographic/etc to make a decent estimate?\n\nBe really careful around language!!\n\nUsing Why or How in your title is a little misleading – we can only answer “does”\nMake sure you do not make implications that we are uncovering a causal pathway!!\n\nWe are not!\nThe study design does NOT support this!\n\n\n“Data” is a plural word!"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#things-you-can-assume-and-not-assume-from-your-reader",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#things-you-can-assume-and-not-assume-from-your-reader",
+    "title": "Poster Info and Help",
+    "section": "Things you can assume and not assume from your reader",
+    "text": "Things you can assume and not assume from your reader\n\nThings people assume you are doing (correctly) and you do not need to share with an audience\n\nFollowing a codebook’s categories\nHow you ran a certain model (aka don’t need to say we used glm() to fit the logistic regression model)\nYou can assume people can read mathematical equations\nHow age is calculated\n\n\n \n\nThings you cannot assume people know\n\nHow to read R code: do not include your model equation as an glm() function"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#some-notes-from-last-quarters-posters-12",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#some-notes-from-last-quarters-posters-12",
+    "title": "Poster Info and Help",
+    "section": "Some notes from last quarter’s posters (1/2)",
+    "text": "Some notes from last quarter’s posters (1/2)\n\nCan you all see my feedback from last quarter? Let me know if you cannot, but want to\nIn methods, there is a difference between coding procedure and statistical procedure\n\nExample of something we do NOT report: If we get a dataset where the categorical variables (with worded categories) are represented as integers, then we convert the integers to the categories.\n\nThis is a coding procedure that automatically needs to be done to represent the variable accurately.\nThis is NOT a statistics procedure and we don’t report it. We’re not “converting” a continuous variable to a categorical one. We are performing data management to make sure the data code represent the data.\n\n\nIn conclusion/discussion, many people mentioned limitations but not how they affect the results\n\nOr made a wrong conclusion about the consequences\nSee me to double check!!\n\n“Data” is a plural word!\n\nUse like “Data are represented in Table…”"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#some-notes-from-last-quarters-posters-22",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#some-notes-from-last-quarters-posters-22",
+    "title": "Poster Info and Help",
+    "section": "Some notes from last quarter’s posters (2/2)",
+    "text": "Some notes from last quarter’s posters (2/2)\n\nResults\n\nNo need to interpret the intercept unless you have an interaction\nIf purposeful model selection, do NOT skip the odds ratios interpretations!!\nIf you are limiting your Regression table to only the main variable, you need to explicitly state that this is from the final model and adjusted for other variables\n\nThere was A LOT of talk about generalizability being an issue because of the spread of our data\n\nSample sistribution ALONE does not mean our results are not generalizable\nThe more important question is: Are there enough people (in counts) in each group/demographic/etc to make a decent estimate?\n\nBe really careful around language!!\n\nUsing Why or How in your title is a little misleading – we can only answer “does”\nMake sure you do not make implications that we are uncovering a causal pathway!!\n\nWe are not!\nThe study design does NOT support this!"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#methods-example-ish",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#methods-example-ish",
+    "title": "Poster Info and Help",
+    "section": "Methods example-ish",
+    "text": "Methods example-ish\n\nData were collected from _____ in ____ year\nWe performed a complete case analysis on _____\nWe generated categorized variables for CO2 emissions and income levels\n\nCO2 emissions used quartiles\nIncome levels used the specified groupings by Gapminder\n\nWe used purposeful model selection, a combination of field expertise and statistical methods, to determine the final model\nOur final model included our outcome, life expectancy, with a main effect for female literacy rate while adjusting for confounders\n\nWe adjusted for: CO2 emissions, income levels, world region, access to improved water, food supply, and intergovernmental groups\nWe included an interaction between ____ and ____\n\nWe investigated model assumptions and diagnostics using ______\nWe used R version 4.4.1 to analyze data"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-needs-work-1",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-needs-work-1",
+    "title": "Poster Info and Help",
+    "section": "2. Regression table or Forest plot (needs work!)",
+    "text": "2. Regression table or Forest plot (needs work!)\n\n\n\nThis is a fun one to investigate!\nStick to the regression table if you are having trouble with this!\n\n\nlibrary(broom.helpers)\n\nmodel_tidy = tidy_and_attach(final_model, conf.int=T) %&gt;%\n  tidy_remove_intercept() %&gt;%\n  tidy_add_reference_rows() %&gt;% tidy_add_estimate_to_reference_rows() %&gt;%\n  tidy_add_term_labels() %&gt;%\n  mutate(var_label = case_match(var_label, \n                               \"Female literacy rate (%)\" ~ \"\", \n                               \"Food supply (kcal PPD)\" ~ \" \", \n                               \"Access to improved water (%)\" ~ \"   \", \n                               \"CO2 emissions quartiles\" ~ \"CO2 emissions \\n quartiles\", \n                               \"Income levels\" ~ \"Income levels\", \n                               \"Intergovernmental group\" ~ \"Intergovern- \\n mental group\", \n                               .default = var_label\n                         ))\n\nforest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + \n  facet_grid(rows = vars(var_label), scales = \"free\",\n             space='free_y', switch = \"y\") + \n  geom_point(size = 3) +  geom_errorbarh(height=.2) + \n  geom_vline(xintercept=0, color='#C2352F', linetype='dashed', alpha=1) +\n  theme_classic() +\n  labs(x = \"Beta\", y = \"Variables\") +\n  theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), \n        title = element_text(size = 20), strip.placement = \"outside\", \n        strip.text.y.left = element_text(size = 18, angle = 0), \n        strip.background = element_blank())\nforest_plot"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-if-no-interactions",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-if-no-interactions",
+    "title": "Poster Info and Help",
+    "section": "2. Regression table or Forest plot (if no interactions)",
+    "text": "2. Regression table or Forest plot (if no interactions)\n\n\n\nreg_table = tbl_regression(\n  final_model, \n  label = list(\n    FemaleLiteracyRate ~ \"Female literacy rate (%)\", \n    CO2_q ~ \"CO2 emissions quartiles\", \n    income_levels1 ~ \"Income levels\", \n    four_regions ~ \"World region\",\n    WaterSourcePrct ~ \"Access to improved water (%)\",\n    FoodSupplykcPPD ~ \"Food supply (kcal PPD)\",\n    members_oecd_g77 ~ \"Intergovernmental group\"\n    )) %&gt;%   \n  as_gt() %&gt;% \n  tab_options(table.font.size = 20) %&gt;%\n  cols_width(label ~ px(250))\nreg_table\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI1\np-value\n\n\n\n\nFemale literacy rate (%)\n-0.07\n-0.17, 0.02\n0.13\n\n\nCO2 emissions quartiles\n\n\n\n\n\n\n\n\n    Quartile 1\n—\n—\n\n\n\n\n    Quartile 2\n1.1\n-2.7, 4.9\n0.6\n\n\n    Quartile 3\n-0.29\n-5.1, 4.6\n&gt;0.9\n\n\n    Quartile 4\n-0.60\n-5.6, 4.5\n0.8\n\n\nIncome levels\n\n\n\n\n\n\n\n\n    Low income\n—\n—\n\n\n\n\n    Lower middle income\n5.4\n0.75, 10\n0.024\n\n\n    Upper middle income\n6.1\n0.20, 12\n0.043\n\n\n    High income\n8.0\n1.4, 15\n0.018\n\n\nWorld region\n\n\n\n\n\n\n\n\n    Africa\n—\n—\n\n\n\n\n    Americas\n9.0\n4.9, 13\n&lt;0.001\n\n\n    Asia\n5.3\n2.0, 8.5\n0.002\n\n\n    Europe\n6.9\n1.1, 13\n0.020\n\n\nAccess to improved water (%)\n0.17\n0.03, 0.30\n0.015\n\n\nFood supply (kcal PPD)\n0.00\n0.00, 0.01\n0.073\n\n\nIntergovernmental group\n\n\n\n\n\n\n\n\n    Group of 77\n—\n—\n\n\n\n\n    OECD\n1.1\n-4.2, 6.5\n0.7\n\n\n    Others\n1.0\n-4.0, 6.1\n0.7\n\n\n\n1 CI = Confidence Interval"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-if-no-interactions-1",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-if-no-interactions-1",
+    "title": "Poster Info and Help",
+    "section": "2. Regression table or Forest plot (if no interactions)",
+    "text": "2. Regression table or Forest plot (if no interactions)\n\nlibrary(broom.helpers)\nmodel_tidy = tidy_and_attach(final_model, conf.int=T) %&gt;%\n  tidy_remove_intercept() %&gt;%\n  tidy_add_reference_rows() %&gt;% tidy_add_estimate_to_reference_rows() %&gt;%\n  tidy_add_term_labels() %&gt;%\n  mutate(var_label = case_match(var_label, \n                               \"Female literacy rate (%)\" ~ \"\", \n                               \"Food supply (kcal PPD)\" ~ \" \", \n                               \"Access to improved water (%)\" ~ \"   \", \n                               \"CO2 emissions quartiles\" ~ \"CO2 emissions \\n quartiles\", \n                               \"Income levels\" ~ \"Income levels\", \n                               \"Intergovernmental group\" ~ \"Intergovern- \\n mental group\", \n                               .default = var_label\n                         ))\n\nforest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + \n  facet_grid(rows = vars(var_label), scales = \"free\",\n             space='free_y', switch = \"y\") + \n  geom_point(size = 3) +  geom_errorbarh(height=.2) + \n  geom_vline(xintercept=0, color='#C2352F', linetype='dashed', alpha=1) +\n  theme_classic() +\n  labs(x = \"Beta\", y = \"Variables\") +\n  theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), \n        title = element_text(size = 20), strip.placement = \"outside\", \n        strip.text.y.left = element_text(size = 18, angle = 0), \n        strip.background = element_blank())"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-if-no-interactions-2",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#regression-table-or-forest-plot-if-no-interactions-2",
+    "title": "Poster Info and Help",
+    "section": "2. Regression table or Forest plot (if no interactions)",
+    "text": "2. Regression table or Forest plot (if no interactions)\n\n\n\nThis is a fun one to investigate!\nStick to the regression table if you are having trouble with this!\n\n\nlibrary(broom.helpers)\n\nmodel_tidy = tidy_and_attach(final_model, conf.int=T) %&gt;%\n  tidy_remove_intercept() %&gt;%\n  tidy_add_reference_rows() %&gt;% tidy_add_estimate_to_reference_rows() %&gt;%\n  tidy_add_term_labels() %&gt;%\n  mutate(var_label = case_match(var_label, \n                               \"Female literacy rate (%)\" ~ \"\", \n                               \"Food supply (kcal PPD)\" ~ \" \", \n                               \"Access to improved water (%)\" ~ \"   \", \n                               \"CO2 emissions quartiles\" ~ \"CO2 emissions \\n quartiles\", \n                               \"Income levels\" ~ \"Income levels\", \n                               \"Intergovernmental group\" ~ \"Intergovern- \\n mental group\", \n                               .default = var_label\n                         ))\n\nforest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + \n  facet_grid(rows = vars(var_label), scales = \"free\",\n             space='free_y', switch = \"y\") + \n  geom_point(size = 3) +  geom_errorbarh(height=.2) + \n  geom_vline(xintercept=0, color='#C2352F', linetype='dashed', alpha=1) +\n  theme_classic() +\n  labs(x = \"Beta\", y = \"Variables\") +\n  theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), \n        title = element_text(size = 20), strip.placement = \"outside\", \n        strip.text.y.left = element_text(size = 18, angle = 0), \n        strip.background = element_blank())\nforest_plot"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#tableplot-if-you-have-interactions",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#tableplot-if-you-have-interactions",
+    "title": "Poster Info and Help",
+    "section": "Table/plot if you have interactions!!",
+    "text": "Table/plot if you have interactions!!\n\nLet’s say my model from HW 3 included other variables and my main research question is about association between death and if infection is probable at ICU intake\n\nTable __: Estimated odds ratios and confidence intervals of death at discharge. Odds ratios are comparing infection probable and not probable at ICU intake depending for two cases when cancer is and is not part of problem. Odds ratios adjust for all other variable in the model presented in methods.\n\n\n\n\n\n\n\n\n\nCancer\nInfection\nEstimated OR\n95% CI\n\n\n\n\nCancer part of present problem\nInfection probable at ICU intake\n\n\n\n\n\n      No\n\n\n\n\n\n      Yes\nFILL HERE\nFILL HERE\n\n\nCancer not part of present problem\nInfection probable at ICU intake\n\n\n\n\n\n      No\n\n\n\n\n\n      Yes\nFILL HERE\nFILL HERE"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#important-note-if-you-have-interactions-1",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#important-note-if-you-have-interactions-1",
+    "title": "Poster Info and Help",
+    "section": "Important note if you have interactions",
+    "text": "Important note if you have interactions\n\nPlease check your Quiz 3 feedback!\n\nMany of you are not quite interpreting interactions correctly\n\nThere is extra care to reporting results from interactions\nPlease make sure you use estimable() to get the correct effects!\n\nIf you have an interaction with a categorical variable, then your main variable’s “effect” should be reported for each category\n\nSee HW 3 and Lecture 10 for reporting!"
+  },
+  {
+    "objectID": "lessons/19_Poster_help/19_Poster_help.html#any-other-questions-about-the-poster",
+    "href": "lessons/19_Poster_help/19_Poster_help.html#any-other-questions-about-the-poster",
+    "title": "Poster Info and Help",
+    "section": "Any other questions about the poster?",
+    "text": "Any other questions about the poster?"
   }
 ]

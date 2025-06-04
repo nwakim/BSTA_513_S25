@@ -1,5 +1,5 @@
 ---
-title: "Poster Results Help Session"
+title: "Poster Info and Help"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#C2352F"
@@ -69,19 +69,46 @@ final_model = gapm2 %>%
     )
 ```
 
-## Some lab 3 notes
+## Some notes from last quarter's posters (1/2)
 
-- Internalization variable only has 5 groups!
-  - 1 "Not at all" 2 "Slightly" 3 "Moderately" 4 "Very" 5 "Extremely"
-- Do NOT combine gender indicators back into one variable 
-  - Need to keep them as separate variables
-  - This is bc the indicators are not mutually exclusive - someone can identify as multiple genders
-- Limit your decimal places on regression table outputs!!
-- Please remove unnecessary color in your plots
-  - If the information can be easily conveyed with text, use text!
-  - If color gives redundant info, do not use!
+-   Can you all see my feedback from last quarter? Let me know if you cannot, but want to
+-   In methods, there is a **difference between coding procedure and statistical procedure**
+    -   Example of something we do NOT report: If we get a dataset where the categorical variables (with worded categories) are represented as integers, then we convert the integers to the categories.
+        -   This is a **coding procedure** that automatically needs to be done to represent the variable accurately.
+        -   This is **NOT a statistics procedure** and we don’t report it. We’re not “converting” a continuous variable to a categorical one. We are performing data management to make sure the data code represent the data.
+-   In conclusion/discussion, many people mentioned limitations but not how they affect the results
+    -   Or made a wrong conclusion about the consequences
+    -   See me to double check!!
+-   "Data" is a plural word!
+    -   Use like "Data are represented in Table..."
 
+## Some notes from last quarter's posters (2/2)
 
+-   Results
+    -   No need to interpret the intercept unless you have an interaction
+    -   If purposeful model selection, do NOT skip the odds ratios interpretations!!
+    -   If you are limiting your Regression table to only the main variable, you need to explicitly state that this is from the final model and adjusted for other variables
+-   There was A LOT of talk about generalizability being an issue because of the spread of our data
+    -   Sample sistribution ALONE does not mean our results are not generalizable
+    -   The more important question is: Are there enough people (in counts) in each group/demographic/etc to make a decent estimate?
+-   Be really careful around language!!
+    -   Using Why or How in your title is a little misleading – we can only answer “does”
+    -   Make sure you do not make implications that we are uncovering a causal pathway!!
+        -   We are not!
+        -   The study design does NOT support this!
+
+## Things you can assume and not assume from your reader
+
+-   Things people assume you are doing (correctly) and you do not need to share with an audience
+    -   Following a codebook’s categories
+    -   How you ran a certain model (aka don’t need to say we used `glm()` to fit the logistic regression model)
+    -   You can assume people can read mathematical equations
+    -   How age is calculated
+
+ 
+
+-   Things you cannot assume people know
+    -   How to read R code: do not include your model equation as an `glm()` function
 
 ## Some notes
 
@@ -89,6 +116,8 @@ final_model = gapm2 %>%
     -   If it says 2-3, anything less than 4 is okay
     -   If it says 5-6, it shouldn't be 1 and it shouldn't be \>10
 -   Do NOT make bullet points really long!
+    -   This was a big issue in last quarter's poster
+    -   Work to make things concise!! You are likely including too much information
 -   I tried the QMD poster, and it is REALLY hard to troubleshoot
     -   I highly suggest making your poster in powerpoint!
 
@@ -118,24 +147,24 @@ final_model = gapm2 %>%
     -   Model building: we performed purposeful selection
     -   Final model
     -   Model diagnostics
-    
-## Methods for life expectancy {.smaller}
 
-- Data were collected from Gapminder and World Bank with 197 countries in 2011
-- We performed a complete case analysis on 72 countries
-- We generated categorized variables for CO2 emissions and income levels
-  - CO2 emissions used quartiles
-  - Income levels used the specified groupings by Gapminder
-- We used purposeful model selection, a combination of field expertise and statistical methods, to determine the final model
-- We performed linear regression on our outcome, life expectancy, with a main effect for female literacy rate while adjusting for confounders $$\widehat{\text{LE}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{FLR} + \text{other confounders}$$
-  - We adjusted for: CO2 emissions, income levels, world region, access to improved water, food supply, and intergovernmental groups
-- We investigated model assumptions and diagnostics using standardized residuals, leverage, Cook's distance, and variance inflation factors (VIFs)
-- We used R version 4.4.1 to analyze data
-  
+## Methods example-ish
+
+-   Data were collected from \_\_\_\_\_ in \_\_\_\_ year
+-   We performed a complete case analysis on \_\_\_\_\_
+-   We generated categorized variables for CO2 emissions and income levels
+    -   CO2 emissions used quartiles
+    -   Income levels used the specified groupings by Gapminder
+-   We used purposeful model selection, a combination of field expertise and statistical methods, to determine the final model
+-   **Our final model included our outcome, life expectancy, with a main effect for female literacy rate while adjusting for confounders**
+    -   **We adjusted for: CO2 emissions, income levels, world region, access to improved water, food supply, and intergovernmental groups**
+    -   **We included an interaction between \_\_\_\_ and \_\_\_\_**
+-   We investigated model assumptions and diagnostics using \_\_\_\_\_\_
+-   We used R version 4.4.1 to analyze data
 
 ## Results: What should be in your results?
 
-::: columns
+::::: columns
 ::: column
 If you did purposeful model selection:
 
@@ -143,14 +172,15 @@ If you did purposeful model selection:
 
 2.  Table showing odds ratios for your main variable + variable from interaction
 
-3.  One additional figure or table to help understand your question
+3.  One additional figure or table to understand your research question
 
 4.  Interpretations of odds ratios from Table in #2
 :::
-::: column
-If you did LASSO: 
 
-1.  Table 1 
+::: column
+If you did LASSO:
+
+1.  Table 1
 
 2.  Table or plot showing most important variables
 
@@ -158,8 +188,7 @@ If you did LASSO:
 
 4.  Interpretations of important variables: identify top 1-3 that predict outcome
 :::
-:::
-
+:::::
 
 ## 1. Table 1 (table summary in Lesson 2)
 
@@ -235,7 +264,7 @@ table1
 :::
 :::::
 
-## 2. Regression table or Forest plot
+## 2. Regression table or Forest plot (if no interactions)
 
 ::::: columns
 ::: {.column width="52%"}
@@ -282,23 +311,26 @@ reg_table
 :::
 :::::
 
-## 2. Regression table or Forest plot (needs work!)
+## 2. Regression table or Forest plot (if no interactions)
 
-::::: columns
-::: {.column width="50%"}
-
-- This is a fun one to investigate!
-- Stick to the regression table if you are having trouble with this!
 ```{r}
 #| echo: true
 #| eval: false
 
 library(broom.helpers)
-
 model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
   tidy_remove_intercept() %>%
   tidy_add_reference_rows() %>% tidy_add_estimate_to_reference_rows() %>%
-  tidy_add_term_labels()
+  tidy_add_term_labels() %>%
+  mutate(var_label = case_match(var_label, 
+                               "Female literacy rate (%)" ~ "", 
+                               "Food supply (kcal PPD)" ~ " ", 
+                               "Access to improved water (%)" ~ "   ", 
+                               "CO2 emissions quartiles" ~ "CO2 emissions \n quartiles", 
+                               "Income levels" ~ "Income levels", 
+                               "Intergovernmental group" ~ "Intergovern- \n mental group", 
+                               .default = var_label
+                         ))
 
 forest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
   facet_grid(rows = vars(var_label), scales = "free",
@@ -309,7 +341,48 @@ forest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xm
   labs(x = "Beta", y = "Variables") +
   theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), 
         title = element_text(size = 20), strip.placement = "outside", 
-        strip.text = element_text(size = 20), strip.background = element_blank())
+        strip.text.y.left = element_text(size = 18, angle = 0), 
+        strip.background = element_blank())
+```
+
+## 2. Regression table or Forest plot (if no interactions)
+
+::::: columns
+::: {.column width="50%"}
+-   This is a fun one to investigate!
+-   Stick to the regression table if you are having trouble with this!
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(broom.helpers)
+
+model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
+  tidy_remove_intercept() %>%
+  tidy_add_reference_rows() %>% tidy_add_estimate_to_reference_rows() %>%
+  tidy_add_term_labels() %>%
+  mutate(var_label = case_match(var_label, 
+                               "Female literacy rate (%)" ~ "", 
+                               "Food supply (kcal PPD)" ~ " ", 
+                               "Access to improved water (%)" ~ "   ", 
+                               "CO2 emissions quartiles" ~ "CO2 emissions \n quartiles", 
+                               "Income levels" ~ "Income levels", 
+                               "Intergovernmental group" ~ "Intergovern- \n mental group", 
+                               .default = var_label
+                         ))
+
+forest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
+  facet_grid(rows = vars(var_label), scales = "free",
+             space='free_y', switch = "y") + 
+  geom_point(size = 3) +  geom_errorbarh(height=.2) + 
+  geom_vline(xintercept=0, color='#C2352F', linetype='dashed', alpha=1) +
+  theme_classic() +
+  labs(x = "Beta", y = "Variables") +
+  theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), 
+        title = element_text(size = 20), strip.placement = "outside", 
+        strip.text.y.left = element_text(size = 18, angle = 0), 
+        strip.background = element_blank())
 forest_plot
 ```
 :::
@@ -325,7 +398,16 @@ library(broom.helpers)
 model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
   tidy_remove_intercept() %>%
   tidy_add_reference_rows() %>% tidy_add_estimate_to_reference_rows() %>%
-  tidy_add_term_labels()
+  tidy_add_term_labels() %>%
+  mutate(var_label = case_match(var_label, 
+                               "Female literacy rate (%)" ~ "", 
+                               "Food supply (kcal PPD)" ~ " ", 
+                               "Access to improved water (%)" ~ "   ", 
+                               "CO2 emissions quartiles" ~ "CO2 emissions \n quartiles", 
+                               "Income levels" ~ "Income levels", 
+                               "Intergovernmental group" ~ "Intergovern- \n mental group", 
+                               .default = var_label
+                         ))
 
 forest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
   facet_grid(rows = vars(var_label), scales = "free",
@@ -336,16 +418,50 @@ forest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xm
   labs(x = "Beta", y = "Variables") +
   theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), 
         title = element_text(size = 20), strip.placement = "outside", 
-        strip.text = element_text(size = 20), strip.background = element_blank())
+        strip.text.y.left = element_text(size = 18, angle = 0), 
+        strip.background = element_blank())
 forest_plot
 ```
 :::
 :::::
 
+## Important note if you have interactions
+
+-   Please check your Quiz 3 feedback!
+
+    -   Many of you are not quite interpreting interactions correctly
+
+-   There is extra care to reporting results from interactions
+
+-   Please make sure you use `estimable()` to get the correct effects!
+
+    -   If you have an interaction with a categorical variable, then your main variable's "effect" should be reported for each category
+
+-   See HW 3 and Lecture 10 for reporting!
+
+-   You will **NOT include** the adjusting variables in the table/plot
+    - But you **need to say adjusting for all other variables** in model from methods
+
+## Table/plot if you have interactions!!
+
+-   Let's say my model from HW 3 included other variables and my main research question is about association between death and if infection is probable at ICU intake
+
+Table \_\_: Estimated odds ratios and confidence intervals of death at discharge. Odds ratios are comparing infection probable and not probable at ICU intake depending for two cases when cancer is and is not part of problem. Odds ratios adjust for all other variable in the model presented in methods.
+
+| Cancer | Infection | Estimated OR | 95% CI |
+|------------------------|-------------------------|------------|----------|
+| Cancer part of present problem | Infection probable at ICU intake |  |  |
+|  |       No |  |  |
+|  |       Yes | FILL HERE | FILL HERE |
+| Cancer not part of present problem | Infection probable at ICU intake |  |  |
+|  |       No |  |  |
+|  |       Yes | FILL HERE | FILL HERE |
+
 ## Saving tables
 
-- For tables: `gtsave` in the `gt` package should work!
-- For figures/plots: `ggsave` in the `ggplot2` package should work!
+-   For tables: `gtsave` in the `gt` package should work!
+-   For figures/plots: `ggsave` in the `ggplot2` package should work!
+
 ```{r}
 #| echo: true
 gtsave(reg_table, filename = here("lessons/19_Poster_help/reg_table.png"))
@@ -353,18 +469,7 @@ gtsave(table1, filename = here("lessons/19_Poster_help/table1.png"))
 ggsave(forest_plot, filename = here("lessons/19_Poster_help/forest_plot.png"))
 ```
 
-- When I first ran the above, I got the following message: 
-`The package "webshot2" is required to save gt tables as images. ✖ Would you like to install it? 1: Yes 2: No`
-  - I inputted `1`
+-   When I first ran the above, I got the following message: `The package "webshot2" is required to save gt tables as images. ✖ Would you like to install it? 1: Yes 2: No`
+    -   I inputted `1`
 
-## Important note if you have interactions
-
-- Please check your Quiz 3 feedback! 
-  - Many of you are not quite interpreting interactions correctly
-
--   There is extra care to reporting results from interactions
-
--   Please make sure you use `estimable()` to get the correct effects!
-    - If you have an interaction with a categorical variable, then your main variable's "effect" should be reported for each category
-    
-- See HW 3 and Lecture 10 for reporting!
+## Any other questions about the poster?
