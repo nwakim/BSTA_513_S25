@@ -104,7 +104,7 @@ You can save tables and figures from labs or separate files, then load them in t
 
 -   [Powerpoint Template](https://ohsuitg-my.sharepoint.com/:p:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Project/Resources/poster_template.pptx?d=w171b4f2e4f1d4ee1a72f499f15d736af&csf=1&web=1&e=Nsqqqs)
     -   Feel free to adjust this poster visually
--   [Quarto Template](/labs/Poster-example.qmd)
+-   [Quarto Template]
     -   Only works if you followed the steps in the Quarto template in the Formatting Guide
     -   Feel free to adjust this poster visually
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.2.7)  30 MAY 2025 19:12
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.2.7)  4 JUN 2025 17:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1115,18 +1115,18 @@ File: mt-TU-empty.cfg 2021/06/22 v1.1 microtype config. file: fonts with nonstan
 
 ]
 
-LaTeX Warning: File `../labs/images/poster_printing.png' not found on input line 290.
+LaTeX Warning: File `../labs/images/poster_printing.png' not found on input line 291.
 
 ! Unable to load picture or PDF file '../labs/images/poster_printing.png'.
 <to be read again> 
                    }
-l.290 ...tio]{../labs/images/poster_printing.png}}
+l.291 ...tio]{../labs/images/poster_printing.png}}
                                                    
 Here is how much of TeX's memory you used:
- 38402 strings out of 475785
- 790759 string characters out of 5772181
+ 38405 strings out of 475785
+ 790858 string characters out of 5772181
  1489440 words of memory out of 5000000
- 60825 multiletter control sequences out of 15000+600000
+ 60828 multiletter control sequences out of 15000+600000
  562425 words of font info for 68 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  108i,7n,114p,10922b,945s stack positions out of 10000i,1000n,20000p,200000b,200000s
